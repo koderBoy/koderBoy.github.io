@@ -36,7 +36,12 @@
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112344029.png">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112352829.png">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112402339.png">
-<meta property="og:image" content="https://koderboy.github.io/.io//gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==%20/%3E%3C/center%3E%0A%0A接着我们可以使用git%20commit一次性提交到分支上，如下：%0A%0A%7B%%20asset_img%20640-20220503112409993.png%20%%7D%0A%0A%3Cp%3E%3Cstrong%3E4.%20Git撤销修改和删除文件操作。%3C/strong%3E%3C/p%3E%0A%3Col%3E%0A%3Cli%3E撤销修改：%3Cbr%3E比如我现在在readme.txt文件里面增加一行%20内容为555555555555，我们先通过命令查看如下：%3C/li%3E%0A%3C/ol%3E%0A%7B%%20asset_img%20640-20220503112418549.png%20%%7D%0A%3Cp%3E在我未提交之前，我发现添加5555555555555内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：%3C/p%3E%0A%3Cp%3E第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。%3C/p%3E%0A%3Cp%3E第二：我可以按以前的方法直接恢复到上一个版本。使用%20git%20reset%20–hard%20HEAD%5E%3C/p%3E%0A%3Cp%3E但是现在我不想使用上面的2种方法，我想直接想使用撤销命令该如何操作呢？首先在做撤销之前，我们可以先用%20git%20status%20查看下当前的状态。如下所示：%3C/p%3E%0A%7B%%20asset_img%20640-20220503112426720.png%20%%7D%0A%0A%3Cp%3E可以发现，Git会告诉你，git%20checkout%20–%20file%20可以丢弃工作区的修改，如下命令：%3Cbr%3Egit%20checkout%20–%20readme.txt,如下所示：%3C/p%3E%0A%7B%%20asset_img%20640-20220503112435546.png%20%%7D%0A%0A%3Cp%3E命令%20git%20checkout%20–readme.txt%20意思就是，把readme.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：%3C/p%3E%0A%3Cp%3E1.readme.txt自动修改后，还没有放到暂存区，使用%20撤销修改就回到和版本库一模一样的状态。%3Cbr%3E2.另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。%3Cbr%3E对于第二种情况，我想我们继续做demo来看下，假如现在我对readme.txt添加一行%20内容为6666666666666，我git%20add%20增加到暂存区后，接着添加内容7777777，我想通过撤销命令让其回到暂存区后的状态。如下所示：%3C/p%3E%0A%7B%%20asset_img%20640-20220503112442662.png%20%%7D%0A%0A%3Cp%3E注意：命令git%20checkout%20–%20readme.txt%20中的%20–%20很重要，如果没有%20–%20的话，那么命令变成创建分支了。%3C/p%3E%0A%3Col%20start=2">
+<meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112409993.png">
+<meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112418549.png">
+<meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112426720.png">
+<meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112435546.png">
+<meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112442662.png">
+<meta property="og:image" content="https://koderboy.github.io/.io//style=zoom:100%25;">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112549914.png">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112559213.png">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112607035.png">
@@ -82,8 +87,8 @@
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112009223.png">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640.png">
 <meta property="og:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-1548877.jpeg">
-<meta property="article:published_time" content="2022-05-03T05:12:48.430Z">
-<meta property="article:modified_time" content="2022-05-03T05:12:48.430Z">
+<meta property="article:published_time" content="2022-05-03T05:26:42.128Z">
+<meta property="article:modified_time" content="2022-05-03T05:26:42.128Z">
 <meta property="article:author" content="koderboy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://koderboy.github.io/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112037562.png">
@@ -197,7 +202,7 @@
                 
     <div class="postdate">
       
-        <time datetime="2022-05-03T05:12:48.430Z" itemprop="datePublished">2022-05-03</time>
+        <time datetime="2022-05-03T05:26:42.128Z" itemprop="datePublished">2022-05-03</time>
         
       
     </div>
@@ -309,32 +314,32 @@
 <img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112402339.png" class>
 
 <p>现在我们先使用git add 命令把2个文件都添加到暂存区中，再使用git status来查看下状态，如下：</p>
-<img src="/.io//gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg== /></center>
-
-接着我们可以使用git commit一次性提交到分支上，如下：
-
-{% asset_img 640-20220503112409993.png %}
+<p>接着我们可以使用git commit一次性提交到分支上，如下：</p>
+<img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112409993.png" class>
 
 <p><strong>4. Git撤销修改和删除文件操作。</strong></p>
 <ol>
 <li>撤销修改：<br>比如我现在在readme.txt文件里面增加一行 内容为555555555555，我们先通过命令查看如下：</li>
 </ol>
-{% asset_img 640-20220503112418549.png %}
+<img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112418549.png" class>
 <p>在我未提交之前，我发现添加5555555555555内容有误，所以我得马上恢复以前的版本，现在我可以有如下几种方法可以做修改：</p>
 <p>第一：如果我知道要删掉那些内容的话，直接手动更改去掉那些需要的文件，然后add添加到暂存区，最后commit掉。</p>
 <p>第二：我可以按以前的方法直接恢复到上一个版本。使用 git reset –hard HEAD^</p>
 <p>但是现在我不想使用上面的2种方法，我想直接想使用撤销命令该如何操作呢？首先在做撤销之前，我们可以先用 git status 查看下当前的状态。如下所示：</p>
-{% asset_img 640-20220503112426720.png %}
+<img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112426720.png" class>
 
 <p>可以发现，Git会告诉你，git checkout – file 可以丢弃工作区的修改，如下命令：<br>git checkout – readme.txt,如下所示：</p>
-{% asset_img 640-20220503112435546.png %}
+<img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112435546.png" class>
 
 <p>命令 git checkout –readme.txt 意思就是，把readme.txt文件在工作区做的修改全部撤销，这里有2种情况，如下：</p>
 <p>1.readme.txt自动修改后，还没有放到暂存区，使用 撤销修改就回到和版本库一模一样的状态。<br>2.另外一种是readme.txt已经放入暂存区了，接着又作了修改，撤销修改就回到添加暂存区后的状态。<br>对于第二种情况，我想我们继续做demo来看下，假如现在我对readme.txt添加一行 内容为6666666666666，我git add 增加到暂存区后，接着添加内容7777777，我想通过撤销命令让其回到暂存区后的状态。如下所示：</p>
-{% asset_img 640-20220503112442662.png %}
+<img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112442662.png" class>
 
 <p>注意：命令git checkout – readme.txt 中的 – 很重要，如果没有 – 的话，那么命令变成创建分支了。</p>
-<ol start=2">" class="" title="&lt;li&gt;删除文件。&lt;br&gt;假如我现在版本库testgit目录添加一个文件b.txt,然后提交。如下：&lt;&#x2F;li&gt; &lt;&#x2F;ol&gt; {% asset_img 640-20220503112505767.png" alt="alt&#x3D;图片 style&#x3D;zoom:100%; &#x2F;&gt;&lt;&#x2F;center&gt; 如上：一般情况下，可以直接在文件目录中把文件删了，或者使用如上rm命令：rm b.txt ，如果我想彻底从版本库中删掉了此文件的话，可以再执行commit命令 提交掉，现在目录是这样的， {% asset_img &#x2F;2022&#x2F;05&#x2F;03&#x2F;Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B&#x2F;640-20220503112542855.png">
+<ol start="2">
+<li>删除文件。<br>假如我现在版本库testgit目录添加一个文件b.txt,然后提交。如下：</li>
+</ol>
+<img src="/.io//style=zoom:100%25;" class="640-20220503112505767.png&quot; alt&#x3D;图片" title="&#x2F;&gt;&lt;&#x2F;center&gt; 如上：一般情况下，可以直接在文件目录中把文件删了，或者使用如上rm命令：rm b.txt ，如果我想彻底从版本库中删掉了此文件的话，可以再执行commit命令 提交掉，现在目录是这样的， {% asset_img &#x2F;2022&#x2F;05&#x2F;03&#x2F;Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B&#x2F;640-20220503112542855.png">
 
 <p>只要没有commit之前，如果我想在版本库中恢复此文件如何操作呢？</p>
 <p>可以使用如下命令 git checkout – b.txt，如下所示：</p>
@@ -344,7 +349,7 @@
 <img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112559213.png" class>
 
 <h2 id="五、远程仓库"><a href="#五、远程仓库" class="headerlink" title="五、远程仓库"></a><strong>五、远程仓库</strong></h2><p>在了解之前，先注册github账号，由于你的本地Git仓库和github仓库之间的传输是通过SSH加密的，所以需要一点设置：<br>第一步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果有的话，直接跳过此如下命令，如果没有的话，打开命令行，输入如下命令：</p>
-<p>ssh-keygen -t rsa –C “<a href="mailto:&#x79;&#111;&#x75;&#x72;&#x65;&#x6d;&#97;&#105;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#x72;&#x65;&#x6d;&#97;&#105;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#111;&#x6d;</a>”, 由于我本地此前运行过一次，所以本地有，如下所示：</p>
+<p>ssh-keygen -t rsa –C “<a href="mailto:&#x79;&#111;&#x75;&#x72;&#101;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#x79;&#111;&#x75;&#x72;&#101;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;</a>”, 由于我本地此前运行过一次，所以本地有，如下所示：</p>
 <img src="/.io//05/03/Git-%E5%82%BB%E7%93%9C%E6%95%99%E7%A8%8B/640-20220503112607035.png" class>
 
 <p>id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p>
