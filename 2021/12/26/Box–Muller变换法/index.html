@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="来源：今日头条 一、定义Box–Muller 变换是一种快速产生符合标准正态分布随机数对的一种方法。基本思想是先得到服从均匀分布的随机数，再将服从均匀分布的随机数转变为服从标准正态分布（零期望，单位方差）的独立的随机数对。 它是由 George E. P. Box 与 Mervin E. Muller 在1958年提出，是最早运用与产生高斯白噪声的著名算法之一，它的基本原理是计算出高斯随机数的相位">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Box–Muller变换法">
+<meta property="og:url" content="https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="来源：今日头条 一、定义Box–Muller 变换是一种快速产生符合标准正态分布随机数对的一种方法。基本思想是先得到服从均匀分布的随机数，再将服从均匀分布的随机数转变为服从标准正态分布（零期望，单位方差）的独立的随机数对。 它是由 George E. P. Box 与 Mervin E. Muller 在1958年提出，是最早运用与产生高斯白噪声的著名算法之一，它的基本原理是计算出高斯随机数的相位">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/251f652ac3f7434195b61860cc28feaf?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3dc0840591c043a3bd58c2d1cb26a858?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3c161ec4b3d54509a185f7d4f8863308?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/552b7d606f2341bd8f05179715d6eb0a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7af192f485fd4fee9201928c5921528e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/40d0e85cc9884aac90cdf247f1b8961e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/472ca2653b6c4719ae81913a1b6f0160?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f992e227573f49c4a310b490b8a0c6a4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/267ea12591d5447a852b13135ce3ad6e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7dfb4e6930274d708d34830a42a2aa7b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/8ad1e7cc6c1545e4aac7c2e2885238f2?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a1c62e3c44834dbfa86fc5de10c57b54?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/87958bd7e742442dbce56148f6187b16?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/245bf068c4084380973569c4ce86c6bb?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ea4f2df61f954f9ca201d743783c7c3f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/4881e699214f412eb462cdd9ae4103a0?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2b4843ee25ae4010a19ae2c3e18dbf4d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7b0148e1fb4340079200bc0f5baf8dd7?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0735064f0f1a4fb3be3598c365c52c51?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/321d382ae2c2413588369176ec1c1752?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f7f6fabd51bd4fa5b56d988b26025850?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3a975d9ffd8549a1a657039b2618dcbe?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e2f43c81c76c4107a0c082579daf24af?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/de1075ce52a443309aeeb6c983130084?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b2decb1604ae4abca404e600df16905f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/82bad890f3924ce1bfc6def8b839c398?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b675fcc6e41d4e9bacb164e6d130cf83?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/614beb43c19742da83c36f452c2738af?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3616a80a2d0145aa8a101bcbe432575b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ffbcee4fdaee4516bfb30484ba320dca?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0ab2272149fb4ce3a5b94a7c934c5012?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/d8d72501e64d4ccb884de4d68f50001b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f419a05fe1d246a18934c41df5943301?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/55dad8afe5cd4d40958c6b733ace020c?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/d1ee6e9928bc4874ae614239015b260d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/4829fb2deff845068ebae54f15ef14ba?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2a772bda88f24b3897d911278f462597?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/bb4fcb5011b743b9a5ca990fa7c486a4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3c4a4e0105fd451fb8b8568a841ed5da?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3c8ecdb3fe6c414faba71f05f7498ce3?from=pc">
+<meta property="article:published_time" content="2021-12-26T11:32:08.000Z">
+<meta property="article:modified_time" content="2022-05-04T08:35:58.660Z">
+<meta property="article:author" content="koderboy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p3.toutiaoimg.com/origin/pgc-image/251f652ac3f7434195b61860cc28feaf?from=pc">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Box–Muller变换法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&text=Box–Muller变换法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&is_video=false&description=Box–Muller变换法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Box–Muller变换法&body=Check out this article: https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&name=Box–Muller变换法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&t=Box–Muller变换法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BC%98%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">二、优点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%A4%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">三、两种形式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">1、标准形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%85%AC%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">（1）公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E7%9A%84python%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="toc-number">6.</span> <span class="toc-text">（2）标准形式的python代码演示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81-%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">7.</span> <span class="toc-text">2、 极坐标形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%85%AC%E5%BC%8F-1"><span class="toc-number">8.</span> <span class="toc-text">（1）公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84python%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="toc-number">9.</span> <span class="toc-text">（2）极坐标形式的python代码演示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E6%BC%94%E7%A4%BA%E7%BB%93%E6%9E%9C"><span class="toc-number">10.</span> <span class="toc-text">3、演示结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number">11.</span> <span class="toc-text">4、小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Box-Muller%E5%8F%98%E6%8D%A2%E7%9A%84%E8%AF%81%E6%98%8E"><span class="toc-number">12.</span> <span class="toc-text">四、Box-Muller变换的证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">13.</span> <span class="toc-text">1、标准形式推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E8%AF%81%E6%98%8E"><span class="toc-number">14.</span> <span class="toc-text">2、标准形式证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%8E%A8%E5%AF%BC%E4%B8%8E%E8%AF%81%E6%98%8E"><span class="toc-number">15.</span> <span class="toc-text">3、极坐标形式的推导与证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">16.</span> <span class="toc-text">五、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%B8%80%E5%85%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-number">17.</span> <span class="toc-text">1、一元随机变量函数的分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E4%BA%8C%E5%85%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-number">18.</span> <span class="toc-text">2、二元随机变量函数的分布</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        Box–Muller变换法
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">koderboy</span>
+                </span>
+                
+    <div class="postdate">
+      
+        <time datetime="2021-12-26T11:32:08.000Z" itemprop="datePublished">2021-12-26</time>
+        
+      
+    </div>
+
+
+                    
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+    </div>
+
+
+                        
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6946910326591963660/?log_from=1ed72a8905505_1636700263179">今日头条</a></p>
+<h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h1><p>Box–Muller 变换是一种快速产生符合标准正态分布随机数对的一种方法。基本思想是先得到服从均匀分布的随机数，再将服从均匀分布的随机数转变为服从标准正态分布（零期望，单位方差）的独立的随机数对。</p>
+<p>它是由 George E. P. Box 与 Mervin E. Muller 在1958年提出，是最早运用与产生高斯白噪声的著名算法之一，它的基本原理是计算出高斯随机数的相位和幅度，进而产生高斯随机数对的算法。实际上，该方法最早是在1934年由Raymond E. A. C. Paley和Norbert Wiener明确提及的。</p>
+<p>George E. P. Box是一位统计学大师，统计学中的很多名词术语都以他的名字命名。Box 之于统计学的家学渊源相当深厚，他的导师是统计学开山鼻祖皮尔逊的儿子-英国统计学家Egon Pearson；同时，Box还是统计学的另外一位巨擘级奠基人费希尔的女婿。统计学中的名言“All models are wrong, but some are useful”（所有模型都是错的，但其中一些是有用的）也出自Box之口。</p>
+<p>Box-Muller变换通常以标准和极坐标两种形式表示。 Box和Muller给出的基本形式是从区间[0，1]上的均匀分布中获取两个样本，并将它们映射为两个标准的正态分布样本。极坐标形式从不同的区间[-1，+1]中获取两个样本，并将它们映射到两个正态分布的样本，而无需使用正弦或余弦函数。</p>
+<h1 id="二、优点"><a href="#二、优点" class="headerlink" title="二、优点"></a>二、优点</h1><p>目前，产生正态分布随机数的主流方法有：</p>
+<ul>
+<li>用中心极限定理生成正态分布</li>
+<li>逆变换法</li>
+<li>Ziggurat 算法</li>
+<li>Box-Muller变换</li>
+</ul>
+<p>Box-Muller变换是作为逆变换采样方法的一种计算效率更高的替代方法而开发的。Ziggurat算法为标量处理器（例如，旧的CPU）提供了一种更有效的方法，而Box-Muller变换对于具有矢量单位的处理器（例如，GPU或现代CPU）更胜一筹。</p>
+<h1 id="三、两种形式"><a href="#三、两种形式" class="headerlink" title="三、两种形式"></a>三、两种形式</h1><h1 id="1、标准形式的-Box–Muller-变换"><a href="#1、标准形式的-Box–Muller-变换" class="headerlink" title="1、标准形式的 Box–Muller 变换"></a>1、标准形式的 Box–Muller 变换</h1><h1 id="（1）公式"><a href="#（1）公式" class="headerlink" title="（1）公式"></a>（1）公式</h1><p>假设变变量 U1 和变量 U2 是（0，1]均匀分布的随机数，</p>
+<p>且 U1 和 U2 彼此独立，令：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/251f652ac3f7434195b61860cc28feaf?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>则 Z0 和 Z1 就是服从 N（0，1）的标准正态分布随机数，并且 Z0 和 Z1 相互独立。</p>
+<h1 id="（2）标准形式的python代码演示"><a href="#（2）标准形式的python代码演示" class="headerlink" title="（2）标准形式的python代码演示"></a>（2）标准形式的python代码演示</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def box_muller_trans():</span><br><span class="line">    x1 = 0</span><br><span class="line">    x2 = 0</span><br><span class="line">    w = 0</span><br><span class="line">    x1 = np.random.rand()</span><br><span class="line">    x2 = np.random.rand()</span><br><span class="line">    y1 = np.cos(2.0*np.pi*x1) * np.sqrt(-2.0*np.log(x1))</span><br><span class="line">    y2 = np.sin(2.0*np.pi*x2) * np.sqrt(-2.0*np.log(x2))</span><br><span class="line">    return y1,y2</span><br></pre></td></tr></table></figure>
+
+<h1 id="2、-极坐标形式的-Box–Muller-变换"><a href="#2、-极坐标形式的-Box–Muller-变换" class="headerlink" title="2、 极坐标形式的 Box–Muller 变换"></a>2、 极坐标形式的 Box–Muller 变换</h1><h1 id="（1）公式-1"><a href="#（1）公式-1" class="headerlink" title="（1）公式"></a>（1）公式</h1><p>假设变量 u 和变量 v 是在[-1，1]上的均匀分布随机量，</p>
+<p>u 和 v 相互独立，令：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3dc0840591c043a3bd58c2d1cb26a858?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>故而，随机数 z0 和 z1 计算后得出如下结果：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3c161ec4b3d54509a185f7d4f8863308?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>z0 和 z1 是服从分布 N（0，1）的随机数，并且 z0 和 z1 相互 独立。</p>
+<h1 id="（2）极坐标形式的python代码演示"><a href="#（2）极坐标形式的python代码演示" class="headerlink" title="（2）极坐标形式的python代码演示"></a>（2）极坐标形式的python代码演示</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def box_muller_trans():</span><br><span class="line">    x1 = 0</span><br><span class="line">    x2 = 0</span><br><span class="line">    w = 0</span><br><span class="line">    while (w &lt;= 0)|(w&gt;=1.0):</span><br><span class="line">        x1 = 2.0*np.random.rand()-1</span><br><span class="line">        x2 = 2.0*np.random.rand()-1</span><br><span class="line">        w = x1*x1 + x2*x2</span><br><span class="line">        w = np.sqrt(-2.0*np.log(w)/w)</span><br><span class="line">        y1 = x1*w</span><br><span class="line">        y2 = x2*w</span><br><span class="line">    return y1,y2</span><br></pre></td></tr></table></figure>
+
+<h1 id="3、演示结果"><a href="#3、演示结果" class="headerlink" title="3、演示结果"></a>3、演示结果</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/552b7d606f2341bd8f05179715d6eb0a?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<h1 id="4、小结"><a href="#4、小结" class="headerlink" title="4、小结"></a>4、小结</h1><p>也可利用Matlab工具进行算法验证。在实际工程应用中，如果直接采用标准形式的Box-Muller算法的时候，需要计算正弦（sin）和余弦（cos）函数，这种计算耗时较多，效率比较低。Box-Muller 的极坐标形式更加常用，它避开了三角函数的计算，可以在很短的时间内产生大量的符合正态分布的随机数，能够满足了工程计算中对计算速度的要求。</p>
+<p>更多的统计分布如何通过均匀分布的变换生成出来，大家可以参考 Sheldon M. Ross 的《统计模拟》。</p>
+<h1 id="四、Box-Muller变换的证明"><a href="#四、Box-Muller变换的证明" class="headerlink" title="四、Box-Muller变换的证明"></a>四、Box-Muller变换的证明</h1><h1 id="1、标准形式推导"><a href="#1、标准形式推导" class="headerlink" title="1、标准形式推导"></a>1、标准形式推导</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7af192f485fd4fee9201928c5921528e?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<h1 id="2、标准形式证明"><a href="#2、标准形式证明" class="headerlink" title="2、标准形式证明"></a>2、标准形式证明</h1><p>设U1,U2相互独立，均服从分布U(0,1)</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/40d0e85cc9884aac90cdf247f1b8961e?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>则X、Y相互独立且均服从标准正态分布。</p>
+<p>证明：U1,U2~U(0,1) 所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/472ca2653b6c4719ae81913a1b6f0160?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>因为θ&#x3D;2πU2, 根据一元随机变量函数分布（见附录）， 有：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f992e227573f49c4a310b490b8a0c6a4?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>因为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/267ea12591d5447a852b13135ce3ad6e?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>同样，根据一元随机变量函数分布，有：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7dfb4e6930274d708d34830a42a2aa7b?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>因为U1、U2互相独立，而 θ只取决于U2，R只取决于U1，所以θ 、R互相独立。而独立随机变量联合分布等于边缘分布之积。所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/8ad1e7cc6c1545e4aac7c2e2885238f2?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>因为X &#x3D; Rcosθ, y&#x3D;Rsinθ, 根据二元随机变量函数分布，有：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a1c62e3c44834dbfa86fc5de10c57b54?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>其中</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/87958bd7e742442dbce56148f6187b16?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/245bf068c4084380973569c4ce86c6bb?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ea4f2df61f954f9ca201d743783c7c3f?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>同理可得：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4881e699214f412eb462cdd9ae4103a0?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>可见X和Y均服从标准正态分布。又因可验证</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2b4843ee25ae4010a19ae2c3e18dbf4d?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以X,Y互相独立。</p>
+<p>证毕。</p>
+<h1 id="3、极坐标形式的推导与证明"><a href="#3、极坐标形式的推导与证明" class="headerlink" title="3、极坐标形式的推导与证明"></a>3、极坐标形式的推导与证明</h1><p>设u,v相互独立，均服从分布U(-1,1)，且有</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7b0148e1fb4340079200bc0f5baf8dd7?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>则X、Y相互独立且均服从标准正态分布。</p>
+<p>根据Box-Muller变换的标准形式</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0735064f0f1a4fb3be3598c365c52c51?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>作变换</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/321d382ae2c2413588369176ec1c1752?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>可得：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f7f6fabd51bd4fa5b56d988b26025850?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>现在证明(*)变换满足: U1,U2相互独立，均服从分布U(0,1)。</p>
+<p>证明：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3a975d9ffd8549a1a657039b2618dcbe?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>图4-1</p>
+<p>如图4-1所示。首先确认U1,U2的取值范围均为(0,1)。因为(u,v)均匀分布在单位圆内，而</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e2f43c81c76c4107a0c082579daf24af?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>故U1取值范围为(0,1)。θ&#x3D;2πU2,因为θ的取值范围是(0,2π), 故U2的取值范围是(0,1)。</p>
+<p>因为(u,v)均匀分布在单位圆内，故</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/de1075ce52a443309aeeb6c983130084?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>根据二元随机变量函数分布(见附录)，有</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b2decb1604ae4abca404e600df16905f?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>现在求J</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/82bad890f3924ce1bfc6def8b839c398?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b675fcc6e41d4e9bacb164e6d130cf83?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/614beb43c19742da83c36f452c2738af?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3616a80a2d0145aa8a101bcbe432575b?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>同理:</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ffbcee4fdaee4516bfb30484ba320dca?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>故U1，U2均服从U(0,1)。</p>
+<p>又</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0ab2272149fb4ce3a5b94a7c934c5012?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>故U1,U2相互独立。</p>
+<p>证毕。</p>
+<h1 id="五、附录"><a href="#五、附录" class="headerlink" title="五、附录"></a>五、附录</h1><h1 id="1、一元随机变量函数的分布"><a href="#1、一元随机变量函数的分布" class="headerlink" title="1、一元随机变量函数的分布"></a>1、一元随机变量函数的分布</h1><p>如果</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/d8d72501e64d4ccb884de4d68f50001b?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>y为单调函数，则</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f419a05fe1d246a18934c41df5943301?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>证明：因为</p>
+<p>P{Y ≤y(x)} &#x3D; P{X ≤x},</p>
+<p>P{Y ≤y(x+dx)} &#x3D; P{X ≤x+dx}</p>
+<p>两式相减得</p>
+<p>P{y(x) ≤Y ≤y(x+dx)} &#x3D; P{x ≤X ≤x+dx}</p>
+<p>又</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/55dad8afe5cd4d40958c6b733ace020c?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>dy之所以加绝对值，是因为dy有可能为负（当y为减函数时，区间[y(x),y(x+dx)]为负区间，dy为负）。</p>
+<p>得</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/d1ee6e9928bc4874ae614239015b260d?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4829fb2deff845068ebae54f15ef14ba?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<h1 id="2、二元随机变量函数的分布"><a href="#2、二元随机变量函数的分布" class="headerlink" title="2、二元随机变量函数的分布"></a>2、二元随机变量函数的分布</h1><p>设X,Y均为二元随机变量，即X&#x3D;(X1,X2), Y&#x3D;(Y1, Y2)</p>
+<p>向量y&#x3D;(y1, y2), 如果</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2a772bda88f24b3897d911278f462597?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>则：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bb4fcb5011b743b9a5ca990fa7c486a4?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>证明：</p>
+<p>对于X取值区域上的面元dS，将经过函数y映射为Y的取值区域上的面元记为y(dS)，有：</p>
+<p>P{X∈dS} &#x3D; P{Y∈y(dS)}</p>
+<p>又</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3c4a4e0105fd451fb8b8568a841ed5da?from=pc" alt="流行算法：Box–Muller变换法"></p>
+<p>其中Area(y(dS))加绝对值，是因为Area(y(dS))可能为负（J&lt;0时）。</p>
+<p>又因为面积元之比等于雅可比行列式，即</p>
+<p>Area(y(dS))&#x3D;J * Area(dS)</p>
+<p>所以</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3c8ecdb3fe6c414faba71f05f7498ce3?from=pc" alt="流行算法：Box–Muller变换法"></p>
+
+        </div>
+        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/Box–Muller变换法.md" target="_blank">编辑</a>
+</article>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+         
+          <li><a href="/URL">LINK_NAME</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BC%98%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">二、优点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%A4%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">三、两种形式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">1、标准形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%85%AC%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">（1）公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E7%9A%84python%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="toc-number">6.</span> <span class="toc-text">（2）标准形式的python代码演示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81-%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">7.</span> <span class="toc-text">2、 极坐标形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%85%AC%E5%BC%8F-1"><span class="toc-number">8.</span> <span class="toc-text">（1）公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84python%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="toc-number">9.</span> <span class="toc-text">（2）极坐标形式的python代码演示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E6%BC%94%E7%A4%BA%E7%BB%93%E6%9E%9C"><span class="toc-number">10.</span> <span class="toc-text">3、演示结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number">11.</span> <span class="toc-text">4、小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Box-Muller%E5%8F%98%E6%8D%A2%E7%9A%84%E8%AF%81%E6%98%8E"><span class="toc-number">12.</span> <span class="toc-text">四、Box-Muller变换的证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="toc-number">13.</span> <span class="toc-text">1、标准形式推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E8%AF%81%E6%98%8E"><span class="toc-number">14.</span> <span class="toc-text">2、标准形式证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%8E%A8%E5%AF%BC%E4%B8%8E%E8%AF%81%E6%98%8E"><span class="toc-number">15.</span> <span class="toc-text">3、极坐标形式的推导与证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">16.</span> <span class="toc-text">五、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%B8%80%E5%85%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-number">17.</span> <span class="toc-text">1、一元随机变量函数的分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E4%BA%8C%E5%85%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E5%B8%83"><span class="toc-number">18.</span> <span class="toc-text">2、二元随机变量函数的分布</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&text=Box–Muller变换法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&is_video=false&description=Box–Muller变换法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Box–Muller变换法&body=Check out this article: https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&title=Box–Muller变换法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&name=Box–Muller变换法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/&t=Box–Muller变换法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2015-2022
+    koderboy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="来源：今日头条 一、定义Dijkstra算法（迪杰斯特拉算法）是很有代表性的最短路径算法，用于计算一个结点到其他结点的最短路径。该算法指定一个点（源点）到其余各个结点的最短路径，因此也叫做单源最短路径算法。该算法是由荷兰计算机科学家Edsger W.Dijkstra于1959年发表。 Dijkstra算法是一种用于计算带权有向图中单源最短路径算法，不存在回溯的过程，因此它还不适用于带有负权重的情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dijkstra算法">
+<meta property="og:url" content="https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="来源：今日头条 一、定义Dijkstra算法（迪杰斯特拉算法）是很有代表性的最短路径算法，用于计算一个结点到其他结点的最短路径。该算法指定一个点（源点）到其余各个结点的最短路径，因此也叫做单源最短路径算法。该算法是由荷兰计算机科学家Edsger W.Dijkstra于1959年发表。 Dijkstra算法是一种用于计算带权有向图中单源最短路径算法，不存在回溯的过程，因此它还不适用于带有负权重的情况">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/a8689f20f2ae481f9b30b16fc4647a1e?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/2598ec87cb944b8894d9491adef654bf?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/d243ccb9e3b64be99f33831eba6c9f47?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/786de4ae95f5433580bc25861ad66961?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/ab214866087b4d2ba1057b03976525c0?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/066a452e5efe4a1c8caaaf342ccc9313?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/aa5d6c4688134f5cb1faf25b8e8510b0?from=pc">
+<meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/f9a8c374a1ec41b3bcf7e73406208a6a?from=pc">
+<meta property="article:published_time" content="2021-12-04T15:39:41.000Z">
+<meta property="article:modified_time" content="2022-05-04T08:35:58.660Z">
+<meta property="article:author" content="koderboy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p9.toutiaoimg.com/origin/pgc-image/a8689f20f2ae481f9b30b16fc4647a1e?from=pc">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Dijkstra算法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&text=Dijkstra算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&is_video=false&description=Dijkstra算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Dijkstra算法&body=Check out this article: https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&name=Dijkstra算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&t=Dijkstra算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%BC%94%E7%A4%BA%E4%BE%8B%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text">二、演示例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901"><span class="toc-number">3.</span> <span class="toc-text">例子1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902"><span class="toc-number">4.</span> <span class="toc-text">例子2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%903"><span class="toc-number">5.</span> <span class="toc-text">例子3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">三、应用</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        Dijkstra算法
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">koderboy</span>
+                </span>
+                
+    <div class="postdate">
+      
+        <time datetime="2021-12-04T15:39:41.000Z" itemprop="datePublished">2021-12-04</time>
+        
+      
+    </div>
+
+
+                    
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+    </div>
+
+
+                        
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6935059545899205134/">今日头条</a></p>
+<h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h1><p>Dijkstra算法（迪杰斯特拉算法）是很有代表性的最短路径算法，用于计算一个结点到其他结点的最短路径。该算法指定一个点（源点）到其余各个结点的最短路径，因此也叫做单源最短路径算法。该算法是由荷兰计算机科学家Edsger W.Dijkstra于1959年发表。</p>
+<p>Dijkstra算法是一种用于计算带权有向图中单源最短路径算法，不存在回溯的过程，因此它还不适用于带有负权重的情况。如果权值存在负数，那么被派生出来的可能是更短的路径，这就需要过程可以回溯，之前的路径需要被更短的路径替换掉，而Dijkstra算法是不能回溯的，它的每一步都是以当前最优选择为前提的。</p>
+<p>Dijkstra算法的思想是广度优先搜索（BFS）+贪心策略。对于计算非加权图中的最短路径，也可使用BFS算法。Dijkstra算法是对BFS算法的推广，以起始点为中心向外层层扩展，并且每一次都选择最优的结点进行扩展，直到扩展到终点为止。Dijkstra算法可以划归为贪心算法，下一条路径都是由当前更短的路径派生出来的更长的路径。</p>
+<p>Dijkstra算法在很多专业课程中都作为基本内容有详细的介绍，如数据结构、图论、运筹学等。</p>
+<h1 id="二、演示例子"><a href="#二、演示例子" class="headerlink" title="二、演示例子"></a>二、演示例子</h1><h1 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h1><p>第1步，创建距离表。第1列是结点名称，第2列是从起点A到对应结点的已知最短距离。开始我们并不知道A到其它结点的最短距离是多少，默认初始距离是无穷大。如图2-1-1所示：</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/a8689f20f2ae481f9b30b16fc4647a1e?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-1-1</p>
+<p>第2步，遍历起点A的所有相邻结点，找到起点A的邻接结点B和C。从A到B的距离是5，从A到C的距离是2，刷新距离表中起点A到各结点的最短距离(绿色表示刷新)。如图2-1-2所示。</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/2598ec87cb944b8894d9491adef654bf?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-1-2</p>
+<p>第3步，从图2-1-2距离表中找到从A出发距离最短的点，也就是结点C（最小距离是2）。遍历结点C的所有相邻结点，找到结点C的相邻结点D和F（A已经遍历过，不需要考虑）。从C到D的距离是1，所以A到D的距离是A-C-D&#x3D;2+1&#x3D;3；从C到F的距离是8；从A到F的距离是A-C-F&#x3D;2+8&#x3D;10。然后刷新距离表(绿色表示刷新)。如图2-1-3所示：</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/d243ccb9e3b64be99f33831eba6c9f47?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-1-3</p>
+<p>第4步，从图2-1-3距离表中找到从A出发距离最短的点（红色结点C已经遍历过，不需要考虑），也就是结点D（最小距离是3）。遍历结点D的所有相邻结点，找到相邻结点B、E和F（C已遍历过，不考虑）。从A-C-D-B的距离是3+1&#x3D;4；从A-C-D-E的距离是3+1&#x3D;4；从A-C-D-F的距离是3+2&#x3D;5。刷新距离表中起点A到各结点的最短距离。如图2-1-4所示。</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/786de4ae95f5433580bc25861ad66961?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-1-4</p>
+<p>第5步，从图2-1-4距离表中找到从A出发距离最短的点（红色结点C、D已经遍历过，不需要考虑），也就是结点B和E（最小距离是4）。遍历结点B的所有相邻结点，找到相邻结点E(D遍历过，不考虑),从A-C-D-B-E的距离为10，比当前A到E的最小距离4要大，不考虑。遍历结点E的所有相邻结点，找到相邻结点G、B(D遍历过，不考虑),从A-C-D-E-G的距离为4+7&#x3D;11&lt;∞, 刷新距离表;A-C-D-E-B的距离4+6&#x3D;10&gt;4,不考虑。如图2-1-5所示。</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/ab214866087b4d2ba1057b03976525c0?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-1-5</p>
+<p>第6步，从图2-1-5距离表中找到从A出发距离最短的点（红色结点B、C、D、E已经遍历过，不需要考虑），也就是结点F（最小距离是5）。从A-C-D-F-G的距离为8, 比当前最小距离11要小，刷新距离表。如图2-1-6所示。</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/066a452e5efe4a1c8caaaf342ccc9313?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-1-6</p>
+<p>就这样，除终点以外的全部结点都已经遍历完毕，距离表中存储的是从起点A到所有结点的最短距离。</p>
+<h1 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h1><p>图2-2-1是原始连通图。</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/aa5d6c4688134f5cb1faf25b8e8510b0?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-2-1</p>
+<p>用Dijkstra算法找出以A为起点的单源最短路径步骤如下：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>集合S</th>
+<th>集合Q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>选择A到集合S&#x3D;{A}此时最短路径A-&gt;A&#x3D;0以A为中间点，查找相邻点</td>
+<td>Q&#x3D;{B,C,D,E,F,G}A-&gt;-B&#x3D;5A-&gt;C&#x3D;2A-&gt;其它Q中结点&#x3D;∞发现A-&gt;C&#x3D;2权值为最短</td>
+</tr>
+<tr>
+<td>2</td>
+<td>选择C到S&#x3D;{A,C}此时最短路径A-&gt;A&#x3D;0,A-&gt;C&#x3D;2以C为中间点，从A-&gt;C这条路径开始找</td>
+<td>Q&#x3D;{B,D,E,F,G}A-&gt;B&#x3D;5(由第1步得到)A-&gt;C-&gt;D&#x3D;3A-&gt;C-&gt;F&#x3D;10A-&gt;C-&gt;其它Q中结点&#x3D;∞在A到Q的结点中，发现A-&gt;C-&gt;D&#x3D;3权值为最短</td>
+</tr>
+<tr>
+<td>3</td>
+<td>选择D到S&#x3D;{A,C,D}此时最短路径A-&gt;A&#x3D;0,A-&gt;C&#x3D;2,A-&gt;C-&gt;D&#x3D;3,以D为中间点，从A-&gt;C-&gt;D这条路径开始找</td>
+<td>Q&#x3D;{B,E,F,G}A-&gt;C-&gt;D-&gt;B&#x3D;4(比第1步的A-&gt;B&#x3D;5要短，替换之)A-&gt;C-&gt;D-&gt;E&#x3D;4A-&gt;C-&gt;D-&gt;F&#x3D;5(比第2步的A-&gt;C-&gt;F&#x3D;10要短，替换之)A-&gt;C-&gt;D-&gt;G&#x3D;∞在A到Q的结点中，发现A-&gt;C-&gt;D-&gt;B&#x3D;4或A-&gt;C-&gt;D-&gt;E&#x3D;4权值为最短</td>
+</tr>
+<tr>
+<td>4</td>
+<td>选择B、E到S&#x3D;{A,C,D,B,E}此时最短路径A-&gt;A&#x3D;0,A-&gt;C&#x3D;2,A-&gt;C-&gt;D&#x3D;3,A-&gt;C-&gt;D-&gt;B&#x3D;4,A-&gt;C-&gt;D-&gt;E&#x3D;4,以B、E为中间点，分别从A-&gt;C-&gt;D-&gt;B、从A-&gt;C-&gt;D-&gt;E路径开始找</td>
+<td>Q&#x3D;{F,G}A-&gt;C-&gt;D-&gt;E-&gt;G&#x3D;11A-&gt;C-&gt;D-&gt;F&#x3D;5(从第3步获得)在A到Q的结点中，发现A-&gt;C-&gt;D-&gt;F权值为最短</td>
+</tr>
+<tr>
+<td>5</td>
+<td>选择F到S&#x3D;{A,C,D,B,E,F}此时最短路径A-&gt;A&#x3D;0,A-&gt;C&#x3D;2,A-&gt;C-&gt;D&#x3D;3,A-&gt;C-&gt;D-&gt;B&#x3D;4,A-&gt;C-&gt;D-&gt;E&#x3D;4,A-&gt;C-&gt;D-&gt;F&#x3D;5以F为中间点，从,A-&gt;C-&gt;D-&gt;F这条路径开始找</td>
+<td>Q&#x3D;{G}A-&gt;C-&gt;D-&gt;F-&gt;G&#x3D;8(比第4步的A-&gt;C-&gt;D-&gt;E-&gt;G&#x3D;11要短，替换之)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>选择G到S&#x3D;{A,C,D,B,E,F,G}此时最短路径A-&gt;A&#x3D;0,A-&gt;C&#x3D;2,A-&gt;C-&gt;D&#x3D;3,A-&gt;C-&gt;D-&gt;B&#x3D;4,A-&gt;C-&gt;D-&gt;E&#x3D;4,A-&gt;C-&gt;D-&gt;F&#x3D;5,A-&gt;C-&gt;D-&gt;F-&gt;G&#x3D;8</td>
+<td>集合Q为空，查找完毕。</td>
+</tr>
+</tbody></table>
+<p>显示更多</p>
+<h1 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h1><p>Dijkstra算法的执行过程：设初始集合S&#x3D;{s}, Q&#x3D;{t,y,x,z}. 源结点s为最左边的结点，每个结点中（圆圈中）的数值为该结点的最短路径的估计值（当前中间值）。黑色的结点属于集合S，白色的结点属于集合Q。每次从集合 S中选择最新加入的结点，分别计算并刷新与它直接相邻的结点的最短路径的估计值，然后从集合Q中选择最小估计值的结点，加入到集合S中。例如(b)中，集合Q中刷新后各结点的估计值为10，5，∞，∞，选择最小估计值为5的结点y，加入到集合S中, 接着计算并刷新结点y的相邻结点的最短路径的估计值。依次类推，直到集合Q中的所有结点全部加入到集合S中，算法结束。如图2-3-1所示。</p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/f9a8c374a1ec41b3bcf7e73406208a6a?from=pc" alt="流行算法：Dijkstra 算法"></p>
+<p>图2-3-1</p>
+<h1 id="三、应用"><a href="#三、应用" class="headerlink" title="三、应用"></a>三、应用</h1><p>一切能抽象成图或树的场景，如果要求最短路径，Dijkstra算法可考虑。比如，查找两个城市之间的最短路径；在地图中寻找两个地点之间的最短路径；在网络连接中为路由器寻找最短的传输路径等。</p>
+
+        </div>
+        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/Dijkstra算法.md" target="_blank">编辑</a>
+</article>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+         
+          <li><a href="/URL">LINK_NAME</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%BC%94%E7%A4%BA%E4%BE%8B%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text">二、演示例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901"><span class="toc-number">3.</span> <span class="toc-text">例子1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902"><span class="toc-number">4.</span> <span class="toc-text">例子2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%903"><span class="toc-number">5.</span> <span class="toc-text">例子3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">三、应用</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&text=Dijkstra算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&is_video=false&description=Dijkstra算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Dijkstra算法&body=Check out this article: https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&title=Dijkstra算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&name=Dijkstra算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2021/12/04/Dijkstra%E7%AE%97%E6%B3%95/&t=Dijkstra算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2015-2022
+    koderboy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="来源：今日头条 一、引言马尔可夫链蒙特卡洛方法(Markov Chain Monte Carlo)，简称MCMC。其产生于20世纪50年代早期，是在贝叶斯理论框架下，通过计算机进行模拟的蒙特卡洛方法(Monte Carlo)。该方法将马尔可夫(Markov)过程引入到Monte Carlo模拟中，实现抽样分布随模拟的进行而改变的动态模拟，弥补了传统的蒙特卡罗积分只能静态模拟的缺陷。 Metropo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="马尔可夫链蒙特卡洛法(MCMC)">
+<meta property="og:url" content="https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="来源：今日头条 一、引言马尔可夫链蒙特卡洛方法(Markov Chain Monte Carlo)，简称MCMC。其产生于20世纪50年代早期，是在贝叶斯理论框架下，通过计算机进行模拟的蒙特卡洛方法(Monte Carlo)。该方法将马尔可夫(Markov)过程引入到Monte Carlo模拟中，实现抽样分布随模拟的进行而改变的动态模拟，弥补了传统的蒙特卡罗积分只能静态模拟的缺陷。 Metropo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/f70eeb511dc64b14ba8a37f85f1b3bd4?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4da605b2917244b4968f4354124c28ea?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/5240ef7a06924833a8b3e8b207359070?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4fdddf5dd5db4a14aa37d78b76da9647?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/5043ca2c5dea4522bba13b8e01583224?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/24e3c81dc5d9485885ff9d35a099e1d3?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/bda3eace45a84a63b8f33631ee0c2e5d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/2d972b13347f490691ea22659cf60e9e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/d9d3e4d915ad41b49a2f33e71a71ef7e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/37c9b5bee23e421eb17f2d42b63b8418?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/ed06c2ce7cc84c83a372c9c66036b917?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/294f8d8299784a5496aa0e5e11c8eb85?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9c6b3f73357540a3984482ef8aab8818?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9e2c1b9139854c8da861d19a9f0012f7?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/757d1dad015c45cab90de6249160f8c6?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/0cbe59f17b4149a3bf3a96b81563ebc9?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/053cf1f72cc843e395afe6744e6cee29?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/52a519e2b3b94f84a5e9b6d72d2be9d3?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/ea6abf3c431c4f79bda0d40e7798b8f6?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/8d74eb7e6d7249ce806f00f712d92dc9?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4a71af08a5d84e1fb1914249eb8e5e9f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/52d306a3398a45f1b98bea66c83f2029?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/95b953f7b1fb41058f727a050c0083fb?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/794dc96c205f4578a8017cca689a4ac2?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/61228d2f14f64617b1e45fa8a4e3323c?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/0b36177d3d1c43ad82ce365f326a7e8e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/7a51ab1b786742e5a7158b4e42b4be25?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/97bbdef7a20a4c54829d95eb188ecbea?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/c4ad2723ee9f4ef1bb33078ae503cd71?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/7a55071c272a44c5b132e5753e2fd15a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/baf866d7917f4711ac9f11f022fa77dc?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a1991254bbc849cc9fd7c642e44cf10e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/7f85c64a90024871af4848f161819d66?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/0a99677ae03e45afba72977ddf44ec40?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/53153e2b368f4c7481345cbcec5cb0be?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/b0561f6f3e9645d6a2dd709422827ee8?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/941a0b78288844598f53179757c0d6ba?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/842e34e82e59464ea601d2ae805586b1?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/fe9d9ce0938b4f1399f87c48db5e2924?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/1ae88d04aaf342b992d041a97684f75d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/13e1e977f945488d9a7cc525af1f3f94?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/d07e429b8d4a48dabbf66dd6a1451ced?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a6dae99640e74713bd7e61b7b59d019d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/59d495a4df05469c91913849aabdd04f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9dc9ec34772a4c008663a2c5debefc86?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/fd51470c608342f4b281618c7b416f7e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/50a50c85dcc84b59a722861d3a520d09?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/b1ea055c416640e2902afae5999827cf?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/7e888bc76bc043a8b946e7d68372a96a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/ba0cb9a1a29b4c38a9a84173102a97c6?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/afe0c001d5d643eaac1c1244d6fb9cb0?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/b997c25128894bddbc07c8e67dcce0ea?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/2820f14d7e144d77ab4cb85b3d1b48e6?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/6b4cbec88d944a9eb620d811c17a8807?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/ddfb61393f344060b26974a73aada48e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/388ac2ef2d71460f9bfb17bedca22f89?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/d9dcba0ecae64d19904b9caac121b9e9?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/f03b99dbbb7b44c799cd132564adf1bd?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3edb5ba2328346a8bda4fc03ad468097?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/369714742cfa42cbae6b5d8e2253f054?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/0017dca313a2495bacb864543644e45a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/8669d49dfd674403bb499cd6453052d5?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e5813a53997c4b33983ee3dd8dda912a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/34e1ddc6c2b04ce49a697060ea69c410?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/d53a36985a434d71a14411846bc8757e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/f5c30da3ebce405198989d64b1df94d0?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/6c09aa902f6d4fd0b031559605a25bc8?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/108c536bcbe3483b9692c456a928d25d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/fe769819655b47c6bf1e9a47683aaf39?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/60c9af6850634d0eb9ef5f8b93e90f5f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4a6b87f8a74f4f979dcf002d5b559a9e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/c794d82299ef4d04ba9d7e1f28246e4d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/bf3d7751196249789a9405fd66fee5d4?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/6e508995c9ba4c5db5f477a944dc9074?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/bc07f2457ce440d8b2ac87b81a3f3fe7?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3e532f0e9266489fbe68bec8aa8a9e9a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a410e9633e1c4d498663e180e04e8a33?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/26be701f1a1d46de9537b0c3f6210f99?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9cdbb3e96cad4eecb492737a2bb17f82?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9e0ca613399e40058892b489e2871568?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3d576847cba846b59d28059c6e98ba96?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4831c27cef29434893ddd4df1e0c12b3?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/0adf6756e47a4ce987296bb75a661093?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e72c4a0fe0aa4f21bd80b6a3b42c018e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/1b0b93d9ceea4d3c99347ad050a22f0f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/eff4daa36ab44fae8c4efabdb40b9fcc?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4910ed0d0cce42688e437a7624cdc44d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/26f507b48013446193d8f1b4bd4b449b?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/db66e81c110d4831b599edd92d53b7d1?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e794bad27f724900994297c7d87e7147?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/f36cb81fb802449c91e75a7ffec0dbbf?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/da5209b48105423e8027244407ea7e34?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a987e1e14c02467d93a1f279ec472032?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3bb41ee6a98b422099b50715fac67a9f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e1f7073b3d18440281b4ff04bbf06442?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/bdaf1907e7264976966ae36635eac066?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/d92dac17be134a7c892ce2cdeb60bacc?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3270f5b82f6b4ffdb73ca9d3486d159a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/cf45c741b68c4e48aee6781e608887a4?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/5ac2bf22be5441dc87585d94926916b4?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/fedceeb0ce84477c8ff4ec552bcbbe4b?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/68fd026416be4c72a0e47fd45b53edc9?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e704492f0df549a8bf991faac3d60782?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/45bbc9030f534f7db1b1468d1e52f764?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4ca2e44ae0fb4af8b0d06234cf5a8af6?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e280bac42a354dc899f3365ce85924f3?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/ddf18150a2be43bab6386119f40e680f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/fe69689716324eababd4b28cbd6f484f?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/26c65abb11f94fccb1e702c5af5f6a22?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/c1250d1ccee641d283661ca5a869e967?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3a628f89202042ee966aabb04bbef65e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4bb176c7aab942c9872821191ea3fb7a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/ad417bc0b7d34f5092c363e3b0378a46?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/db03da79aa3c4c719e1ab6157cdf3ffe?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/279fe28d5d704f35a60c81bcd9b4170c?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/e22c7ed716f449ab869d9efea897472c?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a5ee1ff65b0a47fa88d5595a05b16b7c?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/3769f43e49794f2b9e8759cca974b958?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a670efac45ae436d9b6a931fd5d7d748?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/6a3e834807fb4a35a540c4f705434807?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/c2a63dd01c744ebdb51c74a21384de8b?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/659fa0aba6ce4246bef98111551f948d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/dfdc0313bee24b5fac78b931154ab66a?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/271a6f3493404b62b40beca40344f9d2?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/2b717effd6ae41a99a7094cfae1d25b6?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/1a7b481f6a71413fbec09ce94a03d1d4?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/a90e80029ddf49ec848d0f9213b76e83?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/fee60942a28f4449beacdba4b251d396?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/5ab8c591eb5f45ed8cd84d248f05a51d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/46e2022f158041e78dc95747c00c2a4e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/caf20065cc4c46c39da6775c4982da82?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/118035fe4ae941d9a6d7010aa4afd194?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/c59511cf1f4240829ad30c222cb6b178?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/be9682abfc2443158408c0f2cf32c423?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/62ea22f268b44287a7602d649369f2c0?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/afe943545a554fbc9ed98bc9579ffbcf?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9b670eceb8d6462a8cf66d96677d9151?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/751cfabf29e34d3a859018105a05b172?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/dc8ee3f47a74498698b1483ee454b7d9?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9d23c9f4bf7343b19eb80c159da08159?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/8555e5d1506140368065599d9c0a3343?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/788207cb7a904be983f8349b3d511625?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/1cc9c4d872854441959fbbb04517b90d?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/9ebb269a3d624b5b9627434f0bad5ba2?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/019b2b1c5e764cf895f0462cd55f16a9?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/650dd2fbc7ee414a889e28d90db0f73e?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/5ce6e40090914e5c892723b15054b017?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/d7a0f4ee02304c229298d017c8902b39?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/4eecb3be3b6748898c19ef005c68d75b?from=pc">
+<meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/6d899e68e81140848103c2860e492949?from=pc">
+<meta property="article:published_time" content="2022-03-21T15:45:03.000Z">
+<meta property="article:modified_time" content="2022-05-04T08:35:58.672Z">
+<meta property="article:author" content="koderboy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6.toutiaoimg.com/origin/pgc-image/f70eeb511dc64b14ba8a37f85f1b3bd4?from=pc">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>马尔可夫链蒙特卡洛法(MCMC)</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&text=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&is_video=false&description=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=马尔可夫链蒙特卡洛法(MCMC)&body=Check out this article: https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&name=马尔可夫链蒙特卡洛法(MCMC)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&t=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">一、引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81MCMC%E7%9A%84%E4%B8%A4%E5%A4%A7%E8%B4%B4%E8%BA%AB%E6%8A%A4%E5%8D%AB"><span class="toc-number">2.</span> <span class="toc-text">二、MCMC的两大贴身护卫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E5%8F%8A%E5%85%B6%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-number">3.</span> <span class="toc-text">1、马尔可夫链及其平稳分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E5%AE%9A%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">1）定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E9%A9%AC%E6%B0%8F%E9%93%BE%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87%E7%9F%A9%E9%98%B5%E5%92%8C%E6%94%B6%E6%95%9B%E7%8E%B0%E8%B1%A1"><span class="toc-number">5.</span> <span class="toc-text">2）马氏链转移概率矩阵和收敛现象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89%E9%A9%AC%E6%B0%8F%E9%93%BE%E5%AE%9A%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">3）马氏链定理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E9%A9%AC%E6%B0%8F%E9%93%BE%E7%9A%84%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83%E4%B8%8E%E7%BB%86%E8%87%B4%E5%B9%B3%E8%A1%A1%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">4) 马氏链的平稳分布与细致平衡条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%EF%BC%89%E5%9F%BA%E4%BA%8E%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E9%87%87%E6%A0%B7%E8%BF%87%E7%A8%8B"><span class="toc-number">8.</span> <span class="toc-text">5）基于马尔可夫链的采样过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%EF%BC%89%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">9.</span> <span class="toc-text">6）马尔可夫链的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">7) 马尔可夫链的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95"><span class="toc-number">11.</span> <span class="toc-text">2、蒙特卡洛法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E5%AE%9A%E4%B9%89-1"><span class="toc-number">12.</span> <span class="toc-text">1）定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E4%B8%BB%E8%A6%81%E6%AD%A5%E9%AA%A4"><span class="toc-number">13.</span> <span class="toc-text">2）主要步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">14.</span> <span class="toc-text">3）组成部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%EF%BC%89%E4%BC%98%E7%82%B9"><span class="toc-number">15.</span> <span class="toc-text">4）优点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%EF%BC%89%E5%BA%94%E7%94%A8"><span class="toc-number">16.</span> <span class="toc-text">5）应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%8B%E4%B8%80-%E6%B1%82%E6%97%A0%E7%90%86%E6%95%B0%CF%80"><span class="toc-number">17.</span> <span class="toc-text">应用之一 求无理数π</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%8B%E4%BA%8C-%E6%B1%82%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="toc-number">18.</span> <span class="toc-text">应用之二 求定积分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%8B%E4%B8%89-%E4%BB%BF%E7%9C%9F%E4%B8%AD%E5%AD%90%E9%80%B8%E5%87%BA"><span class="toc-number">19.</span> <span class="toc-text">应用之三 仿真中子逸出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E4%B8%8E%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E7%9A%84%E7%81%B5%E9%AD%82%E9%99%84%E4%BD%93"><span class="toc-number">20.</span> <span class="toc-text">3、马尔可夫链与蒙特卡洛方法的灵魂附体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81MCMC%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="toc-number">21.</span> <span class="toc-text">三、MCMC有什么用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E4%B8%AD%E5%BE%88%E5%A4%9A%E9%97%AE%E9%A2%98%E9%83%BD%E6%98%AFMCMC%E6%96%B9%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">22.</span> <span class="toc-text">1、贝叶斯推断中很多问题都是MCMC方法的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81MCMC%E7%9A%84%E4%BD%9C%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-number">23.</span> <span class="toc-text">2、MCMC的作用总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E5%9C%A8%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E7%90%86%E4%B8%AD%E4%B8%BB%E8%A6%81%E7%94%A8%E4%BA%8E%E4%BB%8E%E5%90%8E%E9%AA%8C%E5%88%86%E5%B8%83%E7%9A%84%E2%80%9C%E9%9D%9E%E6%A0%87%E5%87%86%E5%8C%96%E9%83%A8%E5%88%86%E2%80%9D%E4%B8%AD%E7%9B%B4%E6%8E%A5%E7%94%9F%E6%88%90%E6%A0%B7%E6%9C%AC%E9%9B%86%EF%BC%8C%E9%81%BF%E5%85%8D%E5%A4%8D%E6%9D%82%E8%AE%A1%E7%AE%97%E3%80%82"><span class="toc-number">24.</span> <span class="toc-text">1）在贝叶斯推理中主要用于从后验分布的“非标准化部分”中直接生成样本集，避免复杂计算。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E4%BB%8E%E4%BB%BB%E6%84%8F%E7%BB%99%E5%AE%9A%E7%9A%84%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E6%88%96%E5%A4%8D%E6%9D%82%E5%88%86%E5%B8%83%E4%B8%AD%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%A0%B7%E6%9C%AC%E9%9B%86"><span class="toc-number">25.</span> <span class="toc-text">2）从任意给定的概率分布或复杂分布中获取随机样本集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81MCMC%E7%94%9F%E6%88%90%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%9B%86%E9%95%BF%E5%95%A5%E6%A0%B7%EF%BC%9F"><span class="toc-number">26.</span> <span class="toc-text">四、MCMC生成的样本集长啥样？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81MCMC%E4%B8%8E%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7%E6%B3%95"><span class="toc-number">27.</span> <span class="toc-text">五、MCMC与随机采样法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%87%87%E6%A0%B7%E6%A0%B7%E6%9C%AC%EF%BC%9F"><span class="toc-number">28.</span> <span class="toc-text">1、为什么需要采样样本？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E9%87%87%E6%A0%B7%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-number">29.</span> <span class="toc-text">2、采样必须满足的条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E8%B6%B3%E5%A4%9F%E5%9C%B0%E9%9A%8F%E6%9C%BA"><span class="toc-number">30.</span> <span class="toc-text">1）足够地随机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E8%B6%B3%E5%A4%9F%E5%A4%9A%E7%9A%84%E9%87%87%E6%A0%B7%E6%A0%B7%E6%9C%AC"><span class="toc-number">31.</span> <span class="toc-text">2）足够多的采样样本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89-%E5%B0%BD%E9%87%8F%E8%A6%86%E7%9B%96%E6%A0%B7%E6%9C%AC%E7%A9%BA%E9%97%B4"><span class="toc-number">32.</span> <span class="toc-text">3） 尽量覆盖样本空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%EF%BC%89-%E8%83%BD%E6%A8%A1%E6%8B%9F%E7%BB%99%E5%AE%9A%E7%9A%84%E7%9B%AE%E6%A0%87%E5%88%86%E5%B8%83"><span class="toc-number">33.</span> <span class="toc-text">4） 能模拟给定的目标分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-number">34.</span> <span class="toc-text">3、常见的随机采样方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89-U-0%EF%BC%8C1%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7%E6%B3%95%EF%BC%88Uniform-Sampling%EF%BC%89"><span class="toc-number">35.</span> <span class="toc-text">1） U~[0，1均匀分布采样法（Uniform Sampling）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="toc-number">36.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89-Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95"><span class="toc-number">37.</span> <span class="toc-text">2） Box–Muller变换法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">38.</span> <span class="toc-text">I 标准形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II-%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">39.</span> <span class="toc-text">II 极坐标形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89-%E9%80%86%E5%8F%98%E6%8D%A2%E6%B3%95%EF%BC%88Inverse-Transform-Method%EF%BC%89"><span class="toc-number">40.</span> <span class="toc-text">3） 逆变换法（Inverse Transform Method）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E9%80%86%E5%8F%98%E6%8D%A2%E6%B3%95"><span class="toc-number">41.</span> <span class="toc-text">I 连续随机变量逆变换法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II-%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E9%80%86%E5%8F%98%E6%8D%A2%E6%B3%95"><span class="toc-number">42.</span> <span class="toc-text">II 离散随机变量逆变换法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III-%E8%BD%AE%E7%9B%98%E8%B5%8C%E9%87%87%E6%A0%B7"><span class="toc-number">43.</span> <span class="toc-text">III 轮盘赌采样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-1"><span class="toc-number">44.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%EF%BC%89%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7%E6%B3%95%EF%BC%88Acceptance-Rejection-Sampling%EF%BC%89"><span class="toc-number">45.</span> <span class="toc-text">4）接受-拒绝采样法（Acceptance-Rejection Sampling）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-2"><span class="toc-number">46.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%EF%BC%89-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7%E6%B3%95%EF%BC%88Importance-Sampling%EF%BC%89"><span class="toc-number">47.</span> <span class="toc-text">5） 重要性采样法（Importance Sampling）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E4%B8%80-%E9%99%8D%E6%96%B9%E5%B7%AE"><span class="toc-number">48.</span> <span class="toc-text">作用一 降方差</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E4%BA%8C-%E5%B0%86%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%A0%E6%B3%95%E6%8A%BD%E6%A0%B7%E7%9A%84%E5%88%86%E5%B8%83%E8%BD%AC%E5%8C%96%E4%B8%BA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AE%B9%E6%98%93%E6%8A%BD%E6%A0%B7%E7%9A%84%E5%88%86%E5%B8%83%EF%BC%8C%E9%97%B4%E6%8E%A5%E6%B1%82%E4%B8%80%E4%BA%9B%E7%BB%9F%E8%AE%A1%E9%87%8Ff-x"><span class="toc-number">49.</span> <span class="toc-text">作用二 将复杂的无法抽样的分布转化为简单的容易抽样的分布，间接求一些统计量f(x)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-3"><span class="toc-number">50.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%EF%BC%89-MCMC%E9%87%87%E6%A0%B7%E6%B3%95"><span class="toc-number">51.</span> <span class="toc-text">6） MCMC采样法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89MCMC%E6%80%9D%E6%83%B3%E7%9A%84%E6%9D%A5%E6%BA%90"><span class="toc-number">52.</span> <span class="toc-text">（1）MCMC思想的来源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89MCMC%E4%B8%AD%E7%9A%84%E6%8F%90%E8%AE%AE%E5%88%86%E5%B8%83q"><span class="toc-number">53.</span> <span class="toc-text">（2）MCMC中的提议分布q(.)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89-MCMC%E9%87%87%E6%A0%B7%E5%8E%9F%E7%90%86"><span class="toc-number">54.</span> <span class="toc-text">（3） MCMC采样原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89MCMC%E5%87%A0%E7%A7%8D%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95"><span class="toc-number">55.</span> <span class="toc-text">（4）MCMC几种基本算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I%E3%80%81-Metropolis%E7%AE%97%E6%B3%95"><span class="toc-number">56.</span> <span class="toc-text">I、 Metropolis算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E7%9A%84%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">57.</span> <span class="toc-text">R语言的演示代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-4"><span class="toc-number">58.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II%E3%80%81-Metropolis-Hastings%E7%AE%97%E6%B3%95"><span class="toc-number">59.</span> <span class="toc-text">II、 Metropolis-Hastings算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lt-1-gt-%E3%80%81M-H%E7%AE%97%E6%B3%95%E5%AF%B9%E4%BA%8E%E4%B8%80%E7%BB%B4%E7%9B%AE%E6%A0%87%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E7%9A%84%E9%87%87%E6%A0%B7"><span class="toc-number">60.</span> <span class="toc-text">&lt;1&gt;、M-H算法对于一维目标概率分布的采样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M-H%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">61.</span> <span class="toc-text">M-H算法具体步骤如下：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E6%BC%94%E7%A4%BA%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">62.</span> <span class="toc-text">采样演示如下：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lt-2-gt-%E3%80%81M-H%E7%AE%97%E6%B3%95%E5%AF%B9%E4%BA%8E%E9%AB%98%E7%BB%B4%E7%9B%AE%E6%A0%87%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E7%9A%84%E9%87%87%E6%A0%B7"><span class="toc-number">63.</span> <span class="toc-text">&lt;2&gt;、M-H算法对于高维目标概率分布的采样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BB%A1%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83%E5%AE%9A%E4%B9%89"><span class="toc-number">64.</span> <span class="toc-text">满条件分布定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E5%88%86%E9%87%8FMetropolis-Hastings%E7%AE%97%E6%B3%95"><span class="toc-number">65.</span> <span class="toc-text">单分量Metropolis- Hastings算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M-H%E7%AE%97%E6%B3%95-%E7%8B%AC%E7%AB%8B%E6%8A%BD%E6%A0%B7"><span class="toc-number">66.</span> <span class="toc-text">M-H算法: 独立抽样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81"><span class="toc-number">67.</span> <span class="toc-text">R语言演示代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M-H%E7%AE%97%E6%B3%95-%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E6%8F%90%E8%AE%AE%E5%88%86%E5%B8%83"><span class="toc-number">68.</span> <span class="toc-text">M-H算法: 多元正态提议分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81-1"><span class="toc-number">69.</span> <span class="toc-text">R语言演示代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%90%E5%88%86%E9%87%8F%E7%9A%84M-H%E7%AE%97%E6%B3%95"><span class="toc-number">70.</span> <span class="toc-text">逐分量的M-H算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81-2"><span class="toc-number">71.</span> <span class="toc-text">R语言演示代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III%E3%80%81-%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7-Gibbs-Sampling"><span class="toc-number">72.</span> <span class="toc-text">III、 吉布斯采样(Gibbs Sampling)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%98%AF%E5%8D%95%E5%88%86%E9%87%8FM-H%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%EF%BC%8C%E4%B8%BB%E8%A6%81%E6%9C%89%E4%B8%A4%E7%82%B9%E7%89%B9%E6%AE%8A%EF%BC%9A"><span class="toc-number">73.</span> <span class="toc-text">吉布斯采样算法是单分量M-H算法的特殊情况，主要有两点特殊：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7%E6%9E%84%E9%80%A0%E7%9A%84%E9%A9%AC%E6%B0%8F%E9%93%BE%E6%94%B6%E6%95%9B%E5%88%B0%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83%E7%9A%84%E8%AF%81%E6%98%8E"><span class="toc-number">74.</span> <span class="toc-text">吉布斯采样构造的马氏链收敛到平稳分布的证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4Gibbs%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">75.</span> <span class="toc-text">二维Gibbs采样算法步骤：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-5"><span class="toc-number">76.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BB%B4Gibbs%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">77.</span> <span class="toc-text">高维Gibbs采样算法步骤：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81MCMC%E6%94%B6%E6%95%9B%E8%AF%8A%E6%96%AD%E6%96%B9%E6%B3%95"><span class="toc-number">78.</span> <span class="toc-text">六、MCMC收敛诊断方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E5%90%8C%E6%97%B6%E4%BA%A7%E7%94%9F%E5%A4%9A%E6%9D%A1%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE"><span class="toc-number">79.</span> <span class="toc-text">1、同时产生多条马尔科夫链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%AF%94%E7%8E%87%E8%AF%8A%E6%96%AD%E6%B3%95"><span class="toc-number">80.</span> <span class="toc-text">2、比率诊断法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81GewekeTest%E6%B3%95"><span class="toc-number">81.</span> <span class="toc-text">3、GewekeTest法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">82.</span> <span class="toc-text">七、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E8%AF%81%E6%98%8En-%E6%AD%A5%E8%BD%AC%E7%A7%BB%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BA%8E%E5%85%B6%E4%B9%8B%E5%89%8D%E6%89%80%E6%9C%89%E8%BD%AC%E7%A7%BB%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%9E%E7%BB%AD%E7%9F%A9%E9%98%B5%E7%9B%B8%E4%B9%98"><span class="toc-number">83.</span> <span class="toc-text">附录1 证明n-步转移矩阵等于其之前所有转移矩阵的连续矩阵相乘</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%952-WinBUGS-%E7%94%A8MCMC%E8%BF%9B%E8%A1%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E7%9A%84%E4%B8%93%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">84.</span> <span class="toc-text">附录2 WinBUGS - 用MCMC进行贝叶斯推断的专用软件包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%953-MCNP-%E5%9F%BA%E4%BA%8E%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%A0%B8%E7%89%A9%E7%90%86%E6%96%B9%E9%9D%A2%E7%9A%84%E9%80%9A%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">85.</span> <span class="toc-text">附录3 MCNP - 基于蒙特卡罗方法的核物理方面的通用软件包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%954-R%E8%AF%AD%E8%A8%80%EF%BC%8CS-PLUS%EF%BC%8CMATLBA-%E6%A8%A1%E6%8B%9FMCMC%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7"><span class="toc-number">86.</span> <span class="toc-text">附录4 R语言，S-PLUS，MATLBA - 模拟MCMC的软件工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%955-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">87.</span> <span class="toc-text">附录5 马尔可夫发展历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%956-MCMC%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">88.</span> <span class="toc-text">附录6 MCMC发展历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">89.</span> <span class="toc-text">八、参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        马尔可夫链蒙特卡洛法(MCMC)
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">koderboy</span>
+                </span>
+                
+    <div class="postdate">
+      
+        <time datetime="2022-03-21T15:45:03.000Z" itemprop="datePublished">2022-03-21</time>
+        
+      
+    </div>
+
+
+                    
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+    </div>
+
+
+                        
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6955086840999182861/">今日头条</a></p>
+<h1 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h1><p>马尔可夫链蒙特卡洛方法(Markov Chain Monte Carlo)，简称MCMC。其产生于20世纪50年代早期，是在贝叶斯理论框架下，通过计算机进行模拟的蒙特卡洛方法(Monte Carlo)。该方法将马尔可夫(Markov)过程引入到Monte Carlo模拟中，实现抽样分布随模拟的进行而改变的动态模拟，弥补了传统的蒙特卡罗积分只能静态模拟的缺陷。</p>
+<p>Metropolis等人在1953年首次提出了基于马尔可夫链的蒙特卡罗方法，即 Metropolis 算法，并在最早的计算机上编程实现。Metropolis算法是首个普适的采样方法，并启发了一系列 MCMC 方法，所以人们把它视为随机模拟技术腾飞的起点。 Metropolis算法这篇论文[1]被收录在《统计学中的重大突破》中，《Computing in Science &amp; Engineering》尝试列出了对20世纪科学与工程的发展和实践影响最大的十种算法：</p>
+<ul>
+<li>Metropolis Algorithm for Monte Carlo</li>
+<li>Simplex Method for Linear Programming</li>
+<li>Krylov Subspace Iteration Methods</li>
+<li>The Decompositional Approach to Matrix Computations</li>
+<li>The Fortran Optimizing Compiler</li>
+<li>QR Algorithm for Computing Eigenvalues</li>
+<li>Quicksort Algorithm for Sorting</li>
+<li>Fast Fourier Transform</li>
+<li>Integer Relation Detection</li>
+<li>Fast Multipole Method</li>
+</ul>
+<p>Metropolis Algorithm for Monte Carlo 被列为十大算法之首。 用于蒙特卡洛的Metropolis算法定义了一个收敛的马尔可夫链，其极限就是所需的概率分布。Metropolis算法及其推广算法已被称为蒙特卡洛马尔可夫链技术(MCMC)，因为这些算法模拟了一个马尔可夫链，从极限分布中获取抽样。</p>
+<p>搞自然科学研究的人，MCMC应该是基本装备。所谓平生不识MCMC, 便称英雄也枉然。</p>
+<h1 id="二、MCMC的两大贴身护卫"><a href="#二、MCMC的两大贴身护卫" class="headerlink" title="二、MCMC的两大贴身护卫"></a>二、MCMC的两大贴身护卫</h1><p>MCMC由两个MC组成，即马尔可夫链(Markov Chain ，也简称MC)和蒙特卡洛法（Monte Carlo Simulation，简称MC）。要弄懂MCMC的原理我们首先得搞清楚马尔科夫链的原理和蒙特卡罗法。</p>
+<h1 id="1、马尔可夫链及其平稳分布"><a href="#1、马尔可夫链及其平稳分布" class="headerlink" title="1、马尔可夫链及其平稳分布"></a>1、马尔可夫链及其平稳分布</h1><h1 id="1）定义"><a href="#1）定义" class="headerlink" title="1）定义"></a>1）定义</h1><p>马尔可夫链的命名来自俄国数学家安德雷.马尔可夫以纪念其首次提出马尔可夫链和对其收敛性质所做的研究。</p>
+<p>马尔可夫链是一组具有马尔可夫性质的离散随机变量的集合。所谓马尔可夫性质是指某一时刻状态转移的概率只依赖于它的前一个状态。</p>
+<p>具体地，马氏链的数学定义:</p>
+<p>对概率空间内的离散随机变量集合</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/f70eeb511dc64b14ba8a37f85f1b3bd4?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>若随机变量的取值都在可数集S内：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4da605b2917244b4968f4354124c28ea?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>且随机变量的条件概率满足如下关系</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5240ef7a06924833a8b3e8b207359070?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则随机变量集合X被称为马尔可夫链，可数集S被称为状态空间，马尔可夫链在状态空间内的取值称为状态。</p>
+<p>马氏链某一时刻状态转移的概率只依赖于它的前一个状态，这样定义，可以大大简化模型的复杂度，因此马氏链在很多时间序列模型中得到广泛的应用，比如循环神经网络RNN，隐式马尔科夫模型HMM等，当然MCMC也需要它。</p>
+<p>马尔可夫过程通常分为3类：</p>
+<ul>
+<li>时间、状态都是离散的，称为马尔可夫链。</li>
+<li>时间连续、状态离散的，称为连续时间的马尔可夫链。</li>
+<li>时间连续、状态连续的，称为马尔可夫过程。</li>
+</ul>
+<p>可见马氏链是时间、状态都是离散的马尔可夫过程。</p>
+<h1 id="2）马氏链转移概率矩阵和收敛现象"><a href="#2）马氏链转移概率矩阵和收敛现象" class="headerlink" title="2）马氏链转移概率矩阵和收敛现象"></a>2）马氏链转移概率矩阵和收敛现象</h1><p>我们先来看马氏链的一个具体的例子。社会学家经常把人按其经济状况分成3类：下层(lower-class)、中层(middle-class)、上层(upper-class)，我们用1、2、3分别代表这三个阶层。社会学家们发现决定一个人的收入阶层的最重要的因素就是其父母的收入阶层。如果一个人的收入属于下层类别，那么他的孩子属于下层收入的概率是0.65，属于中层收入的概率是0.28，属于上层收入的概率是0.07。事实上，从父代到子代，收入阶层的变化的转移概率如图2-1和图2-2</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4fdddf5dd5db4a14aa37d78b76da9647?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图2-1</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5043ca2c5dea4522bba13b8e01583224?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图2-2</p>
+<p>设状态空间S&#x3D;{1,2,3} (1、2、3分别代表人的收入阶层：下层、中层、上层), 使用矩阵的表示方式，转移概率矩阵记为:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/24e3c81dc5d9485885ff9d35a099e1d3?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>假设当前这一代人处在下层、中层、上层的人的比例是概率分布向量:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/bda3eace45a84a63b8f33631ee0c2e5d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>那么他们的子女的分布比例将是</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/2d972b13347f490691ea22659cf60e9e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>他们的孙子代的分布比例将是</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d9d3e4d915ad41b49a2f33e71a71ef7e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>第n代子孙的收入分布比例将是</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/37c9b5bee23e421eb17f2d42b63b8418?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>假设初始概率分布为π0&#x3D;[0.21,0.68,0.11]，则我们可以计算前n代人的分布状况如下</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/ed06c2ce7cc84c83a372c9c66036b917?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>我们发现从第7代人开始，这个分布就稳定不变了，这个是偶然的吗？我们换一个初始概率分布π0&#x3D;[0.75,0.15,0.1]试试看，继续计算前n代人的分布状况如下:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/294f8d8299784a5496aa0e5e11c8eb85?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>我们发现，到第9代人的时候, 分布又收敛了。最为奇特的是，两次给定不同的初始概率分布，最终都收敛到概率分布 π&#x3D;[0.286,0.489,0.225]，也就是说收敛的行为和初始概率分布 π0无关。这说明这个收敛行为主要是由概率转移矩阵P决定的。我们计算一下 P的n阶矩阵为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9c6b3f73357540a3984482ef8aab8818?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>我们发现，当 n 足够大的时候，这个P的n阶矩阵的每一行都是稳定地收敛到π&#x3D;[0.286,0.489,0.225]这个概率分布。这个收敛现象并非是我们这个马氏链独有的，而是绝大多数马氏链的共同行为。这个性质同样不光是离散状态，连续状态时也成立。</p>
+<h1 id="3）马氏链定理"><a href="#3）马氏链定理" class="headerlink" title="3）马氏链定理"></a>3）马氏链定理</h1><p>马氏链定理： 如果一个非周期马氏链具有转移概率矩阵P, 状态空间S, i,j∈S且它的任何两个状态是连通的，那么</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9e2c1b9139854c8da861d19a9f0012f7?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>这就是马氏链的收敛定理。</p>
+<p>由该定理可以得出如下结论：</p>
+<p>&lt;1&gt;</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/757d1dad015c45cab90de6249160f8c6?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>&lt;2&gt;</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/0cbe59f17b4149a3bf3a96b81563ebc9?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>&lt;3&gt; π 是方程 πP&#x3D;π的唯一非负解。其中,</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/053cf1f72cc843e395afe6744e6cee29?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>π称为马氏链的平稳分布。</p>
+<p>请注意两种表示方式的不同：</p>
+<ul>
+<li>表示状态空间S中的各个状态1,2,j…的概率：</li>
+</ul>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/52a519e2b3b94f84a5e9b6d72d2be9d3?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<ul>
+<li>表示不同时刻的概率分布</li>
+</ul>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/ea6abf3c431c4f79bda0d40e7798b8f6?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>这个马氏链的收敛定理非常重要，所有的 MCMC方法都是以这个定理作为理论基础的。定理的证明相对复杂，一般的随机过程课本中也不给证明，所以我们就不用纠结它的证明了，直接用这个定理的结论就好了。我们对这个定理的内容做一些解释说明：</p>
+<ul>
+<li>非周期的马尔科夫链：这个主要是指马尔科夫链的状态转化不是循环的，如果是循环的则永远不会收敛。幸运的是我们遇到的马尔科夫链一般都是非周期性的；</li>
+<li>任何两个状态是连通的：这个指的是从任意一个状态可以通过有限步到达其他的任意一个状态，不会出现条件概率一直为0导致不可达的情况；</li>
+<li>马尔科夫链的状态数可以是有限的，也可以是无限的。因此可以用于连续概率分布和离散概率分布；</li>
+<li>π通常称为马尔科夫链的平稳分布。</li>
+</ul>
+<p>我们仅证明定理的第二个结论</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/8d74eb7e6d7249ce806f00f712d92dc9?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>证明：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4a71af08a5d84e1fb1914249eb8e5e9f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>上式两边取极限就得到</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/52d306a3398a45f1b98bea66c83f2029?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>证明完毕。</p>
+<h1 id="4-马氏链的平稳分布与细致平衡条件"><a href="#4-马氏链的平稳分布与细致平衡条件" class="headerlink" title="4) 马氏链的平稳分布与细致平衡条件"></a>4) 马氏链的平稳分布与细致平衡条件</h1><p>给定一个马尔可夫链，若在其状态空间S存在概率分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/95b953f7b1fb41058f727a050c0083fb?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则π是该马尔可夫链的平稳分布。</p>
+<p><strong>细致平衡条件（Detailed Balance Condition）：</strong>给定一个马尔科夫链，概率分布π和概率转移矩阵P，∀i，j∈S, (S是状态空间)，如果下面等式成立:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/794dc96c205f4578a8017cca689a4ac2?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则此马尔科夫链具有一个平稳分布（Stationary Distribution)。</p>
+<p>需要注意，这个细致平衡条件仅是一个充分条件，而不是必要条件，也就是说存在具有平稳分布的马尔科夫链不一定满足此细致平衡条件。</p>
+<p>证明如下：</p>
+<p>由条件推出</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/61228d2f14f64617b1e45fa8a4e3323c?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>得</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/0b36177d3d1c43ad82ce365f326a7e8e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>所以此马尔科夫链具有一个平稳分布。</p>
+<p>从初始概率分布π0(x)出发，我们在马氏链上做状态转移，记Xi的概率分布为πi(x)，则有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/7a51ab1b786742e5a7158b4e42b4be25?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>由马氏链收敛的定理, 概率分布πi(x)将收敛到平稳分布 π(x)。假设到第n步的时候马氏链收敛，则有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/97bbdef7a20a4c54829d95eb188ecbea?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>所以</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/c4ad2723ee9f4ef1bb33078ae503cd71?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>也就是说无论我们的起始状态是何种概率分布，在状态转移矩阵 P 的作用下，经过足够大的 n 步转移之后，最后都收敛到一个平稳分布，且该分布是唯一不变的。即平稳分布仅由状态转移矩阵P决定。</p>
+<p>设马尔可夫链的状态空间S&#x3D;{ω1，ω2，…, ωi，…ωn}（可以理解为样本空间在随机过程中的表达），如果我们从一个具体的初始状态 x0∈S（x0可能是ω2，也可能是ωi）开始,沿着马氏链按照概率转移矩阵做跳转，那么我们可以得到一个转移状态序列 ，马氏链终于露出了它的庐山真面：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/7a55071c272a44c5b132e5753e2fd15a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>尽管马尔可夫链最终会收敛到所需的分布，但是初始样本可能会遵循非常不同的分布，尤其是在起点位于低密度区域的情况下。结果，通常需要一个老化期，所以我们会舍弃前面的老化样本，得到我们需要的平稳样本集</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/baf866d7917f4711ac9f11f022fa77dc?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>这就是平稳分布 π的状态样本序列。最后平稳分布的样本集可能达到几万、几十万甚至更大的规模。统计各个状态出现的频次，归一化后画出统计直方图，就可以模拟目标分布。</p>
+<h1 id="5）基于马尔可夫链的采样过程"><a href="#5）基于马尔可夫链的采样过程" class="headerlink" title="5）基于马尔可夫链的采样过程"></a>5）基于马尔可夫链的采样过程</h1><p>1&gt; 输入马尔可夫链状态转移矩阵P, 状态空间S，设定状态转移收敛次数为n1, 迭代次数为n2;</p>
+<p>2&gt; 从任意简单概率分布采样得到初始状态值x0∈S;</p>
+<p>3&gt; for t&#x3D;0 to n1+n2-1: 从条件概率分布p(x|x(t))中采样，得到样本x &#x3D; x(t+1). 去掉前面的老化样本，最终的样本集</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a1991254bbc849cc9fd7c642e44cf10e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>即为我们需要的平稳分布对应的样本集。</p>
+<p>这里大家会问：</p>
+<ul>
+<li>如何进行简单概率分布采样和条件概率分布采样？</li>
+</ul>
+<p>简单概率分布可选择正态分布或均值分布，正态分布根据Box–Muller变换法或接受-拒绝采样法采样，均值分布可直接计算机采样；条件概率分布可由输入转移矩阵P得到概率数据，然后根据离散随机变量逆变换法采样。这些采样方法后面有详细介绍。</p>
+<ul>
+<li>怎么证明得到的样本集就是平稳分布对应的样本集？</li>
+</ul>
+<p>两种采样方法来理解：</p>
+<p>第1种方法，从简单概率分布中采样 10000个的初始状态样本，用最简单粗暴的方法对每一个初始样本都执行一次n(n&gt;n1)步转移，状态之间的转移概率从该马尔科夫链的状态转移矩阵获取，最后依如下概率落入状态空间中的一个状态。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/7f85c64a90024871af4848f161819d66?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>当初始状态样本足够多时，由大数定律，最终落入到平稳马氏链的各个状态的数量所占的比例逼近各个状态的平稳分布概率。但是这样一来计算量相当大，每次只利用了采样过程中的最后一个状态，且要运行 10000次进入平稳状态的转移过程，数据的利用率很低，浪费也很大。</p>
+<p>第2种方法，只需要对一个初始状态进行状态转移，就可以实现整个采样过程。我们把它进入稳态的那一刻记作t0，当 t0 时刻的状态向下一个时刻t1 转移时，它依照稳态分布概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/0a99677ae03e45afba72977ddf44ec40?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>（由n-步转移概率的性质Chapman–Kolmogorov等式可知，n-步转移矩阵是其之前所有转移矩阵的连续矩阵乘法，证明见附录1）</p>
+<p>进入到状态 1、状态2 或者状态j当中的任意一个。以此类推，对于后面的所有转移时刻：t2、t3……tn，当前状态都能依照稳态分布中的概率进入到状态空间的任何其它状态。进行N次转移后得到N个采样结果，N个采样结果中各个状态的数量所占的比例和平稳分布是一致的。这种方法巧妙地用时间轴的采样分布等价替代了空间轴的采样分布，省时省力。</p>
+<p>图2-3示意了进入平稳期的采样全过程（假设总共3个状态）：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/53153e2b368f4c7481345cbcec5cb0be?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图2-3</p>
+<h1 id="6）马尔可夫链的性质"><a href="#6）马尔可夫链的性质" class="headerlink" title="6）马尔可夫链的性质"></a>6）马尔可夫链的性质</h1><p>马尔可夫链的4个性质：不可约性、常返性、周期性和遍历性。</p>
+<ul>
+<li>不可约是指当马尔可夫链为任何状态时，其访问其余所有状态的概率都是正的，即随机变量可以在任意状态间转移。</li>
+<li>常返性指给定一个状态则经过有限的时间它一定会重新回到这个状态。</li>
+<li>非周期指马尔可夫链的状态的迁移不会陷入小的闭环。</li>
+<li>遍历性指马尔可夫链的的所有状态互通且均为非周期的正常返状态。</li>
+<li>平稳马尔可夫链也被称为齐次马尔可夫链。即转移概率不随时间而变。</li>
+<li>满足细致平衡条件的马氏链具有一个平稳分布。</li>
+<li>由极限定理可知，遍历链是平稳马尔可夫链。</li>
+<li>有限状态马尔可夫链转移概率的极限分布一定是平稳分布。</li>
+<li>若初始概率是平稳分布，则任意时刻的绝对概率分布等于初始分布，也即为平稳分布。</li>
+</ul>
+<h1 id="7-马尔可夫链的作用"><a href="#7-马尔可夫链的作用" class="headerlink" title="7) 马尔可夫链的作用"></a>7) 马尔可夫链的作用</h1><p>马尔可夫链在处理随机动力学时对问题建模的强大作用。</p>
+<p>马尔可夫链预测理论在教育学、经济学、金融投资、生物学、农作物栽培、地质灾变，…特别是水资源科学中都得到了极为广泛地应用。</p>
+<p>例如，马尔可夫链在排队理论、统计数据、生物种群进化建模、隐马尔可夫模型信息理论、语音识别、音字转换、词性标注、蒙特卡洛采样等都有应用。</p>
+<h1 id="2、蒙特卡洛法"><a href="#2、蒙特卡洛法" class="headerlink" title="2、蒙特卡洛法"></a>2、蒙特卡洛法</h1><h1 id="1）定义-1"><a href="#1）定义-1" class="headerlink" title="1）定义"></a>1）定义</h1><p>蒙特卡洛(Monte Carlo，MC)方法, 又称随机抽样法，统计试验法或随机模拟法。</p>
+<p>蒙特卡罗法是由冯·诺伊曼等人在20世纪40年代为研制核武器的需要而首先提出并以摩纳哥的赌城Monte Carlo来命名的一种计算方法。</p>
+<p>蒙特卡洛法是数学建模十大算法之一，是思想和技巧的艺术品。它的魔力在于，对于那些规模极大的问题，求解难度随着问题的维数（自变量个数）的增加呈指数级别增长、出现所谓的“维数的灾难”的问题，传统方法无能为力，而蒙特卡洛方法却可以独辟蹊径，基于随机仿真的过程给出近似的结果。</p>
+<h1 id="2）主要步骤"><a href="#2）主要步骤" class="headerlink" title="2）主要步骤"></a>2）主要步骤</h1><p>蒙特卡洛法是一类通过随机抽样过程来求取最优解的方法的总称，如果建立蒙特卡洛模型的过程没有出错，那么抽样次数越多，得到的答案越精确。蒙特卡洛法可以归纳为如下三个步骤：</p>
+<p><a> 构造或描述概率过程，将欲求解问题转化为概率过程。</p>
+<p>对于本身就具有随机性质的问题，主要是正确描述和模拟这个概率过程，对于本来不是随机性质的确定性问题，比如计算定积分，就必须事先构造一个人为的概率过程，它的某些参量正好是所要求问题的解。即要将不具有随机性质的问题转化为随机性质的问题。</p>
+<p><strong><b> 实现从已知概率分布抽样。</strong></p>
+<p>构造了概率模型以后， 按照这个概率分布抽取随机变量。这一般可以直接由软件工具包（见附录2，3，4）调用，或抽取均匀分布的随机数构造。这成为实现蒙特卡洛方法模拟实验的基本手段，也是蒙特卡洛方法被称为随机抽样的原因。</p>
+<p><strong><c> 通过样本计算各类统计量，此类统计量就是欲求问题的解。</strong></p>
+<p>一般说来，构造了概率模型并能从中抽样后（即实现模拟实验后），我们就要确定一个随机变量，作为所要求的问题的解，我们称它为无偏估计。建立各种估计量，相当于对模拟实验的结果进行考察和登记，从中得到问题的解。</p>
+<h1 id="3）组成部分"><a href="#3）组成部分" class="headerlink" title="3）组成部分"></a>3）组成部分</h1><ul>
+<li>概率密度函数(pdf)：必须给出描述一个物理系统的一组概率密度函数;</li>
+<li>随机数产生器：能够产生在区间[a,b]上满足概率分布的随机数;</li>
+<li>抽样规则：随机抽取服从给定的pdf的随机变量;</li>
+<li>模拟结果记录：记录一些感兴趣的量的模拟结果;</li>
+<li>误差估计：必须确定统计误差（或方差）随模拟次数以及其它一些量的变化;</li>
+<li>减少方差的技术：利用该技术可减少模拟过程中计算的次数;</li>
+<li>并行和矢量化：可以在先进的并行计算机上运行的有效算法。</li>
+</ul>
+<h1 id="4）优点"><a href="#4）优点" class="headerlink" title="4）优点"></a>4）优点</h1><ul>
+<li>对于具有统计性质问题可以直接进行解决；</li>
+<li>对于连续性的问题不必进行离散化处理；</li>
+<li>能够比较逼真地描述具有随机性质的事物的特点及物理实验过程；</li>
+<li>受几何条件限制小；</li>
+<li>方法的误差与问题的维数无关；</li>
+<li>收敛速度与问题的维数无关；</li>
+<li>具有同时计算多个方案与多个未知量的能力；</li>
+<li>误差容易确定；</li>
+<li>程序结构简单，易于实现。</li>
+</ul>
+<h1 id="5）应用"><a href="#5）应用" class="headerlink" title="5）应用"></a>5）应用</h1><p>蒙特卡洛方法应用非常广泛，其领域包括统计物理、天体物理、物理化学、数学、计算生物、统计学、经济学、金融证券、社会科学等等。</p>
+<p>蒙特卡洛方法在解决物理和数学问题时时常被使用。当十分困难或不可能得到解析表达式，或不可能应用确定性算法时，该方法显得尤其重要和最为有用。</p>
+<p>蒙特卡洛方法主要用于两个不同类别的问题：</p>
+<ul>
+<li>确定性的数学问题</li>
+</ul>
+<p>无理数、不规则图形的面积、多重积分、求逆矩阵、解线性代数方程组、解积分方程、解某些偏微分方程边值问题和计算代数方程组、计算微分算子的特征值等等。</p>
+<ul>
+<li>随机性问题</li>
+</ul>
+<p>仿真、概率分布的生成（MCMC算法）。</p>
+<h1 id="应用之一-求无理数π"><a href="#应用之一-求无理数π" class="headerlink" title="应用之一 求无理数π"></a>应用之一 求无理数π</h1><p><img src="https://p6.toutiaoimg.com/origin/pgc-image/b0561f6f3e9645d6a2dd709422827ee8?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>解题思路：</p>
+<p>构造一个单位正方形和一个单位圆的1&#x2F;4，往整个区域内随机投入点，根据点到原点的距离判断点是落在1&#x2F;4的圆内还是在圆外，从而根据落在两个不同区域的点的数目，求出两个区域的比值。如此一来，就可以求出1&#x2F;4单位圆的面积，从而求出圆周率π。</p>
+<p>解题步骤：</p>
+<p>第1步，建模，构造概率过程，选择区域内随机投入点作为随机变量；</p>
+<p>第2步，选择二维均匀分布Y &#x3D; sqrt(h^2+v^2), h、v~U[0,1], 作为已知概率分布抽样；</p>
+<p>第3步，根据落入正方形样本数和1&#x2F;4圆样本数，求出结果。</p>
+<p>演示代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from random import random</span><br><span class="line">from math import sqrt</span><br><span class="line">N = 1000000</span><br><span class="line">hits = 0</span><br><span class="line">for i in range(1, N):</span><br><span class="line">    x, y = random(), random();</span><br><span class="line">    dist = sqrt(x**2 + y**2)</span><br><span class="line">    if dist &lt;= 1.0:</span><br><span class="line">        hits = hits + 1</span><br><span class="line">pi = 4 * (hits/N)</span><br><span class="line">print(&#x27;Pi的值是 %s&#x27; % pi)</span><br></pre></td></tr></table></figure>
+
+<h1 id="应用之二-求定积分"><a href="#应用之二-求定积分" class="headerlink" title="应用之二 求定积分"></a>应用之二 求定积分</h1><p>例子1</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/941a0b78288844598f53179757c0d6ba?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>解题思路如下：</p>
+<p>假定随机变量具有密度函数</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/842e34e82e59464ea601d2ae805586b1?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>根据数学期望公式得</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/fe9d9ce0938b4f1399f87c48db5e2924?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>构造统计数</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/1ae88d04aaf342b992d041a97684f75d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>根据大数定律</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/13e1e977f945488d9a7cc525af1f3f94?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>最终求出了定积分。</p>
+<p>例子2 求定积分</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d07e429b8d4a48dabbf66dd6a1451ced?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>解题思路：</p>
+<p>将原式变形为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a6dae99640e74713bd7e61b7b59d019d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>解：采用蒙特卡洛方法， MATLAB模拟，</p>
+<p>N&#x3D;500;</p>
+<p>x&#x3D;unifrnd(0,2,N,1);</p>
+<p>mean(2<em>exp(3</em>x.^2))</p>
+<p>第一条语句设定了停止条件，共做N次Monte Carlo 模拟；</p>
+<p>第二条语句实现了在积分区间[0,2]均匀产生N个随机数；</p>
+<p>第三条语句求样本均值，实现蒙特卡洛计算方法的面积逼近。</p>
+<h1 id="应用之三-仿真中子逸出"><a href="#应用之三-仿真中子逸出" class="headerlink" title="应用之三 仿真中子逸出"></a>应用之三 仿真中子逸出</h1><p>图2-4是一个中子穿过用于中子屏蔽的铅墙示意图。铅墙的高度远大于左右厚度。设中子是垂直由左端进入铅墙，在铅墙中运行一个单位距离然后与一个铅原子碰撞。碰撞后，任意改变方向，并继续运行一个单位后与另一个铅原子碰撞。这样下去，如果中子在铅墙里消耗掉所有的能量或者从左端逸出就被视为中子被铅墙挡住，如果中子穿过铅墙由右端逸出就视为中子逸出。如果铅墙厚度为5个单位，中子运行7个单位后能量耗尽，求中子逸出的几率。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/59d495a4df05469c91913849aabdd04f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图2-4</p>
+<p>解题思路：</p>
+<p>这个问题并不复杂，但不容易找到一个解析表达式。而用模拟仿真的方法求解却可以有满意的结果。解题步骤如下：</p>
+<p>第1步，建模，构造概率过程，选择中子碰撞后的角度作为随机变量；</p>
+<p>第2步，选择角度的均匀分布作为已知概率分布抽样；</p>
+<p>第3步，根据假设的总中子样本数和逸出的中子样本数，求出结果。</p>
+<p>解：具体做法如下：</p>
+<p>我们关心的是一次碰撞后，中子在水平方向行进了多少，所以行进方向是正负θ的结果是一样的，我们就只考虑θ是正的情形。由于中子运行的方向θ是随机的，我们用计算机抽取在0到π间均衡分布的随机数，模拟1000000个中子在铅墙里行进的情形，看看这些中子与铅原子碰撞7次后，有多少超过了铅墙的右端。</p>
+<p>实现伪代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">n = 1000000;</span><br><span class="line">m = 0;</span><br><span class="line">flag = 1;</span><br><span class="line">for i=1:n</span><br><span class="line">    x=1;</span><br><span class="line">    for j=1:7</span><br><span class="line">        angle = pi * rand;</span><br><span class="line">        x = x + cos(angle);</span><br><span class="line">        if x&lt;0</span><br><span class="line">            k=0;</span><br><span class="line">            flag=0;</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    if x&gt;5 &amp; flag==1</span><br><span class="line">        k=1;</span><br><span class="line">    else </span><br><span class="line">        k=0;</span><br><span class="line">    end</span><br><span class="line">    m = m + k;</span><br><span class="line">    flag = 1;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：m&#x2F;n &#x3D; 1.3%</p>
+<p>我们运行程序得出逸出铅墙的中子的可能性约为1.3%，有了这个数字，我们可以报告安全部门，如果数字不能达到安全要求，我们则要加厚铅墙。</p>
+<h1 id="3、马尔可夫链与蒙特卡洛方法的灵魂附体"><a href="#3、马尔可夫链与蒙特卡洛方法的灵魂附体" class="headerlink" title="3、马尔可夫链与蒙特卡洛方法的灵魂附体"></a>3、马尔可夫链与蒙特卡洛方法的灵魂附体</h1><p>对于给定的概率分布p(x)，我们希望能有便捷的方式生成它对应的样本。由于马氏链能收敛到平稳分布，于是一个很漂亮的想法是：如果我们能构造一个转移矩阵为P的马氏链，使得该马氏链的平稳分布恰好是p(x), 那么我们从任何一个初始状态x0出发沿着马氏链转移, 得到一个转移状态序列</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9dc9ec34772a4c008663a2c5debefc86?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如果马氏链在第n步已经收敛了，于是我们就得到了平稳分布p(x)的样本集</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/fd51470c608342f4b281618c7b416f7e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>这个绝妙的想法在1953年被 Metropolis等人想到了，为了研究粒子系统的平稳性质， Metropolis 考虑了物理学中常见的波尔兹曼分布的采样问题，首次提出了基于马氏链的蒙特卡罗方法，即Metropolis算法，并在最早的计算机上编程实现。</p>
+<h1 id="三、MCMC有什么用？"><a href="#三、MCMC有什么用？" class="headerlink" title="三、MCMC有什么用？"></a>三、MCMC有什么用？</h1><h1 id="1、贝叶斯推断中很多问题都是MCMC方法的应用"><a href="#1、贝叶斯推断中很多问题都是MCMC方法的应用" class="headerlink" title="1、贝叶斯推断中很多问题都是MCMC方法的应用"></a>1、贝叶斯推断中很多问题都是MCMC方法的应用</h1><p>从贝叶斯(Bayesian)的观点来看，模型中的观测变量和参数都是随机变量，因此，样本x与参数θ的联合分布可以表示为：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/50a50c85dcc84b59a722861d3a520d09?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>根据贝叶斯理论，可以通过样本x的信息对θ的分布的进行更新，后验概率为：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/b1ea055c416640e2902afae5999827cf?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>其中π(θ)先验概率；f(x|θ)似然函数（即样本的概率分布）；分母是标准化常量。后验概率 &#x3D; (似然函数<em>先验概率)&#x2F;标准化常量 &#x3D; 标准似然度</em>先验概率。</p>
+<p>贝叶斯学习中经常需要进行三种积分运算：</p>
+<ul>
+<li>归范化（normalization)</li>
+<li>边缘 化（marginalization)</li>
+<li>数学期望（expectation)</li>
+</ul>
+<p>1&gt; 后验概率计算中需要归范化计算：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/7e888bc76bc043a8b946e7d68372a96a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>2&gt; 如果有隐变量z∈Z，后验概率的计算需要边缘化计算：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/ba0cb9a1a29b4c38a9a84173102a97c6?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>3&gt; 如果有一个函数g(θ)，可以计算该函数的关于后验概率分布的数学期望：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/afe0c001d5d643eaac1c1244d6fb9cb0?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>此积分值为样本x的函数，因此可以对g(θ)进行推断。</p>
+<p>该期望估计</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/b997c25128894bddbc07c8e67dcce0ea?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>当维数很高时，直接进行这三类积分是非常困难的， MCMC方法就是为此目的而诞生，为这些计算提供了一个通用的有效解决方案。</p>
+<h1 id="2、MCMC的作用总结"><a href="#2、MCMC的作用总结" class="headerlink" title="2、MCMC的作用总结"></a>2、MCMC的作用总结</h1><h1 id="1）在贝叶斯推理中主要用于从后验分布的“非标准化部分”中直接生成样本集，避免复杂计算。"><a href="#1）在贝叶斯推理中主要用于从后验分布的“非标准化部分”中直接生成样本集，避免复杂计算。" class="headerlink" title="1）在贝叶斯推理中主要用于从后验分布的“非标准化部分”中直接生成样本集，避免复杂计算。"></a>1）在贝叶斯推理中主要用于从后验分布的“非标准化部分”中直接生成样本集，避免复杂计算。</h1><p>对很多贝叶斯推断问题来说，有时候后验分布过于复杂，使得积分没有显示结果，数值方法也很难应用；有时候需要计算多重积分（比如后验分布是多元分布时）。这些都会带来计算上的很大困难。这也是在很长的时期内，贝叶斯统计得不到快速发展的一个原因。1990年代MCMC计算方法引入到贝叶斯统计学之后，一举解决了这个计算的难题。MCMC方法的最新发展使计算大型分层模型成为可能，这些模型需要对数百到数千个未知参数进行积分。可以说，近年来贝叶斯统计的蓬勃发展，特别是在各个学科的广泛应用和MCMC方法的使用有着极其密切的关系。</p>
+<h1 id="2）从任意给定的概率分布或复杂分布中获取随机样本集"><a href="#2）从任意给定的概率分布或复杂分布中获取随机样本集" class="headerlink" title="2）从任意给定的概率分布或复杂分布中获取随机样本集"></a>2）从任意给定的概率分布或复杂分布中获取随机样本集</h1><p>MCMC算法是一个普适的采样方法，它的出现带来了随机模拟技术的腾飞。在随机变量生成技术中，MCMC是一种相当高级的方法，可以从一个非常困难的概率分布中获得样本。更出乎意料的是，可以用MCMC从一个未经标准化的分布中获得样本，这来自于定义马尔可夫链的特定方式，马尔可夫链对这些归一化因子并不敏感。</p>
+<p>对高维（多个自变量）积分的数值近似计算是MCMC方法的一种重要的应用，很多统计问题，比如计算概率、矩（期望、方差等）都可以归结为定积分的计算。</p>
+<p>MCMC的精髓在于构造合适的马氏链。</p>
+<p>MCMC是一种简单有效的计算方法，在很多领域到广泛的应用，如统计学、贝叶斯(Bayes)问题、计算机问题等。</p>
+<h1 id="四、MCMC生成的样本集长啥样？"><a href="#四、MCMC生成的样本集长啥样？" class="headerlink" title="四、MCMC生成的样本集长啥样？"></a>四、MCMC生成的样本集长啥样？</h1><p>MCMC背后的基本思想是构造一个遍历的马尔可夫链，使得其平稳的、收敛的极限分布成为人们所需要的目标概率分布。</p>
+<p>设马尔可夫链的状态空间S&#x3D;{ω1，ω2，…ωn}（可以理解为样本空间在随机过程中的表达），从某个初始状态x0出发，用构造的马尔可夫链随机游走，产生状态样本序列:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/2820f14d7e144d77ab4cb85b3d1b48e6?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>舍弃前面的老化(不稳定)的样本集合</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/6b4cbec88d944a9eb620d811c17a8807?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>应用遍历定理，确定正整数m和n, 得到平稳分布的状态样本集合：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/ddfb61393f344060b26974a73aada48e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>该样本集可能达到几万、几十万、几千万甚至更大的规模。统计该状态样本集中对应的各个状态ω1，ω2…出现的频次，归一化后画成直方图。如图4-1所示，绿色部分就是状态概率分布（即抽样概率分布），红色部分是目标概率分布。t趋近∞时，抽样概率分布可以无限逼近目标概率分布。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/388ac2ef2d71460f9bfb17bedca22f89?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图4-1</p>
+<h1 id="五、MCMC与随机采样法"><a href="#五、MCMC与随机采样法" class="headerlink" title="五、MCMC与随机采样法"></a>五、MCMC与随机采样法</h1><p>平时我们接触比较多的场景是，给定一堆样本数据，求出这堆样本的概率分布p(x)。而采样刚好是个逆命题：给定一个概率分布p(x)，如何生成满足条件的样本？</p>
+<h1 id="1、为什么需要采样样本？"><a href="#1、为什么需要采样样本？" class="headerlink" title="1、为什么需要采样样本？"></a>1、为什么需要采样样本？</h1><p>通过样本可以计算各类统计量（如均值、方差、矩等），而此类统计量就是欲求问题的近似解。例如求积分，根据大数定律，相当于求某概率分布采样样本的均值。</p>
+<h1 id="2、采样必须满足的条件"><a href="#2、采样必须满足的条件" class="headerlink" title="2、采样必须满足的条件"></a>2、采样必须满足的条件</h1><h1 id="1）足够地随机"><a href="#1）足够地随机" class="headerlink" title="1）足够地随机"></a>1）足够地随机</h1><p>蒙特卡罗模拟有一个危险的缺陷：如果必须输入一个模式中的随机数并不像设想的那样是随机数，而却构成一些微妙的非随机模式，那么整个的模拟和预测结果都可能是错的。</p>
+<p>对于给定的概率分布来说，采样必须是随机的，这个非常重要。随机采样对于人来说，<strong>是不能也，非不为也</strong>。依靠人来采样很难得到真正的随机样本，人为地通过概率分布函数计算得到一批样本注定是徒劳的。</p>
+<p>蒙特卡罗模拟要取决于可靠的无穷尽的随机数目来源。产生随机数要靠随机数发生器，随机数发生器主要包括真（物理性）随机数发生器和伪随机数发生器。</p>
+<p>真随机数生成器（True Random Number Generator, TRNG）是一种通过物理过程而不是计算机程序来生成随机数字的设备。通常是基于一些能生成随机的“噪声”信号的微观现象，如热力学噪声、光电效应和量子现象等，其物理过程在理论上是完全不可预测的，并且这种不可预测性要经过实验检验。真随机数生成器通常由换能器、放大器和模拟数字转换器组成。其中换能器用来将物理过程中的某些效果转换为电信号，放大器及其电路用来将随机扰动的振幅放大到宏观级别，而模拟数字转换器则用来将输出变成数字，通常是二进制的零和一。通过重复采样这些随机的信号，一系列的随机数得以生成。</p>
+<p>硬件随机数发生器通常每秒仅产生有限数量的随机位。为了增加可用的输出数据速率，通常将它们用于生成“种子”，以用于更快的密码安全伪随机数生成器，然后生成器以更高的数据速率生成伪随机输出序列。</p>
+<p>伪随机数发生器是依靠计算机按照一定算法模拟产生的，其结果是确定的，是可见的。通过这种方式产生的“随机数”并不随机，是伪随机数。贝尔实验室的里德博士告诫人们记住伟大的诺依曼的忠告:“任何人如果相信计算机能够产生出真正的随机的数序组都是疯子。”</p>
+<p>伪随机数存在两大问题</p>
+<ul>
+<li>递推公式和初始值确定后，整个随机数序列便被唯一确定，不满足随机数相互独立的要求。</li>
+<li>随机数序列会出现周期性的循环现象。</li>
+</ul>
+<p>真随机数的生成对技术的要求比较高，在实际应用中往往使用伪随机数就够了。在使用伪随机数时，要尽量克服其存在的两大问题。对于第一个问题，不能从本质上加以改变，但只要递推公式选的比较好，随机数间的相互独立性是可以近似满足的；对于第二个问题，因为用蒙特卡罗方法解任何具体问题时，所使用的随机数的个数总是有限的，只要所用随机数的个数不超过伪随机数序列出现循环现象时的长度就可以了。</p>
+<h1 id="2）足够多的采样样本"><a href="#2）足够多的采样样本" class="headerlink" title="2）足够多的采样样本"></a>2）足够多的采样样本</h1><p>我们通过采样获取足够多的样本， 然后统计样本空间中的样本出现的频次，来模拟和逼近目标概率分布的。采样样本越多，越逼近目标概率分布。如图5-1所示。</p>
+<p>几万或几十万的样本集是小目标；几百万或几千万的样本集很常见；在AI和大数据时代，目标概率分布有时会涉及到几百个、几千个参数， 几百亿的样本集都出现了。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d9dcba0ecae64d19904b9caac121b9e9?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-1</p>
+<h1 id="3）-尽量覆盖样本空间"><a href="#3）-尽量覆盖样本空间" class="headerlink" title="3） 尽量覆盖样本空间"></a>3） 尽量覆盖样本空间</h1><p>这与算法和采样策略有关。</p>
+<h1 id="4）-能模拟给定的目标分布"><a href="#4）-能模拟给定的目标分布" class="headerlink" title="4） 能模拟给定的目标分布"></a>4） 能模拟给定的目标分布</h1><p>这与算法有关，要从理论上证明。</p>
+<h1 id="3、常见的随机采样方法"><a href="#3、常见的随机采样方法" class="headerlink" title="3、常见的随机采样方法"></a>3、常见的随机采样方法</h1><h1 id="1）-U-0，1均匀分布采样法（Uniform-Sampling）"><a href="#1）-U-0，1均匀分布采样法（Uniform-Sampling）" class="headerlink" title="1） U~[0，1均匀分布采样法（Uniform Sampling）"></a>1） U~[0，1均匀分布采样法（Uniform Sampling）</h1><p>例如：线性同余伪随机数生成器</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/f03b99dbbb7b44c799cd132564adf1bd?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3edb5ba2328346a8bda4fc03ad468097?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>X是伪随机序列；</p>
+<p>m, m&gt;0表示模量；</p>
+<p>a, 0&lt;a&lt;m表示乘数；</p>
+<p>c, 0≤c&lt;m表示增量；</p>
+<p>X0， 0≤X0&lt;m表示初始值；</p>
+<p>如果c&#x3D;0, 称为乘法同余发生器，如果c!&#x3D;0, 称为混合同余发生器；</p>
+<p>Yn则是 [0, 1)内服从均匀分布的随机变量。</p>
+<h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h1><p>均匀分布随机数可以直接由计算机模拟产生。</p>
+<h1 id="2）-Box–Muller变换法"><a href="#2）-Box–Muller变换法" class="headerlink" title="2） Box–Muller变换法"></a>2） Box–Muller变换法</h1><p>Box–Muller 变换是一种利用均匀分布快速产生符合标准正态分布伪随机数对的一种方法。基本思想是先得到服从均匀分布的随机数，再将服从均匀分布的随机数转变为服从正态分布。</p>
+<h1 id="I-标准形式的-Box–Muller-变换"><a href="#I-标准形式的-Box–Muller-变换" class="headerlink" title="I 标准形式的 Box–Muller 变换"></a>I 标准形式的 Box–Muller 变换</h1><p>假设变变量 U1 和变量 U2 是（0，1]均匀分布的随机数，</p>
+<p>且 U1 和 U2 彼此独立，令：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/369714742cfa42cbae6b5d8e2253f054?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则 Z0 和 Z1 就是服从 N（0，1）的标准正态分布随机数，并且 Z0 和 Z1 相互独立。</p>
+<h1 id="II-极坐标形式的-Box–Muller-变换"><a href="#II-极坐标形式的-Box–Muller-变换" class="headerlink" title="II 极坐标形式的 Box–Muller 变换"></a>II 极坐标形式的 Box–Muller 变换</h1><p>假设变量 u 和变量 v 是在[-1，1]上的均匀分布随机量，</p>
+<p>u 和 v 相互独立，令：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/0017dca313a2495bacb864543644e45a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>故而，随机数 z0 和 z1 计算后得出如下结果：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/8669d49dfd674403bb499cd6453052d5?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>z0 和 z1 是服从分布 N（0，1）的随机数，并且 z0 和 z1 相互 独立。</p>
+<h1 id="3）-逆变换法（Inverse-Transform-Method）"><a href="#3）-逆变换法（Inverse-Transform-Method）" class="headerlink" title="3） 逆变换法（Inverse Transform Method）"></a>3） 逆变换法（Inverse Transform Method）</h1><p>逆变换法就是利用累积分布函数求逆，将所求概率分布的抽样转化为随机均匀分布的抽样。</p>
+<h1 id="I-连续随机变量逆变换法"><a href="#I-连续随机变量逆变换法" class="headerlink" title="I 连续随机变量逆变换法"></a>I 连续随机变量逆变换法</h1><p>设所求连续分布采样的连续随机变量X的概率密度函数为f (x) 。</p>
+<p>第1步，求概率累积分布函数F(x)</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e5813a53997c4b33983ee3dd8dda912a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>F(x)是单调递增的连续函数，令</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/34e1ddc6c2b04ce49a697060ea69c410?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则U也是随机变量，且U∈[0, 1]。</p>
+<p>第2步，求反函数</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d53a36985a434d71a14411846bc8757e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>第3步，随机产生均匀分布U[0,1]，求出对应的X，就可得到所求概率分布的采样。</p>
+<h1 id="II-离散随机变量逆变换法"><a href="#II-离散随机变量逆变换法" class="headerlink" title="II 离散随机变量逆变换法"></a>II 离散随机变量逆变换法</h1><p>设所求离散分布采样的离散随机变量的概率密度为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/f5c30da3ebce405198989d64b1df94d0?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>第1步，生成均匀分布U[0,1]随机数。</p>
+<p>第2步，求出对应的X</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/6c09aa902f6d4fd0b031559605a25bc8?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>也就是如下分段式：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/108c536bcbe3483b9692c456a928d25d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>X就是所求概率分布的采样。</p>
+<h1 id="III-轮盘赌采样"><a href="#III-轮盘赌采样" class="headerlink" title="III 轮盘赌采样"></a>III 轮盘赌采样</h1><p>任意离散分布都可以画在轮盘上，采样只需要随机地旋转轮盘即可。如图5-2所示。</p>
+<p>该轮盘模拟了累积分布函数，随机转动轮盘相当于随机均匀采样，最后轮盘的停止位置就是采样值。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/fe769819655b47c6bf1e9a47683aaf39?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-2</p>
+<h1 id="小结：-1"><a href="#小结：-1" class="headerlink" title="小结："></a>小结：</h1><p>优点：随机数可以直接由均匀分布导出。</p>
+<p>缺点：很多复杂累积分布函数求逆困难。</p>
+<h1 id="4）接受-拒绝采样法（Acceptance-Rejection-Sampling）"><a href="#4）接受-拒绝采样法（Acceptance-Rejection-Sampling）" class="headerlink" title="4）接受-拒绝采样法（Acceptance-Rejection Sampling）"></a>4）接受-拒绝采样法（Acceptance-Rejection Sampling）</h1><p>实际随机分布抽样中会遇到如下问题：</p>
+<ul>
+<li>概率密度函数p(x) 太复杂无法直接采样；</li>
+<li>逆变换中一些累积概率分布函数无法求逆。</li>
+</ul>
+<p>接受-拒绝采样法就派上了用场。基本思想是选择一个容易抽样的随机分布函数q(x)和常数k, 使得k*q(x)≥p(x)（这里p(x)可以进行非归一化，乘以常数Z，以下省略），然后按照一定的方法拒绝某些抽样，达到接近p(x)分布的目的。</p>
+<p>如图5-3所示：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/60c9af6850634d0eb9ef5f8b93e90f5f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4a6b87f8a74f4f979dcf002d5b559a9e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-3</p>
+<p>假设我们选取已知的高斯分布q(x)&#x3D;Gassian(1.4, 1.2)，我们按照一定的方法拒绝某些样本，达到接近p(x)分布的目的。</p>
+<p>具体步骤如下：</p>
+<p>第1步，选择已知的分布函数q(x)，确定常量k，使得p(x)总在kq(x)的下方。</p>
+<p>第2步，在x轴上，从q(x)分布抽样取得a。但是a不一定留下，会有一定的几率被拒绝。</p>
+<p>第3步，在y轴上，从均匀分布(0,1)中抽样得到u。如果u.kq(a)&gt;p(a)，就是落到了灰色的区域中，拒绝；否则接受这次抽样。</p>
+<p>第4步，重复2、3步。</p>
+<p>模拟结果如图5-4所示：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/c794d82299ef4d04ba9d7e1f28246e4d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-4</p>
+<h1 id="小结：-2"><a href="#小结：-2" class="headerlink" title="小结："></a>小结：</h1><p>在高维（多个自变量）分布的情况下，接受-拒绝采样会出现如下一些问题：</p>
+<p>1&gt; 合适的提议分布q(x)比较难以找到，并且当kq(x)与p(x)相差太多时，会导致拒绝率很高，无用计算增加。</p>
+<p>2&gt; 很难确定一个合理的常数 k 值, 并且k值往往会很大；</p>
+<p>3&gt; 所需的样本量随空间维数增加而指数增长。</p>
+<h1 id="5）-重要性采样法（Importance-Sampling）"><a href="#5）-重要性采样法（Importance-Sampling）" class="headerlink" title="5） 重要性采样法（Importance Sampling）"></a>5） 重要性采样法（Importance Sampling）</h1><p>重要性采样是统计学中估计某一分布性质时使用的一种方法，该方法从与原分布不同的新分布中采样，而对原分布的性质进行估计。重要性采样常用于蒙特卡洛积分。</p>
+<h1 id="作用一-降方差"><a href="#作用一-降方差" class="headerlink" title="作用一 降方差"></a>作用一 降方差</h1><p>重要性采样是蒙特卡洛方法中的一个重要策略。该方法不改变统计量，只改变概率分布。重要性采样算法就是在有限的采样次数内，尽量让采样点覆盖对积分贡献很大的点或者以一种受控的方式改变仿真，以便增加稀少事件的数目。它是一种降方差的仿真方法。</p>
+<h1 id="作用二-将复杂的无法抽样的分布转化为简单的容易抽样的分布，间接求一些统计量f-x"><a href="#作用二-将复杂的无法抽样的分布转化为简单的容易抽样的分布，间接求一些统计量f-x" class="headerlink" title="作用二 将复杂的无法抽样的分布转化为简单的容易抽样的分布，间接求一些统计量f(x)"></a>作用二 将复杂的无法抽样的分布转化为简单的容易抽样的分布，间接求一些统计量f(x)</h1><p><img src="https://p6.toutiaoimg.com/origin/pgc-image/bf3d7751196249789a9405fd66fee5d4?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>其中， q(x)为提议分布(proposal distribution)，p(x) &#x2F; q(x)可以看做 importance weight。</p>
+<h1 id="小结：-3"><a href="#小结：-3" class="headerlink" title="小结："></a>小结：</h1><p>优点： 如果我们无法从分布p(x)中抽样, 或者从中抽样的成本很高, 那么我们还可以求E[f(x)]吗？答案是可以的, 我们可以从一个简单的分布q(x)中进行抽样得到x, 求f(x)p(x)&#x2F;q(x)的期望，进而可以求得函数积分的近似解。</p>
+<p>缺点：在高维空间里找到一个这样合适的q(x)非常难。</p>
+<h1 id="6）-MCMC采样法"><a href="#6）-MCMC采样法" class="headerlink" title="6） MCMC采样法"></a>6） MCMC采样法</h1><h1 id="（1）MCMC思想的来源"><a href="#（1）MCMC思想的来源" class="headerlink" title="（1）MCMC思想的来源"></a>（1）MCMC思想的来源</h1><p>拒绝采样法和重要性采样法面临两个问题：</p>
+<p>1&gt; 如果提议分布q(x)与目标分布p(x)差距过大，模拟采样效果就不太好；</p>
+<p>2&gt; 构造一个与目标分布p(x)相似的提议分布q(x)很困难。</p>
+<p>我们知道，对于任意的目标分布，我们可以设计一种接受-拒绝的概率，从而使得所有接受的点都是该分布的样本。拒绝采样法和重要性采样法采用了提议函数q(x)和接受概率实现了这种思想，然而问题在于，由于其提议分布q(x)是固定的，这对q(x)的要求很高，试想下，如果q与真实p的差距过大，那么几乎每个样本都会被拒绝掉，效率很低。那如何设计更好的q呢？一个巧妙的办法是设计一个自适应的提议分布 q(x’|x)，它以上一次接受的样本作为条件，然后经过转移propose一个新的样本，如果我们能够约束这个转移不会改变目标分布，那么我们就能快速的找到目标分布p(x)的样本。如图5-5所示，这也正是MCMC的思想。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/6e508995c9ba4c5db5f477a944dc9074?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-5</p>
+<p>另一方面，大多数拒绝采样法和重要性采样法都遭受“维数的诅咒”，其中拒绝的概率随维数的增加呈指数增长。 MCMC方法都没有这个“维数诅咒”的问题，当要采样的分布维数很大时，它通常是唯一可用的解决方案。结果，MCMC方法成为了从分层贝叶斯模型和当今许多学科中使用的其它高维统计模型中生成样本的首选方法。MCMC采样是一种普适采样方法，它可以解决其它采样方法无法搞定的很多问题。</p>
+<h1 id="（2）MCMC中的提议分布q"><a href="#（2）MCMC中的提议分布q" class="headerlink" title="（2）MCMC中的提议分布q(.)"></a>（2）MCMC中的提议分布q(.)</h1><p>提议分布q(x, x’) &#x3D; q(x’|x)通常要满足以下三个条件：</p>
+<p>1&gt; 对于固定的x, q(.)是一个概率密度函数;</p>
+<p>2&gt; 对于∀x, x’∈S, q(x, x’)的值要能计算;</p>
+<p>3&gt; 对于固定的x, 能够方便地从q(x,x’)中产生随机数。</p>
+<p>从理论上讲，提议函数q(.)的选取是任意的，但在实际计算中，提议函数的选取对于算法效率的影响是相当大的。一般认为提议函数与目标分布越接近，模拟的效果越好。</p>
+<p>q(.)函数的选择一般有两种：</p>
+<p>1&gt; 对称: 如高斯分布，均匀分布，这种情况下称为随机游走;</p>
+<p>2&gt; 非对称：如 log-normal，采样值倾向于选择高概率的点，因为我们不希望采样点来回震荡。</p>
+<h1 id="（3）-MCMC采样原理"><a href="#（3）-MCMC采样原理" class="headerlink" title="（3） MCMC采样原理"></a>（3） MCMC采样原理</h1><p>MCMC采样法的关键是构建马氏链，马氏链的收敛性质主要由状态转移矩阵P决定, 所以基于马氏链做采样的关键问题是如何构造状态转移矩阵P, 使得马氏链具有一个平稳分布，且该平稳分布π(x)恰好是我们要的分布p(x)。如何能做到这一点呢？</p>
+<p>答案的关键在细致平衡条件</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/bc07f2457ce440d8b2ac87b81a3f3fe7?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>其中i，j∈S (S是状态空间)，P是状态转移矩阵。</p>
+<p>不幸的是，对于平稳分布π(x)，即我们要的分布p(x)，要找到满足细致平衡条件的状态矩阵P很困难。没关系，我们随机找一个已知的马尔科夫链状态转移矩阵Q，其中Q(i,j)&#x3D;Q(j|i)是从状态i转移到状态j的提议分布条件概率，i,j∈状态空间S，它可能一开始并不满足细致平衡条件，即：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3e532f0e9266489fbe68bec8aa8a9e9a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>我们可以对上式做一个改造，使细致平衡条件成立。方法是引入一个α(i,j) ,使上式可以取等号，即：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a410e9633e1c4d498663e180e04e8a33?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>要使该等式成立，只要满足下面两式即可</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/26be701f1a1d46de9537b0c3f6210f99?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>这样，我们就得到了平稳分布π(x)对应的马尔科夫链状态转移矩阵P</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9cdbb3e96cad4eecb492737a2bb17f82?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>我们有一般称α(i,j)为接受概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9e0ca613399e40058892b489e2871568?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>其取值在(0,1)之间，可以理解为一个概率值。</p>
+<p>也就是说，基于平稳分布的状态转移矩阵P可以通过任意一个马尔科夫链状态转移矩阵Q以一定的接受概率获得。在接受-拒绝采样法中，那里是以一个常见分布通过一定的接受-拒绝概率得到目标概率分布，这里是以一个常见的马尔科夫链状态转移矩阵Q通过一定的接受-拒绝概率得到目标转移矩阵P，两者解决问题的思路是类似的。</p>
+<p>由于α(i,j) &#x3D;π(j)Q(j, i)&lt;1, 通常是一个比较小的数，因此在一次采样中很容易拒绝跳转，从而导致采样的时间成本、计算成本很高。</p>
+<p>因为α(i,j)&lt;1和α(j,i)&lt;1, 我们可以将两者同时放大但不超过1，且不破环等式成立。</p>
+<p>1&gt; 当α(i,j) ≤ α(j,i)时，则α(i,j)按照α(j,i)放大到1（概率不可能大于1）的比例等比例放大:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3d576847cba846b59d28059c6e98ba96?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>2&gt; 当α(i,j) &gt; α(j,i)时，则α(j,i)按照α(i,j)放大到1的比例等比例放大:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4831c27cef29434893ddd4df1e0c12b3?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>所以将两者同时放大有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/0adf6756e47a4ce987296bb75a661093?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>此时α(i,j)就是Metropolis-Hasting算法的接受概率。其中π(x)&#x3D;p(x), Q(i,j)&#x3D;Q(j|i)是提议分布条件概率，α(i,j)在取到1的情况下能实现链的满概率跳转，否则以放大1&#x2F;(π(i)Q(i,j))倍的概率进行跳转。</p>
+<p>当提议分布对称时，即Q(j, i) &#x3D; Q(i, j)， 接受概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e72c4a0fe0aa4f21bd80b6a3b42c018e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>此时α(i,j)就是Metropolis算法的接受概率。其中π(x)&#x3D;p(x)。</p>
+<p>由任选的提议分布Q(i,j)和接受概率α(j,i), 可以构造一个满足细致平衡条件的马氏链， 该马氏链具有一个平稳分布。构造平稳分布的马氏链的过程就是我们实现MCMC采样的过程。</p>
+<h1 id="（4）MCMC几种基本算法"><a href="#（4）MCMC几种基本算法" class="headerlink" title="（4）MCMC几种基本算法"></a>（4）MCMC几种基本算法</h1><p>MCMC算法包括Metropolis算法、Metropolis-Hasting 采样法、吉布斯采样法等。</p>
+<h1 id="I、-Metropolis算法"><a href="#I、-Metropolis算法" class="headerlink" title="I、 Metropolis算法"></a>I、 Metropolis算法</h1><p>已知目标概率分布p(x)，如何对其进行采样？</p>
+<p>我们分别采用接受-拒绝算法和Metropolis算法进行采样，并对两者做了对比。</p>
+<p>接受-拒绝算法的具体步骤如下：</p>
+<p>1&gt; 首先选择一个容易抽样的分布作为提议分布，记为q(x)，接着确定一个常数C，其中 C &gt; 1， 使得在x的定义域上都有p(x) ≤ Cq(x)。</p>
+<p>2&gt; 生成服从提议概率密度函数q(x)的随机数y。</p>
+<p>3&gt; 接着生成一个服从均匀分布U (0,1) 的随机数u。</p>
+<p>4&gt; 计算接受概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/1b0b93d9ceea4d3c99347ad050a22f0f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如果u &lt; α(y)，则接受y; 否则，拒绝。</p>
+<p>5&gt; 不断重复2~ 4就可以生成一组服从目标分布p(x)的随机数序列。</p>
+<p>Metropolis算法就是改进的接受-拒绝算法，具体步骤如下：</p>
+<p>1&gt; 首先构造提议分布q(.|x(t)), 这里提议分布是对称的，即q(y|x)&#x3D;q(x|y)， 例如，我们可以选均值为u&#x3D;x(t)的正态分布为提议分布。设置t&#x3D;0和初始状态x0。</p>
+<p>2&gt; 从提议概率分布q(.|x(t))中产生一个随机数y作为下一个状态。</p>
+<p>3&gt; 接着生成一个服从均匀分布U (0,1) 的随机数u。</p>
+<p>4&gt; 计算接受概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/eff4daa36ab44fae8c4efabdb40b9fcc?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如果u ≤ α，则接受候选随机数y, 赋值x(t+1)&#x3D;y，y作为提议分布的新状态，意味着此操作将鼓励跳转到目标分布的高密度区。</p>
+<p>如果u &gt; α，则拒绝候选随机数，赋值x(t+1)&#x3D;x(t)，表明f(x)在此y状态为低密区, 以概率的形式被拒绝。</p>
+<p>5&gt; 增量设置t &#x3D; t+1。</p>
+<p>6&gt; 重复步骤2~步骤5，我们就可以得到一组仅依赖于上一个随机数并且与前面随机数无关的随机序列</p>
+<p>Metropolis算法与接受-拒绝算法不同之处在于：</p>
+<p>1&gt; Metropolis算法的提议分布是自适应的条件概率分布，产生的随机数是由上一次的状态值转移得到；接受-拒绝算法的提议分布是固定的，没有状态转移的概念。</p>
+<p>2&gt; 两者的接受概率定义不同。</p>
+<p>Metropolis算法中唯一的限制是提议分布必须是对称的，满足条件的这类分布有正态分布、柯西分布、t分布和均匀分布等。为了能够使用非对称分布，或者目标分布的支持集是不对称的，如x∈(0,+∞), 我们将考虑使用Metropolis-Hastings算法。</p>
+<p><strong>例子</strong> 已知： (贝叶斯推断: 一个简单的投资模型) 假设有5种股票被跟踪记录了250的交易日每天的表现, 在每一个交易日, 收益最大的股票被标记出来。用Xi表示股票i在250个交易日中胜出的天数, 则记录到得的频数(x1,x2,… , x5)为随机变量(X1,X2,…,X5) 的观测。基于历史数据, 假设这5种股票在任何给定的一个交易日能胜出的先验机会比率为1 : (1 − β) : (1 − 2β) : 2β : β, 这里β∈(0, 0.5)是一个未知的参数。在有了当前这250个交易日的数据后, 使用Bayes方法对此比例进行更新。</p>
+<p>求：根据观测的数据求β目标分布随机抽样的样本集，进而估计β？</p>
+<p>解：根据前述，(X1,X2,…,X5)在给定β的条件下服从多项分布, 概率向量为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4910ed0d0cce42688e437a7624cdc44d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>因此β服从后验分布为（根据联合密度的多项分布公式，把x1,x2,…,x5看作常数）</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/26f507b48013446193d8f1b4bd4b449b?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>我们不能直接从此后验分布中产生随机数。一种估计β的方法是产生一个链, 使其平稳分布为此后验分布, 然后从产生的链中抽样来估计β.</p>
+<p>我们这里使用随机游动Metropolis算法, 可以初始化β&#x3D;0.2, 提议分布为均匀分布U[0,1], 收敛次数burn&#x3D;1000, 迭代次数m&#x3D;5000, 接受的概率为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/db66e81c110d4831b599edd92d53b7d1?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>因为后验分布即为所求的目标分布f(x), 可得</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e794bad27f724900994297c7d87e7147?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>观测数据(x1, x2, x3, x4, x5)是5只股票服从概率向量p在250天中胜出的频次。</p>
+<h1 id="R语言的演示代码："><a href="#R语言的演示代码：" class="headerlink" title="R语言的演示代码："></a>R语言的演示代码：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">b &lt;- .2 #actual value of beta</span><br><span class="line">w &lt;- .25 #width of the uniform support set</span><br><span class="line">m &lt;- 5000 #length of the chain 迭代次数</span><br><span class="line">burn &lt;- 1000 #burn-in time 收敛次数</span><br><span class="line">days &lt;- 250</span><br><span class="line">x &lt;- numeric(m) #the chain</span><br><span class="line"># generate the observed frequencies of winners</span><br><span class="line"># 首先生成观测数据，即5只股票250天按β=0.2计算各自的概率产生的胜出频次。</span><br><span class="line">i &lt;- sample(1:5, size=days, replace=TRUE,</span><br><span class="line">prob=c(1, 1-b, 1-2*b, 2*b, b))</span><br><span class="line">win &lt;- tabulate(i)</span><br><span class="line">print(win)</span><br><span class="line"># 计算分布概率值</span><br><span class="line">prob &lt;- function(y, win) &#123;</span><br><span class="line"># computes (without the constant) the target density</span><br><span class="line">if (y &lt; 0 || y &gt;= 0.5)</span><br><span class="line">return (0)</span><br><span class="line">return((1/3)^win[1] *</span><br><span class="line">((1-y)/3)^win[2] * ((1-2*y)/3)^win[3] *</span><br><span class="line">((2*y)/3)^win[4] * (y/3)^win[5])</span><br><span class="line">&#125;</span><br><span class="line"># Random Walk Metropolis algorithm</span><br><span class="line"># 使用随机游动Metropolis算法产生随机数</span><br><span class="line">u &lt;- runif(m) #for accept/reject step</span><br><span class="line">v &lt;- runif(m, -w, w) #proposal distribution</span><br><span class="line">x[1] &lt;- .25</span><br><span class="line">for (i in 2:m) &#123;</span><br><span class="line">y &lt;- x[i-1] + v[i]</span><br><span class="line">#计算接受概率</span><br><span class="line">if (u[i] &lt;= prob(y, win) / prob(x[i-1], win))</span><br><span class="line">x[i] &lt;- y</span><br><span class="line">else</span><br><span class="line">x[i] &lt;- x[i-1]</span><br><span class="line">&#125;</span><br><span class="line"># 链的路径图显示链己经收敛到目标分布</span><br><span class="line">par(mfrow=c(1,2))</span><br><span class="line">plot(x, type=&quot;l&quot;)</span><br><span class="line">abline(h=b, v=501, lty=3)</span><br><span class="line">xb &lt;- x[- (1:501)]</span><br><span class="line">hist(xb, prob=TRUE, xlab=bquote(beta), ylab=&quot;X&quot;, main=&quot;&quot;)</span><br><span class="line">z &lt;- seq(min(xb), max(xb), length=100)</span><br><span class="line">lines(z, dnorm(z, mean(xb), sd(xb))</span><br><span class="line"># 从而产生的随机数在丢弃初始的burn-in部分后可以用来估计β.</span><br><span class="line"># β的估计, 样本频率和MCMC估计的多项分布概率由如下代码给出</span><br><span class="line">print(win)</span><br><span class="line">print(round(win/days, 3))</span><br><span class="line">print(round(c(1, 1-b, 1-2*b, 2*b, b)/3, 3))</span><br><span class="line">xb &lt;- x[(burn+1):m]</span><br><span class="line">print(mean(xb))</span><br><span class="line">print(sd(xb))</span><br></pre></td></tr></table></figure>
+
+<h1 id="小结：-4"><a href="#小结：-4" class="headerlink" title="小结："></a>小结：</h1><p>Metropolis算法相邻样本是相关的，无法正确反映分布。这意味着，如果我们想要一组独立的样本，最后还必须丢弃一些样本。可以通过增加跳跃宽度选取样本来降低自相关。</p>
+<h1 id="II、-Metropolis-Hastings算法"><a href="#II、-Metropolis-Hastings算法" class="headerlink" title="II、 Metropolis-Hastings算法"></a>II、 Metropolis-Hastings算法</h1><p>Metropolis算法的应用受到了提议概率分布的对称形式的限制，因此，Hastings把提议概率分布从对称分布形式推广到一般情况，形成了Metropolis-Hastings算法，简称M-H算法，也称之为通用梅特罗波利斯算法。</p>
+<h1 id="lt-1-gt-、M-H算法对于一维目标概率分布的采样"><a href="#lt-1-gt-、M-H算法对于一维目标概率分布的采样" class="headerlink" title="&lt;1&gt;、M-H算法对于一维目标概率分布的采样"></a>&lt;1&gt;、M-H算法对于一维目标概率分布的采样</h1><h1 id="M-H算法具体步骤如下："><a href="#M-H算法具体步骤如下：" class="headerlink" title="M-H算法具体步骤如下："></a>M-H算法具体步骤如下：</h1><p>1&gt; 首先构造提议概率分布q(.|x(t))。设置t&#x3D;0和初始状态x0。</p>
+<p>2&gt; 从提议分布q(.|x(t))中产生一个随机数y作为下一个状态。</p>
+<p>3&gt; 接着生成一个服从均匀分布U (0,1) 的随机数u。</p>
+<p>4&gt; 计算接受概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/f36cb81fb802449c91e75a7ffec0dbbf?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如果u ≤ α，则接受候选随机数y, 赋值x(t+1)&#x3D;y;</p>
+<p>如果u &gt; α，则拒绝候选随机数，赋值x(t+1)&#x3D;x(t)。</p>
+<p>5&gt; 增量设置t &#x3D; t+1。</p>
+<p>6&gt; 重复步骤2~步骤5，我们就可以得到一组仅依赖于上一个随机数并且与前面随机数无关的随机序列。</p>
+<h1 id="采样演示如下："><a href="#采样演示如下：" class="headerlink" title="采样演示如下："></a>采样演示如下：</h1><p>第1次采样，选择初始状态x0</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/da5209b48105423e8027244407ea7e34?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-6a</p>
+<p>第2次采样，接受候选样本x1</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a987e1e14c02467d93a1f279ec472032?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>第3次采样，接受候选样本x2</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3bb41ee6a98b422099b50715fac67a9f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-6c</p>
+<p>第4次采样，拒绝候选样本x3</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e1f7073b3d18440281b4ff04bbf06442?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-6d</p>
+<p>第5次采样，接受候选样本x4</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/bdaf1907e7264976966ae36635eac066?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-6e</p>
+<h1 id="lt-2-gt-、M-H算法对于高维目标概率分布的采样"><a href="#lt-2-gt-、M-H算法对于高维目标概率分布的采样" class="headerlink" title="&lt;2&gt;、M-H算法对于高维目标概率分布的采样"></a>&lt;2&gt;、M-H算法对于高维目标概率分布的采样</h1><h1 id="满条件分布定义"><a href="#满条件分布定义" class="headerlink" title="满条件分布定义"></a>满条件分布定义</h1><p>马尔可夫链蒙特卡罗法的目标分布通常是多元联合概率分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d92dac17be134a7c892ce2cdeb60bacc?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如果条件概率分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3270f5b82f6b4ffdb73ca9d3486d159a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>中所有 k个变量全部出现，其中</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/cf45c741b68c4e48aee6781e608887a4?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>那么称这种条件概率分布为满条件分布（full conditional distribution)。</p>
+<p>满条件分布有以下性质：</p>
+<p>1&gt; 对任意的x, x’和任意的I⊂K, 有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5ac2bf22be5441dc87585d94926916b4?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>2&gt; 对任意的x, x’和任意的I⊂K, 有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/fedceeb0ce84477c8ff4ec552bcbbe4b?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>M-H算法中，可以利用上述性质，简化计算，提高计算效率。具体地，通过满条件分布概率的比</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/68fd026416be4c72a0e47fd45b53edc9?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>代替计算联合概率的比</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e704492f0df549a8bf991faac3d60782?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>而前者更容易计算。</p>
+<h1 id="单分量Metropolis-Hastings算法"><a href="#单分量Metropolis-Hastings算法" class="headerlink" title="单分量Metropolis- Hastings算法"></a>单分量Metropolis- Hastings算法</h1><p>在Metropolis-Hastings算法中，通常需要对多元变量分布进行抽样，有时对多元变量分布的抽样是困难的。</p>
+<p>可以对多元变量的每一变量的条件分布依次分别进行抽样，从而实现对整个多元变量的一次抽样，这就是单分量Metropolis-Hastings (single-component Metropolis-Hastings）算法。</p>
+<p>假设马尔可夫链的状态由k维随机变量表示</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/45bbc9030f534f7db1b1468d1e52f764?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>马尔可夫链在时刻i的状态</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4ca2e44ae0fb4af8b0d06234cf5a8af6?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>为了生成容量为的样本集合</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e280bac42a354dc899f3365ce85924f3?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>单分量Metropolis-Hastings 算法的基本做法：假设有一个k维的随机向量，现想要构造一条k维向量n个样本的马尔可夫链序列，那么随机初始化一个k维向量，然后固定这个向量其中的k-1个元素，抽取剩下的那个元素，生成转移状态的随机数，这样循环k次，就把整个向量更新了一遍，也就是生成了一个新的k维向量样本，把这个整体重复n次就得到了一条马尔科夫链。</p>
+<p>单分量M-H算法由下面的k步迭代实现M-H算法的一次迭代</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/ddf18150a2be43bab6386119f40e680f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>马尔可夫链的转移概率为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/fe69689716324eababd4b28cbd6f484f?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如图5-7所示，单分量M-H算法的迭代过程。目标是对含有两个变量的随机变量x进行抽样</p>
+<p>如果变量x1或x2更新，那么在水平或垂直方向产生一 个移动，连续水平和垂直移动产生</p>
+<p>一个新的样本点。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/26c65abb11f94fccb1e702c5af5f6a22?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-7</p>
+<p><strong>例子 逻辑回归应用</strong></p>
+<p>考虑54位老年人的智力测试成绩(Wechesler Adult Intelligence Scale, WAIS, 0-20分)。 研究的兴趣在于发现老年痴呆症。</p>
+<p>我们采用如下简单的逻辑回归模型:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/c1250d1ccee641d283661ca5a869e967?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则似然函数为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3a628f89202042ee966aabb04bbef65e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>考虑β0, β1的先验分布π为独立的正态分布:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4bb176c7aab942c9872821191ea3fb7a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>从而我们需要从此分布中产生随机数。</p>
+<p>我们考虑如下三种抽样方法.</p>
+<h1 id="M-H算法-独立抽样"><a href="#M-H算法-独立抽样" class="headerlink" title="M-H算法: 独立抽样"></a>M-H算法: 独立抽样</h1><p>提议分布取为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/ad417bc0b7d34f5092c363e3b0378a46?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>则算法如下：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/db03da79aa3c4c719e1ab6157cdf3ffe?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<h1 id="R语言演示代码"><a href="#R语言演示代码" class="headerlink" title="R语言演示代码"></a>R语言演示代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">wais-read.table (.wais. txt. ,header=TRUE)</span><br><span class="line">y&lt;-wais[,2]; x&lt;-wais[,1]</span><br><span class="line">m &lt;- 55000 #length of chain</span><br><span class="line">mu.beta&lt;-c(0,0); sigma.beta&lt;-c(100,100)</span><br><span class="line">prop.s&lt;-c(0.1,0.1) #proposal distribution standard variance</span><br><span class="line">beta &lt;- matrix(nrow=m, ncol=2)</span><br><span class="line">acc.prob &lt;- 0</span><br><span class="line">current.beta&lt;-c(0,0)</span><br><span class="line">for (t in 1:m)&#123;</span><br><span class="line">    prop.beta&lt;- rnorm(2, current.beta, prop.s )</span><br><span class="line">    cur.eta&lt;-current.beta[1]+current.beta[2]*x</span><br><span class="line">    prop.eta&lt;-prop.beta[1]+prop.beta[2]*x</span><br><span class="line">    loga &lt;-(sum(y*prop.eta-log(1+exp(prop.eta)))</span><br><span class="line">    -sum(y*cur.eta-log(1+exp(cur.eta)))</span><br><span class="line">    +sum(dnorm(prop.beta, mu.beta,s.beta,log=TRUE))</span><br><span class="line">    -sum(dnorm(current.beta,mu.beta,s.beta,log=TRUE)))</span><br><span class="line">    u&lt;-runif(1)</span><br><span class="line">    u&lt;-log(u)</span><br><span class="line">    if( u &lt; loga) &#123;</span><br><span class="line">        current.beta&lt;-prop.beta</span><br><span class="line">        acc.prob &lt;- acc.prob+1</span><br><span class="line">    &#125;</span><br><span class="line">    beta[t,]&lt;-current.beta</span><br><span class="line">&#125;</span><br><span class="line">acc.prob&lt;-acc.prob/m</span><br><span class="line">acc.prob</span><br><span class="line"># convergence diagnostics plot</span><br><span class="line">erg.mean&lt;-function( x )&#123;     # compute ergodic mean</span><br><span class="line">    n&lt;-length(x)</span><br><span class="line">    result&lt;-cumsum(x)/cumsum(rep(1,n))</span><br><span class="line">&#125;</span><br><span class="line">burnin&lt;-15000</span><br><span class="line">idx&lt;-seq(1,m,50)</span><br><span class="line">idx2&lt;-seq(burnin+1,m)</span><br><span class="line">par(mfrow=c(2,2))</span><br><span class="line">plot(idx,beta[idx,1],type=&quot;l&quot;,xlab=&quot;Iterations&quot;,ylab=&quot;Values of beta0&quot;)</span><br><span class="line">plot(idx,beta[idx,2],type=&quot;l&quot;,xlab=&quot;Iterations&quot;,ylab=&quot;Values of beta1&quot;)</span><br><span class="line">ergbeta0&lt;-erg.mean(beta[,1])</span><br><span class="line">ergbeta02&lt;-erg.mean(beta[idx2,1])</span><br><span class="line">ylims0&lt;-range(c(ergbeta0,ergbeta02))</span><br><span class="line">ergbeta1&lt;-erg.mean(beta[,2])</span><br><span class="line">ergbeta12&lt;-erg.mean(beta[idx2,2])</span><br><span class="line">ylims1&lt;-range(c(ergbeta1,ergbeta12))</span><br><span class="line">plot(idx , ergbeta0[idx], type=’l’, ylab=’Values of beta0’, xlab=’Iterations’,</span><br><span class="line">main=’(c) Ergodic Mean Plot of beta0’, ylim=ylims0)</span><br><span class="line">lines(idx2, ergbeta02[idx2-burnin], col=2, lty=2)</span><br><span class="line">plot(idx, ergbeta1[idx], type=’l’, ylab=’Values of beta1’, xlab=’Iterations’,</span><br><span class="line">main=’(d) Ergodic Mean Plot of beta1’, ylim=ylims1)</span><br><span class="line">lines(idx2, ergbeta12[idx2-burnin], col=2, lty=2)</span><br><span class="line">apply(beta[(burnin+1):m,],2,mean)</span><br><span class="line">apply(beta[(burnin+1):m,],2,sd)</span><br></pre></td></tr></table></figure>
+
+<p>注意到在独立抽样方法产生的链中, β0和β1有很强的负相关性:</p>
+<p>cor(beta[(burnin+1):m,1],beta[(burnin+1):m,2])&#x3D;-0.954.</p>
+<p>这是链收敛很慢的原因. 在高度相关的空间上使用独立的提议分布导致链的混合效率低下。</p>
+<h1 id="M-H算法-多元正态提议分布"><a href="#M-H算法-多元正态提议分布" class="headerlink" title="M-H算法: 多元正态提议分布"></a>M-H算法: 多元正态提议分布</h1><p>在独立抽样中, 我们使用的提议分布是相互独立的, 从而导致链的混合效率低下. 因此, 自然而然的我们 可以考虑非独立的提议分布. 提议分布相关阵应该和后验分布的相关阵类似. 为此, 可以考虑利用 Fisher信息阵H(β), 提议分布取为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/279fe28d5d704f35a60c81bcd9b4170c?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>由似然函数, 容易计算得到Fisher信息阵为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e22c7ed716f449ab869d9efea897472c?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>算法如下：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a5ee1ff65b0a47fa88d5595a05b16b7c?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<h1 id="R语言演示代码-1"><a href="#R语言演示代码-1" class="headerlink" title="R语言演示代码"></a>R语言演示代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">calculate.loglike&lt;-function(b,X=x,Y=y)&#123;</span><br><span class="line">    x&lt;-X; y&lt;-y</span><br><span class="line">    n&lt;-length(x); X&lt;-cbind( rep(1,n), x )</span><br><span class="line">    precision&lt;-700</span><br><span class="line">    eta&lt;-b[1]+b[2]*x</span><br><span class="line">    logq &lt;- log(1+exp(eta))</span><br><span class="line">    logq[eta&gt;precision]&lt;-eta[eta&gt;precision]</span><br><span class="line">    loglike&lt;- sum( y*eta - logq )</span><br><span class="line">    eta[eta&gt;precision]&lt;-precision</span><br><span class="line">    h &lt;- 1/((1+exp(-eta))*(1+exp(eta)))</span><br><span class="line">    H &lt;- t(X) %*% diag( h ) %*% X</span><br><span class="line">    return( list(loglike=loglike, H=H) )</span><br><span class="line">&#125;</span><br><span class="line">#---------------------------------------</span><br><span class="line">library(MASS)</span><br><span class="line">y=wais[,2]</span><br><span class="line">x=wais[,1]</span><br><span class="line">prop.sd=0.3</span><br><span class="line">m=2500</span><br><span class="line">beta0=c(0,0)</span><br><span class="line">n&lt;-length(y)</span><br><span class="line">X&lt;-cbind(rep(1,n), x )</span><br><span class="line">mu.beta&lt;-c(0,0)</span><br><span class="line">s.beta&lt;-c(100,100)</span><br><span class="line">c.beta&lt;- prop.sd</span><br><span class="line">beta &lt;- matrix(nrow=Iterations, ncol=2)</span><br><span class="line">acc.prob &lt;- 0</span><br><span class="line">current.beta&lt;-beta0</span><br><span class="line">for (t in 1:m)&#123;</span><br><span class="line">    cur&lt;-calculate.loglike( current.beta )</span><br><span class="line">    cur.T&lt;-(1/c.beta^2)*(cur$H+diag(1/s.beta^2))</span><br><span class="line">    prop.beta&lt;- mvrnorm( 1, current.beta, solve(cur.T))</span><br><span class="line">    prop&lt;-calculate.loglike( prop.beta )</span><br><span class="line">    prop.T &lt;- (1/c.beta^2)* (prop$H+diag(1/s.beta^2))</span><br><span class="line">    loga &lt;-( prop$loglike-cur$loglike</span><br><span class="line">    +sum(dnorm(prop.beta,mu.beta,s.beta,log=TRUE))</span><br><span class="line">    -sum(dnorm(current.beta,mu.beta,s.beta,log=TRUE))</span><br><span class="line">    + as.numeric(0.5*log( det(prop.T) )</span><br><span class="line">    - 0.5 * t(current.beta - prop.beta) %*% prop.T %*% (current.beta - prop.beta))</span><br><span class="line">    - as.numeric(0.5*log( det(cur.T ) )</span><br><span class="line">    - 0.5 * t(prop.beta - current.beta) %*% cur.T %*% (prop.beta- current.beta )) )</span><br><span class="line">    u&lt;-runif(1)</span><br><span class="line">    u&lt;-log(u)</span><br><span class="line">    if( u &lt; loga ) &#123;</span><br><span class="line">        current.beta&lt;-prop.beta</span><br><span class="line">        acc.prob &lt;- acc.prob+1</span><br><span class="line">    &#125;</span><br><span class="line">    beta[t,]&lt;-current.beta</span><br><span class="line">&#125;</span><br><span class="line">print(acc.prob/m)</span><br></pre></td></tr></table></figure>
+
+<p>在计算exp(η)时, 由于在R中, exp(710)&#x3D;Inf, 因此我们对η&gt;700, 取近似log(1 + exp(η)) ≈ η.</p>
+<p>对链的收敛诊断可以看出, 链混合的效率很高。</p>
+<h1 id="逐分量的M-H算法"><a href="#逐分量的M-H算法" class="headerlink" title="逐分量的M-H算法"></a>逐分量的M-H算法</h1><p>在M-H算法中, 按分量进行逐个更新, 其优势在于应用方便, 不需要考虑调节参数. 算法如下:</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3769f43e49794f2b9e8759cca974b958?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<h1 id="R语言演示代码-2"><a href="#R语言演示代码-2" class="headerlink" title="R语言演示代码"></a>R语言演示代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">y&lt;-wais[,2]</span><br><span class="line">x&lt;-wais[,1]</span><br><span class="line">m&lt;-10000</span><br><span class="line">beta0&lt;-c(0,0) #initial value</span><br><span class="line">mu.beta&lt;-c(0,0) # prior</span><br><span class="line">s.beta&lt;-c(100,100) # prior</span><br><span class="line">prop.s&lt;-c(1.75,0.2) # sd of proposal normal</span><br><span class="line">beta &lt;- matrix(nrow=m, ncol=2)</span><br><span class="line">acc.prob &lt;-c(0,0)</span><br><span class="line">current.beta&lt;-beta0</span><br><span class="line">for (t in 1:m)&#123;</span><br><span class="line">    for (j in 1:2)&#123;</span><br><span class="line">        prop.beta&lt;- current.beta</span><br><span class="line">        prop.beta[j]&lt;- rnorm( 1, current.beta[j], prop.s[j] )</span><br><span class="line">        cur.eta &lt;-current.beta[1]+current.beta[2]*x</span><br><span class="line">        prop.eta&lt;-prop.beta[1]+prop.beta[2]*x</span><br><span class="line">        if(sum(prop.eta&gt;700)&gt;0) &#123;print(t); stop;&#125;</span><br><span class="line">        if(sum(cur.eta &gt;700)&gt;0) &#123;print(t); stop;&#125;</span><br><span class="line">        loga &lt;-(sum(y*prop.eta-log(1+exp(prop.eta)))</span><br><span class="line">        -sum(y*cur.eta-log(1+exp(cur.eta)))</span><br><span class="line">        +sum(dnorm(prop.beta,mu.beta,s.beta,log=TRUE))</span><br><span class="line">        -sum(dnorm(current.beta,mu.beta,s.beta,log=TRUE)))</span><br><span class="line">        u&lt;-runif(1)</span><br><span class="line">        u&lt;-log(u)</span><br><span class="line">        if(u&lt; loga)&#123;</span><br><span class="line">            current.beta&lt;-prop.beta</span><br><span class="line">        acc.prob[j] &lt;- acc.prob[j]+1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    beta[t,]&lt;-current.beta</span><br><span class="line">&#125;</span><br><span class="line">print(acc.prob/m)</span><br></pre></td></tr></table></figure>
+
+<p>链的收敛诊断显示了相比于独立的M-H算法, 混合的效率要高的多。</p>
+<h1 id="III、-吉布斯采样-Gibbs-Sampling"><a href="#III、-吉布斯采样-Gibbs-Sampling" class="headerlink" title="III、 吉布斯采样(Gibbs Sampling)"></a>III、 吉布斯采样(Gibbs Sampling)</h1><p>吉布斯采样算法是Stuart Geman 和Donald Geman 两兄弟在1984年提出来的，以物理学家Josiah Willard Gibbs的名字命名。这个算法在现代贝叶斯分析中占据重要位置。</p>
+<p>在大数据时代，数据特征非常的多，M-H采样由于接受概率α(i,j)的存在，在高维时需要的计算时间非常的可观，同时α(i,j)一般小于1，有时候辛苦计算出来却被拒绝了。能不能做到不拒绝转移呢？吉布斯采样算法就这样出场了。</p>
+<p>吉布斯采样算法是单分量M-H算法的特殊情况，但是更容易实现，因而被广泛使用。</p>
+<p>吉布斯采样特别适合于采样贝叶斯网络的后验分布，因为贝叶斯网络通常被指定为条件分布的集合。</p>
+<h1 id="吉布斯采样算法是单分量M-H算法的特殊情况，主要有两点特殊："><a href="#吉布斯采样算法是单分量M-H算法的特殊情况，主要有两点特殊：" class="headerlink" title="吉布斯采样算法是单分量M-H算法的特殊情况，主要有两点特殊："></a>吉布斯采样算法是单分量M-H算法的特殊情况，主要有两点特殊：</h1><p>1&gt; 吉布斯采样算法的提议分布是当前变量xj，j &#x3D; 1,2,…，k的满条件概率分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a670efac45ae436d9b6a931fd5d7d748?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>2&gt; 吉布斯采样算法的接受概率α &#x3D; 1</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/6a3e834807fb4a35a540c4f705434807?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>一般的采样方法，生成一维随机变量并不困难，对于高维分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/c2a63dd01c744ebdb51c74a21384de8b?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>生成各分量非独立的随机向量就非常困难。吉布斯采样法很擅长解决这类问题，其广泛用于多元变量联合分布的抽样和估计。</p>
+<p>吉布斯采样法把一次一个n维样本变为“n次一维”样本，但前提是我们事先知道完全条件概率分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/659fa0aba6ce4246bef98111551f948d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>数学上称为半共轭，为方便常简写为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/dfdc0313bee24b5fac78b931154ab66a?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>不同于M-H算法，该算法不引入新的提议分布q( . )，仅通过条件分布得到以给定分布p(x)为平稳分布的马氏链的转移概率。</p>
+<p>把条件分布当作提议分布q( . )，则有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/271a6f3493404b62b40beca40344f9d2?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>接受概率</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/2b717effd6ae41a99a7094cfae1d25b6?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>以接受概率为1的方式实现链的满概率跳转。</p>
+<h1 id="吉布斯采样构造的马氏链收敛到平稳分布的证明"><a href="#吉布斯采样构造的马氏链收敛到平稳分布的证明" class="headerlink" title="吉布斯采样构造的马氏链收敛到平稳分布的证明"></a>吉布斯采样构造的马氏链收敛到平稳分布的证明</h1><p><img src="https://p6.toutiaoimg.com/origin/pgc-image/1a7b481f6a71413fbec09ce94a03d1d4?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-8</p>
+<p>假设有一个二维概率分布p(x,y), 考察x坐标相同的两个点A(x1,y1), B(x1, y2)。如图5-8所示。</p>
+<p>由条件概率公式推得</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a90e80029ddf49ec848d0f9213b76e83?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>上面两式右边相等，所以</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/fee60942a28f4449beacdba4b251d396?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>故</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5ab8c591eb5f45ed8cd84d248f05a51d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>从上面等式，可以看出，在x&#x3D;x1这条平行于y轴的直线上，如果使用条件分布p(y|x1)作为任意两点之间的转移概率，那么任意两点之间的转移满足细致平稳条件。同样地，如果在y&#x3D;y1这条直线上任意取两个点A(x1,y1), C(x2, y1), 也有如下等式：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/46e2022f158041e78dc95747c00c2a4e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>于是，我们可以构造平面上任意两点之间的转移概率矩阵Q</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/caf20065cc4c46c39da6775c4982da82?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>根据上式，我们很容易验证对平面上任意两点X、Y (如图5-8的两点A、B), 满足细致平稳条件</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/118035fe4ae941d9a6d7010aa4afd194?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>因此，这个二维空间上的马氏链将收敛到平稳分布p(x,y)。</p>
+<p>马氏链的状态转移只是轮换地沿着x轴和y轴做转移，于是得到样本(x0,y0), (x0,y1), (x1,y1), (x1, y2), (x2, y2), …马氏链收敛后，最终得到的样本就是p(x, y)的样本。坐标轴轮换采样是不强制要求的，也可以在x轴和y轴之间随机地选一个坐标轴，然后按条件概率做转移，马氏链也是一样收敛的。</p>
+<p>我们很容易把二维推广到高维的情形，对于二维细致平稳条件</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/c59511cf1f4240829ad30c222cb6b178?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>如果x1变为多维X1，可以看出推导过程不变，所以多维细致平稳条件同样是成立的。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/be9682abfc2443158408c0f2cf32c423?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>此时转移矩阵Q由条件分布p(y|<strong>X1</strong>)定义。上式只是说明了一个坐标轴的情况，和二维情形类似，很容易验证对所有的坐标轴都有类似的结论。</p>
+<p>所以，n维空间对于概率分布p(x1,x2,…,xn)可以定义如下转移矩阵</p>
+<p>1&gt; 如果当前状态为(x1,x2,…,xn)，马氏链状态转移的过程中，只能沿着坐标轴做转移，转移概率定义为</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/62ea22f268b44287a7602d649369f2c0?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>2&gt; 其它无法沿着坐标轴进行的跳转，转移概率都设置为0。</p>
+<p>于是，我们可以把Gibbs Sampling算法从二维的概率分布p(x,y)推广到n维的概率分布p(x1,x2,…,xn)。</p>
+<h1 id="二维Gibbs采样算法步骤："><a href="#二维Gibbs采样算法步骤：" class="headerlink" title="二维Gibbs采样算法步骤："></a>二维Gibbs采样算法步骤：</h1><p><img src="https://p6.toutiaoimg.com/origin/pgc-image/afe943545a554fbc9ed98bc9579ffbcf?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>例子 已知：贝叶斯后验分布有如下形式</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9b670eceb8d6462a8cf66d96677d9151?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>求：利用Gibbs采样法获取满足该后验分布的样本序列</p>
+<p>解：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/751cfabf29e34d3a859018105a05b172?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/dc8ee3f47a74498698b1483ee454b7d9?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>由上面两式，求得条件概率分布</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9d23c9f4bf7343b19eb80c159da08159?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>这里A(y), B(x)是关于y, x的函数，当指定y, x时，它们是常数。</p>
+<p>求得的条件概率分布随机变量x, y都符合正态分布，即</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/8555e5d1506140368065599d9c0a3343?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>按已知正态分布f(x|y,data)和f(y|x,data)在两个坐标轴上不停轮换采样就可以得到后验分布的样本集。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/788207cb7a904be983f8349b3d511625?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>图5-9 Bibbs采样点轨迹图</p>
+<p>从图5-9的实验结果可以看出采样点大都集中在高密区。</p>
+<h1 id="小结：-5"><a href="#小结：-5" class="headerlink" title="小结："></a>小结：</h1><p>由于MCMC的马氏链的固有性质 - 采样点依赖前一个状态，这决定了相邻的采样点之间并不独立，存在自相关。自相关的存在将降低采样精度，为了减少样本的依赖性，我们在实验中可以采取如下措施：</p>
+<ul>
+<li>删减(Thinning)技术：对于生成的马氏链，每隔一段距离保留一个，其余舍弃；</li>
+<li>块采样(Blocked Gibbs Sampling)技术；</li>
+<li>折叠采样（Collapsed Gibbs Sampling)技术；</li>
+<li>有序的过松弛(Ordered Overrelaxation)。</li>
+</ul>
+<h1 id="高维Gibbs采样算法步骤："><a href="#高维Gibbs采样算法步骤：" class="headerlink" title="高维Gibbs采样算法步骤："></a>高维Gibbs采样算法步骤：</h1><p><img src="https://p6.toutiaoimg.com/origin/pgc-image/1cc9c4d872854441959fbbb04517b90d?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>当采样空间的维数比较高时，接受-拒绝采样和重要性采样都不适用，原因是当维数升高时很难找到适合的提议分布，采样效率比较差。没有比较就没有伤害，高维Gibbs采样算法的优势就体现出来了，其优点为：</p>
+<ul>
+<li>适用于广泛且困难的问题；</li>
+<li>当联合分布不明确或很难直接采样，但是每个变量的条件分布是已知的并且很容易（或至少更容易）采样时，Gibbs采样更有效；</li>
+<li>问题维数的增加通常不会降低其收敛速度或使其更复杂。</li>
+</ul>
+<h1 id="六、MCMC收敛诊断方法"><a href="#六、MCMC收敛诊断方法" class="headerlink" title="六、MCMC收敛诊断方法"></a>六、MCMC收敛诊断方法</h1><p>MCMC方法依赖于模拟的收敛性，下面介绍三种常用的收敛性诊断方法。</p>
+<h1 id="1、同时产生多条马尔科夫链"><a href="#1、同时产生多条马尔科夫链" class="headerlink" title="1、同时产生多条马尔科夫链"></a>1、同时产生多条马尔科夫链</h1><p>这种方法的思路是选取多个不同的初值，同时产生多条马尔科夫链，经过一段时间后，若这几条链稳定下来，则说明算法收敛了。在实际操作中，可在同一个二维图中画出这些不同的马尔科夫链产生的后验样本值对迭代次数的散点图，如果经过若干次迭代后，这些散点图基本稳定，重合在一起，则可判断其算法收敛。</p>
+<h1 id="2、比率诊断法"><a href="#2、比率诊断法" class="headerlink" title="2、比率诊断法"></a>2、比率诊断法</h1><p>这种方法的思路是选取多个不同的初值，同时产生T条马尔科夫链，记第j条链的标准差估计为Sj，链内方差的均值为W，链间方差为B，则：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/9ebb269a3d624b5b9627434f0bad5ba2?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>R的值趋近1，则表明MCMC模拟收敛，且比较稳定。</p>
+<h1 id="3、GewekeTest法"><a href="#3、GewekeTest法" class="headerlink" title="3、GewekeTest法"></a>3、GewekeTest法</h1><p>GewekeTest由一系列的Z检验组成，其基本思路是：先对所有样本(假设有M个)做一次Z检验，然后去掉最前面的c个样本，用剩余的M-c个样本重复上述检验，再继续去掉最前面的c个样本，用剩余的M-2c个样本重复上述检验，依次类推，重复K次这样的检验，直到M-Kc。</p>
+<h1 id="七、附录"><a href="#七、附录" class="headerlink" title="七、附录"></a>七、附录</h1><h1 id="附录1-证明n-步转移矩阵等于其之前所有转移矩阵的连续矩阵相乘"><a href="#附录1-证明n-步转移矩阵等于其之前所有转移矩阵的连续矩阵相乘" class="headerlink" title="附录1 证明n-步转移矩阵等于其之前所有转移矩阵的连续矩阵相乘"></a>附录1 证明n-步转移矩阵等于其之前所有转移矩阵的连续矩阵相乘</h1><p>该证明内容我们用定理来表述</p>
+<p>定理： 对于∀n≥0，∀i，j∈S, (S是状态空间)，则有</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/019b2b1c5e764cf895f0462cd55f16a9?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>证明：</p>
+<p>该定理可通过数学归纳法和Chapman-Kolmogorov等式来证明。</p>
+<p>大家都知道，对于矩阵乘法，下面式子显然成立。</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/650dd2fbc7ee414a889e28d90db0f73e?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>其中n≥0, m≥0.</p>
+<p>Chapman-Kolmogorov等式</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5ce6e40090914e5c892723b15054b017?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>其中n≥0, m≥0， i，j∈S，S是状态空间。</p>
+<p>下面只需证明Chapman-Kolmogorov等式， 然后就可以用数学归纳法证明我们的定理了。</p>
+<p>证明方法一：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d7a0f4ee02304c229298d017c8902b39?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>证明方法二：</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/4eecb3be3b6748898c19ef005c68d75b?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p>根据该等式用数学归纳法证明定理略。</p>
+<h1 id="附录2-WinBUGS-用MCMC进行贝叶斯推断的专用软件包"><a href="#附录2-WinBUGS-用MCMC进行贝叶斯推断的专用软件包" class="headerlink" title="附录2 WinBUGS - 用MCMC进行贝叶斯推断的专用软件包"></a>附录2 WinBUGS - 用MCMC进行贝叶斯推断的专用软件包</h1><p>WinBUGS(Bayesian inference Using Gibbs Sampling)是由英国的Imperial College和MRC联合开发的MCMC进行贝叶斯推断的专用软件包。在网站<br><a target="_blank" rel="noopener" href="http://www.mrc-bsu.cam.ac.uk/software/bugs/%E5%8F%AF%E4%BB%A5%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD%E3%80%82%E4%BD%BF%E7%94%A8WinBUGS%E5%8F%AF%E4%BB%A5%E5%BE%88%E6%96%B9%E4%BE%BF%E5%9C%B0%E5%AF%B9%E8%AE%B8%E5%A4%9A%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%88%86%E5%B8%83%E8%BF%9B%E8%A1%8CGibbs%E6%8A%BD%E6%A0%B7%EF%BC%8C%E4%BD%BF%E7%94%A8%E8%80%85%E4%B8%8D%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E5%8F%82%E6%95%B0%E7%9A%84%E5%85%88%E9%AA%8C%E5%AF%86%E5%BA%A6%E6%88%96%E4%BC%BC%E7%84%B6%E7%9A%84%E7%B2%BE%E7%A1%AE%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E5%8F%AA%E8%A6%81%E8%AE%BE%E7%BD%AE%E5%A5%BD%E5%8F%98%E9%87%8F%E7%9A%84%E5%85%88%E9%AA%8C%E5%88%86%E5%B8%83%E5%B9%B6%E5%AF%B9%E6%89%80%E7%A0%94%E7%A9%B6%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E4%B8%80%E8%88%AC%E6%80%A7%E7%9A%84%E6%8F%8F%E8%BF%B0%EF%BC%8C%E5%B0%B1%E8%83%BD%E5%BE%88%E5%AE%B9%E6%98%93%E5%AE%9E%E7%8E%B0%E5%AF%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E6%9E%90%EF%BC%8C%E8%80%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E5%A4%8D%E6%9D%82%E7%9A%84%E7%BC%96%E7%A8%8B%E3%80%82%E5%9C%A8WinBUGS%E4%B8%AD%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%A8%A1%E5%9E%8B%E8%BF%9B%E8%A1%8C%E7%9B%B4%E8%A7%82%E7%9A%84%E6%8F%8F%E8%BF%B0%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E7%BC%96%E5%86%99%E6%A8%A1%E5%9E%8B%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%B9%B6%E7%BB%99%E5%87%BA%E5%8F%82%E6%95%B0%E7%9A%84">www.mrc-bsu.cam.ac.uk/software/bugs/可以免费下载。使用WinBUGS可以很方便地对许多常用的模型和分布进行Gibbs抽样，使用者不需要知道参数的先验密度或似然的精确表达式，只要设置好变量的先验分布并对所研究的模型进行一般性的描述，就能很容易实现对模型的贝叶斯分析，而不需要复杂的编程。在WinBUGS中可以使用有向图模型方式对模型进行直观的描述，也可以直接编写模型程序，并给出参数的</a> Gibbs抽样动态图、用smoothing方法得到的后验分布的核密度估计图、抽样值的自相关图及均数和置信区间的变换图等，使抽样结果更直观、可靠。Gibbs抽样收敛后，可以得到参数的后验分布的平均值、标准差、95%置信区间和中位数等信息。</p>
+<h1 id="附录3-MCNP-基于蒙特卡罗方法的核物理方面的通用软件包"><a href="#附录3-MCNP-基于蒙特卡罗方法的核物理方面的通用软件包" class="headerlink" title="附录3 MCNP - 基于蒙特卡罗方法的核物理方面的通用软件包"></a>附录3 MCNP - 基于蒙特卡罗方法的核物理方面的通用软件包</h1><p>MCNP(Monte Carlo N Particle Transport Code)是由美国洛斯阿拉莫斯国家实验室(LosAlamos National Laboratory)开发的基于蒙特卡罗方法的用于计算三维复杂几何结构中的中子、光子、电子或者耦合中子&#x2F;光子&#x2F;电子输运问题的通用软件包，也具有计算核临界系统（包括次临界和超临界系统）本征值问题的能力。</p>
+<p>目前，MCNP以其灵活、通用的特点以及强大的功能被广泛应用于辐射防护与射线测定、辐射屏蔽设计优化、反应堆设计、（次）临界装置实验、医学以及检测器设计与分析等学科领域，并得到一致认可。</p>
+<h1 id="附录4-R语言，S-PLUS，MATLBA-模拟MCMC的软件工具"><a href="#附录4-R语言，S-PLUS，MATLBA-模拟MCMC的软件工具" class="headerlink" title="附录4 R语言，S-PLUS，MATLBA - 模拟MCMC的软件工具"></a>附录4 R语言，S-PLUS，MATLBA - 模拟MCMC的软件工具</h1><h1 id="附录5-马尔可夫发展历史"><a href="#附录5-马尔可夫发展历史" class="headerlink" title="附录5 马尔可夫发展历史"></a>附录5 马尔可夫发展历史</h1><p><strong>1906年</strong> Andrey Andreyevich Markov 引入了马尔可夫链的概念</p>
+<p>Markov, A. A. (1906). Rasprostranenie zakona bol’shih chisel na velichiny, zavisyaschie drug ot druga. Izvestiya Fiziko-matematicheskogo obschestva pri Kazanskom universitete, 15(135-156), 18</p>
+<p><strong>1953年</strong> 梅特罗波利斯将蒙特卡洛方法引入马尔可夫链</p>
+<p>Metropolis, Nicholas; Rosenbluth, Arianna W.; Rosenbluth, Marshall N.; Teller, Augusta H.; Teller, Edward (1953). “Equation of State Calculations by Fast Computing Machines”.</p>
+<p><strong>1957年</strong> 马尔可夫决策过程被提出</p>
+<p>Bellman, R. (1957). A Markovian decision process. Journal of Mathematics and Mechanics, 679-684.</p>
+<p><strong>1966年</strong> Leonard E. Baum等学者提出了隐马尔可夫模型（Hidden Markov Model，HMM）</p>
+<p>Baum, L. E.; Petrie, T. (1966).Statistical Inference for Probabilistic Functions of Finite State Markov Chains. The Annals of Mathematical Statistics. 37 (6): 1554–1563.</p>
+<p><strong>1975年</strong> Baker将HMM用于语音识别</p>
+<p>Baker, J.(1975). The DRAGON system—An overview.IEEE Transactions on Acoustics, Speech, and Signal Processing. 23: 24–29.</p>
+<p><strong>1980年</strong> 《Markov random fields and their applications》出版，详细描述了马尔可夫随机场的理论和应用</p>
+<p>Kindermann, R., &amp; Snell, J. L. (1980). Markov random fields and their applications (Vol. 1). American Mathematical Society.</p>
+<p><strong>1984年</strong> Stuart和Donald Geman兄弟描述了Gibbs抽样算法</p>
+<p>Geman, S.; Geman, D.(1984). Stochastic Relaxation, Gibbs Distributions, and the Bayesian Restoration of Images.IEEE Transactions on Pattern Analysis and Machine Intelligence. 6 (6): 721–741.</p>
+<p><strong>1988年</strong> Judea Pearl提出马尔可夫毯的概念</p>
+<p>Pearl, J. (2014). <em>Probabilistic reasoning in intelligent systems: networks of plausible inference</em>. Morgan Kaufmann.</p>
+<p><strong>1989年</strong> James D. Hamilton 1989年机应用了制转换模型</p>
+<p>Hamilton, J. (1989). A new approach to the economic analysis of nonstationary time series and the business cycle. Econometrica. 57 (2): 357–84.</p>
+<p><strong>20世纪80年代</strong> HMM 开始用于分析生物序列（DNA）</p>
+<p>Bishop, M. and Thompson, E. (1986). Maximum Likelihood Alignment of DNA Sequences.Journal of Molecular Biology. 190 (2): 159–165.</p>
+<p><strong>1991年</strong> Lovejoy 研究了部分可观测马尔可夫决策过程（POMDP）</p>
+<p>Lovejoy, W. S. (1991).A survey of algorithmic methods for partially observed Markov decision processes.Annals of Operations Research. 28(1):47–65.</p>
+<p><strong>1995年</strong> D. P. Bertsekas 和 J. N. Tsitsiklis讨论了一类用于不确定条件下的控制和顺序决策的动态规划方法</p>
+<p>Bertsekas D. P. and Tsitsiklis, J. N. (1995). Neuro-dynamic programming: an overview.Proceedings of 1995 34th IEEE Conference on Decision and Control. 1: 560-564.</p>
+<p><strong>1998年</strong> S.Brin和L.Page提出PageRank算法</p>
+<p>Page, L. (1998). The pagerank citation ranking : bringing order to the web. Stanford Digital Libraries Working Paper, 9(1), 1-14.</p>
+<p><strong>2017年</strong> Yoshua Bengio 等研究者提出了 GibbsNet</p>
+<p>Lamb, A. et al. (2017).GibbsNet: Iterative Adversarial Inference for Deep Graphical Models.arXiv:1712.04120.</p>
+<p><strong>2017年</strong> Jiaming Song, Shengjia Zhao和Stefano Ermon研究了生成对抗的训练方法来对马尔可夫链（Markov chain）的转移算子（transition operator）进行学习</p>
+<p>Song, J.; Zhao, S.; Ermon, S. (2017).GENERATIVE ADVERSARIAL LEARNING OF MARKOV CHAINS. ICLR.</p>
+<h1 id="附录6-MCMC发展历史"><a href="#附录6-MCMC发展历史" class="headerlink" title="附录6 MCMC发展历史"></a>附录6 MCMC发展历史</h1><p><strong>1953年6月</strong> Metropolis等人发表了MCMC方法的开篇之作&lt;&lt;通过快速计算器计算状态方程&gt;&gt;(Equations of state calculations by fast computing machines), 论文的主要关注点是计算积分公式(类似于贝叶斯的后验分布)</p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/6d899e68e81140848103c2860e492949?from=pc" alt="流行算法：马尔可夫链蒙特卡洛法(MCMC)"></p>
+<p><strong>1970年</strong> Hastings完成了MCMC方法史上里程碑的论文-Monte Carlo Sampling Methods Using Markov Chains and their Applications &lt;&lt;马尔可夫链蒙特卡洛抽样方法及其应用&gt;&gt;.解决了核物理研究中碰到的粒子分布高纬计算问题，攻克了常规蒙特卡洛方法遇到的维度瓶颈问题，将Metropolis算法一般化，并推广为一种统计模拟工具，形成了Metropolis-Hastings算法。</p>
+<p>M-H算法相对于Metropolis方法而言，看起来更像专业的统计模拟工具。最重要的是，M-H算法不要求“提议分布函数”必须是对称的，从而应用起来更加灵活方便。Hastings在文章中列举了三个例子：第一个目标分布是泊松分布，采用的提议分布是随机游走；第二个目标分布是高斯分布，提议分布是均匀随机游走，但此均匀分布的中心不是马氏链的当前值θ， 而是-θ;第三个目标分布是多元分布，Hastings引进了Gibbs抽样的策略，每次只更新其中一个变量，这样的转移矩阵同样满足平稳分布。</p>
+<p><strong>1973年</strong> Hastings的唯一的博士生Peskun发表了题为Optimum Monte-Carlo Sampling Using Markov Chains &lt;&lt;最优马尔可夫链蒙特卡洛抽样方法&gt;&gt;的文章，比较了Metropolis和Barker的接受概率的形式，也证明了在离散情形下Metropolis是最优的选择，这里的最优性可以通过经验平均值的渐进方差来表示。</p>
+<p><strong>1984年</strong> Geman S和Geman D发表了在MCMC方法史上具有重要突破性的文章-Stochastic Relaxation,Gibbs Distributions and the Bayesian Restoration of Images. 该文基于随机松弛(Stochastic relaxation)算法，采用Gibbs分布对图像的贝叶斯恢复进行了研究，提出了Gibbs采样的概念并将其引入到统计应用领域，Robert和Casella将此文称为“革命的种子”，吹响了MCMC方法革命的号角。</p>
+<p><strong>1986年</strong> Adrian Smith 做了关于分层模型的系列学术演讲。</p>
+<p><strong>1987年</strong> Tanner和Wong在论文中采用基于多个条件分布进行模拟的方法，这种思路等价于从联合分布进行模拟，基本具备了Gibbs采样的雏形。</p>
+<p><strong>1989年</strong> Adrian Smith第一次详细阐释了Gibbs抽样的本质。</p>
+<p><strong>1990年</strong>Gelfand和Smith发表论文Sampling-based approaches to calculation marginal densities.&lt;&lt;基于抽样的边际分布计算方法&gt;&gt; ，将Gibbs抽样的本质阐述得更为深刻和完整，成为主流统计学界大规模使用MCMC方法的真正起点。</p>
+<p><strong>1995年</strong> Green提出得逆跳的马尔可夫链蒙特卡洛模拟(Reversible Jump Markov Chain Monte Carlo, RJMCMC)，可被视为MCMC方法第二次革命的开端，所构建的马氏链不仅可以在一个模型的参数空间内进行转移，还可以在不同模型(维度可以不同)之间跳跃，从而为贝叶斯模型选择提供了强大工具。</p>
+<p><strong>二十世纪九十年代及以后</strong> Richardson和Green将RJMCMC应用到混合阶估计中；Brooks，Giudici和Roberts提出了提高RJMCMC转移效率的方法；Marin和Robert将RJMCMC应用到变量选择中。由于MCMC方法得到的并非独立样本，具有自相关性，因此不能直接用于参数估计，尤其是不能直接用于直接估计参数的标准误差。为了克服自相关性，Hobert等人提出在原始马氏链转移链基础上间隔抽取构成新的样本序列，从而克服自相关性，可以得到参数估计以及估计误差。</p>
+<h1 id="八、参考文献"><a href="#八、参考文献" class="headerlink" title="八、参考文献"></a>八、参考文献</h1><p>[1] N. Metropolis et al., “Equations of state calculations by fast computing machines”,《the Journal of Chemical Physics》,21,1087(1953).</p>
+<p>[2] <a target="_blank" rel="noopener" href="http://www.random.org/">www.random.org</a></p>
+<p>[3] en.wikipedia.org&#x2F;wiki&#x2F;Gibbs_sampling</p>
+
+        </div>
+        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/马尔可夫链蒙特卡洛法-MCMC.md" target="_blank">编辑</a>
+</article>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+         
+          <li><a href="/URL">LINK_NAME</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">一、引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81MCMC%E7%9A%84%E4%B8%A4%E5%A4%A7%E8%B4%B4%E8%BA%AB%E6%8A%A4%E5%8D%AB"><span class="toc-number">2.</span> <span class="toc-text">二、MCMC的两大贴身护卫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E5%8F%8A%E5%85%B6%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-number">3.</span> <span class="toc-text">1、马尔可夫链及其平稳分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E5%AE%9A%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">1）定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E9%A9%AC%E6%B0%8F%E9%93%BE%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87%E7%9F%A9%E9%98%B5%E5%92%8C%E6%94%B6%E6%95%9B%E7%8E%B0%E8%B1%A1"><span class="toc-number">5.</span> <span class="toc-text">2）马氏链转移概率矩阵和收敛现象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89%E9%A9%AC%E6%B0%8F%E9%93%BE%E5%AE%9A%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">3）马氏链定理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E9%A9%AC%E6%B0%8F%E9%93%BE%E7%9A%84%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83%E4%B8%8E%E7%BB%86%E8%87%B4%E5%B9%B3%E8%A1%A1%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">4) 马氏链的平稳分布与细致平衡条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%EF%BC%89%E5%9F%BA%E4%BA%8E%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E9%87%87%E6%A0%B7%E8%BF%87%E7%A8%8B"><span class="toc-number">8.</span> <span class="toc-text">5）基于马尔可夫链的采样过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%EF%BC%89%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">9.</span> <span class="toc-text">6）马尔可夫链的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">7) 马尔可夫链的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95"><span class="toc-number">11.</span> <span class="toc-text">2、蒙特卡洛法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E5%AE%9A%E4%B9%89-1"><span class="toc-number">12.</span> <span class="toc-text">1）定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E4%B8%BB%E8%A6%81%E6%AD%A5%E9%AA%A4"><span class="toc-number">13.</span> <span class="toc-text">2）主要步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">14.</span> <span class="toc-text">3）组成部分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%EF%BC%89%E4%BC%98%E7%82%B9"><span class="toc-number">15.</span> <span class="toc-text">4）优点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%EF%BC%89%E5%BA%94%E7%94%A8"><span class="toc-number">16.</span> <span class="toc-text">5）应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%8B%E4%B8%80-%E6%B1%82%E6%97%A0%E7%90%86%E6%95%B0%CF%80"><span class="toc-number">17.</span> <span class="toc-text">应用之一 求无理数π</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%8B%E4%BA%8C-%E6%B1%82%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="toc-number">18.</span> <span class="toc-text">应用之二 求定积分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%8B%E4%B8%89-%E4%BB%BF%E7%9C%9F%E4%B8%AD%E5%AD%90%E9%80%B8%E5%87%BA"><span class="toc-number">19.</span> <span class="toc-text">应用之三 仿真中子逸出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E4%B8%8E%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E7%9A%84%E7%81%B5%E9%AD%82%E9%99%84%E4%BD%93"><span class="toc-number">20.</span> <span class="toc-text">3、马尔可夫链与蒙特卡洛方法的灵魂附体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81MCMC%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="toc-number">21.</span> <span class="toc-text">三、MCMC有什么用？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E4%B8%AD%E5%BE%88%E5%A4%9A%E9%97%AE%E9%A2%98%E9%83%BD%E6%98%AFMCMC%E6%96%B9%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">22.</span> <span class="toc-text">1、贝叶斯推断中很多问题都是MCMC方法的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81MCMC%E7%9A%84%E4%BD%9C%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-number">23.</span> <span class="toc-text">2、MCMC的作用总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E5%9C%A8%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E7%90%86%E4%B8%AD%E4%B8%BB%E8%A6%81%E7%94%A8%E4%BA%8E%E4%BB%8E%E5%90%8E%E9%AA%8C%E5%88%86%E5%B8%83%E7%9A%84%E2%80%9C%E9%9D%9E%E6%A0%87%E5%87%86%E5%8C%96%E9%83%A8%E5%88%86%E2%80%9D%E4%B8%AD%E7%9B%B4%E6%8E%A5%E7%94%9F%E6%88%90%E6%A0%B7%E6%9C%AC%E9%9B%86%EF%BC%8C%E9%81%BF%E5%85%8D%E5%A4%8D%E6%9D%82%E8%AE%A1%E7%AE%97%E3%80%82"><span class="toc-number">24.</span> <span class="toc-text">1）在贝叶斯推理中主要用于从后验分布的“非标准化部分”中直接生成样本集，避免复杂计算。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E4%BB%8E%E4%BB%BB%E6%84%8F%E7%BB%99%E5%AE%9A%E7%9A%84%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E6%88%96%E5%A4%8D%E6%9D%82%E5%88%86%E5%B8%83%E4%B8%AD%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%A0%B7%E6%9C%AC%E9%9B%86"><span class="toc-number">25.</span> <span class="toc-text">2）从任意给定的概率分布或复杂分布中获取随机样本集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81MCMC%E7%94%9F%E6%88%90%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%9B%86%E9%95%BF%E5%95%A5%E6%A0%B7%EF%BC%9F"><span class="toc-number">26.</span> <span class="toc-text">四、MCMC生成的样本集长啥样？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81MCMC%E4%B8%8E%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7%E6%B3%95"><span class="toc-number">27.</span> <span class="toc-text">五、MCMC与随机采样法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%87%87%E6%A0%B7%E6%A0%B7%E6%9C%AC%EF%BC%9F"><span class="toc-number">28.</span> <span class="toc-text">1、为什么需要采样样本？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E9%87%87%E6%A0%B7%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-number">29.</span> <span class="toc-text">2、采样必须满足的条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89%E8%B6%B3%E5%A4%9F%E5%9C%B0%E9%9A%8F%E6%9C%BA"><span class="toc-number">30.</span> <span class="toc-text">1）足够地随机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89%E8%B6%B3%E5%A4%9F%E5%A4%9A%E7%9A%84%E9%87%87%E6%A0%B7%E6%A0%B7%E6%9C%AC"><span class="toc-number">31.</span> <span class="toc-text">2）足够多的采样样本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89-%E5%B0%BD%E9%87%8F%E8%A6%86%E7%9B%96%E6%A0%B7%E6%9C%AC%E7%A9%BA%E9%97%B4"><span class="toc-number">32.</span> <span class="toc-text">3） 尽量覆盖样本空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%EF%BC%89-%E8%83%BD%E6%A8%A1%E6%8B%9F%E7%BB%99%E5%AE%9A%E7%9A%84%E7%9B%AE%E6%A0%87%E5%88%86%E5%B8%83"><span class="toc-number">33.</span> <span class="toc-text">4） 能模拟给定的目标分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-number">34.</span> <span class="toc-text">3、常见的随机采样方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%EF%BC%89-U-0%EF%BC%8C1%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7%E6%B3%95%EF%BC%88Uniform-Sampling%EF%BC%89"><span class="toc-number">35.</span> <span class="toc-text">1） U~[0，1均匀分布采样法（Uniform Sampling）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="toc-number">36.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%EF%BC%89-Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95"><span class="toc-number">37.</span> <span class="toc-text">2） Box–Muller变换法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-%E6%A0%87%E5%87%86%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">38.</span> <span class="toc-text">I 标准形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II-%E6%9E%81%E5%9D%90%E6%A0%87%E5%BD%A2%E5%BC%8F%E7%9A%84-Box%E2%80%93Muller-%E5%8F%98%E6%8D%A2"><span class="toc-number">39.</span> <span class="toc-text">II 极坐标形式的 Box–Muller 变换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%EF%BC%89-%E9%80%86%E5%8F%98%E6%8D%A2%E6%B3%95%EF%BC%88Inverse-Transform-Method%EF%BC%89"><span class="toc-number">40.</span> <span class="toc-text">3） 逆变换法（Inverse Transform Method）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I-%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E9%80%86%E5%8F%98%E6%8D%A2%E6%B3%95"><span class="toc-number">41.</span> <span class="toc-text">I 连续随机变量逆变换法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II-%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E9%80%86%E5%8F%98%E6%8D%A2%E6%B3%95"><span class="toc-number">42.</span> <span class="toc-text">II 离散随机变量逆变换法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III-%E8%BD%AE%E7%9B%98%E8%B5%8C%E9%87%87%E6%A0%B7"><span class="toc-number">43.</span> <span class="toc-text">III 轮盘赌采样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-1"><span class="toc-number">44.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%EF%BC%89%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7%E6%B3%95%EF%BC%88Acceptance-Rejection-Sampling%EF%BC%89"><span class="toc-number">45.</span> <span class="toc-text">4）接受-拒绝采样法（Acceptance-Rejection Sampling）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-2"><span class="toc-number">46.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%EF%BC%89-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7%E6%B3%95%EF%BC%88Importance-Sampling%EF%BC%89"><span class="toc-number">47.</span> <span class="toc-text">5） 重要性采样法（Importance Sampling）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E4%B8%80-%E9%99%8D%E6%96%B9%E5%B7%AE"><span class="toc-number">48.</span> <span class="toc-text">作用一 降方差</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E4%BA%8C-%E5%B0%86%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%A0%E6%B3%95%E6%8A%BD%E6%A0%B7%E7%9A%84%E5%88%86%E5%B8%83%E8%BD%AC%E5%8C%96%E4%B8%BA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AE%B9%E6%98%93%E6%8A%BD%E6%A0%B7%E7%9A%84%E5%88%86%E5%B8%83%EF%BC%8C%E9%97%B4%E6%8E%A5%E6%B1%82%E4%B8%80%E4%BA%9B%E7%BB%9F%E8%AE%A1%E9%87%8Ff-x"><span class="toc-number">49.</span> <span class="toc-text">作用二 将复杂的无法抽样的分布转化为简单的容易抽样的分布，间接求一些统计量f(x)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-3"><span class="toc-number">50.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%EF%BC%89-MCMC%E9%87%87%E6%A0%B7%E6%B3%95"><span class="toc-number">51.</span> <span class="toc-text">6） MCMC采样法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89MCMC%E6%80%9D%E6%83%B3%E7%9A%84%E6%9D%A5%E6%BA%90"><span class="toc-number">52.</span> <span class="toc-text">（1）MCMC思想的来源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89MCMC%E4%B8%AD%E7%9A%84%E6%8F%90%E8%AE%AE%E5%88%86%E5%B8%83q"><span class="toc-number">53.</span> <span class="toc-text">（2）MCMC中的提议分布q(.)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89-MCMC%E9%87%87%E6%A0%B7%E5%8E%9F%E7%90%86"><span class="toc-number">54.</span> <span class="toc-text">（3） MCMC采样原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89MCMC%E5%87%A0%E7%A7%8D%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95"><span class="toc-number">55.</span> <span class="toc-text">（4）MCMC几种基本算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I%E3%80%81-Metropolis%E7%AE%97%E6%B3%95"><span class="toc-number">56.</span> <span class="toc-text">I、 Metropolis算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E7%9A%84%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">57.</span> <span class="toc-text">R语言的演示代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-4"><span class="toc-number">58.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#II%E3%80%81-Metropolis-Hastings%E7%AE%97%E6%B3%95"><span class="toc-number">59.</span> <span class="toc-text">II、 Metropolis-Hastings算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lt-1-gt-%E3%80%81M-H%E7%AE%97%E6%B3%95%E5%AF%B9%E4%BA%8E%E4%B8%80%E7%BB%B4%E7%9B%AE%E6%A0%87%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E7%9A%84%E9%87%87%E6%A0%B7"><span class="toc-number">60.</span> <span class="toc-text">&lt;1&gt;、M-H算法对于一维目标概率分布的采样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M-H%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">61.</span> <span class="toc-text">M-H算法具体步骤如下：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%87%E6%A0%B7%E6%BC%94%E7%A4%BA%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">62.</span> <span class="toc-text">采样演示如下：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lt-2-gt-%E3%80%81M-H%E7%AE%97%E6%B3%95%E5%AF%B9%E4%BA%8E%E9%AB%98%E7%BB%B4%E7%9B%AE%E6%A0%87%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E7%9A%84%E9%87%87%E6%A0%B7"><span class="toc-number">63.</span> <span class="toc-text">&lt;2&gt;、M-H算法对于高维目标概率分布的采样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BB%A1%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83%E5%AE%9A%E4%B9%89"><span class="toc-number">64.</span> <span class="toc-text">满条件分布定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E5%88%86%E9%87%8FMetropolis-Hastings%E7%AE%97%E6%B3%95"><span class="toc-number">65.</span> <span class="toc-text">单分量Metropolis- Hastings算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M-H%E7%AE%97%E6%B3%95-%E7%8B%AC%E7%AB%8B%E6%8A%BD%E6%A0%B7"><span class="toc-number">66.</span> <span class="toc-text">M-H算法: 独立抽样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81"><span class="toc-number">67.</span> <span class="toc-text">R语言演示代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M-H%E7%AE%97%E6%B3%95-%E5%A4%9A%E5%85%83%E6%AD%A3%E6%80%81%E6%8F%90%E8%AE%AE%E5%88%86%E5%B8%83"><span class="toc-number">68.</span> <span class="toc-text">M-H算法: 多元正态提议分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81-1"><span class="toc-number">69.</span> <span class="toc-text">R语言演示代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%90%E5%88%86%E9%87%8F%E7%9A%84M-H%E7%AE%97%E6%B3%95"><span class="toc-number">70.</span> <span class="toc-text">逐分量的M-H算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#R%E8%AF%AD%E8%A8%80%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81-2"><span class="toc-number">71.</span> <span class="toc-text">R语言演示代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III%E3%80%81-%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7-Gibbs-Sampling"><span class="toc-number">72.</span> <span class="toc-text">III、 吉布斯采样(Gibbs Sampling)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%98%AF%E5%8D%95%E5%88%86%E9%87%8FM-H%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%EF%BC%8C%E4%B8%BB%E8%A6%81%E6%9C%89%E4%B8%A4%E7%82%B9%E7%89%B9%E6%AE%8A%EF%BC%9A"><span class="toc-number">73.</span> <span class="toc-text">吉布斯采样算法是单分量M-H算法的特殊情况，主要有两点特殊：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7%E6%9E%84%E9%80%A0%E7%9A%84%E9%A9%AC%E6%B0%8F%E9%93%BE%E6%94%B6%E6%95%9B%E5%88%B0%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83%E7%9A%84%E8%AF%81%E6%98%8E"><span class="toc-number">74.</span> <span class="toc-text">吉布斯采样构造的马氏链收敛到平稳分布的证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4Gibbs%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">75.</span> <span class="toc-text">二维Gibbs采样算法步骤：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-5"><span class="toc-number">76.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BB%B4Gibbs%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">77.</span> <span class="toc-text">高维Gibbs采样算法步骤：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81MCMC%E6%94%B6%E6%95%9B%E8%AF%8A%E6%96%AD%E6%96%B9%E6%B3%95"><span class="toc-number">78.</span> <span class="toc-text">六、MCMC收敛诊断方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E5%90%8C%E6%97%B6%E4%BA%A7%E7%94%9F%E5%A4%9A%E6%9D%A1%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE"><span class="toc-number">79.</span> <span class="toc-text">1、同时产生多条马尔科夫链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%AF%94%E7%8E%87%E8%AF%8A%E6%96%AD%E6%B3%95"><span class="toc-number">80.</span> <span class="toc-text">2、比率诊断法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81GewekeTest%E6%B3%95"><span class="toc-number">81.</span> <span class="toc-text">3、GewekeTest法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">82.</span> <span class="toc-text">七、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E8%AF%81%E6%98%8En-%E6%AD%A5%E8%BD%AC%E7%A7%BB%E7%9F%A9%E9%98%B5%E7%AD%89%E4%BA%8E%E5%85%B6%E4%B9%8B%E5%89%8D%E6%89%80%E6%9C%89%E8%BD%AC%E7%A7%BB%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%9E%E7%BB%AD%E7%9F%A9%E9%98%B5%E7%9B%B8%E4%B9%98"><span class="toc-number">83.</span> <span class="toc-text">附录1 证明n-步转移矩阵等于其之前所有转移矩阵的连续矩阵相乘</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%952-WinBUGS-%E7%94%A8MCMC%E8%BF%9B%E8%A1%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E7%9A%84%E4%B8%93%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">84.</span> <span class="toc-text">附录2 WinBUGS - 用MCMC进行贝叶斯推断的专用软件包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%953-MCNP-%E5%9F%BA%E4%BA%8E%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%A0%B8%E7%89%A9%E7%90%86%E6%96%B9%E9%9D%A2%E7%9A%84%E9%80%9A%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">85.</span> <span class="toc-text">附录3 MCNP - 基于蒙特卡罗方法的核物理方面的通用软件包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%954-R%E8%AF%AD%E8%A8%80%EF%BC%8CS-PLUS%EF%BC%8CMATLBA-%E6%A8%A1%E6%8B%9FMCMC%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7"><span class="toc-number">86.</span> <span class="toc-text">附录4 R语言，S-PLUS，MATLBA - 模拟MCMC的软件工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%955-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">87.</span> <span class="toc-text">附录5 马尔可夫发展历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%956-MCMC%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">88.</span> <span class="toc-text">附录6 MCMC发展历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">89.</span> <span class="toc-text">八、参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&text=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&is_video=false&description=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=马尔可夫链蒙特卡洛法(MCMC)&body=Check out this article: https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&title=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&name=马尔可夫链蒙特卡洛法(MCMC)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/&t=马尔可夫链蒙特卡洛法(MCMC)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2015-2022
+    koderboy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

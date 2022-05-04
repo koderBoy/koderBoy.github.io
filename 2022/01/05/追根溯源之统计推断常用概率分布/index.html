@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="来源：今日头条 一、统计与概率论的一些概念定义PDF- 概率密度函数 CDF - 累积分布函数 Quantile - 分位数 Mean - 均值 Median - 中位数 Mode - 众数 Variance - 方差 Skewness - 偏度 Kurtosis - 峰度 Entropy - 信息熵 CF - Characteristic Function, 特征函数 MGF - Moment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="追根溯源之统计推断常用概率分布">
+<meta property="og:url" content="https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="来源：今日头条 一、统计与概率论的一些概念定义PDF- 概率密度函数 CDF - 累积分布函数 Quantile - 分位数 Mean - 均值 Median - 中位数 Mode - 众数 Variance - 方差 Skewness - 偏度 Kurtosis - 峰度 Entropy - 信息熵 CF - Characteristic Function, 特征函数 MGF - Moment">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/86d351e34e76419884a4f608286b69fb?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/dea0cf5c42e24f5288d7f68d40c2958b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5da57b80c77e43f982c829e1c59f0014?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/8d10bdf8d0184e1cb51764037ee04249?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/95e295060b6d4df196013ab146cba618?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b8046dd6839a490cbd3243d7e98172c8?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/fdda9b6567874e32a8d1c39c66f1c12f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5f3eb65018fc40e297acf632adb7e83c?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/129605bc5ea74bb5ad97e8fab17ecbf0?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/18b1afdbad614d8faf83eb8c729fb026?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/bb0a2fc8d42a44138478cd441072fc84?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/8ea91d0f530b47788618f6203f7a33f8?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/9d8f4b00921645f1936b95c402e73d9c?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0de11e01d0d34752befcd537aee90af6?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/500bf8ad52a14f0cbb739d539ca40c3a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0666f1fc343641e7835e283d87dd1e42?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e4a8af5112814ce7842831aea5fb1d01?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/376b6aeb8cd74996a020a306eb6dfcca?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/eabbb1976db0471b803eaa17d7dd06e0?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ec42df4110a641e8b716f30026e10926?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7ab78e312760431d8b48f64baf0447f4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/6a502f87525c456b87932911d27beaec?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/c1915df025514921ad19b7eaab7450a9?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2a42aa4dbdd7487494471a46b64d251d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f62260c0b6334b6c93e73fa9454ffc89?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/234c00e0f8354521ac8d534975ea99c1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/c603e0ad406041bea30575698f0a74de?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/bc6184a4bab84a299127052481709f1e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/fefe8e89dab14349bdb147c9696e6839?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/c1f5d284327b4f228ff471a634d53358?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/9eab971935bb4e87a5e1963352871366?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/248b4a233c2c4393a9d9e9a08d4c4128?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0636288c24dd40bebd5003d22273ee58?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ad9a5caec3164984b172bd6685f70888?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/df999238bf28424c84d12da2ea1b114f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a9005372a5ec45568ce325461a024c2e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e5b0e7b5c87843a8a663d882102ff335?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e4e93ede58b34fbf881b48e5047a70a5?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1765263e3dee4b07b49328d82203e35b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/70e334f6432646418cee983dc8effa1b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/6308b4a8e2854a739bd65492ba92a26f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7a6a1ff320a0400bb525ea671dc5082f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/473eecb926844bfab759eea29e3344f4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/4108a6302d8f498e9792a5f49057ea84?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/81ddcea005ef4916aa17195cab8ab1b4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/30ed409231a448089de8099038681943?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0ddcc2611f44479595f9b3535c726471?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/43c32657f18348049ef906d96f35c46a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e8c78ec6003847faaf4b271edb6c6936?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5df2f56d2a3643f7a3b46a83ea1d4a58?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7f3324eb95f342f0bd0c3386cbecf6b4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/722039d2271348919de01afca217c9bc?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/367348acf7564c2b973e6297a695ffa6?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/438d2bb450a04e7f8074ef1665c618d5?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e4ae5042bc2c4e7c80f2e136e32ee9de?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/be9731b47fdf47a9af1f9ff9b4cbeb3c?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/93d9127b7f084675ac745435b15280f1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b7cc1e9067d34f4a98c93c3bc70aed4b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1f37c726aa6d480db6172ec977764382?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/51e2ea9287f249f0b2226023570977e9?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b389f372f6bb431c8dd15540fdc94736?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/96604fdb7467437d91fcc9292e4549ee?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0ce488a340b3499f85a3e878c49246a5?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/00ddd5e102aa4aeea47a13cf60af672b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/82570a4b32e5459a891e70baa121390e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/bf884c9e25bc4fe3921dbcf2610b59cb?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/81935840226b4f04a8d0567c860945cf?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/78f72f2d703e4b72a3f70cd438a918d1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5082441e2daf4b81a3c0c86deeff781d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/dce997c9490e4e5fa91d40c2e69ce24d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b1f7e1d0bd8a4fa39f6f20cb0fe7e43a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a7f2c6fc48e74366af012078cdbbbfdb?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b524cfcd2f0f407f8cccca5f07283fa2?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2290a64b849c4f4dbbc251d3e60ed903?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ef1a19841b1e4feaad67c25f3b6cd9bc?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5cbb742e7a804e1abbeed5160b211bf9?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f2b044f7ec124233b45a12a2363a2819?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e7dfeb7ca15c49b68ba656dd5ec1adba?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/776ded72a50e4faaa08948c0fa30b6c2?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b7ad2c8a9ff242d8b9ecd347375b090a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b4c1c4196ef640c18dc303a33115e1a6?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1a5b3f66f9f04d8aa29ef24a55b49c08?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7b0d957845014ef7b296f10cd4445b87?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/66a4909f03e648a592f6d4d1315f7bdd?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a8165a24dd3a417288e2e2e995f29b0a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/be3d19ed95174a80a50ef47a922c3e30?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/8a1282c292f145e29f3baa99e0da074d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a7b239df68b34b00b53d6e38105f2a07?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/cc27741af4cd4880ab7bf860c1e21d76?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1f29093ca636419483fa95e036f982ab?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/843d0a0d59034794b5fbba1a6d551bde?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/47b15813624045b1b62f50e02fc79b58?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e2dd0ca117794ab6baf1a5cb14abc464?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/e15f31f4ed3149c4941b70386c6e1c1f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/008bf97e96204aa3afa68dd7b88ae875?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/59971ce1d6c3430a9559b49c54feebec?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/44b10bc9c5da43deb31f0bebcbb2470f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/93c913689ee44467b98764262eb20585?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/93bdfddeab1749f684f43f77cc170103?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/c249c0a8941a4946a2943d5bd0086430?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/9ab291faba6f4a7faabfdedb5c2cd349?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/493b20957f83447e83aad4aadf4085ec?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2e8ca88813f341629a59a057f2ba725f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1b00d10cfc0443e3b6df9dc1e78570d1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f1f4a5311ab141dc92e2c2e70778f614?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/9adc9ba2365747e28b574a3538d85339?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/71719e0fb04a44f6892b03b881adfc96?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/35feb21a40e44b839a922684cdb221d4?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1231f93eb6e941c2a82111ab112b41af?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/d33bbf7c882641729bfa6cc6d0ca3be1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/cfdcea3f6096434692d4765425f5be91?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/24b3a944795540b093afb792584e9fab?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5c0748edc87548639d024e33ad746de7?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1a9e7ac1448142fcabbff258304e6272?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7a56ddcff0c742f0bf28128cbfe0a235?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7891ac0e7eb043848f841ca6cad05ca1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/f3284bb0f9ab429a80c6c129e6267f85?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/49193f35fa864b3c861d4d4720ea331f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2093be5d5c1040be88e1af673558c00f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/cc7325f22dc4434a935ef4ee4defe459?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2f2aa626ca7d4194bcc9b84ac294a59d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/1b582f81310e43a7bb83e65fedaea531?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7d6ee6bb9f5141f6a3d5c2c474ecd1b5?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/77ea02d41f2642eca4ad3f998a00c034?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ec8bae5791b04016a5e290c0eb24d806?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0eef23cc0c1f47489d432804016cb8c2?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/749fda67702a4682a508feec038346d1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a3e2fab9cc5848bc8cc3e7c712e7e63d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/cb1971d4487e4d4eb89ef10b00a54400?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/7e318217ec27419cb741dd71114784ef?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/cbf2f5eb49844e5f97bcc47229548309?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/089d6cc5bb124e459edb969cf92c6039?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/b528d119d61a469ba63bb695c13a212c?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a15dd424966c447d8c29235ee09d72f1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/6ba3ffd6c7694529867b8035466f20ba?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ea6f84df27b3473ca7ee0401e637d50a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3b25b32721cc44dbbdad80e20da10637?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/816a0fcf3201409a8d43c612c5fe384d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/89e186a0ea094c03a1364c7766f0ea7a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0fc3332b1b434f0e974e22e3d3ffd38d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/44c474deebd64d4bba48d59a5a68b1e0?from=pc">
+<meta property="article:published_time" content="2022-01-05T15:35:12.000Z">
+<meta property="article:modified_time" content="2022-05-04T08:35:58.672Z">
+<meta property="article:author" content="koderboy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p3.toutiaoimg.com/origin/pgc-image/86d351e34e76419884a4f608286b69fb?from=pc">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>追根溯源之统计推断常用概率分布</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/12/26/Box%E2%80%93Muller%E5%8F%98%E6%8D%A2%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&text=追根溯源之统计推断常用概率分布"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&is_video=false&description=追根溯源之统计推断常用概率分布"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=追根溯源之统计推断常用概率分布&body=Check out this article: https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&name=追根溯源之统计推断常用概率分布&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&t=追根溯源之统计推断常用概率分布"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%BB%9F%E8%AE%A1%E4%B8%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一、统计与概率论的一些概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0CDF-Cumulative-Distribution-Function"><span class="toc-number">3.</span> <span class="toc-text">1、累积分布函数CDF(Cumulative Distribution Function)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0PDF-Probability-Density-Function"><span class="toc-number">4.</span> <span class="toc-text">2、概率密度函数PDF(Probability Density Function)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E4%BC%97%E6%95%B0-Mode"><span class="toc-number">5.</span> <span class="toc-text">3、众数 (Mode)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E4%BD%8D%E6%95%B0-Quantile"><span class="toc-number">6.</span> <span class="toc-text">4、分位数(Quantile )</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E4%B8%AD%E4%BD%8D%E6%95%B0-Median"><span class="toc-number">7.</span> <span class="toc-text">5、中位数 (Median)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E5%81%8F%E5%BA%A6-Skewness"><span class="toc-number">8.</span> <span class="toc-text">6、偏度(Skewness)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E5%B3%B0%E5%BA%A6"><span class="toc-number">9.</span> <span class="toc-text">7、峰度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8%E3%80%81%E4%BF%A1%E6%81%AF%E7%86%B5-Entropy"><span class="toc-number">10.</span> <span class="toc-text">8、信息熵(Entropy)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0-Characteristic-Function-CF"><span class="toc-number">11.</span> <span class="toc-text">9、特征函数 (Characteristic Function, CF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10%E3%80%81%E5%8A%A8%E5%B7%AE%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-Moment-Generating-Function-MGF"><span class="toc-number">12.</span> <span class="toc-text">10、动差生成函数(Moment Generating Function, MGF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11%E3%80%81%E8%AF%AF%E5%B7%AE%E5%87%BD%E6%95%B0-Error-function-Erf"><span class="toc-number">13.</span> <span class="toc-text">11、误差函数 (Error function, Erf)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%EF%BC%88Normal-Distribution%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">二、正态分布（Normal Distribution）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%EF%BC%88PDF%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">（1）概率密度函数（PDF）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-CDF"><span class="toc-number">16.</span> <span class="toc-text">（2）累积分布函数 (CDF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">17.</span> <span class="toc-text">（3）正态分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93"><span class="toc-number">18.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83-Poisson-Distribution"><span class="toc-number">19.</span> <span class="toc-text">三、泊松分布(Poisson Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0"><span class="toc-number">20.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="toc-number">21.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">22.</span> <span class="toc-text">（3）泊松分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-1"><span class="toc-number">23.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83-Bernoulli-Distribution"><span class="toc-number">24.</span> <span class="toc-text">四、伯努利分布(Bernoulli Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-1"><span class="toc-number">25.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-1"><span class="toc-number">26.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">27.</span> <span class="toc-text">（3）伯努利分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83-Binomial-Distribution"><span class="toc-number">28.</span> <span class="toc-text">五、二项分布(Binomial Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-2"><span class="toc-number">29.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-2"><span class="toc-number">30.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">31.</span> <span class="toc-text">（3）二项分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83-Geometric-Distribution"><span class="toc-number">32.</span> <span class="toc-text">六、几何分布(Geometric Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-3"><span class="toc-number">33.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-3"><span class="toc-number">34.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">35.</span> <span class="toc-text">（3）几何分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-2"><span class="toc-number">36.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83-Hypergeometric-Distribution"><span class="toc-number">37.</span> <span class="toc-text">七、超几何分布(Hypergeometric Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-4"><span class="toc-number">38.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-4"><span class="toc-number">39.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83%E6%80%A7%E8%B4%A8"><span class="toc-number">40.</span> <span class="toc-text">（3）超几何分布性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83-Chi-squared-%CF%872%EF%BC%89"><span class="toc-number">41.</span> <span class="toc-text">八、卡方分布(Chi-squared ( χ2）)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0PDF-of-%CF%872"><span class="toc-number">42.</span> <span class="toc-text">（1）概率密度函数PDF of χ2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0CDF-of-%CF%872"><span class="toc-number">43.</span> <span class="toc-text">（2）累积分布函数CDF of χ2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">44.</span> <span class="toc-text">（3）卡方分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-3"><span class="toc-number">45.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81t-%E5%88%86%E5%B8%83-Student%E2%80%99s-t-distribution"><span class="toc-number">46.</span> <span class="toc-text">九、t-分布(Student’s t-distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89PDF-of-t-distribution"><span class="toc-number">47.</span> <span class="toc-text">（1）PDF of t-distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89CDF-of-t-distribution"><span class="toc-number">48.</span> <span class="toc-text">（2）CDF of t-distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89t-%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">49.</span> <span class="toc-text">（3）t-分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-4"><span class="toc-number">50.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81F-%E5%88%86%E5%B8%83-F-distribution"><span class="toc-number">51.</span> <span class="toc-text">十、F-分布(F-distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89PDF-of-F-distribution"><span class="toc-number">52.</span> <span class="toc-text">（1）PDF of F distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89CDF-of-F-distribution"><span class="toc-number">53.</span> <span class="toc-text">（2）CDF of F distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89F-%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">54.</span> <span class="toc-text">（3）F-分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-5"><span class="toc-number">55.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83-Exponential-Distribution"><span class="toc-number">56.</span> <span class="toc-text">十一、指数分布(Exponential Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-5"><span class="toc-number">57.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-5"><span class="toc-number">58.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">59.</span> <span class="toc-text">（3）指数分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-6"><span class="toc-number">60.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83-Rayleigh-Distribution"><span class="toc-number">61.</span> <span class="toc-text">十二、瑞利分布(Rayleigh Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-6"><span class="toc-number">62.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-6"><span class="toc-number">63.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">64.</span> <span class="toc-text">（3）瑞利分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-7"><span class="toc-number">65.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E5%9C%A8%E9%A3%8E%E8%B5%84%E6%BA%90%E8%AF%84%E4%BC%B0%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">66.</span> <span class="toc-text">瑞利分布在风资源评估中的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E5%9C%A8%E6%97%A0%E7%BA%BF%E9%80%9A%E4%BF%A1%E6%96%B9%E9%9D%A2%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">67.</span> <span class="toc-text">瑞利分布在无线通信方面的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2%E8%B7%9F%E8%B8%AA%E7%AE%97%E6%B3%95"><span class="toc-number">68.</span> <span class="toc-text">基于瑞利分布的粒子滤波跟踪算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E9%9F%A6%E4%BC%AF%E5%88%86%E5%B8%83%EF%BC%88Weibull-Distribution%EF%BC%89"><span class="toc-number">69.</span> <span class="toc-text">十三、韦伯分布（Weibull Distribution）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%9F%A6%E4%BC%AF%E5%88%86%E5%B8%83%E6%98%AF%E8%BF%9E%E7%BB%AD%E6%80%A7%E7%9A%84%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%EF%BC%8C%E5%85%B6%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%E4%B8%BA%EF%BC%9A"><span class="toc-number">70.</span> <span class="toc-text">（1）韦伯分布是连续性的概率分布，其概率密度函数为：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-7"><span class="toc-number">71.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%9F%A6%E4%BC%AF%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">72.</span> <span class="toc-text">（3）韦伯分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-8"><span class="toc-number">73.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E5%B8%95%E9%9B%B7%E6%89%98%E5%88%86%E5%B8%83-Pareto-Distribution"><span class="toc-number">74.</span> <span class="toc-text">十四、帕雷托分布(Pareto Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-7"><span class="toc-number">75.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-number">76.</span> <span class="toc-text">（2）累积概率分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%B8%95%E9%9B%B7%E6%89%98%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">77.</span> <span class="toc-text">（3）帕雷托分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-9"><span class="toc-number">78.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83-Laplace-Distribution"><span class="toc-number">79.</span> <span class="toc-text">十五、拉普拉斯分布(Laplace Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-8"><span class="toc-number">80.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-8"><span class="toc-number">81.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83"><span class="toc-number">82.</span> <span class="toc-text">（3）拉普拉斯分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-10"><span class="toc-number">83.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%88%86%E5%B8%83-Logistic-Distribution"><span class="toc-number">84.</span> <span class="toc-text">十六、逻辑斯蒂分布(Logistic Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-9"><span class="toc-number">85.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-9"><span class="toc-number">86.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%88%86%E5%B8%83"><span class="toc-number">87.</span> <span class="toc-text">（3）逻辑斯蒂分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83-Cauchy-Distribution"><span class="toc-number">88.</span> <span class="toc-text">十七、柯西分布(Cauchy Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-10"><span class="toc-number">89.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-10"><span class="toc-number">90.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83%E6%80%A7%E8%B4%A8"><span class="toc-number">91.</span> <span class="toc-text">（3）柯西分布性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83-Beta-Distribution"><span class="toc-number">92.</span> <span class="toc-text">十八、贝塔分布(Beta Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-11"><span class="toc-number">93.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-11"><span class="toc-number">94.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89Beta%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">95.</span> <span class="toc-text">（3）Beta分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">96.</span> <span class="toc-text">十九、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-number">97.</span> <span class="toc-text">附录1 指数分布的推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%952-%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-number">98.</span> <span class="toc-text">附录2 瑞利分布的推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%953-Beta%E5%88%86%E5%B8%83%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-number">99.</span> <span class="toc-text">附录3 Beta分布的推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">100.</span> <span class="toc-text">二十、参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        追根溯源之统计推断常用概率分布
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">koderboy</span>
+                </span>
+                
+    <div class="postdate">
+      
+        <time datetime="2022-01-05T15:35:12.000Z" itemprop="datePublished">2022-01-05</time>
+        
+      
+    </div>
+
+
+                    
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+    </div>
+
+
+                        
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6949464472935268895/">今日头条</a></p>
+<h1 id="一、统计与概率论的一些概念"><a href="#一、统计与概率论的一些概念" class="headerlink" title="一、统计与概率论的一些概念"></a>一、统计与概率论的一些概念</h1><h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>PDF- 概率密度函数</p>
+<p>CDF - 累积分布函数</p>
+<p>Quantile - 分位数</p>
+<p>Mean - 均值</p>
+<p>Median - 中位数</p>
+<p>Mode - 众数</p>
+<p>Variance - 方差</p>
+<p>Skewness - 偏度</p>
+<p>Kurtosis - 峰度</p>
+<p>Entropy - 信息熵</p>
+<p>CF - Characteristic Function, 特征函数</p>
+<p>MGF - Moment Generating Function, 矩量母函数, 也被称为动差生成函数</p>
+<p>Erf - Error function, 误差函数</p>
+<h1 id="1、累积分布函数CDF-Cumulative-Distribution-Function"><a href="#1、累积分布函数CDF-Cumulative-Distribution-Function" class="headerlink" title="1、累积分布函数CDF(Cumulative Distribution Function)"></a>1、累积分布函数CDF(Cumulative Distribution Function)</h1><p>If X is any random variable, then its CDF is defined for any real number x by</p>
+<p>F(x)&#x3D;P(X ≤ x)</p>
+<h1 id="2、概率密度函数PDF-Probability-Density-Function"><a href="#2、概率密度函数PDF-Probability-Density-Function" class="headerlink" title="2、概率密度函数PDF(Probability Density Function)"></a>2、概率密度函数PDF(Probability Density Function)</h1><p>The probability density function (PDF) f(x) of a continuous distribution is defined as the derivative of the (cumulative) distribution function F(x),</p>
+<p>ƒ(x) &#x3D;dF(x)&#x2F;dx</p>
+<p>so we have</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/86d351e34e76419884a4f608286b69fb?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="3、众数-Mode"><a href="#3、众数-Mode" class="headerlink" title="3、众数 (Mode)"></a>3、众数 (Mode)</h1><p>它是样本观测值在频数分布表中频数最多的那一组的组中值，主要应用于大面积普查研究之中。例如：1，2，3，3，4的众数是3；例如：1，2，2，3，3，4的众数是2和3；例如：1，2，3，4，5没有众数；在高斯分布中，众数位于峰值。</p>
+<h1 id="4、分位数-Quantile"><a href="#4、分位数-Quantile" class="headerlink" title="4、分位数(Quantile )"></a>4、分位数(Quantile )</h1><p>分位数就是用概率作为依据将一批数据分开的那个点，是为了便于研究区间估计而挑选的对应一定概率的随机变量取值。</p>
+<p>一天，班主任气冲冲地走进教室对我们说：“太不像话了，这次考试竟然有60%的同学不及格！”　班主任这句话里就有一个分位数的应用。</p>
+<h1 id="5、中位数-Median"><a href="#5、中位数-Median" class="headerlink" title="5、中位数 (Median)"></a>5、中位数 (Median)</h1><p>中位数，又称中点数，中值。中位数是按顺序排列的一组数据中居于中间位置的数，即在这组数据中，有一半的数据比他大，有一半的数据比他小。</p>
+<p>有一组数据：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/dea0cf5c42e24f5288d7f68d40c2958b?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>将它按从小到大的顺序排序为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5da57b80c77e43f982c829e1c59f0014?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>则当N为奇数时，</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/8d10bdf8d0184e1cb51764037ee04249?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>当N为偶数时，</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/95e295060b6d4df196013ab146cba618?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="6、偏度-Skewness"><a href="#6、偏度-Skewness" class="headerlink" title="6、偏度(Skewness)"></a>6、偏度(Skewness)</h1><p>对于离散随机变量：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b8046dd6839a490cbd3243d7e98172c8?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>一般化公式：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/fdda9b6567874e32a8d1c39c66f1c12f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中µ为均值或期望，σ为标准差。</p>
+<p>可以用来度量随机变量概率分布的不对称性。是统计数据分布偏斜方向和程度的度量，是统计数据分布非对称程度的数字特征。偏度亦称偏态、偏态系数。它表征概率分布密度曲线相对于平均值不对称程度的特征数。直观看来就是密度函数曲线尾部的相对长度。</p>
+<p>例如：一组数据为1、2、2、4、1，均值为2，标准差约为1.22，所以偏度为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5f3eb65018fc40e297acf632adb7e83c?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>几何意义：</p>
+<p>偏度的取值范围为(-∞,+∞)</p>
+<ul>
+<li>当偏度&lt;0时，概率分布图左偏。</li>
+<li>当偏度&#x3D;0时，表示数据相对均匀的分布在平均值两侧，不一定是绝对的对称分布。</li>
+<li>当偏度&gt;0时，概率分布图右偏。</li>
+</ul>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/129605bc5ea74bb5ad97e8fab17ecbf0?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="7、峰度"><a href="#7、峰度" class="headerlink" title="7、峰度"></a>7、峰度</h1><p>峰度被定义为四阶累积量除以二阶累积量的平方，它等于四阶中心矩除以概率分布方差的平方再减去3：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/18b1afdbad614d8faf83eb8c729fb026?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>“减3”是为了让正态分布的峰度为0。</p>
+<p>对于具有n个值的样本，样本峰度为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bb0a2fc8d42a44138478cd441072fc84?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>在统计学中，峰度衡量实数随机变量概率分布的峰态。峰度高就意味着方差增大是由低频度的大于或小于平均值的极端差值引起的。</p>
+<p>根据变量值的集中与分散程度，峰度一般可表现为三种形态：尖顶峰度、平顶峰度和标准峰度。当变量值的次数在众数周围分布比较集中，使次数分布曲线比正态分布曲线顶峰更为隆起尖峭，称为尖顶峰度；当变量值的次数在众数周围分布较为分散，使次数分布曲线较正态分布曲线更为平缓，称为平顶峰度。可见，尖顶峰度或平顶峰度都是相对正态分布曲线的标准峰度而言的。</p>
+<h1 id="8、信息熵-Entropy"><a href="#8、信息熵-Entropy" class="headerlink" title="8、信息熵(Entropy)"></a>8、信息熵(Entropy)</h1><p>熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/8ea91d0f530b47788618f6203f7a33f8?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中p(xi)代表随机事件X为xi的概率。</p>
+<p>令f(x) &#x3D; log(1&#x2F;p(x)), E[f(x)] &#x3D; ∑p(x)f(x). H(x)可以看作f(x)的数学期望。</p>
+<p>信息论之父克劳德·香农，总结出了信息熵的三条性质：</p>
+<ul>
+<li>单调性，即发生概率越高的事件，其所携带的信息熵越低。极端案例就是“太阳从东方升起”，因为为确定事件，所以不携带任何信息量。从信息论的角度，认为这句话没有消除任何不确定性。f(x) &#x3D; 1&#x2F;p(x)是不是很容易想得到？</li>
+<li>非负性，即信息熵不能为负。这个很好理解，因为负的信息，即你得知了某个信息后，却增加了不确定性是不合逻辑的。</li>
+<li>累加性，即多随机事件同时发生存在的总不确定性的量度是可以表示为各事件不确定性的量度的和。</li>
+</ul>
+<p>我们希望信息熵满足：</p>
+<p>所有可能发生事件所带来的信息量的期望：E[f(x)]；</p>
+<p>概率越高，信息熵越低：f(x) &#x3D; log(1&#x2F;p(x))；</p>
+<p>非负性：f(x) &#x3D; log(1&#x2F;p(x))；</p>
+<p>如果两个事件A，B同时发生，且相互独立，有H(A,B) &#x3D; H(A)+H(B)。</p>
+<p>因此，构造了我们现在的信息熵公式。</p>
+<p>香农从数学上，严格证明了满足上述几个个条件的随机变量不确定性度量函数具有唯一形式：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/9d8f4b00921645f1936b95c402e73d9c?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中的C为常数，我们将其归一化为C&#x3D;1， 即得到了信息熵公式。</p>
+<p>如果两个事件不相互独立，那么满足：</p>
+<p>H(A,B) &#x3D; H(A) + H(B) - I(A, B),</p>
+<p>其中I(A, B)是互信息,代表一个随机变量包含另一个随机变量信息量的度量，这个概念在通信中用处很大。比如一个点到点通信系统中，发送端信号为X，通过信道后，接收端接收到的信号为Y，那么信息通过信道传递的信息量就是互信息I(X,Y)。根据这个概念，香农推出了一个十分伟大的公式，香农公式，给出了临界通信传输速率的值，即信道容量：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0de11e01d0d34752befcd537aee90af6?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="9、特征函数-Characteristic-Function-CF"><a href="#9、特征函数-Characteristic-Function-CF" class="headerlink" title="9、特征函数 (Characteristic Function, CF)"></a>9、特征函数 (Characteristic Function, CF)</h1><p>如果F(x)是累积分布函数，那么特征函数由黎曼-斯蒂尔切斯积分给出：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/500bf8ad52a14f0cbb739d539ca40c3a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>如果f(x)是概率密度函数，则特征函数：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0666f1fc343641e7835e283d87dd1e42?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>它被用于中心极限定理的最常见的证明中，还可以用来求出某个随机变量的矩。</p>
+<h1 id="10、动差生成函数-Moment-Generating-Function-MGF"><a href="#10、动差生成函数-Moment-Generating-Function-MGF" class="headerlink" title="10、动差生成函数(Moment Generating Function, MGF)"></a>10、动差生成函数(Moment Generating Function, MGF)</h1><p>在统计学中，矩又被称为动差(Moment)。矩量母函数(Moment Generating Function,简称mgf)又被称为动差生成函数。定义为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e4a8af5112814ce7842831aea5fb1d01?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>前提是这个期望值存在。</p>
+<p>如果X具有连续概率密度函数f(x)，则它的动差生成函数由下式给出：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/376b6aeb8cd74996a020a306eb6dfcca?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中，mi是第i个矩。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/eabbb1976db0471b803eaa17d7dd06e0?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>如果两个随机变量具有相同的mgf，那么它们具有相同的概率分布。</p>
+<p>动差生成函数可用来求n阶原点矩。</p>
+<p>只要动差生成函数在t &#x3D; 0周围的开区间存在，第n阶原点矩为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ec42df4110a641e8b716f30026e10926?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="11、误差函数-Error-function-Erf"><a href="#11、误差函数-Error-function-Erf" class="headerlink" title="11、误差函数 (Error function, Erf)"></a>11、误差函数 (Error function, Erf)</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7ab78e312760431d8b48f64baf0447f4?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>误差函数的级数展开式为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6a502f87525c456b87932911d27beaec?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c1915df025514921ad19b7eaab7450a9?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>误差函数是特殊的不完全伽玛函数之一。</p>
+<p>误差函数在概率论、统计学以及偏微分方程和半导体物理中都有广泛的应用。</p>
+<h1 id="二、正态分布（Normal-Distribution）"><a href="#二、正态分布（Normal-Distribution）" class="headerlink" title="二、正态分布（Normal Distribution）"></a>二、正态分布（Normal Distribution）</h1><h1 id="（1）概率密度函数（PDF）"><a href="#（1）概率密度函数（PDF）" class="headerlink" title="（1）概率密度函数（PDF）"></a>（1）概率密度函数（PDF）</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2a42aa4dbdd7487494471a46b64d251d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>以上结果可表示为 X~N(µ, σ2), µ为均值或期望，σ为标准差。</p>
+<p>标准正态分布（standard normal distribution）表示为N(0,1)</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f62260c0b6334b6c93e73fa9454ffc89?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/234c00e0f8354521ac8d534975ea99c1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-CDF"><a href="#（2）累积分布函数-CDF" class="headerlink" title="（2）累积分布函数 (CDF)"></a>（2）累积分布函数 (CDF)</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c603e0ad406041bea30575698f0a74de?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bc6184a4bab84a299127052481709f1e?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）正态分布的性质"><a href="#（3）正态分布的性质" class="headerlink" title="（3）正态分布的性质"></a>（3）正态分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/fefe8e89dab14349bdb147c9696e6839?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结"><a href="#（4）小结" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>卡方分布、t-分布、F分布统计学三大分布皆来自正态分布。</p>
+<p>正态分布还有诸多迷人的数学特性，我们可以欣赏一下：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c1f5d284327b4f228ff471a634d53358?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="三、泊松分布-Poisson-Distribution"><a href="#三、泊松分布-Poisson-Distribution" class="headerlink" title="三、泊松分布(Poisson Distribution)"></a>三、泊松分布(Poisson Distribution)</h1><p>泊松分布，是一种统计与概率学里常见到的离散概率分布，由法国数学家西莫恩·德尼·泊松（Siméon-Denis Poisson）在1838年时发表。</p>
+<p>泊松分布是用来描述某段时间内事件的发生概率。</p>
+<h1 id="（1）概率密度函数"><a href="#（1）概率密度函数" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/9eab971935bb4e87a5e1963352871366?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/248b4a233c2c4393a9d9e9a08d4c4128?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数"><a href="#（2）累积分布函数" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0636288c24dd40bebd5003d22273ee58?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）泊松分布的性质"><a href="#（3）泊松分布的性质" class="headerlink" title="（3）泊松分布的性质"></a>（3）泊松分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ad9a5caec3164984b172bd6685f70888?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-1"><a href="#（4）小结-1" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>泊松分布通常用于两个主要目的：</p>
+<ul>
+<li>预测事件在选定时间段内将发生多少次。 该技术可用于不同的风险分析应用，例如房屋保险价格估计。</li>
+<li>考虑到事件过去发生的频率，估计事件发生的可能性(例如，未来两个月停电的可能性有多大)。</li>
+</ul>
+<p>许多随机变量服从泊松分布，如某医院一天内的就诊人数，一段时间内一个网站的登陆人数，某路口一段时间内通过的车辆数。</p>
+<h1 id="四、伯努利分布-Bernoulli-Distribution"><a href="#四、伯努利分布-Bernoulli-Distribution" class="headerlink" title="四、伯努利分布(Bernoulli Distribution)"></a>四、伯努利分布(Bernoulli Distribution)</h1><p>伯努利分布是一个离散型机率分布，是N&#x3D;1时二项分布的特殊情况，为纪念瑞士科学家詹姆斯·伯努利(Jacob Bernoulli 或James Bernoulli)而命名。</p>
+<h1 id="（1）概率密度函数-1"><a href="#（1）概率密度函数-1" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/df999238bf28424c84d12da2ea1b114f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a9005372a5ec45568ce325461a024c2e?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-1"><a href="#（2）累积分布函数-1" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><h1 id="（3）伯努利分布的性质"><a href="#（3）伯努利分布的性质" class="headerlink" title="（3）伯努利分布的性质"></a>（3）伯努利分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e5b0e7b5c87843a8a663d882102ff335?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="五、二项分布-Binomial-Distribution"><a href="#五、二项分布-Binomial-Distribution" class="headerlink" title="五、二项分布(Binomial Distribution)"></a>五、二项分布(Binomial Distribution)</h1><h1 id="（1）概率密度函数-2"><a href="#（1）概率密度函数-2" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e4e93ede58b34fbf881b48e5047a70a5?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1765263e3dee4b07b49328d82203e35b?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-2"><a href="#（2）累积分布函数-2" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/70e334f6432646418cee983dc8effa1b?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>或</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6308b4a8e2854a739bd65492ba92a26f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中，I是正则不完全的beta函数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7a6a1ff320a0400bb525ea671dc5082f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）二项分布的性质"><a href="#（3）二项分布的性质" class="headerlink" title="（3）二项分布的性质"></a>（3）二项分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/473eecb926844bfab759eea29e3344f4?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="六、几何分布-Geometric-Distribution"><a href="#六、几何分布-Geometric-Distribution" class="headerlink" title="六、几何分布(Geometric Distribution)"></a>六、几何分布(Geometric Distribution)</h1><h1 id="（1）概率密度函数-3"><a href="#（1）概率密度函数-3" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4108a6302d8f498e9792a5f49057ea84?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/81ddcea005ef4916aa17195cab8ab1b4?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-3"><a href="#（2）累积分布函数-3" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/30ed409231a448089de8099038681943?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）几何分布的性质"><a href="#（3）几何分布的性质" class="headerlink" title="（3）几何分布的性质"></a>（3）几何分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0ddcc2611f44479595f9b3535c726471?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-2"><a href="#（4）小结-2" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>考虑一系列试验，其中每个试验只有两个可能的结果（指定的失败和成功）。假定每个试验的成功概率是相同的。在这样的试验序列中，几何分布可用于对首次成功之前的失败数量进行建模。分布给出了以下可能性：首次成功之前有0个失败，第一次成功之前有1个失败，第一次成功之前有2个失败，依此类推。</p>
+<p>什么时候几何分布是合适的模型？如果以下假设成立，则几何分布是合适的模型。</p>
+<p>一系列独立试验：</p>
+<p>每次试验只有两种可能的结果，通常指定为成功或失败。</p>
+<p>每个试验的成功概率p是相同的。</p>
+<p>如果满足这些条件，则几何随机变量Y是首次成功之前失败次数的计数。</p>
+<h1 id="七、超几何分布-Hypergeometric-Distribution"><a href="#七、超几何分布-Hypergeometric-Distribution" class="headerlink" title="七、超几何分布(Hypergeometric Distribution)"></a>七、超几何分布(Hypergeometric Distribution)</h1><h1 id="（1）概率密度函数-4"><a href="#（1）概率密度函数-4" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/43c32657f18348049ef906d96f35c46a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e8c78ec6003847faaf4b271edb6c6936?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-4"><a href="#（2）累积分布函数-4" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5df2f56d2a3643f7a3b46a83ea1d4a58?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）超几何分布性质"><a href="#（3）超几何分布性质" class="headerlink" title="（3）超几何分布性质"></a>（3）超几何分布性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7f3324eb95f342f0bd0c3386cbecf6b4?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="八、卡方分布-Chi-squared-χ2）"><a href="#八、卡方分布-Chi-squared-χ2）" class="headerlink" title="八、卡方分布(Chi-squared ( χ2）)"></a>八、卡方分布(Chi-squared ( χ2）)</h1><p>卡方分布是由阿贝(Abbe)于1863年首先提出的，后来由海尔墨特(Hermert)和现代统计学的奠基人之一的卡·皮尔逊(C K．Pearson)分别于1875年和1900年推导出来，是统计学中的一个非常有用的分布。</p>
+<p>如果 Z1, Z2 …, Zn 是相互独立的随机变量，且都服从于 N(0,1)分布，那么随机变量X</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/722039d2271348919de01afca217c9bc?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>服从自由度（degree of freedom, df）为 k 的χ2分布，记为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/367348acf7564c2b973e6297a695ffa6?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（1）概率密度函数PDF-of-χ2"><a href="#（1）概率密度函数PDF-of-χ2" class="headerlink" title="（1）概率密度函数PDF of χ2"></a>（1）概率密度函数PDF of χ2</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/438d2bb450a04e7f8074ef1665c618d5?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>这里Γ(x)代表Gamma函数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e4ae5042bc2c4e7c80f2e136e32ee9de?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数CDF-of-χ2"><a href="#（2）累积分布函数CDF-of-χ2" class="headerlink" title="（2）累积分布函数CDF of χ2"></a>（2）累积分布函数CDF of χ2</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/be9731b47fdf47a9af1f9ff9b4cbeb3c?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>这里γ(v,z)为不完全Gamma函数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/93d9127b7f084675ac745435b15280f1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）卡方分布的性质"><a href="#（3）卡方分布的性质" class="headerlink" title="（3）卡方分布的性质"></a>（3）卡方分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b7cc1e9067d34f4a98c93c3bc70aed4b?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-3"><a href="#（4）小结-3" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>卡方分布特点：</p>
+<ul>
+<li>是伽玛分布的一个特例；</li>
+<li>是统计学三大分布之一，是数理统计必须的知识点；</li>
+<li>于检验样本是否偏离了期望；</li>
+<li>可以用来测试随机变量之间是否相互独立，也可用来检测统计模型是否符合要求；</li>
+<li>在分布曲线和数据拟合优度检验中是一个利器，皮尔逊的这个工作被认为是假设检验的开山之作；</li>
+</ul>
+<h1 id="九、t-分布-Student’s-t-distribution"><a href="#九、t-分布-Student’s-t-distribution" class="headerlink" title="九、t-分布(Student’s t-distribution)"></a>九、t-分布(Student’s t-distribution)</h1><p>戈赛特(W.S.Gosset)发现了t-分布。他依靠自己的化学知识进酿酒厂工作，工作期间考虑酿酒配方实验中的统计学问题，酒厂虽然禁止员工发表一切与酿酒研究有关的成果，但允许他在不提到酿酒的前提下，以笔名发表t分布的发现，所以论文使用了“学生”（Student）这一笔名。之后的相关理论经由罗纳德·费雪（Sir Ronald Aylmer Fisher）发扬光大，为了感谢戈塞特的功劳，费雪将此分布命名为学生t分布（Student’s t）。</p>
+<p>戈赛特追随皮尔逊学习了一年的统计学，最终依靠自己的数学知识发现t-分布而名垂青史。1908年，戈塞特提出了正态样本中样本均值和标准差比值的分布，并给出了应用上极其重要的第一个分布表。戈塞特在t-分布的工作开创了小样本统计学的先河。</p>
+<p>设X ~ N(0,1)和Y ~ χ2(n) ，且 X 和 Y 相互独立，则称随机变量</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1f37c726aa6d480db6172ec977764382?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>服从 自由度df 为 n 的 t-分布，记为 T ~ t(n)。</p>
+<h1 id="（1）PDF-of-t-distribution"><a href="#（1）PDF-of-t-distribution" class="headerlink" title="（1）PDF of t-distribution"></a>（1）PDF of t-distribution</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/51e2ea9287f249f0b2226023570977e9?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中, υ为自由度数，Γ为伽玛函数。</p>
+<p>或</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b389f372f6bb431c8dd15540fdc94736?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中 υ为自由度数，B为Beta函数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/96604fdb7467437d91fcc9292e4549ee?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）CDF-of-t-distribution"><a href="#（2）CDF-of-t-distribution" class="headerlink" title="（2）CDF of t-distribution"></a>（2）CDF of t-distribution</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0ce488a340b3499f85a3e878c49246a5?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/00ddd5e102aa4aeea47a13cf60af672b?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）t-分布的性质"><a href="#（3）t-分布的性质" class="headerlink" title="（3）t-分布的性质"></a>（3）t-分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/82570a4b32e5459a891e70baa121390e?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-4"><a href="#（4）小结-4" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>t-分布特点：</p>
+<ul>
+<li>以0为中心，左右对称的单峰分布；</li>
+<li>是一簇曲线，其形态变化与n（确切地说与自由度ν）大小有关。自由度ν越小，t分布曲线越低平；自由度ν越大，t分布曲线越接近标准正态分布曲线；</li>
+<li>是统计学三大分布之一，是数理统计必须的知识点；</li>
+<li>用于检验均值是否不同；</li>
+<li>在概率统计中，在置信区间估计、显著性检验等问题的计算中发挥重要作用。</li>
+</ul>
+<h1 id="十、F-分布-F-distribution"><a href="#十、F-分布-F-distribution" class="headerlink" title="十、F-分布(F-distribution)"></a>十、F-分布(F-distribution)</h1><p>费希尔(R.A.Fisher), F分布就是为了纪念费希尔而用他的名字首字母命名的。费希尔统计造诣极高，受高斯的启发，系统地创立了极大似然估计法，这套理论现在在统计学参数估计中用处最广。</p>
+<p>X 和 Y 是相互独立的χ2分布随机变量，df 分别为 d1 和 d2，则称随机变量</p>
+<p>F &#x3D;（X&#x2F;d1 &#x2F;（Y&#x2F;d2)</p>
+<p>服从df 为 (d1, d2)的 F-分布，且通常写为 F～F（d1,d2）。</p>
+<h1 id="（1）PDF-of-F-distribution"><a href="#（1）PDF-of-F-distribution" class="headerlink" title="（1）PDF of F distribution"></a>（1）PDF of F distribution</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bf884c9e25bc4fe3921dbcf2610b59cb?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>实数x&gt;0, B是Beta函数,d1和d2是正整数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/81935840226b4f04a8d0567c860945cf?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）CDF-of-F-distribution"><a href="#（2）CDF-of-F-distribution" class="headerlink" title="（2）CDF of F distribution"></a>（2）CDF of F distribution</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/78f72f2d703e4b72a3f70cd438a918d1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5082441e2daf4b81a3c0c86deeff781d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）F-分布的性质"><a href="#（3）F-分布的性质" class="headerlink" title="（3）F-分布的性质"></a>（3）F-分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/dce997c9490e4e5fa91d40c2e69ce24d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-5"><a href="#（4）小结-5" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>F分布的特点：</p>
+<ul>
+<li>是统计学三大分布之一，是数理统计必须的知识点。</li>
+<li>用于检验方差是否不同。</li>
+</ul>
+<p>卡方分布、t-分布、F分布三大分布皆来自正态分布。</p>
+<p>假设独立随机变量</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b1f7e1d0bd8a4fa39f6f20cb0fe7e43a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>则满足三大分布的随机变量可以构造如下：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a7f2c6fc48e74366af012078cdbbbfdb?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>有了统计学三大分布的加持，正态分布在数理统计学独领风骚。</p>
+<h1 id="十一、指数分布-Exponential-Distribution"><a href="#十一、指数分布-Exponential-Distribution" class="headerlink" title="十一、指数分布(Exponential Distribution)"></a>十一、指数分布(Exponential Distribution)</h1><p>推导公式见附录1</p>
+<h1 id="（1）概率密度函数-5"><a href="#（1）概率密度函数-5" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b524cfcd2f0f407f8cccca5f07283fa2?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中λ&gt;0为常数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2290a64b849c4f4dbbc251d3e60ed903?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-5"><a href="#（2）累积分布函数-5" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ef1a19841b1e4feaad67c25f3b6cd9bc?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5cbb742e7a804e1abbeed5160b211bf9?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）指数分布的性质"><a href="#（3）指数分布的性质" class="headerlink" title="（3）指数分布的性质"></a>（3）指数分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f2b044f7ec124233b45a12a2363a2819?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-6"><a href="#（4）小结-6" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>指数分布是伽玛分布和威布尔分布的特殊情况，可以看作是威布尔分布中的形状系数等于1的特殊分布。</p>
+<p>指数函数的一个重要特征是无记忆性（Memoryless Property，又称遗失记忆性）。这表示如果一个随机变量呈指数分布，当s,t≥0时有P(T&gt;s+t|T&gt;t)&#x3D;P(T&gt;s)。所谓缺乏“记忆”，是指某种产品或零件经过一段时间t0的工作后,仍然如同新的产品一样,不影响以后的工作寿命值，或者说，经过一段时间t0的工作之后，该产品的寿命分布与原来还未工作时的寿命分布相同，显然，指数分布的这种特性，与机械零件的疲劳、磨损、腐蚀、蠕变等损伤过程的实际情况是完全矛盾的，它违背了产品损伤累积和老化这一过程。所以，指数分布不能作为机械零件功能参数的分布形式，因而限制了它在机械可靠性研究中的应用。</p>
+<p>指数分布在电子元器件的可靠性研究中，通常用于描述对发生的缺陷数或系统故障数的测量结果。这种分布表现为均值越小，分布偏斜得越厉害。在日本的工业标准和美国军用标准中，半导体器件的抽验方案都是采用指数分布。</p>
+<h1 id="十二、瑞利分布-Rayleigh-Distribution"><a href="#十二、瑞利分布-Rayleigh-Distribution" class="headerlink" title="十二、瑞利分布(Rayleigh Distribution)"></a>十二、瑞利分布(Rayleigh Distribution)</h1><p>瑞利分布（Rayleigh Distribution）:当一个随机二维向量的两个分量呈独立的、均值为0，有着相同的方差的正态分布时，这个向量的模呈瑞利分布。例如，当随机复数的实部和虚部独立同分布于0均值，同方差的正态分布时，该复数的绝对值服从瑞利分布。</p>
+<p>瑞利分布是最常见的用于描述平坦衰落信号接收包络或独立多径分量接受包络统计时变特性的一种分布类型。两个正交高斯噪声信号之和的包络服从瑞利分布。</p>
+<p>瑞利分布是威布尔分布的一种特殊情况，也就是说，当威布尔分布的形状参数为2时，威布尔分布就是瑞利分布。</p>
+<p>推导公式见附录2</p>
+<h1 id="（1）概率密度函数-6"><a href="#（1）概率密度函数-6" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p>如果连续型随机变量X的概率密度函数为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e7dfeb7ca15c49b68ba656dd5ec1adba?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中σ为尺度参数，且σ&gt;0, 则称随机变量X服从瑞利分布。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/776ded72a50e4faaa08948c0fa30b6c2?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-6"><a href="#（2）累积分布函数-6" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b7ad2c8a9ff242d8b9ecd347375b090a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b4c1c4196ef640c18dc303a33115e1a6?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）瑞利分布的性质"><a href="#（3）瑞利分布的性质" class="headerlink" title="（3）瑞利分布的性质"></a>（3）瑞利分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1a5b3f66f9f04d8aa29ef24a55b49c08?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-7"><a href="#（4）小结-7" class="headerlink" title="（4）小结"></a>（4）小结</h1><h1 id="瑞利分布在风资源评估中的应用"><a href="#瑞利分布在风资源评估中的应用" class="headerlink" title="瑞利分布在风资源评估中的应用"></a>瑞利分布在风资源评估中的应用</h1><p>风资源评估，风场选择，单位选择和容量规划应基于风资源评估的结果。瑞利分布和威布尔分布是风资源评估中使用最广泛的两个分布函数。</p>
+<h1 id="瑞利分布在无线通信方面的应用"><a href="#瑞利分布在无线通信方面的应用" class="headerlink" title="瑞利分布在无线通信方面的应用"></a>瑞利分布在无线通信方面的应用</h1><p>在无线移动通信系统中，瑞利衰落分布常用于平坦衰落信号或独立多径分量接收中包络具备时变统计特性的衰落模型。瑞利衰落属于小尺度的衰落效应，小尺度衰落信道包络一般服从瑞利分布或莱斯分布。</p>
+<p>瑞利衰落信道（Rayleigh fading channel）是一种无线电信号传播环境的统计模型。这种模型假设信号通过无线信道之后，其信号幅度是随机的，即“衰落”，并且其包络服从瑞利分布。这一信道模型能够描述由电离层和对流层反射的短波信道，以及建筑物密集的城市环境。瑞利衰落只适用于从发射机到接收机不存在直射信号的情况，否则应使用莱斯衰落信道作为信道模型。</p>
+<h1 id="基于瑞利分布的粒子滤波跟踪算法"><a href="#基于瑞利分布的粒子滤波跟踪算法" class="headerlink" title="基于瑞利分布的粒子滤波跟踪算法"></a>基于瑞利分布的粒子滤波跟踪算法</h1><p>瑞利分布（RD）在许多现实生活中都有广泛的应用，特别是寿命测试，机械构件的载荷能力方面，可靠性分析，药品等。</p>
+<h1 id="十三、韦伯分布（Weibull-Distribution）"><a href="#十三、韦伯分布（Weibull-Distribution）" class="headerlink" title="十三、韦伯分布（Weibull Distribution）"></a>十三、韦伯分布（Weibull Distribution）</h1><p>韦伯分布，又称威布尔分布，是可靠性分析和寿命检验的理论基础。历史来源：</p>
+<ul>
+<li>1927年，Fréchet首先给出这一分布的定义；</li>
+<li>1933年，Rosin和Rammler在研究碎末的分布时，第一次应用了该分布（Rosin, P.; Rammler, E. (1933), “The Laws Governing the Fineness of Powdered Coal”, Journal of the Institute of Fuel 7: 29 - 36.）；</li>
+<li>1951年，瑞典工程师、数学家Waloddi Weibull详细解释了这一分布，于是，该分布便以他的名字命名为Weibull Distribution。</li>
+</ul>
+<h1 id="（1）韦伯分布是连续性的概率分布，其概率密度函数为："><a href="#（1）韦伯分布是连续性的概率分布，其概率密度函数为：" class="headerlink" title="（1）韦伯分布是连续性的概率分布，其概率密度函数为："></a>（1）韦伯分布是连续性的概率分布，其概率密度函数为：</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7b0d957845014ef7b296f10cd4445b87?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中，x是随机变量，λ&gt;0是比例参数（scale parameter），k&gt;0是形状参数（shape parameter）。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/66a4909f03e648a592f6d4d1315f7bdd?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-7"><a href="#（2）累积分布函数-7" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a8165a24dd3a417288e2e2e995f29b0a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/be3d19ed95174a80a50ef47a922c3e30?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）韦伯分布的性质"><a href="#（3）韦伯分布的性质" class="headerlink" title="（3）韦伯分布的性质"></a>（3）韦伯分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/8a1282c292f145e29f3baa99e0da074d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-8"><a href="#（4）小结-8" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>威布尔分析最主要的优点：</p>
+<ul>
+<li>提供比较准确的失效分析和小数据样本的失效预测，对出现的问题尽早地制订解决方案。</li>
+<li>为单个失效模式提供简单而有用的图表，使数据在不充足时，仍易于理解。</li>
+<li>描述分布状态的形状可很好地选择相应的分布。</li>
+<li>提供基于威布尔概率图的斜率的物理失效的线索。</li>
+</ul>
+<p>在所有可用的可靠性计算的分布当中，威布尔分布是唯一可用于工程领域的。威布尔分析广泛用于研究机械、化工、电气、电子、材料的失效，甚至人体疫病。具体应用如下：</p>
+<ul>
+<li>工业制造</li>
+<li>研究生产过程和运输时间关系。</li>
+<li>极值理论</li>
+<li>预测天气</li>
+<li>可靠性和失效分析</li>
+<li>雷达系统</li>
+<li>对接受到的杂波信号的依分布建模。</li>
+<li>拟合度</li>
+<li>无线通信技术中，相对指数衰减频道模型，韦伯衰减模型对衰减频道建模有较好的拟合度。</li>
+<li>量化寿险模型的重复索赔</li>
+<li>预测技术变革</li>
+<li>风速</li>
+<li>由于曲线形状与现实状况很匹配，被用来描述风速的分布。</li>
+</ul>
+<h1 id="十四、帕雷托分布-Pareto-Distribution"><a href="#十四、帕雷托分布-Pareto-Distribution" class="headerlink" title="十四、帕雷托分布(Pareto Distribution)"></a>十四、帕雷托分布(Pareto Distribution)</h1><p>帕雷托分布， 也称帕累托分布。以意大利经济学家 Vilfredo Pareto命名，他在1882年研究英国的财富分配情况时，发现前20%的人群拥有着社会80%的财富，这一现象可以用一个简单的概率分布函数来描述，即帕雷托分布。帕累托分布是从大量真实世界的现象中发现的幂次定律分布，这个分布在经济学以外， 也被称为布拉德福分布。</p>
+<h1 id="（1）概率密度函数-7"><a href="#（1）概率密度函数-7" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a7b239df68b34b00b53d6e38105f2a07?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/cc27741af4cd4880ab7bf860c1e21d76?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积概率分布"><a href="#（2）累积概率分布" class="headerlink" title="（2）累积概率分布"></a>（2）累积概率分布</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1f29093ca636419483fa95e036f982ab?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/843d0a0d59034794b5fbba1a6d551bde?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）帕雷托分布的性质"><a href="#（3）帕雷托分布的性质" class="headerlink" title="（3）帕雷托分布的性质"></a>（3）帕雷托分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/47b15813624045b1b62f50e02fc79b58?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-9"><a href="#（4）小结-9" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>帕累托分布被广泛应用于经济学研究中。被认为大致是帕累托分布的例子有：</p>
+<ul>
+<li>财富在个人之间的分布；</li>
+<li>沙粒的大小；</li>
+<li>人类住区的规模(更少的城市和更多的村庄)；</li>
+<li>接近绝对零度时，玻色-爱因斯坦凝聚的团簇；</li>
+<li>在互联网流量中文件尺寸的分布；</li>
+<li>油田储量价值(大油田少，小油田多)；</li>
+<li>龙卷风带来的灾难数量；</li>
+<li>对维基百科条目的访问。</li>
+</ul>
+<h1 id="十五、拉普拉斯分布-Laplace-Distribution"><a href="#十五、拉普拉斯分布-Laplace-Distribution" class="headerlink" title="十五、拉普拉斯分布(Laplace Distribution)"></a>十五、拉普拉斯分布(Laplace Distribution)</h1><p>拉普拉斯分布是由两个指数函数组成的，所以又叫做双指数函数分布（double exponential distribution）</p>
+<h1 id="（1）概率密度函数-8"><a href="#（1）概率密度函数-8" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p>设随机变量X具有密度函数</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e2dd0ca117794ab6baf1a5cb14abc464?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中尺度参数b，位置参数μ为常数，且b&gt;0，则称X服从参数为b，μ的拉普拉斯分布。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e15f31f4ed3149c4941b70386c6e1c1f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>服从拉普拉斯分布的随机变量，出现极端大的值的概率，要远远大于正态分布。</p>
+<h1 id="（2）累积分布函数-8"><a href="#（2）累积分布函数-8" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/008bf97e96204aa3afa68dd7b88ae875?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/59971ce1d6c3430a9559b49c54feebec?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）拉普拉斯分布"><a href="#（3）拉普拉斯分布" class="headerlink" title="（3）拉普拉斯分布"></a>（3）拉普拉斯分布</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/44b10bc9c5da43deb31f0bebcbb2470f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（4）小结-10"><a href="#（4）小结-10" class="headerlink" title="（4）小结"></a>（4）小结</h1><p>拉普拉斯分布是比较常见的概率统计模型,它在生活中很多专业领域都有广泛的应用。如拉普拉斯分布在证券金融经济领域有着重要的作用。在工程中,对于测绘数据的处理以及在语音和图像数据等领域上也有着广泛的应用。</p>
+<p>过去人们研究证券市场收益率的分布时大都假设其服从正态分布,后来发现此假设的缺点越来越明显——无法满足尖峰厚尾非正态的分布特性,而且根本就不能通过统计检验.出于上述考虑,引入拉普拉斯分布,比较成功地解决了这些问题,并且发现该类分布在证券市场上具有很大的应用前景。</p>
+<p>拟合优度检验是统计学应用中的一个常见的问题,即检验来自总体中数据其分布是否与某种理论分布相一致的统计方法。一般情况下,先根据问题的实际情况、观测的样本数据以及抽样方法,猜测数据可能的理论分布,然后利用样本数据进一步检验这个猜测的模型。</p>
+<h1 id="十六、逻辑斯蒂分布-Logistic-Distribution"><a href="#十六、逻辑斯蒂分布-Logistic-Distribution" class="headerlink" title="十六、逻辑斯蒂分布(Logistic Distribution)"></a>十六、逻辑斯蒂分布(Logistic Distribution)</h1><h1 id="（1）概率密度函数-9"><a href="#（1）概率密度函数-9" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/93c913689ee44467b98764262eb20585?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中μ为均值参数，s&gt;0为尺度参数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/93bdfddeab1749f684f43f77cc170103?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-9"><a href="#（2）累积分布函数-9" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c249c0a8941a4946a2943d5bd0086430?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中μ为均值参数，s&gt;0为尺度参数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/9ab291faba6f4a7faabfdedb5c2cd349?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）逻辑斯蒂分布"><a href="#（3）逻辑斯蒂分布" class="headerlink" title="（3）逻辑斯蒂分布"></a>（3）逻辑斯蒂分布</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/493b20957f83447e83aad4aadf4085ec?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="十七、柯西分布-Cauchy-Distribution"><a href="#十七、柯西分布-Cauchy-Distribution" class="headerlink" title="十七、柯西分布(Cauchy Distribution)"></a>十七、柯西分布(Cauchy Distribution)</h1><p>柯西分布也叫作柯西一洛伦兹分布，它是以奥古斯丁-路易-柯西与亨德里克-洛伦兹名字命名的连续概率分布。</p>
+<p>柯西分布是一个数学期望不存在的连续型概率分布。</p>
+<h1 id="（1）概率密度函数-10"><a href="#（1）概率密度函数-10" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2e8ca88813f341629a59a057f2ba725f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中，x0定义分布峰值位置的位置参数；γ为最大值一半处的一半宽度的尺度参数。</p>
+<p>如果x0&#x3D;0, γ&#x3D;1, 则为标准柯西分布：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1b00d10cfc0443e3b6df9dc1e78570d1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f1f4a5311ab141dc92e2c2e70778f614?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-10"><a href="#（2）累积分布函数-10" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/9adc9ba2365747e28b574a3538d85339?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/71719e0fb04a44f6892b03b881adfc96?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）柯西分布性质"><a href="#（3）柯西分布性质" class="headerlink" title="（3）柯西分布性质"></a>（3）柯西分布性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/35feb21a40e44b839a922684cdb221d4?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="十八、贝塔分布-Beta-Distribution"><a href="#十八、贝塔分布-Beta-Distribution" class="headerlink" title="十八、贝塔分布(Beta Distribution)"></a>十八、贝塔分布(Beta Distribution)</h1><p>贝塔分布（Beta Distribution) 是一个作为伯努利分布和二项式分布的共轭先验分布的概率函数，在机器学习和数理统计学中有重要应用。在概率论中，贝塔分布，也称Βeta分布，是指一组定义在(0,1) 区间的连续概率分布。</p>
+<p>推导公式见附录3</p>
+<h1 id="（1）概率密度函数-11"><a href="#（1）概率密度函数-11" class="headerlink" title="（1）概率密度函数"></a>（1）概率密度函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1231f93eb6e941c2a82111ab112b41af?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中Γ(x)代表Gamma函数，参数α&gt;0, β&gt;0， B(α，β)是Beta函数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/d33bbf7c882641729bfa6cc6d0ca3be1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（2）累积分布函数-11"><a href="#（2）累积分布函数-11" class="headerlink" title="（2）累积分布函数"></a>（2）累积分布函数</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/cfdcea3f6096434692d4765425f5be91?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/24b3a944795540b093afb792584e9fab?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中B(x;a,b)是不完全Beta函数。Ix(α,β)是正则不完全贝塔函数。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5c0748edc87548639d024e33ad746de7?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="（3）Beta分布的性质"><a href="#（3）Beta分布的性质" class="headerlink" title="（3）Beta分布的性质"></a>（3）Beta分布的性质</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1a9e7ac1448142fcabbff258304e6272?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<h1 id="十九、附录"><a href="#十九、附录" class="headerlink" title="十九、附录"></a>十九、附录</h1><h1 id="附录1-指数分布的推导"><a href="#附录1-指数分布的推导" class="headerlink" title="附录1 指数分布的推导"></a>附录1 指数分布的推导</h1><p>设某电子元件使用时间超过x的概率为P(X&gt;x)。元件在x和x+h时间段内失效的概率为 P(x≤X≤x+h)。假设元件已经使用了 x时长了， 那么，元件在x和x+h时间段内失效应等于条件概率：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7a56ddcff0c742f0bf28128cbfe0a235?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>用上面的条件概率除以h, 也就得到了h时段的平均失效率：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7891ac0e7eb043848f841ca6cad05ca1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>当h—&gt;0时，上式当元件已经使用了X时长，元件在下一时刻的失效概率恒为λ</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/f3284bb0f9ab429a80c6c129e6267f85?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>设B事件为 X&gt;x, A事件为x≤X≤x+h,有条件概率公式：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/49193f35fa864b3c861d4d4720ea331f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>则有</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2093be5d5c1040be88e1af673558c00f?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>设F(x) &#x3D; P(X≤x), 有</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/cc7325f22dc4434a935ef4ee4defe459?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>得到微分方程：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2f2aa626ca7d4194bcc9b84ac294a59d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>可以转化为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/1b582f81310e43a7bb83e65fedaea531?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>是一个具有常数系数和常数项的一阶微分方程。</p>
+<p>有通解公式：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7d6ee6bb9f5141f6a3d5c2c474ecd1b5?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>这就是指数分布的分布函数，求导即得到概率密度函数：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/77ea02d41f2642eca4ad3f998a00c034?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>推导完毕。</p>
+<h1 id="附录2-瑞利分布的推导"><a href="#附录2-瑞利分布的推导" class="headerlink" title="附录2 瑞利分布的推导"></a>附录2 瑞利分布的推导</h1><p>定理1 若 随机变 量 X与Y相互 独立 , 又 f( x) 、 g (x ) 是两个连 续函 数 , 则随机 变量 f (X)如与 g (Y)相互独立 。</p>
+<p>定理2 随机变量X的概率密度函数为Ψ(x), 则随机变量Y&#x3D;X2的概率密度函数为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ec8bae5791b04016a5e290c0eb24d806?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>定理3 若 随机变 量 X与Y相互独立 , 且其概率密度函数分别为Φ(x)、θ(y)。</p>
+<p>则随机变量Z&#x3D;X+Y的概率密度函数为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0eef23cc0c1f47489d432804016cb8c2?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>定理4 设X是一个连续型随机变量 , 其概率密度函数为Ψ(x), 由函数y&#x3D;f(x)严格单调，其反函数h(y)有连续导数,随机变量Y&#x3D;f(X)也是一个连续型随机变量，其概率密度函数为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/749fda67702a4682a508feec038346d1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中α &#x3D; min{f(-∞), f(+∞)}, β &#x3D; max{f(-∞), f(+∞)}</p>
+<p>设两个随机变量ζ与η相互独立且它们均服从正态分布N(0,σ2) , 则随机变量</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a3e2fab9cc5848bc8cc3e7c712e7e63d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>服从瑞利分布</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/cb1971d4487e4d4eb89ef10b00a54400?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>其中σ为常数，且σ&gt;0。</p>
+<p>推导如下：</p>
+<p>由定理1、2， 可得X&#x3D;ζ2 和 Y&#x3D;η2 相互独立，其概率密度函数分别为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7e318217ec27419cb741dd71114784ef?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/cbf2f5eb49844e5f97bcc47229548309?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>由定理3随机变量Z&#x3D;X+Y的概率密度函数为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/089d6cc5bb124e459edb969cf92c6039?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>故Z&#x3D;X+Y的概率密度函数为</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b528d119d61a469ba63bb695c13a212c?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>由定理4可得随机变量</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a15dd424966c447d8c29235ee09d72f1?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>的概率分布服从瑞利分布：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6ba3ffd6c7694529867b8035466f20ba?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>推导完毕。</p>
+<h1 id="附录3-Beta分布的推导"><a href="#附录3-Beta分布的推导" class="headerlink" title="附录3 Beta分布的推导"></a>附录3 Beta分布的推导</h1><p>在贝叶斯公式中，离散随机变量的后验概率可以由先验概率和条件概率得到</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ea6f84df27b3473ca7ee0401e637d50a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>在已经知道参数先验分布信息与样本信息的情况下，我们可以应用贝叶斯公式得到参数的连续随机变量的后验分布信息。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3b25b32721cc44dbbdad80e20da10637?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>这里，θ表示需要估计的未知参数，x表示样本信息，π ( θ )表示θ 的先验密度函数，L ( x | θ ) 表示x 关于θ 的条件密度函数，Θ 表示参数θ 的取值空间。</p>
+<p>已知样本信息x，需要选择合适的参数θ使发生样本所代表事件的概率最大，所以L ( x | θ ) 在这里是一个似然函数。</p>
+<p>假设随机变量X服从二项分布B ( n , θ ) ，那么似然函数:</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/816a0fcf3201409a8d43c612c5fe384d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>如果我们对参数θ一无所知，那么对θ的先验分布π ( θ ) ，可以做θ~U ( 0 , 1 )均匀分布的假设，我们称之为贝叶斯假设：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/89e186a0ea094c03a1364c7766f0ea7a?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>由以上似然函数和参数的先验分布可以得出参数的后验分布：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0fc3332b1b434f0e974e22e3d3ffd38d?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>令x&#x3D;θ，α &#x3D; x + 1，β &#x3D; n − x + 1，可以得到Beta分布的概率密度函数：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/44c474deebd64d4bba48d59a5a68b1e0?from=pc" alt="流行算法：追根溯源之统计推断常用概率分布"></p>
+<p>推导完成。</p>
+<h1 id="二十、参考文献"><a href="#二十、参考文献" class="headerlink" title="二十、参考文献"></a>二十、参考文献</h1><p>[1] Hurst, Simon. The Characteristic Function of the Student tDistribution, Financial Mathematics Research Report No. FMRR006-95, Statistics Research Report No. SRR044-95 Archived February 18, 2010, at the Wayback Machine.</p>
+<p>[2] Johnson, Norman Lloyd; Samuel Kotz; N. Balakrishnan (1995). Continuous Univariate Distributions, Volume 2 (Second Edition, Section 27). Wiley. [1] ISBN 0-471-58494-0.</p>
+<p>[3] Abramowitz, Milton; Stegun, Irene Ann, eds. (1983) [June 1964]. “Chapter 26”. Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables. Applied Mathematics Series. 55 (Ninth reprint with additional corrections of tenth original printing with corrections (December 1972); first ed.). Washington D.C.; New York: United States Department of Commerce, National Bureau of Standards; Dover Publications. p. 946. ISBN 978-0-486-61272-0. LCCN 64-60036. MR 0167642. LCCN 65-12253.</p>
+<p>[4] Lazo, A.V.; Rathie, P. (1978). “On the entropy of continuous probability distributions”. IEEE Transactions on Information Theory. IEEE. 24 (1): 120–122.[1] doi:10.1109&#x2F;tit.1978.1055832.</p>
+<p>[5] en.wikipedia.org&#x2F;wiki&#x2F;Beta_distribution</p>
+
+        </div>
+        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/追根溯源之统计推断常用概率分布.md" target="_blank">编辑</a>
+</article>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+         
+          <li><a href="/URL">LINK_NAME</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%BB%9F%E8%AE%A1%E4%B8%8E%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一、统计与概率论的一些概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0CDF-Cumulative-Distribution-Function"><span class="toc-number">3.</span> <span class="toc-text">1、累积分布函数CDF(Cumulative Distribution Function)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0PDF-Probability-Density-Function"><span class="toc-number">4.</span> <span class="toc-text">2、概率密度函数PDF(Probability Density Function)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E4%BC%97%E6%95%B0-Mode"><span class="toc-number">5.</span> <span class="toc-text">3、众数 (Mode)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E4%BD%8D%E6%95%B0-Quantile"><span class="toc-number">6.</span> <span class="toc-text">4、分位数(Quantile )</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E4%B8%AD%E4%BD%8D%E6%95%B0-Median"><span class="toc-number">7.</span> <span class="toc-text">5、中位数 (Median)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E5%81%8F%E5%BA%A6-Skewness"><span class="toc-number">8.</span> <span class="toc-text">6、偏度(Skewness)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E5%B3%B0%E5%BA%A6"><span class="toc-number">9.</span> <span class="toc-text">7、峰度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8%E3%80%81%E4%BF%A1%E6%81%AF%E7%86%B5-Entropy"><span class="toc-number">10.</span> <span class="toc-text">8、信息熵(Entropy)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9%E3%80%81%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0-Characteristic-Function-CF"><span class="toc-number">11.</span> <span class="toc-text">9、特征函数 (Characteristic Function, CF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10%E3%80%81%E5%8A%A8%E5%B7%AE%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-Moment-Generating-Function-MGF"><span class="toc-number">12.</span> <span class="toc-text">10、动差生成函数(Moment Generating Function, MGF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11%E3%80%81%E8%AF%AF%E5%B7%AE%E5%87%BD%E6%95%B0-Error-function-Erf"><span class="toc-number">13.</span> <span class="toc-text">11、误差函数 (Error function, Erf)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%EF%BC%88Normal-Distribution%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">二、正态分布（Normal Distribution）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%EF%BC%88PDF%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">（1）概率密度函数（PDF）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-CDF"><span class="toc-number">16.</span> <span class="toc-text">（2）累积分布函数 (CDF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">17.</span> <span class="toc-text">（3）正态分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93"><span class="toc-number">18.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83-Poisson-Distribution"><span class="toc-number">19.</span> <span class="toc-text">三、泊松分布(Poisson Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0"><span class="toc-number">20.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="toc-number">21.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">22.</span> <span class="toc-text">（3）泊松分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-1"><span class="toc-number">23.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83-Bernoulli-Distribution"><span class="toc-number">24.</span> <span class="toc-text">四、伯努利分布(Bernoulli Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-1"><span class="toc-number">25.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-1"><span class="toc-number">26.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">27.</span> <span class="toc-text">（3）伯努利分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83-Binomial-Distribution"><span class="toc-number">28.</span> <span class="toc-text">五、二项分布(Binomial Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-2"><span class="toc-number">29.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-2"><span class="toc-number">30.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">31.</span> <span class="toc-text">（3）二项分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83-Geometric-Distribution"><span class="toc-number">32.</span> <span class="toc-text">六、几何分布(Geometric Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-3"><span class="toc-number">33.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-3"><span class="toc-number">34.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">35.</span> <span class="toc-text">（3）几何分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-2"><span class="toc-number">36.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83-Hypergeometric-Distribution"><span class="toc-number">37.</span> <span class="toc-text">七、超几何分布(Hypergeometric Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-4"><span class="toc-number">38.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-4"><span class="toc-number">39.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83%E6%80%A7%E8%B4%A8"><span class="toc-number">40.</span> <span class="toc-text">（3）超几何分布性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83-Chi-squared-%CF%872%EF%BC%89"><span class="toc-number">41.</span> <span class="toc-text">八、卡方分布(Chi-squared ( χ2）)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0PDF-of-%CF%872"><span class="toc-number">42.</span> <span class="toc-text">（1）概率密度函数PDF of χ2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0CDF-of-%CF%872"><span class="toc-number">43.</span> <span class="toc-text">（2）累积分布函数CDF of χ2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%8D%A1%E6%96%B9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">44.</span> <span class="toc-text">（3）卡方分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-3"><span class="toc-number">45.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81t-%E5%88%86%E5%B8%83-Student%E2%80%99s-t-distribution"><span class="toc-number">46.</span> <span class="toc-text">九、t-分布(Student’s t-distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89PDF-of-t-distribution"><span class="toc-number">47.</span> <span class="toc-text">（1）PDF of t-distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89CDF-of-t-distribution"><span class="toc-number">48.</span> <span class="toc-text">（2）CDF of t-distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89t-%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">49.</span> <span class="toc-text">（3）t-分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-4"><span class="toc-number">50.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81F-%E5%88%86%E5%B8%83-F-distribution"><span class="toc-number">51.</span> <span class="toc-text">十、F-分布(F-distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89PDF-of-F-distribution"><span class="toc-number">52.</span> <span class="toc-text">（1）PDF of F distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89CDF-of-F-distribution"><span class="toc-number">53.</span> <span class="toc-text">（2）CDF of F distribution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89F-%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">54.</span> <span class="toc-text">（3）F-分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-5"><span class="toc-number">55.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83-Exponential-Distribution"><span class="toc-number">56.</span> <span class="toc-text">十一、指数分布(Exponential Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-5"><span class="toc-number">57.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-5"><span class="toc-number">58.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">59.</span> <span class="toc-text">（3）指数分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-6"><span class="toc-number">60.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83-Rayleigh-Distribution"><span class="toc-number">61.</span> <span class="toc-text">十二、瑞利分布(Rayleigh Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-6"><span class="toc-number">62.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-6"><span class="toc-number">63.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">64.</span> <span class="toc-text">（3）瑞利分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-7"><span class="toc-number">65.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E5%9C%A8%E9%A3%8E%E8%B5%84%E6%BA%90%E8%AF%84%E4%BC%B0%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">66.</span> <span class="toc-text">瑞利分布在风资源评估中的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E5%9C%A8%E6%97%A0%E7%BA%BF%E9%80%9A%E4%BF%A1%E6%96%B9%E9%9D%A2%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">67.</span> <span class="toc-text">瑞利分布在无线通信方面的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2%E8%B7%9F%E8%B8%AA%E7%AE%97%E6%B3%95"><span class="toc-number">68.</span> <span class="toc-text">基于瑞利分布的粒子滤波跟踪算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E9%9F%A6%E4%BC%AF%E5%88%86%E5%B8%83%EF%BC%88Weibull-Distribution%EF%BC%89"><span class="toc-number">69.</span> <span class="toc-text">十三、韦伯分布（Weibull Distribution）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%9F%A6%E4%BC%AF%E5%88%86%E5%B8%83%E6%98%AF%E8%BF%9E%E7%BB%AD%E6%80%A7%E7%9A%84%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%EF%BC%8C%E5%85%B6%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%E4%B8%BA%EF%BC%9A"><span class="toc-number">70.</span> <span class="toc-text">（1）韦伯分布是连续性的概率分布，其概率密度函数为：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-7"><span class="toc-number">71.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%9F%A6%E4%BC%AF%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">72.</span> <span class="toc-text">（3）韦伯分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-8"><span class="toc-number">73.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E5%B8%95%E9%9B%B7%E6%89%98%E5%88%86%E5%B8%83-Pareto-Distribution"><span class="toc-number">74.</span> <span class="toc-text">十四、帕雷托分布(Pareto Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-7"><span class="toc-number">75.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-number">76.</span> <span class="toc-text">（2）累积概率分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%B8%95%E9%9B%B7%E6%89%98%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">77.</span> <span class="toc-text">（3）帕雷托分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-9"><span class="toc-number">78.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83-Laplace-Distribution"><span class="toc-number">79.</span> <span class="toc-text">十五、拉普拉斯分布(Laplace Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-8"><span class="toc-number">80.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-8"><span class="toc-number">81.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83"><span class="toc-number">82.</span> <span class="toc-text">（3）拉普拉斯分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B0%8F%E7%BB%93-10"><span class="toc-number">83.</span> <span class="toc-text">（4）小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%88%86%E5%B8%83-Logistic-Distribution"><span class="toc-number">84.</span> <span class="toc-text">十六、逻辑斯蒂分布(Logistic Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-9"><span class="toc-number">85.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-9"><span class="toc-number">86.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%88%86%E5%B8%83"><span class="toc-number">87.</span> <span class="toc-text">（3）逻辑斯蒂分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83-Cauchy-Distribution"><span class="toc-number">88.</span> <span class="toc-text">十七、柯西分布(Cauchy Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-10"><span class="toc-number">89.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-10"><span class="toc-number">90.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83%E6%80%A7%E8%B4%A8"><span class="toc-number">91.</span> <span class="toc-text">（3）柯西分布性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83-Beta-Distribution"><span class="toc-number">92.</span> <span class="toc-text">十八、贝塔分布(Beta Distribution)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0-11"><span class="toc-number">93.</span> <span class="toc-text">（1）概率密度函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0-11"><span class="toc-number">94.</span> <span class="toc-text">（2）累积分布函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%883%EF%BC%89Beta%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">95.</span> <span class="toc-text">（3）Beta分布的性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">96.</span> <span class="toc-text">十九、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-number">97.</span> <span class="toc-text">附录1 指数分布的推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%952-%E7%91%9E%E5%88%A9%E5%88%86%E5%B8%83%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-number">98.</span> <span class="toc-text">附录2 瑞利分布的推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%953-Beta%E5%88%86%E5%B8%83%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-number">99.</span> <span class="toc-text">附录3 Beta分布的推导</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">100.</span> <span class="toc-text">二十、参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&text=追根溯源之统计推断常用概率分布"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&is_video=false&description=追根溯源之统计推断常用概率分布"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=追根溯源之统计推断常用概率分布&body=Check out this article: https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&title=追根溯源之统计推断常用概率分布"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&name=追根溯源之统计推断常用概率分布&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/&t=追根溯源之统计推断常用概率分布"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2015-2022
+    koderboy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

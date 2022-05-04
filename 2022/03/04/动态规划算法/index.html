@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="来源：今日头条 一、定义动态规划（英语：Dynamic Programming，简称DP）是运筹学的一个分支，是通过把原问题分解为相对简单的子问题的方式求解复杂问题的一种方法。20世纪50年代初，美国数学家贝尔曼（R.Bellman）等人在研究多阶段决策过程的优化问题时，提出了著名的最优化原理，从而创立了动态规划[1] 。 这里Programming不是编程的意思，而是决策。但这种决策不是一下就出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划算法">
+<meta property="og:url" content="https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="来源：今日头条 一、定义动态规划（英语：Dynamic Programming，简称DP）是运筹学的一个分支，是通过把原问题分解为相对简单的子问题的方式求解复杂问题的一种方法。20世纪50年代初，美国数学家贝尔曼（R.Bellman）等人在研究多阶段决策过程的优化问题时，提出了著名的最优化原理，从而创立了动态规划[1] 。 这里Programming不是编程的意思，而是决策。但这种决策不是一下就出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/c149ad2c8d4b4c65a8f1c148590df34f?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/18738fde5a324aaeb392cd0b52f64655?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/64751d9595de48959134e4d500ea25cb?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/a2d810a1d13f466bae7d37963158e9eb?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/792902c241d64cbaba805c36e30e907e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/595da1e51b3f490dbb17f0050504f67e?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/923d96b22e69425796cfc8bd9adef71b?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/4616b165d37942d2b301d5ede692e24a?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/94070f7e6dd642a2a9516d37c8a53809?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/402d069fd26844619f043b9a89a095b7?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/0e24d758f50140e4be2ae101c76b496d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/cdb6e5991f654823bf13ff2e699bff8d?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/98348b4388e843df81c5f195d0924b49?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/4aec45d6bd814f6b94cb9bf944c0a385?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/be225340ce49431493813199b6da80ef?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/713e74e4948243f1a41f46fe0a28b3f3?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5d919b989a4241aba6ed5340f38e4ca1?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/76283630314040d4aa2fb388a7e1bf32?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/efcf9dd76b964957ba69398aea066257?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/6a032515d85348d48a11da6bb134d0a2?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2f8968f70b9e422dabee49b8dc04b93e?from=pc">
+<meta property="article:published_time" content="2022-03-04T16:07:16.000Z">
+<meta property="article:modified_time" content="2022-05-04T08:35:58.672Z">
+<meta property="article:author" content="koderboy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p3.toutiaoimg.com/origin/pgc-image/c149ad2c8d4b4c65a8f1c148590df34f?from=pc">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>动态规划算法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&text=动态规划算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&is_video=false&description=动态规划算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=动态规划算法&body=Check out this article: https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&name=动态规划算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&t=动态规划算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">二、基本思想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">三、动态规划分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">四、适用条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E7%8A%B6%E6%80%81%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E6%9C%80%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">(1) 问题中的状态必须满足最优化原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E7%8A%B6%E6%80%81%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E6%97%A0%E5%90%8E%E6%95%88%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">(2) 问题中的状态必须满足无后效性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%AD%90%E9%97%AE%E9%A2%98%E9%87%8D%E5%8F%A0%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">(3) 子问题重叠性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">8.</span> <span class="toc-text">五、动态规划解题思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-number">9.</span> <span class="toc-text">1、解题步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%88%92%E5%88%86%E9%98%B6%E6%AE%B5"><span class="toc-number">10.</span> <span class="toc-text">1) 划分阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%A1%AE%E5%AE%9A%E7%8A%B6%E6%80%81%E5%92%8C%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F"><span class="toc-number">11.</span> <span class="toc-text">2) 确定状态和状态变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%A1%AE%E5%AE%9A%E5%86%B3%E7%AD%96%E5%B9%B6%E5%86%99%E5%87%BA%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="toc-number">12.</span> <span class="toc-text">3) 确定决策并写出状态转移方程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6%E5%92%8C%E8%BE%B9%E7%95%8C%E7%8A%B6%E5%86%B5"><span class="toc-number">13.</span> <span class="toc-text">4) 初始条件和边界状况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">14.</span> <span class="toc-text">2、动态规划决策过程示意图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">15.</span> <span class="toc-text">六、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">16.</span> <span class="toc-text">例子1 0-1背包问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-gt-%E7%A9%B7%E4%B8%BE%E6%B3%95"><span class="toc-number">17.</span> <span class="toc-text">1&gt; 穷举法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">18.</span> <span class="toc-text">有两种方法：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E8%AE%A1%E7%AE%97%E4%BB%8En%E4%BB%B6%E7%89%A9%E5%93%81%E4%B8%AD%EF%BC%8C%E5%8F%96%E4%BB%BB%E6%84%8F%E6%95%B0%E9%87%8F%E7%9A%84%E7%89%A9%E5%93%81%E6%9C%89%E5%A4%9A%E5%B0%91%E7%A7%8D%E5%8F%96%E6%B3%95%EF%BC%9F"><span class="toc-number">19.</span> <span class="toc-text">第一种方法，计算从n件物品中，取任意数量的物品有多少种取法？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E5%B0%86n%E4%B8%AA%E7%89%A9%E5%93%81%E6%8E%92%E6%88%90%E4%B8%80%E8%A1%8C%EF%BC%8C%E5%AF%B9%E4%BA%8E%E4%B8%80%E4%BB%B6%E7%89%A9%E5%93%81%E5%BF%85%E9%A1%BB%E9%80%89%E6%8B%A9%E5%8F%96%EF%BC%88%E7%94%A81%E8%A1%A8%E7%A4%BA%EF%BC%89%E6%88%96%E8%80%85%E4%B8%8D%E5%8F%96%EF%BC%88%E7%94%A80%E8%A1%A8%E7%A4%BA%EF%BC%89%EF%BC%8C%E6%83%B3%E8%B1%A1%E6%88%90n%E4%B8%AA0%E3%80%811%E7%BB%84%E6%88%90%E7%9A%84%E5%BA%8F%E5%88%97%EF%BC%8C%E5%A6%82"><span class="toc-number">20.</span> <span class="toc-text">第二种方法，将n个物品排成一行，对于一件物品必须选择取（用1表示）或者不取（用0表示），想象成n个0、1组成的序列，如</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="toc-number">21.</span> <span class="toc-text">2、回溯法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="toc-number">22.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E6%9F%A5%E5%AD%97%E5%85%B8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2%E4%B8%8E%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97-2"><span class="toc-number">23.</span> <span class="toc-text">例子2 查字典 - 最长公共子串与最长公共子序列[2]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-gt-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2"><span class="toc-number">24.</span> <span class="toc-text">1&gt; 最长公共子串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-gt-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">25.</span> <span class="toc-text">2&gt; 最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-1"><span class="toc-number">26.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">27.</span> <span class="toc-text">七、动态规划算法的局限性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">28.</span> <span class="toc-text">八、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E8%AF%81%E6%98%8E%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84%E4%B8%AD%E5%8E%9F%E9%97%AE%E9%A2%98%E7%9A%84%E6%9C%80%E4%BC%98%E8%A7%A3%E5%8C%85%E5%90%AB%E5%AD%90%E9%97%AE%E9%A2%98%E7%9A%84%E6%9C%80%E4%BC%98%E8%A7%A3"><span class="toc-number">29.</span> <span class="toc-text">附录1 证明最优子结构中原问题的最优解包含子问题的最优解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">30.</span> <span class="toc-text">九、参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        动态规划算法
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">koderboy</span>
+                </span>
+                
+    <div class="postdate">
+      
+        <time datetime="2022-03-04T16:07:16.000Z" itemprop="datePublished">2022-03-04</time>
+        
+      
+    </div>
+
+
+                    
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+    </div>
+
+
+                        
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6938026841311592998/">今日头条</a></p>
+<h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a><strong>一、定义</strong></h1><p>动态规划（英语：Dynamic Programming，简称DP）是运筹学的一个分支，是通过把原问题分解为相对简单的子问题的方式求解复杂问题的一种方法。20世纪50年代初，美国数学家贝尔曼（R.Bellman）等人在研究多阶段决策过程的优化问题时，提出了著名的最优化原理，从而创立了动态规划[1] 。</p>
+<p>这里Programming不是编程的意思，而是决策。但这种决策不是一下就出来的，而是一步步多阶段(multistage)积累出来的。换句话说，我们需要一个决策，但这个决策太大了，我们做不了，所以需要把它递归到我们可以简单做出决策的状态，然后从这些状态开始，慢慢的“动态地”演进到最终的决策。</p>
+<p>把一个问题看作是一个前后关联具有链状结构的多阶段过程就称为多阶段决策过程，这种问题称为多阶段决策问题。在多阶段决策问题中，各个阶段采取的决策，一般来说是与时间有关的，决策依赖于当前状态，又随即引起状态的转移，一个决策序列就是在变化的状态中产生出来的，故有“动态”的含义，称这种解决多阶段决策最优化的过程为动态规划方法。</p>
+<p>动态规划没有统一的处理方法，必须根据问题的各种性质并结合一定的技巧来处理。动态规划问题一直是大厂面试时最频繁出现的算法题，主要原因在于此类问题灵活度高，思维难度大，没有很明显的套路做法。没有放之四海皆准的计算动态规划解决方案的公式。</p>
+<p>动态规划算法是国际大学生程序设计竞赛（ACM）用得最多的算法之一，深入学习动态规划很重要。</p>
+<h1 id="二、基本思想"><a href="#二、基本思想" class="headerlink" title="二、基本思想"></a><strong>二、基本思想</strong></h1><p>动态规划算法与分治法类似，其基本思想也是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解。与分治法不同的是，适合于用动态规划求解的问题，经分解得到子问题往往不是互相独立的。若用分治法来解这类问题，则分解得到的子问题数目太多，有些子问题被重复计算了很多次。如果我们能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，这样就可以避免大量的重复计算，节省时间。</p>
+<p>动态规划算法的核心是记住已经求过的解，记住求解的方式有两种：</p>
+<p>①通过具有记忆功能的迭代自顶而下求解;</p>
+<p>②一般采用迭代法通过自底而上求解。</p>
+<p>动态规划算法的关键在于解决冗余，这是动态规划算法的根本目的。动态规划实质上是一种以空间换时间的技术，它在实现的过程中，不得不存储产生过程中的各种状态，所以它的空间复杂度要大于其他的算法。选择动态规划算法是因为它可以用空间换取时间，特别是规模比较大时，大幅减少搜索与计算的时间。</p>
+<h1 id="三、动态规划分类"><a href="#三、动态规划分类" class="headerlink" title="三、动态规划分类"></a><strong>三、动态规划分类</strong></h1><p>动态规划一般可分为四类：</p>
+<ul>
+<li>线性动态规划</li>
+</ul>
+<p>例如：拦截导弹,合唱队形,挖地雷,建学校,剑客决斗等；</p>
+<ul>
+<li>区域动态规划</li>
+</ul>
+<p>例如：石子合并, 加分二叉树,统计单词个数,炮兵布阵等；</p>
+<ul>
+<li>树形动态规划</li>
+</ul>
+<p>例如：皇宫守卫,贪吃的九头龙,二分查找树,聚会的欢乐,数字三角形等；</p>
+<ul>
+<li>背包动态规划</li>
+</ul>
+<p>例如：01背包问题,完全背包问题,分组背包问题,装箱问题,挤牛奶等。</p>
+<h1 id="四、适用条件"><a href="#四、适用条件" class="headerlink" title="四、适用条件"></a>四、适用条件</h1><p>能采用动态规划求解的问题，通常要具备3个性质：</p>
+<h1 id="1-问题中的状态必须满足最优化原理"><a href="#1-问题中的状态必须满足最优化原理" class="headerlink" title="(1) 问题中的状态必须满足最优化原理"></a><strong>(1) 问题中的状态必须满足最优化原理</strong></h1><p>最优化原理的定义：作为整个过程的最优策略具有这样的性质，无论过去的状态和决策如何，对先前决策所形成的状态而言，余下的诸决策必构成最优决策。简而言之，一个最优化策略的子策略总是最优的。</p>
+<p>最优化原理用数学语言描述：假设为了解决某一优化问题，需要依次作出n个决策D1，D2，…，Dn，如若这个决策序列是最优的，对于任何一个整数k，1 &lt; k &lt; n，不论前面k个决策是怎样的，以后的最优决策只取决于由前面决策所确定的当前状态，即以后的决策Dk+1，Dk+2，…，Dn也是最优的。</p>
+<p>最优化原理是动态规划的基础。任何一个问题，如果失去了这个最优化原理的支持，就不可能用动态规划方法计算。一个问题满足最优化原理又称其具有最优子结构性质。最优子结构是指原问题的最优解包含子问题的最优解。证明见附录1。</p>
+<h1 id="2-问题中的状态必须满足无后效性"><a href="#2-问题中的状态必须满足无后效性" class="headerlink" title="(2) 问题中的状态必须满足无后效性"></a><strong>(2) 问题中的状态必须满足无后效性</strong></h1><p>所谓的无后效性是指，下一时刻的状态只与当前状态有关，而和当前状态之前的状态无关，当前的状态是对以往决策的总结。</p>
+<h1 id="3-子问题重叠性"><a href="#3-子问题重叠性" class="headerlink" title="(3) 子问题重叠性"></a><strong>(3) 子问题重叠性</strong></h1><p>子问题重叠性即子问题之间是不独立的，一个子问题在下一阶段决策中可能被屡次使用到。</p>
+<p>动态规划算法正是利用了这种子问题的重叠性质，对每一个子问题只计算一次，然后将其计算结果保存在一个表格中，当再次需要计算已经计算过的子问题时，只是在表格中简单地查看一下结果，从而获得较高的效率。</p>
+<p>子问题重叠不是使用动态规划的必要条件，但是问题存在子问题重叠的特性更能够充分彰显动态规划的优势。若是没有这条性质，动态规划算法同其它算法相比就不具有优点。</p>
+<h1 id="五、动态规划解题思路"><a href="#五、动态规划解题思路" class="headerlink" title="五、动态规划解题思路"></a>五、动态规划解题思路</h1><h1 id="1、解题步骤"><a href="#1、解题步骤" class="headerlink" title="1、解题步骤"></a>1、解题步骤</h1><h1 id="1-划分阶段"><a href="#1-划分阶段" class="headerlink" title="1) 划分阶段"></a><strong>1) 划分阶段</strong></h1><p>按照问题的时间或空间特征，把问题分为若干个阶段。在划分阶段时，注意划分后的阶段必定要是有序的或者是可排序的，不然问题就没法求解。</p>
+<h1 id="2-确定状态和状态变量"><a href="#2-确定状态和状态变量" class="headerlink" title="2) 确定状态和状态变量"></a><strong>2) 确定状态和状态变量</strong></h1><p>将问题发展到各个阶段时所处于的各类客观状况用不一样的状态表示出来。</p>
+<p>DP状态的确定主要有两大原则：</p>
+<ul>
+<li>最优子结构</li>
+<li>无后效性</li>
+</ul>
+<p>例如：图5-1求得一条从A到G的最短路径？</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c149ad2c8d4b4c65a8f1c148590df34f?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图5-1</p>
+<p>可以用Dijkstra算法求得， Dijkstra算法符合动态规划的这一特性：待求解的问题分解为若干个子问题，前一子问题的解，为后一子问题的求解提供了有用的信息。动态规划主要是解决多阶段决策问题，并且阶段间存在着相互影响。该例子有7个阶段，初始阶段状态为A, 第2阶段状态有两个{B1，B2}, 第三阶段状态有4个{C1,C2,C3,C4}，等等。一个阶段可以有多个状态。</p>
+<h1 id="3-确定决策并写出状态转移方程"><a href="#3-确定决策并写出状态转移方程" class="headerlink" title="3) 确定决策并写出状态转移方程"></a><strong>3) 确定决策并写出状态转移方程</strong></h1><p>由于决策和状态转移有着自然的联系，状态转移就是根据上一阶段的状态和决策来导出本阶段的状态。因此若是确定了决策，状态转移方程也就可写出。</p>
+<p>我们只需要用分类讨论的思想来枚举所有小状态向大状态转移的可能性即可推出DP转移方程。</p>
+<h1 id="4-初始条件和边界状况"><a href="#4-初始条件和边界状况" class="headerlink" title="4) 初始条件和边界状况"></a><strong>4) 初始条件和边界状况</strong></h1><p>给出的状态转移方程是一个递推式，需要一个递推的终止条件或边界条件。即设置初始值，考虑边界状况。</p>
+<h1 id="2、动态规划决策过程示意图"><a href="#2、动态规划决策过程示意图" class="headerlink" title="2、动态规划决策过程示意图"></a>2、动态规划决策过程示意图</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/18738fde5a324aaeb392cd0b52f64655?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图5-2</p>
+<h1 id="六、应用"><a href="#六、应用" class="headerlink" title="六、应用"></a><strong>六、应用</strong></h1><p>动态规划的应用极其广泛，包括工程技术、经济、工业生产、军事以及自动化控制等领域，并在背包问题、生产经营问题、资金管理问题、资源分配问题、最短路径问题和复杂系统可靠性问题等中取得了显著的效果 。</p>
+<h1 id="例子1-0-1背包问题"><a href="#例子1-0-1背包问题" class="headerlink" title="例子1 0-1背包问题"></a><strong>例子1 0-1背包问题</strong></h1><p>现有n件物品和一个容量为c的背包。第i件物品的重量是重量为w[i]，价值是v[i]。已知对于一件物品必须选择取（用1表示）或者不取（用0表示），且每件物品只能被取一次（这就是“0-1”的含义）。求放置哪些物品进背包，可使这些物品的重量总和不超过背包容量，且价值总和最大。</p>
+<h1 id="1-gt-穷举法"><a href="#1-gt-穷举法" class="headerlink" title="1&gt; 穷举法"></a><strong>1&gt; 穷举法</strong></h1><h1 id="有两种方法："><a href="#有两种方法：" class="headerlink" title="有两种方法："></a><strong>有两种方法：</strong></h1><h1 id="第一种方法，计算从n件物品中，取任意数量的物品有多少种取法？"><a href="#第一种方法，计算从n件物品中，取任意数量的物品有多少种取法？" class="headerlink" title="第一种方法，计算从n件物品中，取任意数量的物品有多少种取法？"></a><strong>第一种方法，计算从n件物品中，取任意数量的物品有多少种取法？</strong></h1><p>利用高中的排列组合知识，分类取：</p>
+<p>取0个物品，有1种取法；</p>
+<p>取1个物品，有n种取法；</p>
+<p>取2个物品，有n*(n-1)&#x2F;2种取法；</p>
+<p>…</p>
+<p>取n个物品，有1种取法；</p>
+<p>总共的取法为：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/64751d9595de48959134e4d500ea25cb?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>共有<strong>2ⁿ</strong>种取法，然后分别计算<strong>2ⁿ</strong>种取法的物品的总重量和总价值，选出其中满足条件（物品的重量总和不超过背包容量，且价值总和最大）的一种取法。</p>
+<h1 id="第二种方法，将n个物品排成一行，对于一件物品必须选择取（用1表示）或者不取（用0表示），想象成n个0、1组成的序列，如"><a href="#第二种方法，将n个物品排成一行，对于一件物品必须选择取（用1表示）或者不取（用0表示），想象成n个0、1组成的序列，如" class="headerlink" title="第二种方法，将n个物品排成一行，对于一件物品必须选择取（用1表示）或者不取（用0表示），想象成n个0、1组成的序列，如"></a><strong>第二种方法，将n个物品排成一行，对于一件物品必须选择取（用1表示）或者不取（用0表示），想象成n个0、1组成的序列，如</strong></h1><p>00010…010；</p>
+<p>01100…100;</p>
+<p>10001…110;</p>
+<p>…</p>
+<p>利用高中的排列组合知识, 这样的序列有2<em>2</em>2*2…*2 &#x3D; 2^n种。</p>
+<p>0-1背包问题中的“0-1”就是这个意思。</p>
+<p>每一个序列代表一种取法，选出其中满足条件（物品的重量总和不超过背包容量，且价值总和最大）的一种取法。</p>
+<p><strong>显然，穷举法的运行时间是O(2ⁿ)，当n很大时真的是慢如蜗牛。</strong></p>
+<h1 id="2、回溯法"><a href="#2、回溯法" class="headerlink" title="2、回溯法"></a><strong>2、回溯法</strong></h1><p>用回溯法实现就是要在包含问题的所有解的解空间树中，按照深度优先搜索的策略，从根结点出发深度探索解空间树。具体方法如下： </p>
+<p>①对每一个物品i，对该物品只有选与不选两种决策，有n个物品，可以形成一棵 深度为n的决策树； </p>
+<p>②遍历这棵树，以枚举所有情况，最后进行判断，若重量不超过背包容量，且总价值最大，该方案就是最优的。</p>
+<p>假设你是一个小偷，背着一个可装下6磅东西的背包，你可以偷窃的商品如下：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a2d810a1d13f466bae7d37963158e9eb?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-1</p>
+<p>为了让偷窃的商品价值最高，你该选择哪些商品？</p>
+<p>初始的状态是（6，0），表示背包容量为6磅，背包内物品总价值为0美元。接下来，我们要开始做选择了。每加一件物品，有两种选择，选或者不选。选择一个物品时，背包的容量会减少，里面的物品总价值会增加。背包问题变成了决策树，如图6-1所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/792902c241d64cbaba805c36e30e907e?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-2</p>
+<p>子树叶蓝色标记是按照回溯法枚举的选取物品的剩余容量和总价值，红色标记是能偷窃的商品的最高价值4200美元。</p>
+<h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a><strong>小结：</strong></h1><p>优化方法： </p>
+<p>剪枝一：当重量大于背包的容量时，没有必要对剩下的物品进行决策； </p>
+<p>剪枝二：将剩下的所有物品都选取，其总价值也没有目前所求得的总价值还大的话，就可以返回。</p>
+<p>回溯法枚举所有的解空间，时间复杂度是O(2ⁿ)。</p>
+<p><strong>3、动态规划法</strong></p>
+<p>与回溯法同样的例子，假设你是一个小偷，背着一个可装下6磅东西的背包，你可以偷窃的商品如下：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/595da1e51b3f490dbb17f0050504f67e?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-3</p>
+<p>为了让偷窃的商品价值最高，你该选择哪些商品？</p>
+<p>第1步，我们从一个网格开始，将背包问题网格化。网格的行对应的是商品，列对应的是不同容量(1~6磅)的背包。如图6-4所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/923d96b22e69425796cfc8bd9adef71b?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-4</p>
+<p>第2步，我们先来一步一步做。首先来看第1行，加入2磅的吉他。第1个单元格表示背包的的容量为1磅。吉他的重量是2磅，这意味着它不能装入背包！第1行的其它单元格的背包的容量≥2磅，可以装入吉他，总价值是1500美元。如图6-5所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4616b165d37942d2b301d5ede692e24a?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-5</p>
+<p>第3步，再加入4磅的电脑。在第2行中的各单元格的总价值的计算公式如下：</p>
+<p>S(2,j)&#x3D;max {v[2]+S(1,c[j]-w[2]),S(1,j)}</p>
+<p>S(2, j)—表示第2行，第j列的单元格的总价值；</p>
+<p>v[2] — 表示第2行的商品(即电脑)的价值；</p>
+<p>w[2] — 表示第2行的商品(即电脑)的重量；</p>
+<p>c[j] — 表示第j列的小背包的容量，一般c[j]&#x3D;j；(例如，第1列背包的容量是1磅， 第2列的背包的容量是2磅， 第3列的背包的容量是3磅，…， 第6列的背包的容量是6磅)</p>
+<p>c[j]-w[2] — 表示加入电脑后，第j列的背包的容量减去电脑重量后的剩余容量，刚好对应着以前的列号。</p>
+<p>S(1, j) — 表示第1行第j列的单元格的总价值。</p>
+<p><strong>对计算公式第一种理解方法：</strong></p>
+<p>加入当前商品（电脑）后，当前行中的各单元格的总价值等于①与②的最大值。</p>
+<p>①　当前加入的商品（电脑）的价值 + 上一行中剩余背包容量（当前行的各单元格对应的背包容量减去当前加入的商品的重量）所在的列对应的单元格的总价值；</p>
+<p>②　同一列(即同一背包的容量)的上一行单元格(即上一次计算)的已经加入的商品的总价值。</p>
+<p><strong>对计算公式第二种理解方法：</strong></p>
+<p>如图中红色标记部分， 第2行第6列的计算总价值 &#x3D; max { 第1行第2列的单元格的总价值$1500 + 当前电脑的价值$2000, 第1行第6列的单元格的总价值$1500 }， 即两者取最大值。 为什么是第1行第2列呢？因为第6列的容量是6磅，减去加入的电脑的重量4磅，剩余的容量为2磅，对应的就是第2列。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/94070f7e6dd642a2a9516d37c8a53809?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-6</p>
+<p>第4步，再加入5磅的音响。在第3行中的各单元格的总价值的计算公式如下：</p>
+<p>S(3, j) &#x3D; max {v[3]+S(2,c[j]-w[3]),S(2, j)}</p>
+<p>S(3, j)—表示第3行，第j列的单元格的总价值；</p>
+<p>v[3] — 表示第3行的商品(即音响)的价值；</p>
+<p>w[3] — 表示第3行的商品(即音响)的重量；</p>
+<p>c[j] — 表示第j列的小背包的容量，一般c[j]&#x3D;j；(例如，第1列背包的容量是1磅，第2列的背包的容量是2磅， 第3列的背包的容量是3磅，…，第6列的背包的容量是6磅）</p>
+<p>c[j]-w[3] — 表示加入音响后，第j列的背包的容量减去音响重量后的剩余容量，刚好对应着以前的列号。</p>
+<p>S(2, j) — 表示第2行第j列的单元格的总价值。</p>
+<p><strong>对计算公式第一种理解方法：</strong></p>
+<p>加入当前商品（音响）后，当前行中的各单元格的总价值等于①与②的最大值。</p>
+<p>③　当前加入的商品（音响）的价值 + 上一行中剩余背包容量（当前行的各单元格对应的背包容量减去当前加入的商品的重量）所在的列对应的单元格的总价值；</p>
+<p>④　同一列(即同一背包的容量)的上一行单元格(即上一次计算)的已经加入的商品的总价值。</p>
+<p><strong>对计算公式第二种理解方法：</strong></p>
+<p>如图中红色标记部分， 第3行第6列的计算总价值 &#x3D; max { 第2行第1列的单元格的总价值0 + 当前音响的价值 $3000, 第2行第6列的单元格的总价值$3500 }， 即两者取最大值。 为什么是第2行第1列呢？因为第6列的容量是6磅，减去加入的音响的重量5磅，剩余的容量为1磅，对应的就是第1列。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/402d069fd26844619f043b9a89a095b7?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-7</p>
+<p>经过第4步加入手机、第5步加入MP3后，计算得到满的网格数据，红色标记的最后一行就是对应的各容量能够获取的商品的最大总价值。例如：1磅的容量能获取$1200, 2磅的容量能获取$1700, 3磅的容量能获取$2700, 4磅的容量能获取$3200, 5磅的容量能获取$3200, 6磅的容量能获取$4200。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0e24d758f50140e4be2ae101c76b496d?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-8</p>
+<p><strong>小结：</strong></p>
+<p>问题1：再新加一件商品，沿着往下走时，最大价值有可能降低吗？</p>
+<p>答案：不可能。每次迭代时，你都存储当前的最大价值。最大价值不可能比以前低。</p>
+<p>问题2：行的排列顺序发生变化时结果将如何？答案会随之变化吗？</p>
+<p>假设你按如下顺序填充各行：手机、音响、电脑、MP3、吉他。网格将会是什么样的？</p>
+<p>答案：没有变化。也就是说，各行的排列顺序无关紧要。</p>
+<p>问题3：可以逐列而不是逐行填充网格吗？</p>
+<p>答案：就这个背包问题而言，这没有任何影响，但对于其他问题，可能有影响。</p>
+<p>动态规划先解决子问题，再逐步解决大问题。 对于背包问题，你先解决小背包（子背包）问题，再逐步解决原来的问题。</p>
+<p>0-1背包问题用二维矩阵的网格解决，矩阵的行表示n个物品，列表示背包逐步增长的容量, 是从1增长到c，也就是从小背包容量增长到待求背包容量。</p>
+<p><strong>其状态转移函数：S(i, j) &#x3D; max { v[i] + S(i-1, j- w[i]), S(i-1, j)} 1≤i≤n, 1≤j≤c</strong></p>
+<p>S(i, j)—表示第i行，第j列的单元格的总价值；</p>
+<p>v[i] — 表示第i行的物品的价值；</p>
+<p>w[i] — 表示第i行的物品的重量；</p>
+<p>j — 既表示列号，又表示第j列的小背包的容量;</p>
+<p>j-w[i] — 表示加入物品后，第j列的小背包的容量减去该物品重量后的剩余容量，刚好对应着以前的列号。</p>
+<p>S(i-1, j) — 表示第i-1行第j列的单元格的总价值。</p>
+<p>0-1背包问题的空间复杂度与时间复杂度均为O(n*c)，其中n为物品数，c为背包容量。</p>
+<h1 id="例子2-查字典-最长公共子串与最长公共子序列-2"><a href="#例子2-查字典-最长公共子串与最长公共子序列-2" class="headerlink" title="例子2 查字典 - 最长公共子串与最长公共子序列[2]"></a><strong>例子2 查字典 - 最长公共子串与最长公共子序列[2]</strong></h1><p>已知：假设你管理着字典网站。用户在该网站输入单词时，你需要给出其定义。 但如果用户拼错了，你必须猜测他原本要输入的是什么单词。例如，Alex想查单词fish，但不小心输入了hish。</p>
+<p>求：Alex输入了hish，那他原本要输入的是fish还是vista呢？</p>
+<p><strong>解答：</strong></p>
+<h1 id="1-gt-最长公共子串"><a href="#1-gt-最长公共子串" class="headerlink" title="1&gt; 最长公共子串"></a><strong>1&gt; 最长公共子串</strong></h1><p>如何将这个问题划分为子问题呢？你可能需要比较子串：不是比较hish和fish，而是先比较his和fis。每个单元格都将包含这两个子串的最长公共子串的长度。这也给你提供了线索，让坐标轴很可能是这两个单词。</p>
+<p>第1步 建立网格，单元格全部初始化为0。如图6-9所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/cdb6e5991f654823bf13ff2e699bff8d?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-9</p>
+<p>第2步，计算单元格的值，如果两个字母不相同，值为0；如果两个字母相同，值为左上角邻居的值加1。如图6-10所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/98348b4388e843df81c5f195d0924b49?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-10</p>
+<p>第3步，查找单词Fish和Hish的最长公共子串时，网格如图，最长公共子串为ish。如图6-11所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4aec45d6bd814f6b94cb9bf944c0a385?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-11</p>
+<p>查找单词hish和vista的最长公共子串时，网格如图，最长公共子串为is。如图6-12所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/be225340ce49431493813199b6da80ef?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-12</p>
+<p>所以，Alex输入了hish，那他原本要输入的是fish而不是vista。</p>
+<p><strong>伪代码实现如下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (word_a[i] == word_b[j])     //两个字母相同</span><br><span class="line">    cell[i][j] = cell[i-1][j-1] + 1;</span><br><span class="line">else                          //两个字母不相同</span><br><span class="line">    cell[i][j] = 0;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-gt-最长公共子序列"><a href="#2-gt-最长公共子序列" class="headerlink" title="2&gt; 最长公共子序列"></a><strong>2&gt; 最长公共子序列</strong></h1><p>假设Alex不小心输入了fosh，他原本想输入的是fish还是fort呢？</p>
+<p>我们使用最长公共子串公式来比较它们。如图6-13所示。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/713e74e4948243f1a41f46fe0a28b3f3?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-13</p>
+<p>最长公共子串的长度相同，都包含两个字母！但fosh与fish更像。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5d919b989a4241aba6ed5340f38e4ca1?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-14</p>
+<p>这里比较的是最长公共子串，但其实应比较最长公共子序列：两个单词中都有的序列包含的</p>
+<p>字母数。如何计算最长公共子序列呢？</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/76283630314040d4aa2fb388a7e1bf32?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-15</p>
+<p>最终的网格如下。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/efcf9dd76b964957ba69398aea066257?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图6-16</p>
+<p>伪代码实现如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (word_a[i] == word_b[j])</span><br><span class="line">    cell[i][j] = cell[i-1][j-1] + 1;</span><br><span class="line">else</span><br><span class="line">    cell[i][j] = max(cell[i-1][j], cell[i][j-1]);</span><br></pre></td></tr></table></figure>
+
+<h1 id="小结：-1"><a href="#小结：-1" class="headerlink" title="小结："></a><strong>小结：</strong></h1><ul>
+<li>生物学家根据最长公共序列来确定DNA链的相似性，进而判断度两种动物或疾病有多相似。最长公共序列还被用来寻找多发性硬化症治疗方案。</li>
+<li>你使用过诸如git diff等命令吗？它们指出两个文件的差异，也是使用动态规划实现的。</li>
+<li>比较字符串的相似程度。编辑距离（levenshtein distance）指出了两个字符串的相似程度，也是使用动态规划计算得到的。编辑距离算法的用途很多，从拼写检查到判断用户上传的资料是否是盗版，都在其中。</li>
+<li>你使用过诸如Microsoft Word等具有断字功能的应用程序吗？它们如何确定在什么地方断字以确保行长一致呢？使用动态规划！</li>
+</ul>
+<h1 id="七、动态规划算法的局限性"><a href="#七、动态规划算法的局限性" class="headerlink" title="七、动态规划算法的局限性"></a><strong>七、动态规划算法的局限性</strong></h1><p>动态规划对于解决多阶段决策问题的效果是明显的，但是动态规划也有一定的局限性。首先，它没有统一的处理方法，必须根据问题的各种性质并结合一定的技巧来处理；另外当变量的维数增大时，总的计算量及存贮量急剧增大。</p>
+<p>动态规划的维数就是指状态变量的维数，而不是指决策变量或策略的维数。状态变量的维数过大，在应用动态规划的方法求解时将大大增加电子计算机的内存量。解题所需要的内存量一般按指数速度增加的。</p>
+<p>因而，受计算机的存贮量及计算速度的限制，当今的计算机仍不能用动态规划方法来解决较大规模的问题，这就是“维数障碍”</p>
+<h1 id="八、附录"><a href="#八、附录" class="headerlink" title="八、附录"></a><strong>八、附录</strong></h1><h1 id="附录1-证明最优子结构中原问题的最优解包含子问题的最优解"><a href="#附录1-证明最优子结构中原问题的最优解包含子问题的最优解" class="headerlink" title="附录1 证明最优子结构中原问题的最优解包含子问题的最优解"></a><strong>附录1 证明最优子结构中原问题的最优解包含子问题的最优解</strong></h1><p><strong>以0-1背包问题为例证明。</strong></p>
+<p>0-1背包问题： 给定n中物品和一个背包，物品i的重量是wi,其价值为vi,背包的容量为C。如何选择装入背包的物品，使得装入背包中物品的总价值最大？</p>
+<p>0-1背包问题等价于一个整数规划问题：</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6a032515d85348d48a11da6bb134d0a2?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图8-1</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2f8968f70b9e422dabee49b8dc04b93e?from=pc" alt="流行算法：竞赛必备-动态规划算法 &lt;一&gt;"></p>
+<p>图8-2</p>
+<h1 id="九、参考资料"><a href="#九、参考资料" class="headerlink" title="九、参考资料"></a><strong>九、参考资料</strong></h1><p>[1] Bellman的自传书 <Eye of the Hurricane: An Autobiography></p>
+<p>[2]《算法图解》Aditya Bhargava著，袁国忠译</p>
+
+        </div>
+        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/动态规划算法.md" target="_blank">编辑</a>
+</article>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+         
+          <li><a href="/URL">LINK_NAME</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">二、基本思想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">三、动态规划分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">四、适用条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E7%8A%B6%E6%80%81%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E6%9C%80%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">(1) 问题中的状态必须满足最优化原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E4%B8%AD%E7%9A%84%E7%8A%B6%E6%80%81%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E6%97%A0%E5%90%8E%E6%95%88%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">(2) 问题中的状态必须满足无后效性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%AD%90%E9%97%AE%E9%A2%98%E9%87%8D%E5%8F%A0%E6%80%A7"><span class="toc-number">7.</span> <span class="toc-text">(3) 子问题重叠性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">8.</span> <span class="toc-text">五、动态规划解题思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-number">9.</span> <span class="toc-text">1、解题步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%88%92%E5%88%86%E9%98%B6%E6%AE%B5"><span class="toc-number">10.</span> <span class="toc-text">1) 划分阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%A1%AE%E5%AE%9A%E7%8A%B6%E6%80%81%E5%92%8C%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F"><span class="toc-number">11.</span> <span class="toc-text">2) 确定状态和状态变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%A1%AE%E5%AE%9A%E5%86%B3%E7%AD%96%E5%B9%B6%E5%86%99%E5%87%BA%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="toc-number">12.</span> <span class="toc-text">3) 确定决策并写出状态转移方程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6%E5%92%8C%E8%BE%B9%E7%95%8C%E7%8A%B6%E5%86%B5"><span class="toc-number">13.</span> <span class="toc-text">4) 初始条件和边界状况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">14.</span> <span class="toc-text">2、动态规划决策过程示意图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">15.</span> <span class="toc-text">六、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-0-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">16.</span> <span class="toc-text">例子1 0-1背包问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-gt-%E7%A9%B7%E4%B8%BE%E6%B3%95"><span class="toc-number">17.</span> <span class="toc-text">1&gt; 穷举法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">18.</span> <span class="toc-text">有两种方法：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E8%AE%A1%E7%AE%97%E4%BB%8En%E4%BB%B6%E7%89%A9%E5%93%81%E4%B8%AD%EF%BC%8C%E5%8F%96%E4%BB%BB%E6%84%8F%E6%95%B0%E9%87%8F%E7%9A%84%E7%89%A9%E5%93%81%E6%9C%89%E5%A4%9A%E5%B0%91%E7%A7%8D%E5%8F%96%E6%B3%95%EF%BC%9F"><span class="toc-number">19.</span> <span class="toc-text">第一种方法，计算从n件物品中，取任意数量的物品有多少种取法？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E5%B0%86n%E4%B8%AA%E7%89%A9%E5%93%81%E6%8E%92%E6%88%90%E4%B8%80%E8%A1%8C%EF%BC%8C%E5%AF%B9%E4%BA%8E%E4%B8%80%E4%BB%B6%E7%89%A9%E5%93%81%E5%BF%85%E9%A1%BB%E9%80%89%E6%8B%A9%E5%8F%96%EF%BC%88%E7%94%A81%E8%A1%A8%E7%A4%BA%EF%BC%89%E6%88%96%E8%80%85%E4%B8%8D%E5%8F%96%EF%BC%88%E7%94%A80%E8%A1%A8%E7%A4%BA%EF%BC%89%EF%BC%8C%E6%83%B3%E8%B1%A1%E6%88%90n%E4%B8%AA0%E3%80%811%E7%BB%84%E6%88%90%E7%9A%84%E5%BA%8F%E5%88%97%EF%BC%8C%E5%A6%82"><span class="toc-number">20.</span> <span class="toc-text">第二种方法，将n个物品排成一行，对于一件物品必须选择取（用1表示）或者不取（用0表示），想象成n个0、1组成的序列，如</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="toc-number">21.</span> <span class="toc-text">2、回溯法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="toc-number">22.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E6%9F%A5%E5%AD%97%E5%85%B8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2%E4%B8%8E%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97-2"><span class="toc-number">23.</span> <span class="toc-text">例子2 查字典 - 最长公共子串与最长公共子序列[2]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-gt-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2"><span class="toc-number">24.</span> <span class="toc-text">1&gt; 最长公共子串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-gt-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-number">25.</span> <span class="toc-text">2&gt; 最长公共子序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-1"><span class="toc-number">26.</span> <span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">27.</span> <span class="toc-text">七、动态规划算法的局限性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">28.</span> <span class="toc-text">八、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E8%AF%81%E6%98%8E%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84%E4%B8%AD%E5%8E%9F%E9%97%AE%E9%A2%98%E7%9A%84%E6%9C%80%E4%BC%98%E8%A7%A3%E5%8C%85%E5%90%AB%E5%AD%90%E9%97%AE%E9%A2%98%E7%9A%84%E6%9C%80%E4%BC%98%E8%A7%A3"><span class="toc-number">29.</span> <span class="toc-text">附录1 证明最优子结构中原问题的最优解包含子问题的最优解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">30.</span> <span class="toc-text">九、参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&text=动态规划算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&is_video=false&description=动态规划算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=动态规划算法&body=Check out this article: https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&title=动态规划算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&name=动态规划算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/&t=动态规划算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2015-2022
+    koderboy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     --><!--
+       --><li><a href="/URL">LINK_NAME</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
