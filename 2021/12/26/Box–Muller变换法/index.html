@@ -54,7 +54,7 @@
 <meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3c4a4e0105fd451fb8b8568a841ed5da?from=pc">
 <meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/3c8ecdb3fe6c414faba71f05f7498ce3?from=pc">
 <meta property="article:published_time" content="2021-12-26T11:32:08.000Z">
-<meta property="article:modified_time" content="2022-05-04T08:47:51.249Z">
+<meta property="article:modified_time" content="2022-05-08T01:51:47.358Z">
 <meta property="article:author" content="koderboy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://p3.toutiaoimg.com/origin/pgc-image/251f652ac3f7434195b61860cc28feaf?from=pc">
@@ -207,7 +207,7 @@
 <p>且 U1 和 U2 彼此独立，令：</p>
 <p><img src="https://p3.toutiaoimg.com/origin/pgc-image/251f652ac3f7434195b61860cc28feaf?from=pc" alt="流行算法：Box–Muller变换法"></p>
 <p>则 Z0 和 Z1 就是服从 N（0，1）的标准正态分布随机数，并且 Z0 和 Z1 相互独立。</p>
-<h1 id="（2）标准形式的python代码演示"><a href="#（2）标准形式的python代码演示" class="headerlink" title="（2）标准形式的python代码演示"></a>（2）标准形式的python代码演示</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def box_muller_trans():</span><br><span class="line">    x1 = 0</span><br><span class="line">    x2 = 0</span><br><span class="line">    w = 0</span><br><span class="line">    x1 = np.random.rand()</span><br><span class="line">    x2 = np.random.rand()</span><br><span class="line">    y1 = np.cos(2.0*np.pi*x1) * np.sqrt(-2.0*np.log(x1))</span><br><span class="line">    y2 = np.sin(2.0*np.pi*x2) * np.sqrt(-2.0*np.log(x2))</span><br><span class="line">    return y1,y2</span><br></pre></td></tr></table></figure>
+<h1 id="（2）标准形式的python代码演示"><a href="#（2）标准形式的python代码演示" class="headerlink" title="（2）标准形式的python代码演示"></a>（2）标准形式的python代码演示</h1><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def box_muller_trans():</span><br><span class="line">    x1 = <span class="number">0</span></span><br><span class="line">    x2 = <span class="number">0</span></span><br><span class="line">    w = <span class="number">0</span></span><br><span class="line">    x1 = <span class="built_in">np</span>.<span class="built_in">random</span>.rand()</span><br><span class="line">    x2 = <span class="built_in">np</span>.<span class="built_in">random</span>.rand()</span><br><span class="line">    y1 = <span class="built_in">np</span>.<span class="built_in">cos</span>(<span class="number">2.0</span>*<span class="built_in">np</span>.pi*x1) * <span class="built_in">np</span>.<span class="built_in">sqrt</span>(-<span class="number">2.0</span>*<span class="built_in">np</span>.<span class="built_in">log</span>(x1))</span><br><span class="line">    y2 = <span class="built_in">np</span>.<span class="built_in">sin</span>(<span class="number">2.0</span>*<span class="built_in">np</span>.pi*x2) * <span class="built_in">np</span>.<span class="built_in">sqrt</span>(-<span class="number">2.0</span>*<span class="built_in">np</span>.<span class="built_in">log</span>(x2))</span><br><span class="line">    <span class="built_in">return</span> y1,y2</span><br></pre></td></tr></table></figure>
 
 <h1 id="2、-极坐标形式的-Box–Muller-变换"><a href="#2、-极坐标形式的-Box–Muller-变换" class="headerlink" title="2、 极坐标形式的 Box–Muller 变换"></a>2、 极坐标形式的 Box–Muller 变换</h1><h1 id="（1）公式-1"><a href="#（1）公式-1" class="headerlink" title="（1）公式"></a>（1）公式</h1><p>假设变量 u 和变量 v 是在[-1，1]上的均匀分布随机量，</p>
 <p>u 和 v 相互独立，令：</p>
@@ -215,7 +215,7 @@
 <p>故而，随机数 z0 和 z1 计算后得出如下结果：</p>
 <p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3c161ec4b3d54509a185f7d4f8863308?from=pc" alt="流行算法：Box–Muller变换法"></p>
 <p>z0 和 z1 是服从分布 N（0，1）的随机数，并且 z0 和 z1 相互 独立。</p>
-<h1 id="（2）极坐标形式的python代码演示"><a href="#（2）极坐标形式的python代码演示" class="headerlink" title="（2）极坐标形式的python代码演示"></a>（2）极坐标形式的python代码演示</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def box_muller_trans():</span><br><span class="line">    x1 = 0</span><br><span class="line">    x2 = 0</span><br><span class="line">    w = 0</span><br><span class="line">    while (w &lt;= 0)|(w&gt;=1.0):</span><br><span class="line">        x1 = 2.0*np.random.rand()-1</span><br><span class="line">        x2 = 2.0*np.random.rand()-1</span><br><span class="line">        w = x1*x1 + x2*x2</span><br><span class="line">        w = np.sqrt(-2.0*np.log(w)/w)</span><br><span class="line">        y1 = x1*w</span><br><span class="line">        y2 = x2*w</span><br><span class="line">    return y1,y2</span><br></pre></td></tr></table></figure>
+<h1 id="（2）极坐标形式的python代码演示"><a href="#（2）极坐标形式的python代码演示" class="headerlink" title="（2）极坐标形式的python代码演示"></a>（2）极坐标形式的python代码演示</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">def</span> box_muller_trans():</span><br><span class="line">    <span class="attribute">x1</span> = <span class="number">0</span></span><br><span class="line">    <span class="attribute">x2</span> = <span class="number">0</span></span><br><span class="line">    <span class="attribute">w</span> = <span class="number">0</span></span><br><span class="line">    <span class="attribute">while</span> (w &lt;= <span class="number">0</span>)|(w&gt;=<span class="number">1</span>.<span class="number">0</span>):</span><br><span class="line">        <span class="attribute">x1</span> = <span class="number">2</span>.<span class="number">0</span>*np.random.rand()-<span class="number">1</span></span><br><span class="line">        <span class="attribute">x2</span> = <span class="number">2</span>.<span class="number">0</span>*np.random.rand()-<span class="number">1</span></span><br><span class="line">        <span class="attribute">w</span> = x1*x1 + x2*x2</span><br><span class="line">        <span class="attribute">w</span> = np.sqrt(-<span class="number">2</span>.<span class="number">0</span>*np.log(w)/w)</span><br><span class="line">        <span class="attribute">y1</span> = x1*w</span><br><span class="line">        <span class="attribute">y2</span> = x2*w</span><br><span class="line">    <span class="attribute">return</span> y1,y2</span><br></pre></td></tr></table></figure>
 
 <h1 id="3、演示结果"><a href="#3、演示结果" class="headerlink" title="3、演示结果"></a>3、演示结果</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/552b7d606f2341bd8f05179715d6eb0a?from=pc" alt="流行算法：Box–Muller变换法"></p>
 <h1 id="4、小结"><a href="#4、小结" class="headerlink" title="4、小结"></a>4、小结</h1><p>也可利用Matlab工具进行算法验证。在实际工程应用中，如果直接采用标准形式的Box-Muller算法的时候，需要计算正弦（sin）和余弦（cos）函数，这种计算耗时较多，效率比较低。Box-Muller 的极坐标形式更加常用，它避开了三角函数的计算，可以在很短的时间内产生大量的符合正态分布的随机数，能够满足了工程计算中对计算速度的要求。</p>
@@ -316,10 +316,20 @@
 <p><img src="https://p3.toutiaoimg.com/origin/pgc-image/3c8ecdb3fe6c414faba71f05f7498ce3?from=pc" alt="流行算法：Box–Muller变换法"></p>
 
         </div>
+        <!--添加编辑 常飞-->
         <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/Box–Muller变换法.md" target="_blank">编辑</a>
+        <!--添加编辑-->
 </article>
 
 
+
+    <!--添加高亮代码 常飞-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <!--添加高亮代码-->
         
           <div id="footer-post-container">
   <div id="footer-post">
