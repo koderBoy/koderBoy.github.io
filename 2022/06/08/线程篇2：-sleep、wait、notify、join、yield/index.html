@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="来源:https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844903838495965198 前言：线程的五种状态 本文是线程篇的一个分支,主要结合我的理解,看一下sleep和wait以及线程的一些状态网上的图看起来都有点丑，我自己画了一幅:   1234567891.New：       新建态:  new Thread ~ thread.start期间2.Runnable：  可执行态: 可被C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程篇2：[- sleep、wait、notify、join、yield -]">
+<meta property="og:url" content="https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="来源:https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844903838495965198 前言：线程的五种状态 本文是线程篇的一个分支,主要结合我的理解,看一下sleep和wait以及线程的一些状态网上的图看起来都有点丑，我自己画了一幅:   1234567891.New：       新建态:  new Thread ~ thread.start期间2.Runnable：  可执行态: 可被C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b4111b0889be~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b27bf64d945f~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b25a197d254a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b245bfd54b30~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b4111b0889be~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b222518703fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b2340d168f1d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b2d04ca6cf7c~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b3ae3b81c63c~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b56c24ea9deb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="article:published_time" content="2022-06-08T14:58:22.000Z">
+<meta property="article:modified_time" content="2022-06-08T07:12:20.910Z">
+<meta property="article:author" content="koderboy">
+<meta property="article:tag" content="收藏">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b4111b0889be~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>线程篇2：[- sleep、wait、notify、join、yield -]</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/06/08/IDEA%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&text=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&is_video=false&description=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=线程篇2：[- sleep、wait、notify、join、yield -]&body=Check out this article: https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&name=线程篇2：[- sleep、wait、notify、join、yield -]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&t=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-number">1.</span> <span class="toc-text">前言：线程的五种状态</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81Thread-sleep%E7%AE%80%E8%BF%B0"><span class="toc-number"></span> <span class="toc-text">一、Thread.sleep简述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">1.测试代码：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%EF%BC%9A%E6%B3%A802-29%E4%BB%A3%E8%A1%A8%E5%BD%93%E5%89%8D%E6%97%B6%E5%88%BB%E7%9A%84%E5%88%86%E7%A7%92%EF%BC%8C%E5%8D%B32%E5%88%8629%E7%A7%92"><span class="toc-number">2.</span> <span class="toc-text">2. 结果分析：注02:29代表当前时刻的分秒，即2分29秒</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BA%BF%E7%A8%8B%E5%86%85sleep%E4%BB%A5%E5%8F%8Asynchronized"><span class="toc-number"></span> <span class="toc-text">二、线程内sleep以及synchronized</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AD%90%E7%BA%BF%E7%A8%8B%E5%8A%A0%E5%85%A5%E4%BC%91%E7%9C%A0"><span class="toc-number">1.</span> <span class="toc-text">1.子线程加入休眠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">2.结果分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%BD%93%E5%8A%A0%E9%94%81%E7%9D%A1%E7%9C%A0%E6%97%B6"><span class="toc-number">3.</span> <span class="toc-text">3.当加锁睡眠时</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-1"><span class="toc-number">4.</span> <span class="toc-text">2.结果分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81Object-wait-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number"></span> <span class="toc-text">三、Object#wait()方法的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-wait%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">1.wait方法的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-2"><span class="toc-number">2.</span> <span class="toc-text">2.结果分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%94%A4%E9%86%92%E7%AD%89%E5%BE%85%E7%BA%BF%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">3.唤醒等待线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">4.结果分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Thread-join-%E6%96%B9%E6%B3%95-%E5%92%8CThread-yield"><span class="toc-number"></span> <span class="toc-text">四、Thread#join()方法 和Thread#yield</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%99%AE%E9%80%9A%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">1.普通代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-3"><span class="toc-number">2.</span> <span class="toc-text">2.结果分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-join%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">3.join方法的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-yield%E6%96%B9%E6%B3%95%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">4.yield方法测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number"></span> <span class="toc-text">五、小结</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E9%9C%80%E8%A6%81%E8%A1%A5%E5%85%85%E7%9A%84%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">1.需要补充的点:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%AE%80%E5%8D%95%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">2.简单比较</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        
+    <h1 class="posttitle" itemprop="name headline">
+        线程篇2：[- sleep、wait、notify、join、yield -]
+    </h1>
+
+
+
+            <div class="meta">
+                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">koderboy</span>
+                </span>
+                
+    <div class="postdate">
+      
+        <time datetime="2022-06-08T14:58:22.000Z" itemprop="datePublished">2022-06-08</time>
+        
+      
+    </div>
+
+
+                    
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%94%B6%E8%97%8F/" rel="tag">收藏</a>, <a class="tag-link-link" href="/tags/%E7%BA%BF%E7%A8%8B/" rel="tag">线程</a>
+    </div>
+
+
+            </div>
+    </header>
+    
+
+        <div class="content" itemprop="articleBody">
+            <p>来源:<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903838495965198">https://juejin.cn/post/6844903838495965198</a></p>
+<h5 id="前言：线程的五种状态"><a href="#前言：线程的五种状态" class="headerlink" title="前言：线程的五种状态"></a>前言：线程的五种状态</h5><blockquote>
+<p>本文是线程篇的一个分支,主要结合我的理解,看一下sleep和wait以及线程的一些状态<br>网上的图看起来都有点丑，我自己画了一幅:</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b4111b0889be~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="线程状态"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="keyword">New</span>：       新建态:  <span class="keyword">new</span> Thread <span class="operator">~</span> thread.start期间</span><br><span class="line"><span class="number">2.</span>Runnable：  可执行态: 可被CPU调度执行期间。</span><br><span class="line"><span class="number">3.</span><span class="keyword">Running</span>     运行态: 线程获取CPU权限进行执行</span><br><span class="line"><span class="number">4.</span>Blocked     阻塞状态: 阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。</span><br><span class="line">    <span class="operator">|</span><span class="comment">---等待阻塞:通过调用线程的wait()方法，让线程等待某工作的完成。</span></span><br><span class="line">    <span class="operator">|</span><span class="comment">---同步阻塞:线程在获取synchronized同步锁失败(因为锁被其它线程所占用)时</span></span><br><span class="line">    <span class="operator">|</span><span class="comment">---其他阻塞:通过调用线程的sleep()或join()或发出了I/O请求时</span></span><br><span class="line"><span class="number">5.</span>Dead        死亡状态: 线程执行完了或者因异常退出了run()方法，该线程结束生命周期。</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="一、Thread-sleep简述"><a href="#一、Thread-sleep简述" class="headerlink" title="一、Thread.sleep简述"></a>一、Thread.sleep简述</h4><blockquote>
+<p>暂停当前线程，进入Blocked状态,把cpu片段让出给其他线程。</p>
+</blockquote>
+<h5 id="1-测试代码："><a href="#1-测试代码：" class="headerlink" title="1.测试代码："></a>1.测试代码：</h5><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main0</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="title class_">SimpleDateFormat</span> sdf = <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">void</span> <span class="title function_">main</span>(<span class="params"><span class="built_in">String</span>[] args</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Car</span>()).<span class="title function_">start</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">2000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="title class_">InterruptedException</span> e) &#123;</span><br><span class="line">            e.<span class="title function_">printStackTrace</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Ambulance</span>()).<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Car</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">void</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:小汽车开始启动,在路上跑&quot;</span>);</span><br><span class="line">            <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:小汽车跑到终点&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Ambulance</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">void</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:救护车开始启动,在路上跑&quot;</span>);</span><br><span class="line">            <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:救护车跑到终点&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-结果分析：注02-29代表当前时刻的分秒，即2分29秒"><a href="#2-结果分析：注02-29代表当前时刻的分秒，即2分29秒" class="headerlink" title="2. 结果分析：注02:29代表当前时刻的分秒，即2分29秒"></a>2. 结果分析：注<code>02:29代表当前时刻的分秒，即2分29秒</code></h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b27bf64d945f~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">-</span>---&gt;[运行结果]----------------------</span><br><span class="line"><span class="attribute">02</span>:29:小汽车开始启动,在路上跑</span><br><span class="line"><span class="attribute">02</span>:29:小汽车跑到终点</span><br><span class="line"><span class="attribute">02</span>:31:救护车开始启动,在路上跑</span><br><span class="line"><span class="attribute">02</span>:31:救护车跑到终点</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="二、线程内sleep以及synchronized"><a href="#二、线程内sleep以及synchronized" class="headerlink" title="二、线程内sleep以及synchronized"></a>二、线程内sleep以及synchronized</h4><h5 id="1-子线程加入休眠"><a href="#1-子线程加入休眠" class="headerlink" title="1.子线程加入休眠"></a>1.子线程加入休眠</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">Car</span> <span class="title">implements</span> <span class="title">Runnable</span> &#123;</span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>()</span> &#123;</span><br><span class="line">        System.<span class="keyword">out</span>.println(sdf.format(System.currentTimeMillis()) + <span class="string">&quot;:小汽车开始启动,在路上跑&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.<span class="keyword">out</span>.println(sdf.format(System.currentTimeMillis()) + <span class="string">&quot;:小汽车跑到终点&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-结果分析"><a href="#2-结果分析" class="headerlink" title="2.结果分析"></a>2.结果分析</h5><blockquote>
+<p>Car线程的任务是睡5s,可见主线程的休眠没有影响到Car子线程的运行(休眠)</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b25a197d254a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">18</span>:48:小汽车开始启动,在路上跑</span><br><span class="line"><span class="attribute">18</span>:50:救护车开始启动,在路上跑</span><br><span class="line"><span class="attribute">18</span>:50:救护车跑到终点</span><br><span class="line"><span class="attribute">18</span>:53:小汽车跑到终点</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="3-当加锁睡眠时"><a href="#3-当加锁睡眠时" class="headerlink" title="3.当加锁睡眠时"></a>3.当加锁睡眠时</h5><blockquote>
+<p>在线程1中加synchronized(<code>这里锁用sdf对象,你也可以任意</code>)</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main2</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="title class_">SimpleDateFormat</span> sdf = <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;mm:ss&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">void</span> <span class="title function_">main</span>(<span class="params"><span class="built_in">String</span>[] args</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Car</span>()).<span class="title function_">start</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">2000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="title class_">InterruptedException</span> e) &#123;</span><br><span class="line">            e.<span class="title function_">printStackTrace</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Ambulance</span>()).<span class="title function_">start</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Car</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">void</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">            synchronized (sdf)&#123;</span><br><span class="line">                <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:小汽车开始启动,在路上跑&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">5000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (<span class="title class_">InterruptedException</span> e) &#123;</span><br><span class="line">                    e.<span class="title function_">printStackTrace</span>();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:小汽车跑到终点&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Ambulance</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">void</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">            synchronized (sdf)&#123;</span><br><span class="line">                <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:救护车开始启动,在路上跑&quot;</span>);</span><br><span class="line">                <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:救护车跑到终点&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-结果分析-1"><a href="#2-结果分析-1" class="headerlink" title="2.结果分析"></a>2.结果分析</h5><blockquote>
+<p>Car线程和Ambulance线程在运行时使用同一把锁,线程在休眠时不会释放锁<br>所以Ambulance线程需要等待Car线程执行完成,才能进行执行</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b245bfd54b30~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">23</span>:46:小汽车开始启动,在路上跑</span><br><span class="line"><span class="attribute">23</span>:51:小汽车跑到终点</span><br><span class="line"><span class="attribute">23</span>:51:救护车开始启动,在路上跑</span><br><span class="line"><span class="attribute">23</span>:51:救护车跑到终点</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="三、Object-wait-方法的作用"><a href="#三、Object-wait-方法的作用" class="headerlink" title="三、Object#wait()方法的作用"></a>三、<code>Object#wait()</code>方法的作用</h4><blockquote>
+<p>在<code>线程t1</code>调用<code>A对象</code>的<code>wait()方法</code>,会释放<code>t1持有的锁</code>，让t1进入<code>等待队列(Blocked状态)</code><br>直到其他线程调用A对象的<code>notify()方法</code>或<code>notifyAll()</code>方法t1进入<code>同步队列(Blocked状态)</code><br>当t1获得锁后会进入<code>就绪状态Runnable</code>,获取CPU的调度权后会继续执行,再贴一遍这个图:</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b4111b0889be~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="线程状态"></p>
+<hr>
+<h5 id="1-wait方法的使用"><a href="#1-wait方法的使用" class="headerlink" title="1.wait方法的使用"></a>1.wait方法的使用</h5><blockquote>
+<p>既然是释放当前线程的锁，那么不须有锁才行，而且必须用该锁的对象调用wait方法<br>比如上面是用sdf对象加锁的,必须使用<code>sdf.wait();</code>,否则会抛出<code>InterruptedException</code></p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> static <span class="keyword">class</span> Car implements Runnable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run<span class="literal">()</span> &#123;</span><br><span class="line">        synchronized (sdf) &#123;</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(sdf.format(<span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>current<span class="constructor">TimeMillis()</span>) + <span class="string">&quot;:小汽车开始启动,在路上跑&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="module-access"><span class="module"><span class="identifier">Thread</span>.</span></span>sleep(<span class="number">3000</span>);<span class="comment">//模拟执行3s的任务之后</span></span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.print<span class="constructor">StackTrace()</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(sdf.format(<span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>current<span class="constructor">TimeMillis()</span>) + <span class="string">&quot;:小汽车紧急刹车....&quot;</span>);</span><br><span class="line">                sdf.wait<span class="literal">()</span>;</span><br><span class="line">                <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(sdf.format(<span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>current<span class="constructor">TimeMillis()</span>) + <span class="string">&quot;:小汽车开始启动....&quot;</span>);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.print<span class="constructor">StackTrace()</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="module-access"><span class="module"><span class="identifier">Thread</span>.</span></span>sleep(<span class="number">5000</span>);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.print<span class="constructor">StackTrace()</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(sdf.format(<span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>current<span class="constructor">TimeMillis()</span>) + <span class="string">&quot;:小汽车跑到终点&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> static <span class="keyword">class</span> Ambulance implements Runnable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run<span class="literal">()</span> &#123;</span><br><span class="line">        synchronized (sdf) &#123;</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(sdf.format(<span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>current<span class="constructor">TimeMillis()</span>) + <span class="string">&quot;:救护车开始启动,在路上跑&quot;</span>);</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(sdf.format(<span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>current<span class="constructor">TimeMillis()</span>) + <span class="string">&quot;:救护车跑到终点&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-结果分析-2"><a href="#2-结果分析-2" class="headerlink" title="2.结果分析"></a>2.结果分析</h5><blockquote>
+<p>在Car线程调用<code>sdf.wait();</code>后,锁将被释放，然后Ambulance线程就可以持有锁运行了<br>如果不唤醒线程，线程将一直阻塞，就是<code>根本停不下来</code>。打个比方就是sdf是司机<br><code>wait()</code>之后就把车钥匙扔了，然后熄火了。钥匙拿不回来，车就跑不了。需要<code>notify()</code>获取车钥匙</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b222518703fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">30</span>:48:小汽车开始启动,在路上跑</span><br><span class="line"><span class="attribute">30</span>:51:小汽车紧急刹车....</span><br><span class="line"><span class="attribute">30</span>:51:救护车开始启动,在路上跑</span><br><span class="line"><span class="attribute">30</span>:51:救护车跑到终点</span><br><span class="line">然后就阻塞在这里停不下来了....</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="3-唤醒等待线程"><a href="#3-唤醒等待线程" class="headerlink" title="3.唤醒等待线程"></a>3.唤醒等待线程</h5><blockquote>
+<p>注意wait和notify需要使用同一个对象,否则然并卵<br>在Ambulance线程跑完后唤醒Car线程,然后Car获取所后会进入就绪态</p>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private static <span class="keyword">class</span> Ambulance implements Runnable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    <span class="built_in">public</span> <span class="type">void</span> run() &#123;</span><br><span class="line">        synchronized (sdf) &#123;</span><br><span class="line">            <span class="keyword">System</span>.<span class="keyword">out</span>.println(sdf.format(<span class="keyword">System</span>.currentTimeMillis()) + &quot;:救护车开始启动,在路上跑&quot;);</span><br><span class="line">            <span class="keyword">System</span>.<span class="keyword">out</span>.println(sdf.format(<span class="keyword">System</span>.currentTimeMillis()) + &quot;:救护车跑到终点&quot;);</span><br><span class="line">            sdf.<span class="keyword">notify</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="4-结果分析"><a href="#4-结果分析" class="headerlink" title="4.结果分析"></a>4.结果分析</h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b2340d168f1d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">40</span>:23:小汽车开始启动,在路上跑</span><br><span class="line"><span class="attribute">40</span>:26:小汽车紧急刹车....</span><br><span class="line"><span class="attribute">40</span>:26:救护车开始启动,在路上跑</span><br><span class="line"><span class="attribute">40</span>:26:救护车跑到终点</span><br><span class="line"><span class="attribute">40</span>:26:救护车:喂，哥们,醒醒,你可以开了...</span><br><span class="line"><span class="attribute">40</span>:26:小汽车开始启动....</span><br><span class="line"><span class="attribute">40</span>:31:小汽车跑到终点</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="四、Thread-join-方法-和Thread-yield"><a href="#四、Thread-join-方法-和Thread-yield" class="headerlink" title="四、Thread#join()方法 和Thread#yield"></a>四、<code>Thread#join()</code>方法 和<code>Thread#yield</code></h4><h5 id="1-普通代码"><a href="#1-普通代码" class="headerlink" title="1.普通代码"></a>1.普通代码</h5><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main6</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="title class_">SimpleDateFormat</span> sdf = <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">void</span> <span class="title function_">main</span>(<span class="params"><span class="built_in">String</span>[] args</span>) &#123;</span><br><span class="line">        <span class="title class_">Thread</span> car = <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Car</span>());</span><br><span class="line">        car.<span class="title function_">start</span>();</span><br><span class="line">        <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:main线程结束&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Car</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">void</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:小汽车开始启动,在路上跑&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="title class_">Thread</span>.<span class="title function_">sleep</span>(<span class="number">3000</span>);<span class="comment">//模拟执行3s的任务之后</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (<span class="title class_">InterruptedException</span> e) &#123;</span><br><span class="line">                e.<span class="title function_">printStackTrace</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title class_">System</span>.<span class="property">out</span>.<span class="title function_">println</span>(sdf.<span class="title function_">format</span>(<span class="title class_">System</span>.<span class="title function_">currentTimeMillis</span>()) + <span class="string">&quot;:小汽车跑到终点&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-结果分析-3"><a href="#2-结果分析-3" class="headerlink" title="2.结果分析"></a>2.结果分析</h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b2d04ca6cf7c~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">26</span>:28:小汽车开始启动,在路上跑</span><br><span class="line"><span class="attribute">26</span>:28:main线程结束</span><br><span class="line"><span class="attribute">26</span>:31:小汽车跑到终点</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="3-join方法的使用"><a href="#3-join方法的使用" class="headerlink" title="3.join方法的使用"></a>3.join方法的使用</h5><blockquote>
+<p>阻塞当前线程,知道join的线程结束或超时</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b3ae3b81c63c~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main6</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">        Thread car = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Car());</span><br><span class="line">        car.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            car.<span class="keyword">join</span>();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.<span class="keyword">out</span>.println(sdf.format(System.currentTimeMillis()) + <span class="string">&quot;:main线程结束&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">Car</span> <span class="title">implements</span> <span class="title">Runnable</span> &#123;</span><br><span class="line">        @Override</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>()</span> &#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(sdf.format(System.currentTimeMillis()) + <span class="string">&quot;:小汽车开始启动,在路上跑&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">3000</span>);<span class="comment">//模拟执行3s的任务之后</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.<span class="keyword">out</span>.println(sdf.format(System.currentTimeMillis()) + <span class="string">&quot;:小汽车跑到终点&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">----&gt;[打印结果]-----------------------------</span><br><span class="line"><span class="number">31</span>:<span class="number">53</span>:小汽车开始启动,在路上跑</span><br><span class="line"><span class="number">31</span>:<span class="number">56</span>:小汽车跑到终点</span><br><span class="line"><span class="number">31</span>:<span class="number">56</span>:main线程结束</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="4-yield方法测试"><a href="#4-yield方法测试" class="headerlink" title="4.yield方法测试"></a>4.yield方法测试</h5><blockquote>
+<p>让出线程的cpu调度权,之后再一起抢夺。<code>运行状态--&gt;就绪状态</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main7</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">car</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&quot;car&quot;</span>);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">ambulance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&quot;Ambulance&quot;</span>);</span><br><span class="line">        car.start();</span><br><span class="line">        ambulance.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Car</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Car</span><span class="params">(String name)</span> &#123;</span><br><span class="line">            <span class="built_in">super</span>(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                System.out.println(getName() + <span class="string">&quot;----&quot;</span> + i);</span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">5</span>) &#123;</span><br><span class="line">                    yield();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行了几组数据,大部分满足让出调度权后，另一个线程执行，也有少量情况不是。<br>所以yield说明我现在不急,可以划划水,执行权可以让出去。不过接下来谁执行还是不定的。</p>
+</blockquote>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/5/6/16a8b56c24ea9deb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<hr>
+<h4 id="五、小结"><a href="#五、小结" class="headerlink" title="五、小结"></a>五、小结</h4><h5 id="1-需要补充的点"><a href="#1-需要补充的点" class="headerlink" title="1.需要补充的点:"></a>1.需要补充的点:</h5><blockquote>
+<p>1.关于synchronized锁这里不展开,不了解的可以见:[线程篇3：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903749488492557">-synchronized-]</a><br>2.关于synchronized锁对象需要一致,否则锁不住，然并卵。常用class对象,如<code>Car.class</code><br>3.可以设置超时唤醒<code>xxx.wait(3000)</code>,即3s后唤醒线程。<br>4.可以设置join超时<code>xxx.join(3000)</code>,即3s后线程进入就绪态。<br>5.notifyAll:来着黑暗寒冬的随从们,仆人们,士兵们,听从克尔苏加德的召唤吧!</p>
+</blockquote>
+<hr>
+<h5 id="2-简单比较"><a href="#2-简单比较" class="headerlink" title="2.简单比较"></a>2.简单比较</h5><table>
+<thead>
+<tr>
+<th>item</th>
+<th>从属</th>
+<th>是否释放锁</th>
+<th>状态转变为</th>
+<th>异常</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sleep</td>
+<td>Thread 静态方法</td>
+<td>NO</td>
+<td>阻塞</td>
+<td>InterruptedException</td>
+</tr>
+<tr>
+<td>wait</td>
+<td>Object 公共方法</td>
+<td>YES</td>
+<td>等待队列</td>
+<td>IllegalMonitorStateException+InterruptedException</td>
+</tr>
+<tr>
+<td>notify&#x2F;notifyAll</td>
+<td>Object 公共方法</td>
+<td>–</td>
+<td>同步队列</td>
+<td>IllegalMonitorStateException</td>
+</tr>
+<tr>
+<td>join</td>
+<td>Thread 公共方法</td>
+<td>NO</td>
+<td>阻塞</td>
+<td>InterruptedException</td>
+</tr>
+<tr>
+<td>yield</td>
+<td>Thread 公共方法</td>
+<td>NO</td>
+<td>可执行态</td>
+<td>无</td>
+</tr>
+</tbody></table>
+
+        </div>
+        <!--添加编辑 常飞-->
+        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/线程篇2：-sleep、wait、notify、join、yield.md" target="_blank">编辑</a>
+        <!--添加编辑-->
+</article>
+
+
+
+    <!--添加高亮代码 常飞-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <!--添加高亮代码-->
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-number">1.</span> <span class="toc-text">前言：线程的五种状态</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81Thread-sleep%E7%AE%80%E8%BF%B0"><span class="toc-number"></span> <span class="toc-text">一、Thread.sleep简述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">1.测试代码：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%EF%BC%9A%E6%B3%A802-29%E4%BB%A3%E8%A1%A8%E5%BD%93%E5%89%8D%E6%97%B6%E5%88%BB%E7%9A%84%E5%88%86%E7%A7%92%EF%BC%8C%E5%8D%B32%E5%88%8629%E7%A7%92"><span class="toc-number">2.</span> <span class="toc-text">2. 结果分析：注02:29代表当前时刻的分秒，即2分29秒</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BA%BF%E7%A8%8B%E5%86%85sleep%E4%BB%A5%E5%8F%8Asynchronized"><span class="toc-number"></span> <span class="toc-text">二、线程内sleep以及synchronized</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AD%90%E7%BA%BF%E7%A8%8B%E5%8A%A0%E5%85%A5%E4%BC%91%E7%9C%A0"><span class="toc-number">1.</span> <span class="toc-text">1.子线程加入休眠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">2.结果分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%BD%93%E5%8A%A0%E9%94%81%E7%9D%A1%E7%9C%A0%E6%97%B6"><span class="toc-number">3.</span> <span class="toc-text">3.当加锁睡眠时</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-1"><span class="toc-number">4.</span> <span class="toc-text">2.结果分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81Object-wait-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number"></span> <span class="toc-text">三、Object#wait()方法的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-wait%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">1.wait方法的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-2"><span class="toc-number">2.</span> <span class="toc-text">2.结果分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%94%A4%E9%86%92%E7%AD%89%E5%BE%85%E7%BA%BF%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">3.唤醒等待线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">4.结果分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Thread-join-%E6%96%B9%E6%B3%95-%E5%92%8CThread-yield"><span class="toc-number"></span> <span class="toc-text">四、Thread#join()方法 和Thread#yield</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%99%AE%E9%80%9A%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">1.普通代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-3"><span class="toc-number">2.</span> <span class="toc-text">2.结果分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-join%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">3.join方法的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-yield%E6%96%B9%E6%B3%95%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">4.yield方法测试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number"></span> <span class="toc-text">五、小结</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E9%9C%80%E8%A6%81%E8%A1%A5%E5%85%85%E7%9A%84%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">1.需要补充的点:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%AE%80%E5%8D%95%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">2.简单比较</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&text=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&is_video=false&description=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=线程篇2：[- sleep、wait、notify、join、yield -]&body=Check out this article: https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&title=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&name=线程篇2：[- sleep、wait、notify、join、yield -]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/06/08/%E7%BA%BF%E7%A8%8B%E7%AF%872%EF%BC%9A-sleep%E3%80%81wait%E3%80%81notify%E3%80%81join%E3%80%81yield/&t=线程篇2：[- sleep、wait、notify、join、yield -]"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2015-2022
+    koderboy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
