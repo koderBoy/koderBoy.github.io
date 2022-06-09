@@ -1,539 +1,738 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
     <meta property="og:type" content="website">
 <meta property="og:title" content="VOYAGE">
 <meta property="og:url" content="https://koderboy.github.io/page/2/index.html">
 <meta property="og:site_name" content="VOYAGE">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="koderboy">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>VOYAGE</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>VOYAGE</title>
 
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-    <div class="content index py4">
-        
-          <header id="header">
-    <a href="/">
-        
-            
-                                <div id="logo" style="background-image: url(/images/logo.png);"></div>
-                                
-                                    
-                                        <div id="title">
-                                            <h1>
-                                                VOYAGE
-                                            </h1>
-                                        </div>
+
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
     </a>
-    <div id="nav">
-        <ul>
-            <li class="icon">
-                <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
             </li>
-            
-                <!--
-     -->
-                <li>
-                    <a href="/">
-                        首页
-                    </a>
-                </li>
-                <!--
-   -->
-                
-                <!--
-     -->
-                <li>
-                    <a href="/about/">
-                        关于
-                    </a>
-                </li>
-                <!--
-   -->
-                
-                <!--
-     -->
-                <li>
-                    <a href="/archives/">
-                        归档
-                    </a>
-                </li>
-                <!--
-   -->
-                
-                <!--
-     -->
-                <li>
-                    <a href="/search">
-                        搜索
-                    </a>
-                </li>
-                <!--
-   -->
-                
-                    <button style="background-color: #1890ff  ; color: aliceblue; border: 0px;" onclick="javascript:window.open('https://github.com/koderBoy/blog/new/master/source/_posts','_blank');">写博客</button>
-        </ul>
-    </div>
-
-</header>
+          
         
-        <section id="about">
-    
-                
-                    <p>
-                        在这里找到我：
-                            
-                                
-                                    
-                                        
-                                                    <a class="icon" target="_blank" rel="noopener" href="http://github.com/probberechts/cactus-dark" aria-label="github">
-            <i class="fab fa-github"></i><!--
-      ---></a>
-                                                    <!--
-    --->
-                                                    
-                                                        <!--
-    --->
-                                                          
-                                                            
-                                                                
-                                        
-                                                    <a class="icon" target="_blank" rel="noopener" href="/" aria-label="twitter">
-            <i class="fab fa-twitter"></i><!--
-      ---></a>
-                                                    <!--
-    --->
-                                                    
-                                                        <!--
-    --->
-                                                          
-                                                            
-                                                                
-                                        
-                                                    <a class="icon" target="_blank" rel="noopener" href="/" aria-label="facebook">
-            <i class="fab fa-facebook"></i><!--
-      ---></a>
-                                                    <!--
-    --->
-                                                    
-                                                        <!--
-    --->
-                                                          
-                                                            
-                                                                
-                                        
-                                                    <a class="icon" target="_blank" rel="noopener" href="/" aria-label="linkedin">
-            <i class="fab fa-linkedin"></i><!--
-      ---></a>
-                                                    <!--
-    --->
-                                                    
-                                                        <!--
-    --->
-                                                           
-                                                            
-                                                                
-                                        
-                                            <a class="icon" target="_blank" rel="noopener" href="mailto:name@email.com" aria-label="mail">
-                                                <i class="fas fa-envelope"></i>
-                                                <!--
-      --->
-                                            </a>
-                                            
-                                                        <!--
-    --->
-                                                        .
-                                                            
-                                                                
-                    </p>
-                    
-</section>
-
-<section id="writing">
-    <span class="h1"><a href="/archives/">文章</a></span>
-    
-            <ul class="post-list">
-                
-                    
-                        
-                            
-                                        
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
-          <time datetime="2022-06-03T11:23:29.000Z" itemprop="datePublished">2022-06-03</time>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/">策略算法工程师之路-排序模型(LTR)及应用</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
-          <time datetime="2022-06-03T09:30:33.000Z" itemprop="datePublished">2022-06-03</time>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/06/03/%E8%AF%A6%E8%A7%A3%E8%AE%A9%E6%97%A0%E6%95%B0%E4%BA%BA%E9%A1%BF%E6%82%9F%E7%9A%84%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/">详解让无数人顿悟的熵增定律</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
         
-          <time datetime="2022-05-19T17:56:15.000Z" itemprop="datePublished">2022-05-19</time>
         
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/19/elasticsearch%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">elasticsearch常用命令</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-05-15T06:44:46.000Z" itemprop="datePublished">2022-05-15</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/15/python%E4%B9%8B%E8%99%9A%E6%8B%9F%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83/">python之虚拟隔离环境</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-05-14T14:56:49.000Z" itemprop="datePublished">2022-05-14</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/14/vscode%E6%B2%A1%E6%9C%89python%E7%9A%84%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/">vscode没有python的代码提示</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-05-07T16:28:29.000Z" itemprop="datePublished">2022-05-07</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/07/Jenkins%E8%BF%9C%E7%A8%8Bssh%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91/">Jenkins远程ssh部署踩坑</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-05-04T16:11:25.000Z" itemprop="datePublished">2022-05-04</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/">哈希算法</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-05-04T09:13:03.000Z" itemprop="datePublished">2022-05-04</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/04/tomcat%E7%BC%93%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/">tomcat缓存不足问题</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-05-03T19:23:45.000Z" itemprop="datePublished">2022-05-03</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/05/03/Elasticsearch%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/">Elasticsearch网络设置</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-                                            <li class="post-item">
-                                                
-    <div class="meta">
-      
-        
-          <time datetime="2022-04-27T15:54:02.000Z" itemprop="datePublished">2022-04-27</time>
-        
-      
-    </div>
-
-
-                                                    <span>
-    
-        <a class="" href="/2022/04/27/%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/">局部搜索算法</a>
-    
-
-
-</span>
-                                            </li>
-                                            
-            </ul>
-            
-                
-    <div class="pagination">
-        
-            <a href="/"><i class="fas fa-angle-left"></i></a>
-        
-        <span class="page-number">第 2 页，共 3 页</span>
-        
-            <a href="/page/3/"><i class="fas fa-angle-right"></i>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
+          </li>
         
-    </div>
-
-
-                    
-
-
-</section>
-
-
-    <section id="projects">
-        <span class="h1"><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></span>
-        <ul class="project-list">
-            
-                <li class="project-item">
-                    <a target="_blank" rel="noopener" href="https://hexo.io/">
-                        Hexo
-                    </a>:
-                    <p>个人博客搭建工具</p>
-
-                </li>
-                
-                <li class="project-item">
-                    <a target="_blank" rel="noopener" href="https://github.com/probberechts/hexo-theme-cactus">
-                        hexo-theme-cactus
-                    </a>:
-                    <p>非常简约的hexo主题</p>
-
-                </li>
-                
-                <li class="project-item">
-                    <a target="_blank" rel="noopener" href="http://git.oschina.net/progit/">
-                        ProGit
-                    </a>:
-                    <p>权威Git书籍 ProGit（中文版），新手老鸟均适合</p>
-
-                </li>
-                
-                <li class="project-item">
-                    <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">
-                        廖雪峰的git教程
-                    </a>:
-                    <p>史上最浅显易懂的Git教程！</p>
-
-                </li>
-                
-                <li class="project-item">
-                    <a target="_blank" rel="noopener" href="https://ifconfig.me/">
-                        ifconfig.me
-                    </a>:
-                    <p>查看自己的外网IP</p>
-
-                </li>
-                
-        </ul>
-
-    </section>
-    
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2015-2022
-    koderboy
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
       </ul>
-    </nav>
+    </div>
   </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_home.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="一万年太久，只争朝夕">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/" target="_self">
+          策略算法工程师之路-排序模型(LTR)及应用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/" target="_self">
+          
+          策略算法工程师之路-排序模型(LTR)及应用目录1.简述 2.Pointwise类 2.1 LR 2.2 MLR 2.3 GBDT + LR 2.4 FM&#x2F;FFM 2.5 深度模型之DNN 2.6 深度模型之Wide&amp;Deep 2.7 深度模型之DeepFM模型 2.8 深度模型之DCN模 2.9 深度模型之DIN模型 2.10 深度模型之DIEN模型 2.11 深度模型之语义相
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-03 11:23" pubdate>
+              2022-06-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95-LTR-%E6%8E%92%E5%BA%8F-%E6%94%B6%E8%97%8F-%E7%9F%A5%E4%B9%8E/">算法,LTR,排序,收藏,知乎</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/03/%E8%AF%A6%E8%A7%A3%E8%AE%A9%E6%97%A0%E6%95%B0%E4%BA%BA%E9%A1%BF%E6%82%9F%E7%9A%84%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/" target="_self">
+          详解让无数人顿悟的熵增定律
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/03/%E8%AF%A6%E8%A7%A3%E8%AE%A9%E6%97%A0%E6%95%B0%E4%BA%BA%E9%A1%BF%E6%82%9F%E7%9A%84%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/" target="_self">
+          
+          详解让无数人顿悟的熵增定律  人活着就是在对抗熵增定律，生命以负熵为生。本文来自微信公众号：思维有了模型（ID：siweimoxing666），作者：模型君，原文标题：《熵增定律：为什么熵增理论让好多人一下子顿悟了》，头图来自：《成为简·奥斯汀》剧照 如果物理学只能留一条定律，我会留熵增定律。说这句话的人叫吴国盛，清华大学的科学史系主任。 虽然你可能会反驳这个观点，难道不是牛顿的力学和爱因斯坦的相
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-03 09:30" pubdate>
+              2022-06-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%94%B6%E8%97%8F-%E7%86%B5%E5%A2%9E-%E7%9C%9F%E7%90%86/">收藏,熵增,真理</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/19/elasticsearch%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_self">
+          elasticsearch常用命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/19/elasticsearch%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_self">
+          
+          快速初始化密码elasticsearch-setup-passwords interactive
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-19 17:56" pubdate>
+              2022-05-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/elasticsearch/">elasticsearch</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/elasticsearch/">elasticsearch</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/15/python%E4%B9%8B%E8%99%9A%E6%8B%9F%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83/" target="_self">
+          python之虚拟隔离环境
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/15/python%E4%B9%8B%E8%99%9A%E6%8B%9F%E9%9A%94%E7%A6%BB%E7%8E%AF%E5%A2%83/" target="_self">
+          
+          我们在python开发项目过程中不可避免的会用到外部依赖库,这些依赖库默认都安装到python安装目录下面。项目越做越多，依赖的库也会越来越多,相同的依赖库还会有多个版本,这就会导致依赖库管混乱。 为了避免依赖库管理我们可以使用python给我们提供的虚拟隔离环境(virtual environment),也叫venv。python的3.4之前默认没有提供venv模块，如果要使用venv需要安全第
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-15 06:44" pubdate>
+              2022-05-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python-venv/">python,venv</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/14/vscode%E6%B2%A1%E6%9C%89python%E7%9A%84%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/" target="_self">
+          vscode没有python的代码提示
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/14/vscode%E6%B2%A1%E6%9C%89python%E7%9A%84%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA/" target="_self">
+          
+          好久没用vscod写Python代码了⌨️，今天打开vscode写python代码时,发现没有代码提示，可能是vscode频繁升级和最近重新安装python环境有关。    Cmd+Shift+P打开设置一顿折腾依然没有结果。   看来只能求助百度了。  网上有好多小伙伴和我遇到的情况一样，我按照小伙伴们的解决办法试了一个遍，vscode依旧是没有提示。  就在快要放弃的时候，一个小伙伴提到
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-14 14:56" pubdate>
+              2022-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/vscode/">vscode</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python-vscode/">python,vscode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/07/Jenkins%E8%BF%9C%E7%A8%8Bssh%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91/" target="_self">
+          Jenkins远程ssh部署踩坑
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/07/Jenkins%E8%BF%9C%E7%A8%8Bssh%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91/" target="_self">
+          
+          
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-07 16:28" pubdate>
+              2022-05-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/jenkins-devOps/">jenkins,devOps</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/" target="_self">
+          哈希算法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/" target="_self">
+          
+          来源：今日头条 一、定义哈希算法，又叫Hash算法，哈希是音译。 哈希算法从数学上讲是遵循一定映射规则集合的多对一（或一对一）的函数实现。相同的输入值必定得到相同的输出值，不同的输入值可能会得到相同的输出值，这就是哈希算法中所谓的碰撞问题。它是一种函数变换，我们把这种函数叫hash函数、散列函数、杂凑函数或哈希函数。 哈希算法，大部分情况下会把一个高维空间或无限维空间上的数据映射成一个更小的有限维
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-04 16:11" pubdate>
+              2022-05-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/04/tomcat%E7%BC%93%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/" target="_self">
+          tomcat缓存不足问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/04/tomcat%E7%BC%93%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/" target="_self">
+          
+          最近部署项目启动服务器后，控制台重复报错警告: Unable to add the resource at [&#x2F;WEB-INF&#x2F;lib&#x2F;xpp3_min-1.1.4c.jar] to the  cache because there was insufficient  free space available after evicting  expired cache entries - cons
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-04 09:13" pubdate>
+              2022-05-04
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/tomcat/">tomcat</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/03/Elasticsearch%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/" target="_self">
+          Elasticsearch网络设置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/03/Elasticsearch%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/" target="_self">
+          
+          Elasticsearch 缺省情况下是绑定 localhost。对于本地开发服务是足够的（如果你在相同机子上启动多个节点，它还可以形成一个集群），但是你需要配置基本的网络设置，为了能够在实际的多服务器生产集群中运行。WARNING：注意网络配置，永远不要暴露未受保护的节点到公网上 常用的网络配置network.host节点将绑定到一个主机名或者 ip 地址并且会将该这个节点通知集群中的其他节点。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-03 19:23" pubdate>
+              2022-05-03
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/27/%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" target="_self">
+          局部搜索算法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/04/27/%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" target="_self">
+          
+          来源：今日头条 一、定义局部搜索算法(Local Search Algorithm)是一种用于解决最优化问题的启发式算法，是一类近似算法（Approximate Algorithms）的通称。它从一个(或一组)初始解出发,通过邻域函数生成解的邻域,再在邻域中搜索出更优的解来替换当前解, 使目标函数逐步优化，通过不断地迭代过程实现解的最优化。 二、基本思想与分类 图2-1 局部搜索算法是一种启发式搜
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-27 15:54" pubdate>
+              2022-04-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
+  
+    
+  
 
-<!-- clipboard -->
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
 
-<!-- Umami Analytics -->
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

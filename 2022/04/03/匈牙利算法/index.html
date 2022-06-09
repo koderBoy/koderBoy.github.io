@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="来源：今日头条 一、定义匈牙利算法（Hungarian algorithm），其核心就是寻找增广路径，是一种用增广路径求二分图最大匹配的算法。 匈牙利算法是一种在P问题内（多项式时间内）求解任务分配问题的组合优化算法。它推动了后来的原始对偶方法。 匈牙利算法是美国数学家哈罗德·库恩于1955年提出的。此算法之所以被称作匈牙利算法，是因为算法很大一部分是基于以前匈牙利数学家Dénes Kőnig和J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="匈牙利算法">
@@ -42,149 +52,237 @@
 <meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/59311857eb4f41cdbdd708dd818f4f8b?from=pc">
 <meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/36151513ac8a44adbcaf20dee57d5393?from=pc">
 <meta property="article:published_time" content="2022-04-03T15:58:27.000Z">
-<meta property="article:modified_time" content="2022-06-08T07:30:55.645Z">
+<meta property="article:modified_time" content="2022-06-09T03:54:43.551Z">
 <meta property="article:author" content="koderboy">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://p3.toutiaoimg.com/origin/pgc-image/2ad50b9d65ca4624b317c801920d8701?from=pc">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>匈牙利算法</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  <title>匈牙利算法 - VOYAGE</title>
 
-    <!-- persian styles -->
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
     
-    <!-- rss -->
     
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
-	<!-- mathjax -->
-	
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/04/27/%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&text=匈牙利算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&is_video=false&description=匈牙利算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=匈牙利算法&body=Check out this article: https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&name=匈牙利算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&t=匈牙利算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
 
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">二、名词解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%BA%8C%E5%88%86%E5%9B%BE%E4%B8%8E%E5%8C%B9%E9%85%8D"><span class="toc-number">3.</span> <span class="toc-text">1、二分图与匹配</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-%E5%A6%82%E5%9B%BE2-2%E6%89%80%E7%A4%BA"><span class="toc-number">4.</span> <span class="toc-text">例子1 如图2-2所示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E5%A6%82%E5%9B%BE2-3%E6%89%80%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">例子2 如图2-3所示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%A2%9E%E5%B9%BF%E8%B7%AF%E5%BE%84"><span class="toc-number">6.</span> <span class="toc-text">2、增广路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A2%9E%E5%B9%BF%E8%B7%AF%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">增广路的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%8C%88%E7%89%99%E5%88%A9%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">3、匈牙利树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E6%95%B0-x3D-%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96%E7%8E%87"><span class="toc-number">9.</span> <span class="toc-text">4、二分图最大匹配数&#x3D;最小点覆盖率</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">10.</span> <span class="toc-text">三、匈牙利算法复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">11.</span> <span class="toc-text">四、举例说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901"><span class="toc-number">12.</span> <span class="toc-text">例子1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80"><span class="toc-number">13.</span> <span class="toc-text">解法一</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C"><span class="toc-number">14.</span> <span class="toc-text">解法二</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902"><span class="toc-number">15.</span> <span class="toc-text">例子2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">16.</span> <span class="toc-text">五、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8F"><span class="toc-number">17.</span> <span class="toc-text">例子1 矩阵游戏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E6%9F%AF%E5%8D%97%E5%BC%80%E9%94%81"><span class="toc-number">18.</span> <span class="toc-text">例子2 柯南开锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">19.</span> <span class="toc-text">六、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AE%9A%E7%90%86"><span class="toc-number">20.</span> <span class="toc-text">附录1 相关概念与定理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%952-Konig%E5%AE%9A%E7%90%86%E5%8F%8A%E5%85%B6%E8%AF%81%E6%98%8E"><span class="toc-number">21.</span> <span class="toc-text">附录2 Kőnig定理及其证明</span></a></li></ol>
-    </div>
-  </span>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="匈牙利算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-03 15:58" pubdate>
+        2022年4月3日 下午
+      </time>
+    </span>
+  
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-        
-    <h1 class="posttitle" itemprop="name headline">
-        匈牙利算法
-    </h1>
+<div class="mt-1">
+  
 
+  
 
+  
+  
+</div>
 
-            <div class="meta">
-                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">koderboy</span>
-                </span>
-                
-    <div class="postdate">
-      
-        <time datetime="2022-04-03T15:58:27.000Z" itemprop="datePublished">2022-04-03</time>
-        
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
 
-
-                    
-    <div class="article-category">
-        <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
-    </div>
-
-
-                        
-
-            </div>
-    </header>
+  <main>
     
+      
 
-        <div class="content" itemprop="articleBody">
-            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6939746079759974944/">今日头条</a></p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">匈牙利算法</h1>
+            
+            <div class="markdown-body">
+              <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6939746079759974944/">今日头条</a></p>
 <h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h1><p>匈牙利算法（Hungarian algorithm），其核心就是寻找增广路径，是一种用增广路径求二分图最大匹配的算法。</p>
 <p>匈牙利算法是一种在P问题内（多项式时间内）求解任务分配问题的组合优化算法。它推动了后来的原始对偶方法。</p>
 <p>匈牙利算法是美国数学家哈罗德·库恩于1955年提出的。此算法之所以被称作匈牙利算法，是因为算法很大一部分是基于以前匈牙利数学家Dénes Kőnig和Jenő Egerváry的工作之上创建起来的。</p>
 <h1 id="二、名词解释"><a href="#二、名词解释" class="headerlink" title="二、名词解释"></a>二、名词解释</h1><h1 id="1、二分图与匹配"><a href="#1、二分图与匹配" class="headerlink" title="1、二分图与匹配"></a>1、二分图与匹配</h1><p>二分图（Bipartite graph）又称作二部图，是图论中的一种特殊模型。 设G&#x3D;(V,E)是一个无向图，如果顶点V可分割为两个互不相交的子集(A,B)，A、B内部的点不相交，并且图中的每条边（i，j）所关联的两个顶点i和j分别属于这两个不同的顶点集(i∈A, j∈B)，则称图G为一个二分图。</p>
 <p>如图2-1左边图转换成一个二分图。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2ad50b9d65ca4624b317c801920d8701?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2ad50b9d65ca4624b317c801920d8701?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图2-1</p>
 <p>一个图为二分图的充分必要条件是至少有两个点，并且如果存在回路的话，那么回路的长度(长度指的是该回路连接的点的数目)必须为偶数。</p>
 <p>二分图的匹配：</p>
@@ -192,16 +290,16 @@
 <p>极大匹配是指在当前已完成的匹配下,无法再通过增加未完成匹配的边的方式来增加匹配的边数。</p>
 <p>最大匹配是所有极大匹配当中边数最大的一个匹配。选择这样的边数最大的子集称为图的最大匹配问题。匈牙利算法就是找出这样一个最大匹配的边数。对于图来说，最大匹配不是唯一的，但是最大匹配的大小是唯一的。</p>
 <p>如果一个匹配中，图中的每个顶点都和图中某条边相关联，则称此匹配为完全匹配，也称作完美匹配。图2-2中图d就是二分图的一个完全匹配（同时也是最大匹配），但是最大匹配不总是完全匹配。</p>
-<h1 id="例子1-如图2-2所示"><a href="#例子1-如图2-2所示" class="headerlink" title="例子1 如图2-2所示"></a>例子1 如图2-2所示</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/94b4c835aabd4602aa1be6c0c90d21c9?from=pc" alt="流行算法：匈牙利算法"></p>
+<h1 id="例子1-如图2-2所示"><a href="#例子1-如图2-2所示" class="headerlink" title="例子1 如图2-2所示"></a>例子1 如图2-2所示</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/94b4c835aabd4602aa1be6c0c90d21c9?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图2-2</p>
 <p>图a，图b，图c，图d中任意两条边的连接的顶点都没有相同的(换句话说，n条边必须连接2 * n个不相同的顶点)。所以他们都是图G的匹配。</p>
-<h1 id="例子2-如图2-3所示"><a href="#例子2-如图2-3所示" class="headerlink" title="例子2 如图2-3所示"></a>例子2 如图2-3所示</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e293607bba904c5ba990203fd215fa5b?from=pc" alt="流行算法：匈牙利算法"></p>
+<h1 id="例子2-如图2-3所示"><a href="#例子2-如图2-3所示" class="headerlink" title="例子2 如图2-3所示"></a>例子2 如图2-3所示</h1><p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e293607bba904c5ba990203fd215fa5b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图2-3</p>
 <p>红线部分代表匹配或完美匹配。</p>
 <h1 id="2、增广路径"><a href="#2、增广路径" class="headerlink" title="2、增广路径"></a>2、增广路径</h1><p>交替路：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。</p>
 <p>增广路径：若P是图G中一条连通两个未匹配顶点的路径，并且属于M的边和不属于M的边(即已匹配和待匹配的边)在P上交替出现，则称P为相对于M的一条增广路径。</p>
 <p>换一个说法，从一个未匹配点出发，走交替路，如果途径另一个未匹配点，则这条交替路称为增广路。如图2-4所示，红色结点代表匹配结点， 红色边代表匹配边，黑色边代表非匹配边。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c180006e1543456db0408c7ad2bcea91?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/c180006e1543456db0408c7ad2bcea91?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图2-4</p>
 <p>增广路径：1 -&gt; 2-&gt;3-&gt;4-&gt;5-&gt;6。1、6非匹配点，中间结点2、3、4、5是匹配点。黑色标记 1—&gt;2、3—&gt;4、5—&gt;6是非匹配边，红色标记2-3、4-5是匹配边。</p>
 <p>增广路径的首尾是非匹配点。因此，增广路径的第一条和最后一条边，必然是非匹配边；同时它的第二条边（如果有）和倒数第二条边（如果有），必然是匹配边；以及第三条边（如果有）和倒数第三条边（如果有），一定是非匹配边。</p>
@@ -225,70 +323,70 @@
 <li>增广路主要应用于匈牙利算法中，用于求二分图最大匹配。</li>
 </ul>
 <h1 id="3、匈牙利树"><a href="#3、匈牙利树" class="headerlink" title="3、匈牙利树"></a>3、匈牙利树</h1><p>匈牙利树一般由 BFS 构造（类似于 BFS 树）。从一个未匹配点出发运行 BFS（唯一的限制是，必须走交替路），直到不能再扩展为止。如图2-5，由Fig.7，可以得到Fig.8的一棵 BFS 树。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/86591fe9815540c9aa10ed0e8c5f394f?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/86591fe9815540c9aa10ed0e8c5f394f?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图2-5</p>
 <p>这棵树存在一个叶子结点为非匹配点（7号），但是匈牙利树要求所有叶子结点均为匹配点，因此这不是一棵匈牙利树（顺便说一句，Fig.8 中非匹配根节点2到非匹配叶结点7显然是一条增广路，沿这条增广路扩充后将得到一个完美匹配）。在Fig.9中，从2号结点出发就会得到一棵匈牙利树。</p>
 <p>匈牙利树要求所有叶子结点均为匹配点，它就是把存在的可连接的匹配点都列出来。</p>
 <h1 id="4、二分图最大匹配数-x3D-最小点覆盖率"><a href="#4、二分图最大匹配数-x3D-最小点覆盖率" class="headerlink" title="4、二分图最大匹配数&#x3D;最小点覆盖率"></a>4、二分图最大匹配数&#x3D;最小点覆盖率</h1><p>二分图的最小点覆盖的理解：找到最少的一些点，使二分图所有的边都至少有一个端点在这些点之中。倒过来说就是，删除包含这些点的边，可以删掉所有边。</p>
 <h1 id="三、匈牙利算法复杂度"><a href="#三、匈牙利算法复杂度" class="headerlink" title="三、匈牙利算法复杂度"></a>三、匈牙利算法复杂度</h1><p>设V为二分图左边的顶点数，E为二分图中边的数目。匈牙利算法的实现以与点集合 V 为基础，每次在集合V中选一个顶点 Vi 做增广路径的起点搜索增广路径。搜索增广路径需要遍历边及E内的所有边，遍历方法可以采用深度优先遍历（DFS），也可以采用广度优先遍历（BFS），无论什么方法，其时间复杂度都是 O(E)。<br>匈牙利算法每个顶点 Vi 只能选择一次，因此算法的整体时间复杂度是 O(V*E)，总的来说，是一个相当高效的算法。</p>
 <h1 id="四、举例说明"><a href="#四、举例说明" class="headerlink" title="四、举例说明"></a>四、举例说明</h1><h1 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h1><p>假设在婚介公司的手上有4位剩男，4位剩女，还没见面只是互相看了资料，每个人都对多名异性有好感。婚介公司做了一张互有好感关系图。如图4-1所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ec9c344c222849e0a67f3d1690c6a95b?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ec9c344c222849e0a67f3d1690c6a95b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-1</p>
 <p>是否可能让所有男孩和女孩一对一配对，使得每对儿都互相喜欢呢？在图论中，这就是完美匹配问题。如果换一个说法：最多有多少互相喜欢的男孩&#x2F;女孩可以配对儿？这就是最大匹配问题。匈牙利算法就是为了求解最大匹配问题。</p>
 <h1 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h1><p>第1步 初始为空匹配。如图4-2所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bffbf8f9a762453db2d3813bd3e56c47?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/bffbf8f9a762453db2d3813bd3e56c47?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-2</p>
 <p>第2步 选择空匹配点Al、Alice，建立第1条增广路径Al—&gt;Alice, 并进行置换，创建第1个匹配：红色标记Al**—&gt;**Alice。如图4-3所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/88033fc474ab41dab2e6b3e0247df7bf?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/88033fc474ab41dab2e6b3e0247df7bf?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-3</p>
 <p>第3步 选择空匹配点Bob，建立第2条增广路径Bob–&gt;Carol, 并进行置换，创建第2个匹配：红色标记<strong>Bob—&gt;Carol</strong>。如图4-4所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7393e9824891468a8a8721b62c9d0800?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7393e9824891468a8a8721b62c9d0800?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-4</p>
 <p>第4步，选择空匹配点Christ，建立增广路径Christ—&gt;<strong>Alice—&gt;Al</strong>—&gt;Beatrice</p>
 <p>（增广路径满足：头部Christ、尾部Beatrice都是非匹配点， 中间Alice、Al都是匹配点；蓝色标记Christ—&gt;Alice是非匹配边，红色标记<strong>Alice—&gt;Al</strong>是匹配边，蓝色标记Al—&gt;Beatrice是非匹配边）。如图4-5所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0f1d5095d81244618d06042d8d45b5b4?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0f1d5095d81244618d06042d8d45b5b4?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-5</p>
 <p>第5步，置换增广路径中的匹配边和非匹配边。建立新的匹配：Christ—&gt;Alice**—&gt;**Al—&gt;Beatrice</p>
 <p>（红色标记<strong>Christ—&gt;Alice</strong>是匹配边，Alice—&gt;Al是非匹配边，红色标记<strong>Al—&gt;Beatrice</strong>是匹配边）。如图4-6所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/655849a26e694f2bb07fea89459440ae?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/655849a26e694f2bb07fea89459440ae?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-6</p>
 <p>第6步，选择空匹配点Dan，建立增广路径Dan—&gt;<strong>Carol—&gt;Bob</strong>—&gt;Danielle</p>
 <p>（增广路径满足：头部Dan、尾部Danielle都是非匹配点， 中间Carol、Bob都是匹配点；蓝色标记Dan—&gt;Carol是非匹配边，红色标记<strong>Carol—&gt;Bob</strong>是匹配边，蓝色标记Bob—&gt;Danielle是非匹配边）。如图4-7所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/95e402fa9b0d4c6d84110a72a86f5b46?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/95e402fa9b0d4c6d84110a72a86f5b46?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-7</p>
 <p>第7步，置换增广路径中的匹配边和非匹配边。建立新的匹配：Dan—&gt;Carol—&gt;Bob—&gt;Danielle</p>
 <p>（红色标记Dan—&gt;Carol是匹配边，Carol—&gt;Bob是非匹配边，红色标记Bob—&gt;Danielle是匹配边）。如图4-8所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/de9e1b0205264fbfb515c611e700b064?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/de9e1b0205264fbfb515c611e700b064?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-8</p>
 <p>已经无法添加新的增广路径了，算法结束。男女双方达到最大配对，红色标记最大配对边:{Al—&gt;Beatrice，Bob—&gt;Danielle，Christ—&gt;Alice, Dan—&gt;Carol}。</p>
 <h1 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h1><p>第1步 初始为空匹配。。如图4-9所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7a0a3f5c7c3f4cf39f05e6cec62a419b?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/7a0a3f5c7c3f4cf39f05e6cec62a419b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-9</p>
 <p>第2步 选择空匹配点Al、Alice，建立第1条增广路径Al—&gt;Alice, 并进行置换，创建第1个匹配：红色标记Al**—&gt;**Alice。如图4-10所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e867fd9454334d0f89e396e8db80936a?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/e867fd9454334d0f89e396e8db80936a?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-10</p>
 <p>第3步，选择空匹配点Christ，建立增广路径Christ—&gt;<strong>Alice—&gt;Al</strong>—&gt;Carol</p>
 <p>（增广路径满足：头部Christ、尾部Carol都是非匹配点， 中间Alice、Al都是匹配点；蓝色标记Christ—&gt;Alice是非匹配边，红色标记<strong>Alice—&gt;Al</strong>是匹配边，蓝色标记Al—&gt;Carol是非匹配边）。如图4-11所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/033084fbf6624821b7850f8f91e35378?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/033084fbf6624821b7850f8f91e35378?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-11</p>
 <p>第4步，置换增广路径中的匹配边和非匹配边。建立新的匹配：Christ—&gt;Alice**—&gt;**Al—&gt;Carol</p>
 <p>（红色标记<strong>Christ—&gt;Alice</strong>是匹配边，黑色标记Alice—&gt;Al是非匹配边，红色标记<strong>Al—&gt;Carol</strong>是匹配边）。如图4-12所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/d16f1a1129c3416e89fdc915902c45e8?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/d16f1a1129c3416e89fdc915902c45e8?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-12</p>
 <p>第5步，选择空匹配点Dan，建立增广路径Dan—&gt;<strong>Carol—&gt;Al</strong>—&gt;Beatrice</p>
 <p>（增广路径满足：头部Dan、尾部Beatrice都是非匹配点， 中间Carol、Al都是匹配点；蓝色标记Dan—&gt;Carol是非匹配边，红色标记<strong>Carol—&gt;Al</strong>是匹配边，蓝色标记Al—&gt;Beatrice是非匹配边）。如图4-13所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0dea5d76ce1b46289343731165354b6f?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0dea5d76ce1b46289343731165354b6f?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-13</p>
 <p>第6步，置换增广路径中的匹配边和非匹配边。建立新的匹配：Dan—&gt;Carol—&gt;Al—&gt;Beatrice</p>
 <p>（红色标记Dan—&gt;Carol是匹配边，Carol—&gt;Al是非匹配边，红色标记Al—&gt;Beatrice是匹配边）。如图4-14所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6fc700dcb9064edc942cf311d9186d98?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/6fc700dcb9064edc942cf311d9186d98?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-14</p>
 <p>第7步，选择空匹配点Bob，建立匹配边<strong>Bob–&gt;Danielle</strong>。如图4-15所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0593bdd9ab294a34a37f1612423b34ed?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/0593bdd9ab294a34a37f1612423b34ed?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-15</p>
 <p>已经无法添加新的增广路径了，算法结束。男女双方达到最大配对，红色标记最大配对边:{Al—&gt;Beatrice，Bob—&gt;Danielle，Christ—&gt;Alice, Dan—&gt;Carol}。</p>
 <h1 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h1><p>匈牙利算法的核心是：不断寻找增广路，并扩展增广路。不断重复这一过程直到找不到增广路为止。如图4-16所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4c9198ba1c8b47bcb82ec6a496f2e077?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/4c9198ba1c8b47bcb82ec6a496f2e077?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图4-16</p>
 <p>具体步骤：</p>
 <ol>
@@ -302,17 +400,17 @@
 <p><strong>解：</strong></p>
 <p>解题思路：我们把矩阵转化为二分图（左侧集合代表各行，右侧集合代表各列，某位置为1则该行和该列之间有边）。我们想进行一系列交换操作，使得X1连上Y1，X2连上Y2，……</p>
 <p>假设N&#x3D;4, 建立4×4的01矩阵。如图5-1所示。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b8bceb46896c4647a6a0620fddd78687?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/b8bceb46896c4647a6a0620fddd78687?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图5-1</p>
 <p>原问题变为将矩阵转化为二分图，求最大匹配。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/32e259aca2274eeeaa515f8651f53d1d?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/32e259aca2274eeeaa515f8651f53d1d?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图5-2</p>
 <p>如图5-2所示，采用匈牙利算法，红色标记最大匹配为｛X1—&gt;Y4, X2—&gt;Y2, X3—&gt;Y1, X4—&gt;Y3｝。</p>
 <p>结果矩阵为(如图5-3所示)：</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a280f92209754ce79739a420c6949311?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/a280f92209754ce79739a420c6949311?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图5-3</p>
 <h1 id="例子2-柯南开锁"><a href="#例子2-柯南开锁" class="headerlink" title="例子2 柯南开锁"></a>例子2 柯南开锁</h1><p>面对OIBH组织的嚣张气焰, 柯南决定深入牛棚, 一探虚实.<br>他经过深思熟虑, 决定从OIBH组织大门进入………..<br>OIBH组织的大门有一个很神奇的锁.<br>锁是由M*N个格子组成, 其中某些格子凸起(灰色的格子). 每一次操作可以把某一行或某一列的格子给按下去.</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/29ef47800b2d4a9c8d074e29cb9e1245?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/29ef47800b2d4a9c8d074e29cb9e1245?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图5-4</p>
 <p>如果柯南能在组织限定的次数内将所有格子都按下去, 那么他就能够进入总部. 但是OIBH组织不是吃素的, 他们的限定次数恰是最少次数.<br>请您帮助柯南计算出开给定的锁所需的最少次数。</p>
 <p><strong>解：</strong></p>
@@ -322,7 +420,7 @@
 <p>第1步，先将图5-4中的矩阵行与列分别设定了二分图中的集合X与Y，标出灰色格子对应的连接边。</p>
 <p>第2步，采用匈牙利算法求出该二分图的最大匹配：{X2—&gt;Y4, X4—&gt;Y2}。如图5-5所示。</p>
 <p>第3步，在图5-4中找到最大匹配所对应的灰色格子，灰色格子数就是开锁所需的最小次数。</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2d162555b8a9443dbdabd590d4f6d3ef?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/2d162555b8a9443dbdabd590d4f6d3ef?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图5-5</p>
 <h1 id="六、附录"><a href="#六、附录" class="headerlink" title="六、附录"></a>六、附录</h1><h1 id="附录1-相关概念与定理"><a href="#附录1-相关概念与定理" class="headerlink" title="附录1 相关概念与定理"></a>附录1 相关概念与定理</h1><p>最大匹配数：最大匹配的匹配边的数目。</p>
 <p>最小点覆盖数：选取最少的点，使任意一条边至少有一个端点被选择。</p>
@@ -334,166 +432,208 @@
 <p>定理3：最小路径覆盖数 &#x3D; 顶点数 - 最大匹配数</p>
 <h1 id="附录2-Konig定理及其证明"><a href="#附录2-Konig定理及其证明" class="headerlink" title="附录2 Kőnig定理及其证明"></a>附录2 Kőnig定理及其证明</h1><p><strong>Kőnig定理：二分图中的最大匹配数等于这个图中的最小点覆盖数。</strong></p>
 <p>证明：</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/59311857eb4f41cdbdd708dd818f4f8b?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/59311857eb4f41cdbdd708dd818f4f8b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 <p>图6-1</p>
-<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/36151513ac8a44adbcaf20dee57d5393?from=pc" alt="流行算法：匈牙利算法"></p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/36151513ac8a44adbcaf20dee57d5393?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：匈牙利算法"></p>
 
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/27/%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">局部搜索算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/21/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95-MCMC/">
+                        <span class="hidden-mobile">马尔可夫链蒙特卡洛法(MCMC)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-        <!--添加编辑 常飞-->
-        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/匈牙利算法.md" target="_blank">编辑</a>
-        <!--添加编辑-->
-</article>
-
-
-
-    <!--添加高亮代码 常飞-->
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-    </script>
-    <!--添加高亮代码-->
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/search">搜索</a></li>
-        
-      </ul>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">二、名词解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%BA%8C%E5%88%86%E5%9B%BE%E4%B8%8E%E5%8C%B9%E9%85%8D"><span class="toc-number">3.</span> <span class="toc-text">1、二分图与匹配</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-%E5%A6%82%E5%9B%BE2-2%E6%89%80%E7%A4%BA"><span class="toc-number">4.</span> <span class="toc-text">例子1 如图2-2所示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E5%A6%82%E5%9B%BE2-3%E6%89%80%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">例子2 如图2-3所示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%A2%9E%E5%B9%BF%E8%B7%AF%E5%BE%84"><span class="toc-number">6.</span> <span class="toc-text">2、增广路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A2%9E%E5%B9%BF%E8%B7%AF%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">增广路的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%8C%88%E7%89%99%E5%88%A9%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">3、匈牙利树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E6%95%B0-x3D-%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96%E7%8E%87"><span class="toc-number">9.</span> <span class="toc-text">4、二分图最大匹配数&#x3D;最小点覆盖率</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">10.</span> <span class="toc-text">三、匈牙利算法复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">11.</span> <span class="toc-text">四、举例说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901"><span class="toc-number">12.</span> <span class="toc-text">例子1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80"><span class="toc-number">13.</span> <span class="toc-text">解法一</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C"><span class="toc-number">14.</span> <span class="toc-text">解法二</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902"><span class="toc-number">15.</span> <span class="toc-text">例子2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">16.</span> <span class="toc-text">五、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8F"><span class="toc-number">17.</span> <span class="toc-text">例子1 矩阵游戏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E6%9F%AF%E5%8D%97%E5%BC%80%E9%94%81"><span class="toc-number">18.</span> <span class="toc-text">例子2 柯南开锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">19.</span> <span class="toc-text">六、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AE%9A%E7%90%86"><span class="toc-number">20.</span> <span class="toc-text">附录1 相关概念与定理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%952-Konig%E5%AE%9A%E7%90%86%E5%8F%8A%E5%85%B6%E8%AF%81%E6%98%8E"><span class="toc-number">21.</span> <span class="toc-text">附录2 Kőnig定理及其证明</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&text=匈牙利算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&is_video=false&description=匈牙利算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=匈牙利算法&body=Check out this article: https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&title=匈牙利算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&name=匈牙利算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/04/03/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/&t=匈牙利算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      </div>
+    
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+<!-- Custom -->
+
+
     
+
     
-    2015-2022
-    koderboy
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </nav>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
+  <!-- SCRIPTS -->
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
-      e.clearSelection();
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
+<!-- Plugins -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
+  <script  src="/js/local-search.js" ></script>
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Umami Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

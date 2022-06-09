@@ -1,153 +1,264 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="关于时间GMT时间格里尼治天文台观测时间 UT时间UT(Universal Time）世界时间，原子钟时间。 UTC时间UTC时间,世界协调时，是结合了GMT观测时间和世界时间的(UC)结合后的调整时间。UTC的0时区在英国（本初子午线从跨英国）中国的时区是东八区去（UTC+8),CST(中国标准时区) 123456789ZoneId.of(&quot;UTC&quot;) &#x2F;&#x2F;0时区ZoneId">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="关于时间GMT时间格里尼治天文台观测时间 UT时间UT(Universal Time）世界时间，原子钟时间。 UTC时间UTC时间,世界协调时，是结合了GMT观测时间和世界时间的(UC)结合后的调整时间。UTC的0时区在英国（本初子午线从跨英国）中国的时区是东八区去（UTC+8),CST(中国标准时区)  ZoneId.of(&quot;UTC&quot;) &#x2F;&#x2F;0时区 ZoneId.of(&quot;UTC+0&quot;) &#x2F;&#x2F;0时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中的time">
 <meta property="og:url" content="https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/index.html">
 <meta property="og:site_name" content="VOYAGE">
-<meta property="og:description" content="关于时间GMT时间格里尼治天文台观测时间 UT时间UT(Universal Time）世界时间，原子钟时间。 UTC时间UTC时间,世界协调时，是结合了GMT观测时间和世界时间的(UC)结合后的调整时间。UTC的0时区在英国（本初子午线从跨英国）中国的时区是东八区去（UTC+8),CST(中国标准时区) 123456789ZoneId.of(&quot;UTC&quot;) &#x2F;&#x2F;0时区ZoneId">
+<meta property="og:description" content="关于时间GMT时间格里尼治天文台观测时间 UT时间UT(Universal Time）世界时间，原子钟时间。 UTC时间UTC时间,世界协调时，是结合了GMT观测时间和世界时间的(UC)结合后的调整时间。UTC的0时区在英国（本初子午线从跨英国）中国的时区是东八区去（UTC+8),CST(中国标准时区)  ZoneId.of(&quot;UTC&quot;) &#x2F;&#x2F;0时区 ZoneId.of(&quot;UTC+0&quot;) &#x2F;&#x2F;0时">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-03T16:27:36.000Z">
-<meta property="article:modified_time" content="2022-06-08T07:30:55.637Z">
+<meta property="article:modified_time" content="2022-06-09T03:54:43.547Z">
 <meta property="article:author" content="koderboy">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>java中的time</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>java中的time - VOYAGE</title>
 
-    <!-- persian styles -->
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
     
-    <!-- rss -->
     
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
-	<!-- mathjax -->
-	
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/06/04/Mac%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86-%E8%BD%AC/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&text=java中的time"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&is_video=false&description=java中的time"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=java中的time&body=Check out this article: https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&name=java中的time&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&t=java中的time"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
 
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4"><span class="toc-number">1.</span> <span class="toc-text">关于时间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GMT%E6%97%B6%E9%97%B4"><span class="toc-number">1.1.</span> <span class="toc-text">GMT时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UT%E6%97%B6%E9%97%B4"><span class="toc-number">1.2.</span> <span class="toc-text">UT时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTC%E6%97%B6%E9%97%B4"><span class="toc-number">1.3.</span> <span class="toc-text">UTC时间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%97%A9%E6%9C%9F%E7%9A%84%E6%97%A5%E6%9C%9FAPI"><span class="toc-number">2.</span> <span class="toc-text">一、早期的日期API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date"><span class="toc-number">2.1.</span> <span class="toc-text">Date</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calender"><span class="toc-number">2.2.</span> <span class="toc-text">Calender</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-util%E5%8C%85%E4%B8%AD%E7%9A%84%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">2.3.</span> <span class="toc-text">java.util包中的日期格式化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4API"><span class="toc-number">3.</span> <span class="toc-text">新的日期和时间API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Instan"><span class="toc-number">3.1.</span> <span class="toc-text">Instan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LocalDateTime"><span class="toc-number">3.2.</span> <span class="toc-text">LocalDateTime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ZonedDateTime"><span class="toc-number">3.3.</span> <span class="toc-text">ZonedDateTime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-time%E5%8C%85%E4%B8%AD%E7%9A%84%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">3.4.</span> <span class="toc-text">java.time包中的日期格式化</span></a></li></ol></li></ol>
-    </div>
-  </span>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="java中的time">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-03 16:27" pubdate>
+        2022年6月3日 下午
+      </time>
+    </span>
+  
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-        
-    <h1 class="posttitle" itemprop="name headline">
-        java中的time
-    </h1>
+<div class="mt-1">
+  
 
+  
 
+  
+  
+</div>
 
-            <div class="meta">
-                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">koderboy</span>
-                </span>
-                
-    <div class="postdate">
-      
-        <time datetime="2022-06-03T16:27:36.000Z" itemprop="datePublished">2022-06-03</time>
-        
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
 
-
-                    
-
-                        
-
-            </div>
-    </header>
+  <main>
     
+      
 
-        <div class="content" itemprop="articleBody">
-            <h1 id="关于时间"><a href="#关于时间" class="headerlink" title="关于时间"></a>关于时间</h1><h2 id="GMT时间"><a href="#GMT时间" class="headerlink" title="GMT时间"></a>GMT时间</h2><p>格里尼治天文台观测时间</p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">java中的time</h1>
+            
+            <div class="markdown-body">
+              <h1 id="关于时间"><a href="#关于时间" class="headerlink" title="关于时间"></a>关于时间</h1><h2 id="GMT时间"><a href="#GMT时间" class="headerlink" title="GMT时间"></a>GMT时间</h2><p>格里尼治天文台观测时间</p>
 <h2 id="UT时间"><a href="#UT时间" class="headerlink" title="UT时间"></a>UT时间</h2><p>UT(Universal Time）世界时间，原子钟时间。</p>
 <h2 id="UTC时间"><a href="#UTC时间" class="headerlink" title="UTC时间"></a>UTC时间</h2><p>UTC时间,世界协调时，是结合了GMT观测时间和世界时间的(UC)结合后的调整时间。<br>UTC的0时区在英国（本初子午线从跨英国）<br>中国的时区是东八区去（UTC+8),CST(中国标准时区)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ZoneId.of(<span class="string">&quot;UTC&quot;</span>) <span class="comment">//0时区</span></span><br><span class="line">ZoneId.of(<span class="string">&quot;UTC+0&quot;</span>) <span class="comment">//0时区</span></span><br><span class="line">ZoneId.of(<span class="string">&quot;UTC+8&quot;</span>) <span class="comment">//8时区 == CST</span></span><br><span class="line">ZoneId.of(<span class="string">&quot;Asia/Shanghai&quot;</span>); <span class="comment">// UTC+8</span></span><br><span class="line"></span><br><span class="line">ZoneId zid= ZoneId.of(<span class="string">&quot;EST&quot;</span>,ZoneId.SHORT_IDS);</span><br><span class="line"></span><br><span class="line">TimeZone.getTimeZone(zid);</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java">
+<span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"UTC"</span><span class="token punctuation">)</span> <span class="token comment">//0时区</span>
+<span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"UTC+0"</span><span class="token punctuation">)</span> <span class="token comment">//0时区</span>
+<span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"UTC+8"</span><span class="token punctuation">)</span> <span class="token comment">//8时区 == CST</span>
+<span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"Asia/Shanghai"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// UTC+8</span>
+
+<span class="token class-name">ZoneId</span> zid<span class="token operator">=</span> <span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"EST"</span><span class="token punctuation">,</span><span class="token class-name">ZoneId</span><span class="token punctuation">.</span>SHORT_IDS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">TimeZone</span><span class="token punctuation">.</span><span class="token function">getTimeZone</span><span class="token punctuation">(</span>zid<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h1 id="一、早期的日期API"><a href="#一、早期的日期API" class="headerlink" title="一、早期的日期API"></a>一、早期的日期API</h1><h2 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h2><p>需要注意的是在java.util.Date这个类</p>
 <ul>
@@ -156,10 +267,18 @@
 <li>月份是从<strong>0</strong>开始的</li>
 <li>时区用的是系统的默认时区，中国标准时区（CST），我们无法指定时区</li>
 </ul>
-<figure class="highlight java"><figcaption><span>java.util.Date(Java1.0)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//为了构造2022年,你不得不用2022-1900这样的参数构造年;同样2月份你得用“2-1”作为参数</span></span><br><span class="line"><span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">2022</span>-<span class="number">1900</span>,<span class="number">11</span>,<span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//java.util.Date的toString()方法的输出也不是很清晰</span></span><br><span class="line">System.out.println(date.toString());</span><br><span class="line"><span class="comment">//Fri Dec 23 00:00:00 CST 2022</span></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><div class="caption"><span>java.util.Date(Java1.0)</span></div><code class="language-java"><span class="token comment">//为了构造2022年,你不得不用2022-1900这样的参数构造年;同样2月份你得用“2-1”作为参数</span>
+<span class="token class-name">Date</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token number">2022</span><span class="token operator">-</span><span class="token number">1900</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">)</span>
+
+<span class="token comment">//java.util.Date的toString()方法的输出也不是很清晰</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>date<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//Fri Dec 23 00:00:00 CST 2022</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h2 id="Calender"><a href="#Calender" class="headerlink" title="Calender"></a>Calender</h2><p>在Java 1.1中，Date类的很多方法被废弃了，取而代之的是java.util.Calender</p>
-<figure class="highlight java"><figcaption><span>java.util.Calender</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">Calendar</span> <span class="variable">cal</span> <span class="operator">=</span> Calender.getInstance();</span><br><span class="line"></span><br><span class="line">cal.add(<span class="number">1</span>,Calender.MONTH); <span class="comment">//当前日期添加一个月</span></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><div class="caption"><span>java.util.Calender</span></div><code class="language-java">
+<span class="token class-name">Calendar</span> cal <span class="token operator">=</span> <span class="token class-name">Calender</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+cal<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token class-name">Calender</span><span class="token punctuation">.</span>MONTH<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//当前日期添加一个月</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>在Calender类中</p>
 <ul>
@@ -168,181 +287,263 @@
 <li>月份和Date类一样是从0开始的，不符合认知。</li>
 <li>可以对时间修改，但修改的是当前声明的对象。</li>
 </ul>
-<h2 id="java-util包中的日期格式化"><a href="#java-util包中的日期格式化" class="headerlink" title="java.util包中的日期格式化"></a>java.util包中的日期格式化</h2><figure class="highlight java"><figcaption><span>java.text.SimpleDateFormat</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line"><span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> sdf.parse(<span class="string">&quot;2022-02-13 17:00:00&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="java-util包中的日期格式化"><a href="#java-util包中的日期格式化" class="headerlink" title="java.util包中的日期格式化"></a>java.util包中的日期格式化</h2><div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><div class="caption"><span>java.text.SimpleDateFormat</span></div><code class="language-java"><span class="token class-name">SimpleDateFormat</span> sdf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Date</span> date <span class="token operator">=</span> sdf<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"2022-02-13 17:00:00"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 
 <p><strong>SimpleDateFormat是线程不安全的，多线程使用的时候要每个线程声明一个单独变量。</strong></p>
 <h1 id="新的日期和时间API"><a href="#新的日期和时间API" class="headerlink" title="新的日期和时间API"></a>新的日期和时间API</h1><h2 id="Instan"><a href="#Instan" class="headerlink" title="Instan"></a>Instan</h2><p>新的AP用Instan类来表示机器时间，概念上更明确。<br>Instan内部使用Unix元年时间(传统设定为UTC时区1970年一月1日午夜时分)开始所经历的秒数进行计算，另外内部还有个存储纳秒字段。<br>因此Instan能够满足对时间精度更高要求的场景。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间 seconds+nanos</span></span><br><span class="line"><span class="type">Instant</span> <span class="variable">instan</span> <span class="operator">=</span> Instan.now();</span><br><span class="line"></span><br><span class="line">instan.truncatedTo(HOURS);<span class="comment">//取整</span></span><br><span class="line">Zoneninstant.atZone(ZoneId.of(<span class="string">&quot;UTC&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//时间 seconds+nanos</span>
+<span class="token class-name">Instant</span> instan <span class="token operator">=</span> <span class="token class-name">Instan</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+instan<span class="token punctuation">.</span><span class="token function">truncatedTo</span><span class="token punctuation">(</span>HOURS<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//取整</span>
+<span class="token class-name">Zoneninstant</span><span class="token punctuation">.</span><span class="token function">atZone</span><span class="token punctuation">(</span><span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"UTC"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h2 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h2><p>替代java.util中的Date,不含时区概念,没有年是从1970、月份是从0开始问题</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">localDateTime</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">//转化带时区的时间</span></span><br><span class="line"><span class="type">ZonedDateTime</span>  <span class="variable">zoneDateTime</span> <span class="operator">=</span> localDateTime.atZone(ZoneId.of(<span class="string">&quot;UTC&quot;</span>));</span><br><span class="line"></span><br><span class="line">System.out.println(locaDateTime.getYear()) <span class="comment">//2022</span></span><br><span class="line"></span><br><span class="line">System.out.println(localDateTime.getMonth()) <span class="comment">//FEBRUARY</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2022-2-13 00:00:00</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">localDateTime1</span> <span class="operator">=</span> LocalDateTime.of(<span class="number">2022</span>,<span class="number">2</span>,<span class="number">13</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java">
+<span class="token class-name">LocalDateTime</span> localDateTime <span class="token operator">=</span> <span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//转化带时区的时间</span>
+<span class="token class-name">ZonedDateTime</span>  zoneDateTime <span class="token operator">=</span> localDateTime<span class="token punctuation">.</span><span class="token function">atZone</span><span class="token punctuation">(</span><span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"UTC"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>locaDateTime<span class="token punctuation">.</span><span class="token function">getYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//2022</span>
+
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>localDateTime<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//FEBRUARY</span>
+
+<span class="token comment">// 2022-2-13 00:00:00</span>
+<span class="token class-name">LocalDateTime</span> localDateTime1 <span class="token operator">=</span> <span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">2022</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h2 id="ZonedDateTime"><a href="#ZonedDateTime" class="headerlink" title="ZonedDateTime"></a>ZonedDateTime</h2><p>带时区的时间</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//创建一个0时区的时间</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">z0</span> <span class="operator">=</span> ZonedDateTime.now(ZoneId.of(<span class="string">&quot;UTC&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//默认无参是系统时区</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">z8</span> <span class="operator">=</span> ZonedDateTime.now();</span><br><span class="line"></span><br><span class="line">System.out.println(z8);</span><br><span class="line">System.out.println(z0);</span><br><span class="line"></span><br><span class="line">System.out.println(z8.toLoalDateTime());</span><br><span class="line">System.out.println(z0.toLoalDateTime());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java">
+<span class="token comment">//创建一个0时区的时间</span>
+<span class="token class-name">ZonedDateTime</span> z0 <span class="token operator">=</span> <span class="token class-name">ZonedDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"UTC"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//默认无参是系统时区</span>
+<span class="token class-name">ZonedDateTime</span> z8 <span class="token operator">=</span> <span class="token class-name">ZonedDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>z8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>z0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>z8<span class="token punctuation">.</span><span class="token function">toLoalDateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>z0<span class="token punctuation">.</span><span class="token function">toLoalDateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
-<h2 id="java-time包中的日期格式化"><a href="#java-time包中的日期格式化" class="headerlink" title="java.time包中的日期格式化"></a>java.time包中的日期格式化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">DateTimeFormatter</span> <span class="variable">dtf</span> <span class="operator">=</span> DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//日期格式化为字符串</span></span><br><span class="line"> <span class="type">String</span> <span class="variable">nowStr</span> <span class="operator">=</span> dtf.format(LocalDateTime.now());</span><br><span class="line"> System.out.prinln(nowStr);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串转化为日期</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">localDateTime</span> <span class="operator">=</span> LocalDateTime.parse(<span class="string">&quot;2007-12-03T10:15:30&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//进一步转化成带时区的时间</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">zonedDateTime</span> <span class="operator">=</span>localDateTime.atZone(ZoneId.of(<span class="string">&quot;Europe/Paris&quot;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以通过ZonedDateTime.parse()直接转化成带时区的时间</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">zonedDateTime1</span> <span class="operator">=</span> ZonedDateTime.parse(<span class="string">&quot;2007-12-03T10:15:30+01:00[Europe/Paris]&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="java-time包中的日期格式化"><a href="#java-time包中的日期格式化" class="headerlink" title="java.time包中的日期格式化"></a>java.time包中的日期格式化</h2><div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token class-name">DateTimeFormatter</span> dtf <span class="token operator">=</span> <span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">//日期格式化为字符串</span>
+ <span class="token class-name">String</span> nowStr <span class="token operator">=</span> dtf<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">prinln</span><span class="token punctuation">(</span>nowStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">//字符串转化为日期</span>
+<span class="token class-name">LocalDateTime</span> localDateTime <span class="token operator">=</span> <span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"2007-12-03T10:15:30"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">//进一步转化成带时区的时间</span>
+<span class="token class-name">ZonedDateTime</span> zonedDateTime <span class="token operator">=</span>localDateTime<span class="token punctuation">.</span><span class="token function">atZone</span><span class="token punctuation">(</span><span class="token class-name">ZoneId</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"Europe/Paris"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">//也可以通过ZonedDateTime.parse()直接转化成带时区的时间</span>
+<span class="token class-name">ZonedDateTime</span> zonedDateTime1 <span class="token operator">=</span> <span class="token class-name">ZonedDateTime</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"2007-12-03T10:15:30+01:00[Europe/Paris]"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
 
 
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/04/Mac%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86-%E8%BD%AC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mac服务管理(转)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/">
+                        <span class="hidden-mobile">策略算法工程师之路-排序模型(LTR)及应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-        <!--添加编辑 常飞-->
-        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/java中的time.md" target="_blank">编辑</a>
-        <!--添加编辑-->
-</article>
-
-
-
-    <!--添加高亮代码 常飞-->
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-    </script>
-    <!--添加高亮代码-->
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/search">搜索</a></li>
-        
-      </ul>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4"><span class="toc-number">1.</span> <span class="toc-text">关于时间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GMT%E6%97%B6%E9%97%B4"><span class="toc-number">1.1.</span> <span class="toc-text">GMT时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UT%E6%97%B6%E9%97%B4"><span class="toc-number">1.2.</span> <span class="toc-text">UT时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTC%E6%97%B6%E9%97%B4"><span class="toc-number">1.3.</span> <span class="toc-text">UTC时间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%97%A9%E6%9C%9F%E7%9A%84%E6%97%A5%E6%9C%9FAPI"><span class="toc-number">2.</span> <span class="toc-text">一、早期的日期API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date"><span class="toc-number">2.1.</span> <span class="toc-text">Date</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calender"><span class="toc-number">2.2.</span> <span class="toc-text">Calender</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-util%E5%8C%85%E4%B8%AD%E7%9A%84%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">2.3.</span> <span class="toc-text">java.util包中的日期格式化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4API"><span class="toc-number">3.</span> <span class="toc-text">新的日期和时间API</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Instan"><span class="toc-number">3.1.</span> <span class="toc-text">Instan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LocalDateTime"><span class="toc-number">3.2.</span> <span class="toc-text">LocalDateTime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ZonedDateTime"><span class="toc-number">3.3.</span> <span class="toc-text">ZonedDateTime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java-time%E5%8C%85%E4%B8%AD%E7%9A%84%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">3.4.</span> <span class="toc-text">java.time包中的日期格式化</span></a></li></ol></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&text=java中的time"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&is_video=false&description=java中的time"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=java中的time&body=Check out this article: https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&title=java中的time"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&name=java中的time&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/06/03/java%E4%B8%AD%E7%9A%84time/&t=java中的time"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      </div>
+    
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+<!-- Custom -->
+
+
     
+
     
-    2015-2022
-    koderboy
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </nav>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
+  <!-- SCRIPTS -->
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
-      e.clearSelection();
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
+<!-- Plugins -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
+  <script  src="/js/local-search.js" ></script>
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Umami Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

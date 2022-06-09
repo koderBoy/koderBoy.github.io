@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="来源：今日头条 一、定义哈希算法，又叫Hash算法，哈希是音译。 哈希算法从数学上讲是遵循一定映射规则集合的多对一（或一对一）的函数实现。相同的输入值必定得到相同的输出值，不同的输入值可能会得到相同的输出值，这就是哈希算法中所谓的碰撞问题。它是一种函数变换，我们把这种函数叫hash函数、散列函数、杂凑函数或哈希函数。 哈希算法，大部分情况下会把一个高维空间或无限维空间上的数据映射成一个更小的有限维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="哈希算法">
@@ -31,143 +41,231 @@
 <meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/b3ada031ee3648f582579c1e42e2361e?from=pc">
 <meta property="og:image" content="https://p6.toutiaoimg.com/origin/pgc-image/959e2c3911e941c1926dfd6079ca712c?from=pc">
 <meta property="article:published_time" content="2022-05-04T16:11:25.000Z">
-<meta property="article:modified_time" content="2022-06-08T07:30:55.645Z">
+<meta property="article:modified_time" content="2022-06-09T03:54:43.551Z">
 <meta property="article:author" content="koderboy">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://p6.toutiaoimg.com/origin/pgc-image/38d9229c5e45490b90186ad268340cdf?from=pc">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>哈希算法</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  <title>哈希算法 - VOYAGE</title>
 
-    <!-- persian styles -->
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
     
-    <!-- rss -->
     
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
-	<!-- mathjax -->
-	
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/05/07/Jenkins%E8%BF%9C%E7%A8%8Bssh%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/05/04/tomcat%E7%BC%93%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&text=哈希算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&is_video=false&description=哈希算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=哈希算法&body=Check out this article: https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&name=哈希算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&t=哈希算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
 
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">三、哈希函数分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">四、哈希函数详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%99%AE%E9%80%9A%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">1、普通的哈希函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%A3%E5%88%97%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">2、计算机数据结构的散列函数与散列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">直接寻址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">8.</span> <span class="toc-text">数字分析法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E5%8F%96%E4%B8%AD%E6%B3%95"><span class="toc-number">9.</span> <span class="toc-text">平方取中法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%98%E5%8F%A0%E6%B3%95"><span class="toc-number">10.</span> <span class="toc-text">折叠法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%B3%95"><span class="toc-number">11.</span> <span class="toc-text">随机数法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%A4%E7%95%99%E4%BD%99%E6%95%B0%E6%B3%95"><span class="toc-number">12.</span> <span class="toc-text">除留余数法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">平方散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%EF%BC%88Fibonacci%EF%BC%89%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">14.</span> <span class="toc-text">斐波那契（Fibonacci）散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%98%E6%B3%95%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">15.</span> <span class="toc-text">乘法散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%9F%9F%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">16.</span> <span class="toc-text">全域散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E6%95%A3%E5%88%97%E6%B3%95%EF%BC%88perfect-hashing"><span class="toc-number">17.</span> <span class="toc-text">完全散列法（perfect hashing)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="toc-number">18.</span> <span class="toc-text">开放定址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%8D%E5%93%88%E5%B8%8C%E6%B3%95"><span class="toc-number">19.</span> <span class="toc-text">再哈希法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95"><span class="toc-number">20.</span> <span class="toc-text">链地址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%85%AC%E5%85%B1%E6%BA%A2%E5%87%BA%E5%8C%BA"><span class="toc-number">21.</span> <span class="toc-text">建立公共溢出区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%B6%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="toc-number">22.</span> <span class="toc-text">桶定址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%8A%A0%E5%AF%86%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">23.</span> <span class="toc-text">3、加密哈希函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">24.</span> <span class="toc-text">五、哈希算法的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B8%80-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E%EF%BC%9A%E6%8C%96%E7%9F%BF"><span class="toc-number">25.</span> <span class="toc-text">应用一 区块链与比特币中的工作量证明：挖矿</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%BA%8C-%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E6%9E%84%EF%BC%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">26.</span> <span class="toc-text">应用二 分布式服务器架构：负载均衡</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E4%B8%BB%E8%A6%81%E8%A7%A3%E5%86%B3%E7%94%A8%E6%88%B7%E5%8F%AA%E9%9C%80%E4%B8%80%E4%B8%AA%E5%9F%9F%E5%90%8D%E6%88%96IP%E5%9C%B0%E5%9D%80%E5%B0%B1%E8%83%BD%E9%80%8F%E6%98%8E%E5%9C%B0%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E5%A4%9A%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%88%96%E8%80%85%E8%AE%BF%E9%97%AE%E7%A6%BB%E8%87%AA%E5%B7%B1%E8%B7%9D%E7%A6%BB%E6%9C%80%E8%BF%91%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%BE%97%E6%9C%80%E5%BF%AB%E7%9A%84%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E3%80%82%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E5%BE%88%E5%A4%9A%EF%BC%8C%E6%AF%94%E5%A6%82%E8%BD%AE%E8%AF%A2%E6%B3%95%E3%80%81%E9%9A%8F%E6%9C%BA%E6%B3%95%E3%80%81%E6%9C%80%E5%B0%8F%E8%BF%9E%E6%8E%A5%E6%B3%95%E3%80%81%E5%8A%A0%E6%9D%83%E8%BD%AE%E8%AF%A2%E6%B3%95%E7%AD%89%E3%80%82%E9%82%A3%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E4%BC%9A%E8%AF%9D%E7%B2%98%E6%BB%9E%EF%BC%88session-sticky%EF%BC%89%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E5%91%A2%EF%BC%9F%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8A%EF%BC%8C%E5%9C%A8%E4%B8%80%E6%AC%A1%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E9%83%BD%E8%B7%AF%E7%94%B1%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E3%80%82"><span class="toc-number">27.</span> <span class="toc-text">负载均衡主要解决用户只需一个域名或IP地址就能透明地访问本地多台服务器，或者访问离自己距离最近的服务器获得最快的访问速度。负载均衡算法有很多，比如轮询法、随机法、最小连接法、加权轮询法等。那如何才能实现一个会话粘滞（session sticky）的负载均衡算法呢？也就是说，我们需要在同一个客户端上，在一次会话中的所有请求都路由到同一个服务器上。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B8%89-%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="toc-number">28.</span> <span class="toc-text">应用三 分布式缓存与一致性哈希算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9B%9B-%E5%9B%BE%E7%89%87%E6%A0%87%E8%AF%86%E4%B8%8E%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE"><span class="toc-number">29.</span> <span class="toc-text">应用四 图片标识与快速查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%BA%94-%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87"><span class="toc-number">30.</span> <span class="toc-text">应用五 数据分片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2%E5%87%A0%E7%99%BE%E4%BA%BF%E5%BC%A0%E5%9B%BE%E7%89%87%EF%BC%9F"><span class="toc-number">31.</span> <span class="toc-text">1 如何快速检索几百亿张图片？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E7%BB%9F%E8%AE%A1%E5%85%B3%E9%94%AE%E8%AF%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%EF%BC%9F"><span class="toc-number">32.</span> <span class="toc-text">2. 如何统计关键词出现的次数？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%85%AD-%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-number">33.</span> <span class="toc-text">应用六 文件数据校验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B8%83-HMAC%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">34.</span> <span class="toc-text">应用七 HMAC的实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%85%AB-%E6%B6%88%E6%81%AF%E6%91%98%E8%A6%81%E4%B8%8E%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="toc-number">35.</span> <span class="toc-text">应用八 消息摘要与数字签名验证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%9D-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">36.</span> <span class="toc-text">应用九 布隆过滤器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8D%81-java%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84hashmap%E5%92%8Chashcode"><span class="toc-number">37.</span> <span class="toc-text">应用十 java集合中的hashmap和hashcode</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8D%81%E4%B8%80-%E6%A3%80%E7%B4%A2%E4%B8%AD%E7%9A%84%E5%90%84%E7%B1%BBHash%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="toc-number">38.</span> <span class="toc-text">应用十一 检索中的各类Hash及其应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TF-IDF-Hashing-TF-and-IDF"><span class="toc-number">39.</span> <span class="toc-text">TF-IDF(Hashing TF and IDF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PageRank"><span class="toc-number">40.</span> <span class="toc-text">PageRank</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C%EF%BC%88LSH%EF%BC%89"><span class="toc-number">41.</span> <span class="toc-text">局部敏感哈希（LSH）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E5%93%88%E5%B8%8C%EF%BC%88Semantic-Hashing%EF%BC%89"><span class="toc-number">42.</span> <span class="toc-text">语义哈希（Semantic Hashing）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%B1%E5%93%88%E5%B8%8C%EF%BC%88Spectral-Hashing-SH%EF%BC%89"><span class="toc-number">43.</span> <span class="toc-text">谱哈希（Spectral Hashing, SH）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8D%81%E4%BA%8C-%E5%9F%BA%E4%BA%8E%E5%93%88%E5%B8%8C%E7%9A%84%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D"><span class="toc-number">44.</span> <span class="toc-text">应用十二 基于哈希的特征匹配</span></a></li></ol>
-    </div>
-  </span>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="哈希算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-04 16:11" pubdate>
+        2022年5月4日 下午
+      </time>
+    </span>
+  
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-        
-    <h1 class="posttitle" itemprop="name headline">
-        哈希算法
-    </h1>
+<div class="mt-1">
+  
 
+  
 
+  
+  
+</div>
 
-            <div class="meta">
-                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">koderboy</span>
-                </span>
-                
-    <div class="postdate">
-      
-        <time datetime="2022-05-04T16:11:25.000Z" itemprop="datePublished">2022-05-04</time>
-        
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
 
-
-                    
-    <div class="article-category">
-        <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
-    </div>
-
-
-                        
-
-            </div>
-    </header>
+  <main>
     
+      
 
-        <div class="content" itemprop="articleBody">
-            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6943145184364413443/">今日头条</a></p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">哈希算法</h1>
+            
+            <div class="markdown-body">
+              <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6943145184364413443/">今日头条</a></p>
 <h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h1><p>哈希算法，又叫Hash算法，哈希是音译。</p>
 <p>哈希算法从数学上讲是遵循一定映射规则集合的多对一（或一对一）的函数实现。相同的输入值必定得到相同的输出值，不同的输入值可能会得到相同的输出值，这就是哈希算法中所谓的碰撞问题。它是一种函数变换，我们把这种函数叫hash函数、散列函数、杂凑函数或哈希函数。</p>
 <p>哈希算法，大部分情况下会把一个高维空间或无限维空间上的数据映射成一个更小的有限维空间的数据（也可以把这看成一种有信息损失的不可逆的数据压缩），所谓大道由简，大乐必易（越简单的东西越是好的），哈希算法正体现了这个道理。</p>
@@ -196,7 +294,7 @@
 <li>PJWHash，ELFHash等等</li>
 </ul>
 <h1 id="四、哈希函数详解"><a href="#四、哈希函数详解" class="headerlink" title="四、哈希函数详解"></a>四、哈希函数详解</h1><h1 id="1、普通的哈希函数"><a href="#1、普通的哈希函数" class="headerlink" title="1、普通的哈希函数"></a>1、普通的哈希函数</h1><p>举一个最简单的普通哈希函数的例子，输入是电话号码，哈希函数是取中间三位，得到三位数字，这就是哈希值，其长度是3。如图4-1示：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/38d9229c5e45490b90186ad268340cdf?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/38d9229c5e45490b90186ad268340cdf?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>图4-1</p>
 <h1 id="2、计算机数据结构的散列函数与散列表"><a href="#2、计算机数据结构的散列函数与散列表" class="headerlink" title="2、计算机数据结构的散列函数与散列表"></a>2、计算机数据结构的散列函数与散列表</h1><p>我们再看看应用于计算机数据结构（哈希表，Hash table，也叫散列表）、存储和查询上的散列函数。这类数据结构散列函数能使一个数据序列的存储和访问更加迅速有效，数据元素能被更快地定位。</p>
 <p>散列表，是根据关键码值对(key，value&#x3D;Hash(key))而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。它是基于快速存取的角度设计的，散列表可以理解为一个线性表，但是其中的元素不是紧密排列的，而是可能存在空隙。</p>
@@ -204,10 +302,10 @@
 <p>散列表的查询可以分为两步：一是用散列函数将被查找的键转化为线性表的一个索引；二是处理碰撞冲突。</p>
 <p><strong>如何构造散列表？如何寻找散列函数？以下是最常见的方法：</strong></p>
 <h1 id="直接寻址法"><a href="#直接寻址法" class="headerlink" title="直接寻址法"></a>直接寻址法</h1><p>取关键字或关键字的某个线性函数值为散列地址。即H(key)&#x3D;key或H(key) &#x3D; a·key + b，其中a和b为常数（这种散列函数叫做自身函数）。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e9ecd1c5b61c429daf4ecfcef0f77d55?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/e9ecd1c5b61c429daf4ecfcef0f77d55?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>图4-2</p>
 <p>如图4-2所示，T是一个最简单的散列表(哈希表)，可以看作是根据关键字直接访问内存存储位置的数据结构。根据哈希函数H(key)&#x3D;key可以直接找该关键字在T的位置，该位置存储了对应的数据地址。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/2cfd0d74775143298c448f6556bc1b42?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/2cfd0d74775143298c448f6556bc1b42?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>图4-3</p>
 <p>如图4-3所示，它是T的一个升级版，关键字经过哈希函数计算后发生了碰撞（两个关键字映射到散列表同一个位置），解决碰撞的办法有链接法和开放地址法，上图采用的是链接法。</p>
 <p>直接寻址技术优点：当数据量较小时，相对简单有效。</p>
@@ -236,7 +334,7 @@
 <p>在乘法的情况中，对于m的选择与除法时刚好相反，倾向于选择2的幂，同时，会把A表示为s&#x2F;(2^w)的形式（其中w是计算机的字长,如32位）。Knuth建议采用A为0.618…，也就是我们所知的黄金分割比。通过这样的设定，这个哈希函数的执行得到了一定的简化。</p>
 <p>举例：k &#x3D; 123456，m &#x3D; 16384（即2^14)，w &#x3D; 32 时， 可将A表示为特定的形式：A &#x3D; s&#x2F;(2^w) &#x3D; 2654435769&#x2F;(2^32)。</p>
 <p>具体步骤如下：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/8198dd274f8544a49346bbd72bed8363?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/8198dd274f8544a49346bbd72bed8363?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <h1 id="全域散列法"><a href="#全域散列法" class="headerlink" title="全域散列法"></a>全域散列法</h1><p>其定义如下：随机选择散列函数，使之不依赖于要存储的关键字，其平均性能会很好。</p>
 <p>全域散列法解决的是确定性散列算法无法应对特殊输入的问题。我们有m（为方便讨论，不妨设m远大于2）个槽时，单个好的散列函数的冲突概率是 1&#x2F;m（已经均匀散列了，但还会恰好两个掉到同一个槽里）。但是，我们可以为这个“好的”散列函数精心构造输入数据，把正好都掉到一个槽里的数拿出来作为输入，这样冲突概率达到100%了。我们要解决的问题是，对于精心构造的输入，冲突概率仍然达到 1&#x2F;m。</p>
 <p>一个词可解决这个问题——random, 如果散列函数是随机选择的，那么精心构造的数据就不一定起作用了。这些随机选择的散列函数也是有讲究的：</p>
@@ -255,13 +353,13 @@
 <p>key &#x3D; 5206 &#x3D; 5 * 31^2 + 12 * 31 + 29, key表示为&lt;29, 12, 5&gt;,</p>
 <p>则哈希函数值value &#x3D; H<a href="5206">8205</a>&#x3D;(21<em>29+16</em>12+8*5) mod 31&#x3D;4</p>
 <p>如何设计一个通用的全域散列函数类？(可以证明其冲突率为 1&#x2F;m，证明过程另行介绍。)</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/f9770f670c9a488f8f77347222b54c03?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/f9770f670c9a488f8f77347222b54c03?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <h1 id="完全散列法（perfect-hashing"><a href="#完全散列法（perfect-hashing" class="headerlink" title="完全散列法（perfect hashing)"></a>完全散列法（perfect hashing)</h1><p>当键值是静态(即固定不变)的时候，我们可以设计方案使得最差情况下的查询性能也很出色，这就是完美哈希。</p>
 <p>完美散列函数是一个将集合S的每个元素映射到一系列无冲突的整数的哈希函数。一个完美散列函数的应用与其他哈希函数的应用基本一致，但不需要任何冲突解决方案。在数学术语中，这是一个完全单射函数。</p>
 <p>在静态集合S或集合S极少更新且查询频率非常多的情况下，使用完美散列函数是非常有效的。对集合S更新频率的限定是由于对任何集合S的修改，都将导致该完美散列函数退化为非完美散列函数。每次集合S被修改后自动更新hash函数的解决方案被称为dynamic perfect hashing，但这类方法非常复杂，难以实现。一个简单的允许动态更新集合S的完美散列函数的替代品叫cuckoo hashing。</p>
 <p>最小完美散列函数是一个能将<em>n</em>个键（key）映射到<em>n</em>个连续的整数的完美散列函数。若对一个最小完美散列函数F，其应用变换后得到的值保持了键（key）的字典序列，我们称该最小完美散列函数F为单调的。</p>
 <p>实际上，很多地方都会用到静态关键字集合。比如一种语言的保留字集合，一张CD-ROM里的文件名集合。 而完美哈希可以在最坏情况下以O(1)复杂度查找，性能非常出色的。完美哈希的思想就是采用两级的框架，每一级上都用全域哈希。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d24ab2f675f6459b8ddae5444ceab034?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d24ab2f675f6459b8ddae5444ceab034?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>完美哈希的结构如上图。具体来说，第一级和带链表的哈希非常的相似，只是第一级发生冲突后后面接的不是链表，而是一个新的哈希表。</p>
 <p>我们可以看到前端存储了一些哈希表的基本性质：m 哈希表槽数；a,b 全域哈希函数要确定的两个值(一般是随机选然后确定下来的)，后面跟着哈希表。为了保证不冲突，每个二级哈希表的数量是第一级映射到这个槽中元素个数的平方（在第 1 级，如果有 Ni 个元素映射到第 i 个槽，那么第 Ni 个槽对应的 2 级哈希表采用全域哈希。表的长度取 Mi &#x3D; Ni^2 ），这样可以保证整个哈希表非常的稀疏。</p>
 <p>一次散列表中的每个槽都指向了一个二次散列表，而这个二次散列表的大小是它所存数据个数的平方</p>
@@ -277,14 +375,14 @@
 <p>di&#x3D;1，2，3，…，m-1。这种方法的特点是，冲突发生时，顺序查看表中下一单元，直到找出一个空单元或查遍全表。</p>
 <p>例如：关键字集合为{12,67,56,16,25,37,22,29,15,47,48,34},表长为12。 我们用散列函数f(key) &#x3D; key mod 12。</p>
 <p>当计算前5个数{12,67,56,16,25}时，都是没有冲突的散列地址，直接存入：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/1e7449d365f54ba1b4653583d3718f31?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/1e7449d365f54ba1b4653583d3718f31?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>计算key &#x3D; 37时，发现f(37) &#x3D; 1，此时就与25所在的位置冲突。</p>
 <p>于是我们应用上面的公式f(37) &#x3D; (f(37)+1) mod 12 &#x3D; 2。于是将37存入下标为2的位置。这其实就是房子被人买了于是买下一间的做法。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/947270a222424fd182b5317fcba12786?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/947270a222424fd182b5317fcba12786?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>接下来22,29,15,47都没有冲突，正常的存入：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/477c79af06534f80b3d4c63c0cbf9201?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/477c79af06534f80b3d4c63c0cbf9201?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>到了 key&#x3D;48，我们计算得到f(48) &#x3D; 0，与12所在的0位置冲突了，不要紧，我们f(48) &#x3D; (f(48)+1) mod 12 &#x3D; 1，此时又与25所在的位置冲突。于是f(48) &#x3D; (f(48)+2) mod 12&#x3D;2，还是冲突……一直到 f(48) &#x3D; (f(48)+6) mod 12 &#x3D; 6时，才有空位，机不可失，赶快存入：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3e65d0a4426b4a0a9b045123862f88af?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/3e65d0a4426b4a0a9b045123862f88af?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>线性探测也有弊端，就是会造成元素聚集现象，降低查找效率。</p>
 <ul>
 <li>二次探测再散列</li>
@@ -311,7 +409,7 @@
 <p>当哈希地址Hi&#x3D;RH1（key）发生冲突时，再计算Hi&#x3D;RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间。</p>
 <h1 id="链地址法"><a href="#链地址法" class="headerlink" title="链地址法"></a>链地址法</h1><p>这种方法的基本思想是将所有哈希地址为i的元素构成一个称为同义词链的单链表，并将单链表的头指针存在哈希表的第i个单元中，因而查找、插入和删除主要在同义词链中进行。链地址法适用于经常进行插入和删除的情况。</p>
 <p>例如，假设关键字是前10个完全平方数，hash(x)&#x3D;x%10，这里Table Size&#x3D;10不是素数，只是为了简便。如图4-4所示。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5679c6d5d2a94e79807d2623c29c6214?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/5679c6d5d2a94e79807d2623c29c6214?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>图4-4</p>
 <p>优点：</p>
 <ul>
@@ -327,7 +425,7 @@
 </ul>
 <h1 id="建立公共溢出区"><a href="#建立公共溢出区" class="headerlink" title="建立公共溢出区"></a>建立公共溢出区</h1><p>这种方法的基本思想是：将哈希表分为基本表和溢出表两部分，凡是和基本表发生冲突的元素，一律填入溢出表。适用于相对于基本表来说冲突数据很少的情况。</p>
 <h1 id="桶定址法"><a href="#桶定址法" class="headerlink" title="桶定址法"></a>桶定址法</h1><p>桶：一片足够大的存储空间。桶定址：为表中的每个地址关联一个桶。如果桶已经满了，可以使用开放定址法来处理。例如，插入A5,A2,A3,B5,A9,B2,B9,C2，采用线性探查法解决冲突。如图4-5所示。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d85664a377c144b7891debd640202c6a?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d85664a377c144b7891debd640202c6a?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>4-5</p>
 <p><strong>如何选择散列表的载荷因子？</strong></p>
 <p>散列表的载荷因子定义为: α&#x3D;填入表中的元素个数&#x2F;散列表的长度，α是散列表装满程度的标志因子。由于表长是定值，α与“填入表中的元素个数”成正比，所以，α越大，表明填入表中的元素越多，产生冲突的可能性就越大:反之，α越小，标明填入表中的元素越少，产生冲突的可能性就越小。实际上，散表的平均查找长度是载荷因子α的函数，只是不同处理冲突的方法有不同的函数。<br>对于开放定址法，荷载因子是特别重要因素，应严格限制在0.7-0.8以下。超过0.8，查表时的CPU缓存不命中(cache missing)按照指数曲线上升。因此，一些采用开放定址法的hash库，如Java的系统库限制了荷载因子为0.75，超过此值将resize散列表。</p>
@@ -676,10 +774,10 @@
 </ul>
 <p>简而言之，这类加密哈希算法具有正向快速、逆向困难、输入敏感和冲突避免等特点。</p>
 <h1 id="五、哈希算法的应用"><a href="#五、哈希算法的应用" class="headerlink" title="五、哈希算法的应用"></a>五、哈希算法的应用</h1><h1 id="应用一-区块链与比特币中的工作量证明：挖矿"><a href="#应用一-区块链与比特币中的工作量证明：挖矿" class="headerlink" title="应用一 区块链与比特币中的工作量证明：挖矿"></a>应用一 区块链与比特币中的工作量证明：挖矿</h1><p>挖矿就是做让矿机做一个计算量很大的数学题，即进行哈希计算。伪代码实现如图5-1所示。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d9eb34b6bfa94cb587c8f12784a45931?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/d9eb34b6bfa94cb587c8f12784a45931?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>图5-1</p>
 <p>区块链的最新区块头部信息如下：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a5688e2712ec4847801b9b579d3c1f2f?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/a5688e2712ec4847801b9b579d3c1f2f?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p><strong>挖矿的本质就是找到一个Nonce值，使最新区块头部信息的哈希值满足难度目标条件，伪代码中的target就是难度目标。target</strong>难度值是矿工们挖矿时的重要参考指标，它决定了矿工大约需要经过多少次哈希运算才能产生一个合法的区块。哈希函数计算的难度值对保证区块链系统的安全意义重大。</p>
 <p>区块链协议规定，使用一个常量（targetMax）除以难度系数（difficulty），可以得到目标值（target）。显然，难度系数越大，目标值就越小，哈希的计算越耗时，采矿越难。根据协议，Nonce 是一个32位的二进制值，即最大可以到21.47亿，它是一个随机值，矿工的作用其实就是猜出 Nonce 的值，使得最新区块头的哈希值可以小于目标值。运气好，也许很快就找到了 Nonce，因此采矿具有随机性，没法保证正好十分钟产出一个区块，有时一分钟就算出来了，有时几个小时也没结果。难度值必须根据全网矿工算力的变化进行调整，为了将最新区块产出的速率稳定在十分钟左右，协议设计了难度系数的动态调节机制，难度系数定期（假定是每两周）调整一次。如果这段时间内，最新区块的平均生成速度是9分钟左右，难度系数就要调高10%；如果平均生成速度是11分钟左右，难度系数就要调低10%。</p>
 <p>参与挖矿的矿主只有购买更多更快的矿机，才能在单位时间内提高运算速度，有更多的机会去尝试那个随机数Nonce，从而获得比特币的奖励,现在比特币的价格涨到几万美元&#x2F;枚，是不是很心动呢？</p>
@@ -693,7 +791,7 @@
 <h1 id="应用三-分布式缓存与一致性哈希算法"><a href="#应用三-分布式缓存与一致性哈希算法" class="headerlink" title="应用三 分布式缓存与一致性哈希算法"></a>应用三 分布式缓存与一致性哈希算法</h1><p>数字经济时代，为了应付海量的数据，提高数据的读取、写入能力，一般都采用分布式的方式来缓存数据，这就需要将不同的缓存对象按照相应的hash算法映射到相应的机器上去，例如：key&#x3D;36, 总服务器数是N&#x3D;25，key%N&#x3D;11, 即哈希值key为36对应的缓存对象将存储到ID&#x3D;11的服务器上。那么当添加一台机器或者是其中某一台机器宕机之后，总服务器数N发生了变换，需要将缓存清空，然后重新将内容hash运算映射到所有的机器上，这样的代价是巨大的。</p>
 <p>一致性哈希算法在1997年由麻省理工学院提出，是一种特殊的哈希算法，目的就是解决分布式缓存的这个问题。</p>
 <p>一致性哈希算法将整个哈希值空间映射成一个虚拟的圆环，整个哈希空间的取值范围为（0，2^32-1）。整个空间按顺时针方向组织，0与2^32重合。接下来使用本算法对服务请求进行映射，将服务请求使用哈希算法算出对应的hash值，然后根据hash值的位置沿圆环顺时针查找，第一台遇到的服务器就是所对应的处理请求服务器。当增加一台新的服务器，受影响的数据仅仅是新添加的服务器到其环空间中前一台的服务器（也就是顺着逆时针方向遇到的第一台服务器）之间的数据，其他都不会受到影响。综上所述，一致性哈希算法对于节点的增减都只需重定位环空间中的一小部分数据，具有较好的容错性和可扩展性。如图5-1所示：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/141d5b296b264cb5ac9b6c27f986749c?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/141d5b296b264cb5ac9b6c27f986749c?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>图5-1</p>
 <p>将服务器的标识（如IP地址）作为哈希函数的Key映射到环上。如：hash(Node1) &#x3D;Key1，hash(Node2) &#x3D; Key2。缓存对象object1的哈希值key1按顺时针靠近NODE1,它就会存储到服务器（NODE1）上。为了解决数据分配不均衡的问题, 还会引入虚拟机器节点。</p>
 <h1 id="应用四-图片标识与快速查找"><a href="#应用四-图片标识与快速查找" class="headerlink" title="应用四 图片标识与快速查找"></a>应用四 图片标识与快速查找</h1><p>如果要在海量的图库中，搜索一张图是否存在，我们不能单纯地用图片的元信息（比如图片名称）来比对，因为有可能存在名称相同但图片内容不同，或者名称不同图片内容相同的情况。那我们该如何搜索呢？</p>
@@ -717,7 +815,14 @@
 <p>布隆过滤器可以用于检索一个元素是否在一个集合中，它的优点是空间效率和查询时间都比一般的算法要好的多。它通过m个Hash函数将一个元素映射成一个位阵列（Bit array）中的m个点。例如，将一个字符串经过m个hash函数计算得到m个hash值，m个hash值代表了位阵列中的m个位置，将位阵列中 m个位置的位设为1. 查询时只要检测到这些位都为1，则证明该字符串找到了。</p>
 <p>布隆过滤器认为不在的，一定不会在集合中；布隆过滤器认为在的，可能在也可能不在集合中。</p>
 <p>比较简单的hash函数组实现如下：</p>
-<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="type">int</span> hash(<span class="type">int</span> randSeed, <span class="type">int</span> bitArraySize, <span class="type">String</span> key) &#123;</span><br><span class="line">  <span class="type">int</span> <span class="built_in">result</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> len = key.length();</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="built_in">result</span> = randSeed * <span class="built_in">result</span> + key.charAt(i);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (bitArraySize - <span class="number">1</span>) &amp; <span class="built_in">result</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public int hash(int randSeed, int bitArraySize, String key) &#123;
+  int result &#x3D; 0;
+  int len &#x3D; key.length();
+  for (int i &#x3D; 0; i &lt; len; i++) &#123;
+    result &#x3D; randSeed * result + key.charAt(i);
+  &#125;
+  return (bitArraySize - 1) &amp; result;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>输入：</p>
 <p>randSeed — 随机种子，不同的hash函数，这个随机种子就不同。</p>
@@ -727,10 +832,17 @@
 <p>布隆过滤器广泛应用于网页URL的去重、垃圾邮件的判别、集合重复元素的判别、查询加速（比如基于key-value的存储系统）、Redis数据库防止查询时缓存穿透和减少不存在的行或列的磁盘查找等。</p>
 <h1 id="应用十-java集合中的hashmap和hashcode"><a href="#应用十-java集合中的hashmap和hashcode" class="headerlink" title="应用十 java集合中的hashmap和hashcode"></a>应用十 java集合中的hashmap和hashcode</h1><p>hashmap是java集合的实现之一，其利用hash函数创建数据结构哈希表，该哈希表&#x3D;位桶（可以看作是数组）+链表(或红黑树），主要作用是提高大数据的检索效率。传统的数组或链表线性结构，查找数据的方式是线性检索，即把所有数据都遍历一遍，对大数据而言效率极低，其时间复杂度为O(n)；二分搜索要求数据排列有序，每次只用查找集合中一半的元素。其时间复杂度为O(logn)；Hash表闪亮登场，这是一种时间复杂度为O(1)的检索，就是说不管你数据有多少只需要查一次就可以找到目标数据。</p>
 <p>Hash冲突的策略是相同的hash值组成链表，链表太长就转换成红黑树。</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/b3ada031ee3648f582579c1e42e2361e?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/b3ada031ee3648f582579c1e42e2361e?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>HashMap高度依赖的 hashcode 和 hash 算法。</p>
 <p>Java中String对象的计算hashcode方法：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="type">int</span> <span class="title">hashCode</span><span class="params">(<span class="type">String</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="type">char</span> val[] = value;</span><br><span class="line">    <span class="type">int</span> h=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line">        h = <span class="number">31</span> * h + val[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">public int hashCode(String value) &#123;
+    char val[] &#x3D; value;
+    int h&#x3D;0;
+    for (int i &#x3D; 0; i &lt; value.length; i++) &#123;
+        h &#x3D; 31 * h + val[i];
+    &#125;
+    return h;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>选择31相乘的理由：31不大，可以防止乘法结果溢出；31&#x3D;2^5-1,且是素数，可以将乘法操作变成与的操作，加快运算速度，素数可以让结果均匀分布。</p>
 <p>hash函数可以是hash(h)&#x3D; h%size, size是位桶的长度,这个长度可以随数据量增大动态扩容。</p>
@@ -738,170 +850,221 @@
 <h1 id="PageRank"><a href="#PageRank" class="headerlink" title="PageRank"></a>PageRank</h1><p>作为Google战胜Yahoo的秘密之一，大名鼎鼎的PageRank算法首当其冲。Pagerank是Google排名运算法则(排名公式)的一部分,是Google用于用来标识网页的等级&#x2F;重要性的一种方法,是Google用来衡量一个网站的好坏的唯一标准。</p>
 <p>其核心思想即认为某一链接的质量由其本身即指向它的连接共同决定。它是一种与与查询无关的静态算法，即其最终排序结果可提前计算给出，能够较好的满足实时性的需求。而该算法的缺点则是，其最终结果与主题无关，且旧网页的排名往往要比新网页高。</p>
 <h1 id="局部敏感哈希（LSH）"><a href="#局部敏感哈希（LSH）" class="headerlink" title="局部敏感哈希（LSH）"></a>局部敏感哈希（LSH）</h1><p>局部敏感哈希是非常简单的一种哈希函数，其通过无监督学习生成。由于结构、运算简单而在许多领域得到广泛应用。尤其是当编码位数较长时其效率有明显的提高，因此在很多任务中LSH是我们必须尝试的编码之一。LSH通过将原始数据进行随机投影后经过符号函数得到Hash编码，其表达式如下：</p>
-<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/959e2c3911e941c1926dfd6079ca712c?from=pc" alt="流行算法：哈希算法 - 比特币就靠她了"></p>
+<p><img src="https://p6.toutiaoimg.com/origin/pgc-image/959e2c3911e941c1926dfd6079ca712c?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：哈希算法 - 比特币就靠她了"></p>
 <p>上式中 X为原始数据， W为变换矩阵， B为Hash编码。可以看出LSH真的是非常简洁，这也充分验证了“Simple is beauty.”这句名言。</p>
 <h1 id="语义哈希（Semantic-Hashing）"><a href="#语义哈希（Semantic-Hashing）" class="headerlink" title="语义哈希（Semantic Hashing）"></a>语义哈希（Semantic Hashing）</h1><p>Semantic hashing由Hinton于2007年提出，其主要是利用深度受限制玻尔兹曼机RBMs，学习Hash编码。</p>
 <h1 id="谱哈希（Spectral-Hashing-SH）"><a href="#谱哈希（Spectral-Hashing-SH）" class="headerlink" title="谱哈希（Spectral Hashing, SH）"></a>谱哈希（Spectral Hashing, SH）</h1><p>谱哈希是哈希函数族中的又一经典代表，其天才的将哈希编码过程转化为图像分割问题，进而通过放松约束条件将分割问题转化成拉普拉斯特征图的降维问题，从而求解原问题得到图像数据的哈希编码。</p>
 <p>此外，类似还有在线哈希学习（Online Hashing）、迭代量化哈希（Iterative Quantization, ITQ）、PCA-ITQ、PCA-RR、SKLSH等检索哈希函数。</p>
 <h1 id="应用十二-基于哈希的特征匹配"><a href="#应用十二-基于哈希的特征匹配" class="headerlink" title="应用十二 基于哈希的特征匹配"></a>应用十二 基于哈希的特征匹配</h1><p>通过Hash特征匹配，主要能解决图像搜索、三维重建、图像分类、目标识别等问题。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">unsigned <span class="built_in">int</span> SDBMHash(char *<span class="built_in">str</span>)</span><br><span class="line">&#123;</span><br><span class="line">    unsigned <span class="built_in">int</span> <span class="built_in">hash</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (*<span class="built_in">str</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        // equivalent to: <span class="built_in">hash</span> = <span class="number">65599</span>*<span class="built_in">hash</span> + (*<span class="built_in">str</span>++);</span><br><span class="line">        <span class="built_in">hash</span> = (*<span class="built_in">str</span>++) + (<span class="built_in">hash</span> &lt;&lt; <span class="number">6</span>) + (<span class="built_in">hash</span> &lt;&lt; <span class="number">16</span>) - <span class="built_in">hash</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">hash</span> &amp; <span class="number">0x7FFFFFFF</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">unsigned int SDBMHash(char *str)
+&#123;
+    unsigned int hash &#x3D; 0;
+    while (*str)
+    &#123;
+        &#x2F;&#x2F; equivalent to: hash &#x3D; 65599*hash + (*str++);
+        hash &#x3D; (*str++) + (hash &lt;&lt; 6) + (hash &lt;&lt; 16) - hash;
+    &#125;
+    return (hash &amp; 0x7FFFFFFF);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/07/Jenkins%E8%BF%9C%E7%A8%8Bssh%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Jenkins远程ssh部署踩坑</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/04/tomcat%E7%BC%93%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">tomcat缓存不足问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-        <!--添加编辑 常飞-->
-        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/哈希算法.md" target="_blank">编辑</a>
-        <!--添加编辑-->
-</article>
-
-
-
-    <!--添加高亮代码 常飞-->
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-    </script>
-    <!--添加高亮代码-->
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/search">搜索</a></li>
-        
-      </ul>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">三、哈希函数分类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">四、哈希函数详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%99%AE%E9%80%9A%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">1、普通的哈希函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%A3%E5%88%97%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">2、计算机数据结构的散列函数与散列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">直接寻址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">8.</span> <span class="toc-text">数字分析法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E5%8F%96%E4%B8%AD%E6%B3%95"><span class="toc-number">9.</span> <span class="toc-text">平方取中法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%98%E5%8F%A0%E6%B3%95"><span class="toc-number">10.</span> <span class="toc-text">折叠法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%B3%95"><span class="toc-number">11.</span> <span class="toc-text">随机数法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%A4%E7%95%99%E4%BD%99%E6%95%B0%E6%B3%95"><span class="toc-number">12.</span> <span class="toc-text">除留余数法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">平方散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%EF%BC%88Fibonacci%EF%BC%89%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">14.</span> <span class="toc-text">斐波那契（Fibonacci）散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%98%E6%B3%95%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">15.</span> <span class="toc-text">乘法散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%9F%9F%E6%95%A3%E5%88%97%E6%B3%95"><span class="toc-number">16.</span> <span class="toc-text">全域散列法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E6%95%A3%E5%88%97%E6%B3%95%EF%BC%88perfect-hashing"><span class="toc-number">17.</span> <span class="toc-text">完全散列法（perfect hashing)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="toc-number">18.</span> <span class="toc-text">开放定址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%8D%E5%93%88%E5%B8%8C%E6%B3%95"><span class="toc-number">19.</span> <span class="toc-text">再哈希法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95"><span class="toc-number">20.</span> <span class="toc-text">链地址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%85%AC%E5%85%B1%E6%BA%A2%E5%87%BA%E5%8C%BA"><span class="toc-number">21.</span> <span class="toc-text">建立公共溢出区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%B6%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="toc-number">22.</span> <span class="toc-text">桶定址法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%8A%A0%E5%AF%86%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">23.</span> <span class="toc-text">3、加密哈希函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">24.</span> <span class="toc-text">五、哈希算法的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B8%80-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E%EF%BC%9A%E6%8C%96%E7%9F%BF"><span class="toc-number">25.</span> <span class="toc-text">应用一 区块链与比特币中的工作量证明：挖矿</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%BA%8C-%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E6%9E%84%EF%BC%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">26.</span> <span class="toc-text">应用二 分布式服务器架构：负载均衡</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E4%B8%BB%E8%A6%81%E8%A7%A3%E5%86%B3%E7%94%A8%E6%88%B7%E5%8F%AA%E9%9C%80%E4%B8%80%E4%B8%AA%E5%9F%9F%E5%90%8D%E6%88%96IP%E5%9C%B0%E5%9D%80%E5%B0%B1%E8%83%BD%E9%80%8F%E6%98%8E%E5%9C%B0%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E5%A4%9A%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%88%96%E8%80%85%E8%AE%BF%E9%97%AE%E7%A6%BB%E8%87%AA%E5%B7%B1%E8%B7%9D%E7%A6%BB%E6%9C%80%E8%BF%91%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%BE%97%E6%9C%80%E5%BF%AB%E7%9A%84%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E3%80%82%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E5%BE%88%E5%A4%9A%EF%BC%8C%E6%AF%94%E5%A6%82%E8%BD%AE%E8%AF%A2%E6%B3%95%E3%80%81%E9%9A%8F%E6%9C%BA%E6%B3%95%E3%80%81%E6%9C%80%E5%B0%8F%E8%BF%9E%E6%8E%A5%E6%B3%95%E3%80%81%E5%8A%A0%E6%9D%83%E8%BD%AE%E8%AF%A2%E6%B3%95%E7%AD%89%E3%80%82%E9%82%A3%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E4%BC%9A%E8%AF%9D%E7%B2%98%E6%BB%9E%EF%BC%88session-sticky%EF%BC%89%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E5%91%A2%EF%BC%9F%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8A%EF%BC%8C%E5%9C%A8%E4%B8%80%E6%AC%A1%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E9%83%BD%E8%B7%AF%E7%94%B1%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E3%80%82"><span class="toc-number">27.</span> <span class="toc-text">负载均衡主要解决用户只需一个域名或IP地址就能透明地访问本地多台服务器，或者访问离自己距离最近的服务器获得最快的访问速度。负载均衡算法有很多，比如轮询法、随机法、最小连接法、加权轮询法等。那如何才能实现一个会话粘滞（session sticky）的负载均衡算法呢？也就是说，我们需要在同一个客户端上，在一次会话中的所有请求都路由到同一个服务器上。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B8%89-%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="toc-number">28.</span> <span class="toc-text">应用三 分布式缓存与一致性哈希算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9B%9B-%E5%9B%BE%E7%89%87%E6%A0%87%E8%AF%86%E4%B8%8E%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE"><span class="toc-number">29.</span> <span class="toc-text">应用四 图片标识与快速查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%BA%94-%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87"><span class="toc-number">30.</span> <span class="toc-text">应用五 数据分片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%A3%80%E7%B4%A2%E5%87%A0%E7%99%BE%E4%BA%BF%E5%BC%A0%E5%9B%BE%E7%89%87%EF%BC%9F"><span class="toc-number">31.</span> <span class="toc-text">1 如何快速检索几百亿张图片？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E7%BB%9F%E8%AE%A1%E5%85%B3%E9%94%AE%E8%AF%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%EF%BC%9F"><span class="toc-number">32.</span> <span class="toc-text">2. 如何统计关键词出现的次数？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%85%AD-%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-number">33.</span> <span class="toc-text">应用六 文件数据校验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B8%83-HMAC%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">34.</span> <span class="toc-text">应用七 HMAC的实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%85%AB-%E6%B6%88%E6%81%AF%E6%91%98%E8%A6%81%E4%B8%8E%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="toc-number">35.</span> <span class="toc-text">应用八 消息摘要与数字签名验证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%B9%9D-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">36.</span> <span class="toc-text">应用九 布隆过滤器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8D%81-java%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84hashmap%E5%92%8Chashcode"><span class="toc-number">37.</span> <span class="toc-text">应用十 java集合中的hashmap和hashcode</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8D%81%E4%B8%80-%E6%A3%80%E7%B4%A2%E4%B8%AD%E7%9A%84%E5%90%84%E7%B1%BBHash%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="toc-number">38.</span> <span class="toc-text">应用十一 检索中的各类Hash及其应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TF-IDF-Hashing-TF-and-IDF"><span class="toc-number">39.</span> <span class="toc-text">TF-IDF(Hashing TF and IDF)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PageRank"><span class="toc-number">40.</span> <span class="toc-text">PageRank</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C%EF%BC%88LSH%EF%BC%89"><span class="toc-number">41.</span> <span class="toc-text">局部敏感哈希（LSH）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E5%93%88%E5%B8%8C%EF%BC%88Semantic-Hashing%EF%BC%89"><span class="toc-number">42.</span> <span class="toc-text">语义哈希（Semantic Hashing）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%B1%E5%93%88%E5%B8%8C%EF%BC%88Spectral-Hashing-SH%EF%BC%89"><span class="toc-number">43.</span> <span class="toc-text">谱哈希（Spectral Hashing, SH）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8D%81%E4%BA%8C-%E5%9F%BA%E4%BA%8E%E5%93%88%E5%B8%8C%E7%9A%84%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D"><span class="toc-number">44.</span> <span class="toc-text">应用十二 基于哈希的特征匹配</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&text=哈希算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&is_video=false&description=哈希算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=哈希算法&body=Check out this article: https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&title=哈希算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&name=哈希算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/05/04/%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/&t=哈希算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      </div>
+    
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+<!-- Custom -->
+
+
     
+
     
-    2015-2022
-    koderboy
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </nav>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
+  <!-- SCRIPTS -->
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
-      e.clearSelection();
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
+<!-- Plugins -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
+  <script  src="/js/local-search.js" ></script>
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Umami Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

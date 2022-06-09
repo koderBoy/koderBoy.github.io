@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="来源：今日头条 一、定义维特比(Viterbi)算法说白了就是动态规划实现最短路径。由安德鲁·维特比(Andrew Viterbi)于1967年提出，用于在数字通信链路中解卷积以消除噪音。 所谓动态规划，其核心就是“动态”的概念，把大的问题细分为多个小的问题，基于每一步的结果再去寻找下一步的策略，通过每一步走过之后的局部最优去寻找全局最优。 二、求篱笆网络（Lattice）的最短路径问题篱笆网络有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划最短路径-维特比算法">
@@ -32,143 +42,231 @@
 <meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/42edad2f4a7c458989f0169937685b42?from=pc">
 <meta property="og:image" content="https://p9.toutiaoimg.com/origin/pgc-image/3efd5d476e844c309c764909c83e9124?from=pc">
 <meta property="article:published_time" content="2022-02-18T15:29:53.000Z">
-<meta property="article:modified_time" content="2022-06-08T07:30:55.645Z">
+<meta property="article:modified_time" content="2022-06-09T03:54:43.551Z">
 <meta property="article:author" content="koderboy">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://p9.toutiaoimg.com/origin/pgc-image/7e335cac9e0f4830b68b4648555b3ce1?from=pc">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>动态规划最短路径-维特比算法</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  <title>动态规划最短路径-维特比算法 - VOYAGE</title>
 
-    <!-- persian styles -->
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
     
-    <!-- rss -->
     
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
-	<!-- mathjax -->
-	
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&text=动态规划最短路径-维特比算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&is_video=false&description=动态规划最短路径-维特比算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=动态规划最短路径-维特比算法&body=Check out this article: https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&name=动态规划最短路径-维特比算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&t=动态规划最短路径-维特比算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
 
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B1%82%E7%AF%B1%E7%AC%86%E7%BD%91%E7%BB%9C%EF%BC%88Lattice%EF%BC%89%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">二、求篱笆网络（Lattice）的最短路径问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%A9%B7%E4%B8%BE%E6%B3%95%E6%89%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">3.</span> <span class="toc-text">1、穷举法找最短路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E7%BB%B4%E7%89%B9%E6%AF%94%E6%B3%95%E6%89%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">4.</span> <span class="toc-text">2、维特比法找最短路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">3、小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BB%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E8%A7%92%E5%BA%A6%E7%90%86%E8%A7%A3%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">三、从动态规划的角度理解维特比算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9B%9B%E9%83%A8%E6%9B%B2"><span class="toc-number">7.</span> <span class="toc-text">动态规划四部曲</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E7%8A%B6%E6%80%81-%EF%BC%88a-%E6%9C%80%E5%90%8E%E4%B8%80%E6%AD%A5%EF%BC%9Bb-%E5%8C%96%E4%B8%BA%E5%AD%90%E9%97%AE%E9%A2%98%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">确定状态 （a. 最后一步；b. 化为子问题）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="toc-number">9.</span> <span class="toc-text">转移方程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%92%8C%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="toc-number">10.</span> <span class="toc-text">开始和边界条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%A1%BA%E5%BA%8F"><span class="toc-number">11.</span> <span class="toc-text">计算顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95%E7%9A%84%E7%90%86%E8%A7%A3%E5%8F%AF%E4%BB%A5%E6%A6%82%E6%8B%AC%E6%88%90%E4%B8%89%E7%82%B9"><span class="toc-number">12.</span> <span class="toc-text">四、维特比算法的理解可以概括成三点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">13.</span> <span class="toc-text">五、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%88%E4%BB%8B%E7%BB%8D%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">14.</span> <span class="toc-text">先介绍隐马尔可夫模型的基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-%E5%8C%BB%E7%94%9F%E7%9C%8B%E7%97%85"><span class="toc-number">15.</span> <span class="toc-text">例子1 医生看病</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E9%80%9A%E8%BF%87%E6%8B%BC%E9%9F%B3%E8%AF%86%E5%88%AB%E6%B1%89%E5%AD%97"><span class="toc-number">16.</span> <span class="toc-text">例子2 通过拼音识别汉字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%A8%A1%E5%9E%8B%E5%8C%96%E4%B8%BA%E7%AF%B1%E7%AC%86%E7%BD%91%E7%BB%9C%E3%80%82%E5%A6%82%E5%9B%BE5-6%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-number">17.</span> <span class="toc-text">1、模型化为篱笆网络。如图5-6所示。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%88%A9%E7%94%A8%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95%E6%B1%82%E5%BE%97%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%82%E5%A6%825-7%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-number">18.</span> <span class="toc-text">2、利用维特比算法求得最短路径。如5-7所示。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">19.</span> <span class="toc-text">六、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95%E4%B8%8E%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">20.</span> <span class="toc-text">隐马尔可夫模型中的维特比算法与伪代码实现[1]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="toc-number">21.</span> <span class="toc-text">1、算法描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">22.</span> <span class="toc-text">2、伪代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">23.</span> <span class="toc-text">七、参考资料</span></a></li></ol>
-    </div>
-  </span>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="动态规划最短路径-维特比算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-18 15:29" pubdate>
+        2022年2月18日 下午
+      </time>
+    </span>
+  
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-        
-    <h1 class="posttitle" itemprop="name headline">
-        动态规划最短路径-维特比算法
-    </h1>
+<div class="mt-1">
+  
 
+  
 
+  
+  
+</div>
 
-            <div class="meta">
-                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">koderboy</span>
-                </span>
-                
-    <div class="postdate">
-      
-        <time datetime="2022-02-18T15:29:53.000Z" itemprop="datePublished">2022-02-18</time>
-        
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
 
-
-                    
-    <div class="article-category">
-        <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
-    </div>
-
-
-                        
-
-            </div>
-    </header>
+  <main>
     
+      
 
-        <div class="content" itemprop="articleBody">
-            <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6936529283917824519/?log_from=6396cd54cb25a_1651649299705">今日头条</a></p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">动态规划最短路径-维特比算法</h1>
+            
+            <div class="markdown-body">
+              <p>来源：<a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6936529283917824519/?log_from=6396cd54cb25a_1651649299705">今日头条</a></p>
 <h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a><strong>一、定义</strong></h1><p>维特比(Viterbi)算法说白了就是动态规划实现最短路径。由安德鲁·维特比(Andrew Viterbi)于1967年提出，用于在数字通信链路中解卷积以消除噪音。</p>
 <p>所谓动态规划，其核心就是“动态”的概念，把大的问题细分为多个小的问题，基于每一步的结果再去寻找下一步的策略，通过每一步走过之后的局部最优去寻找全局最优。</p>
 <h1 id="二、求篱笆网络（Lattice）的最短路径问题"><a href="#二、求篱笆网络（Lattice）的最短路径问题" class="headerlink" title="二、求篱笆网络（Lattice）的最短路径问题"></a><strong>二、求篱笆网络（Lattice）的最短路径问题</strong></h1><p>篱笆网络有向图的特点，如图2-1所示：</p>
@@ -177,7 +275,7 @@
 <li>同一列结点有多个，并且和上一列结点交错地连接起来；</li>
 <li>不构成有向回路。</li>
 </ul>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/7e335cac9e0f4830b68b4648555b3ce1?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/7e335cac9e0f4830b68b4648555b3ce1?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图2-1</p>
 <p><strong>题目：如图2-1，求A到E的最短路径？</strong></p>
 <h1 id="1、穷举法找最短路径"><a href="#1、穷举法找最短路径" class="headerlink" title="1、穷举法找最短路径"></a><strong>1、穷举法找最短路径</strong></h1><p><strong>从A到C列 有3*3&#x3D; 9条路径：</strong></p>
@@ -233,7 +331,7 @@
 <p>A B2 C3 7+7</p>
 <p><strong>A B3 C3 5+6 最短为11</strong></p>
 <p>可以看出A到C3， A B3 C2 路径最短， 把这条路径记录下来。</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/5f18b0c887164198a5b9a2995130bbf3?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/5f18b0c887164198a5b9a2995130bbf3?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图2-2</p>
 <p><strong>第2步，从C到D列有3*3条路径，计算量是3*3</strong></p>
 <p><strong>我们只把到A到C的最短的路径（红色部分A-B3-C1、A-B2-C2、A-B3-C3）参与到D的路径计算中，其它路径就不用计算了。</strong></p>
@@ -249,7 +347,7 @@
 <p>A B2 C2 D3 10+3&#x3D;13</p>
 <p>A B3 C3 D3 11+6&#x3D;17</p>
 <p>可以看出A到D3， A B3 C1 D3 路径最短， 把这条路径记录下来。</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/1b14e31b81a14929b264e975812cf69c?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/1b14e31b81a14929b264e975812cf69c?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图2-3</p>
 <p>第3步，从D到E有3条路径</p>
 <p>A B2 C2 D1 E 15+4&#x3D;19</p>
@@ -258,7 +356,7 @@
 <p>假如整个网络长度是N,宽度是D,这样总的计算时间复杂度只有o((N-1)*D^2)。</p>
 <p>(不包括起始点和终点,N代表水平方向有的结点数，D代表竖直方向的结点数，本例子是N&#x3D;3, D&#x3D;3）</p>
 <h1 id="3、小结"><a href="#3、小结" class="headerlink" title="3、小结"></a><strong>3、小结</strong></h1><p>假如整个网络长度是N(不包括起始点和终点), 宽度是D, 维特比法的计算计算时间复杂度是o((N-1)*D^2); 穷举法的计算时间复杂度是o（D^N）即D的N次幂。维特比法的计算量比穷举法的计算量少很多，特别是当N和D都比较大时，效果特别明显。如穷举法要一个月才能计算完，维特比法只要几分钟就计算完了。这就是好的算法的巨大威力。</p>
-<h1 id="三、从动态规划的角度理解维特比算法"><a href="#三、从动态规划的角度理解维特比算法" class="headerlink" title="三、从动态规划的角度理解维特比算法"></a><strong>三、从动态规划的角度理解维特比算法</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/e3526d6f2b824f66b1e22aae031812e5?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<h1 id="三、从动态规划的角度理解维特比算法"><a href="#三、从动态规划的角度理解维特比算法" class="headerlink" title="三、从动态规划的角度理解维特比算法"></a><strong>三、从动态规划的角度理解维特比算法</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/e3526d6f2b824f66b1e22aae031812e5?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图3-1</p>
 <p>如图3-1，求S到E的最短路径？</p>
 <h1 id="动态规划四部曲"><a href="#动态规划四部曲" class="headerlink" title="动态规划四部曲"></a><strong>动态规划四部曲</strong></h1><h1 id="确定状态-（a-最后一步；b-化为子问题）"><a href="#确定状态-（a-最后一步；b-化为子问题）" class="headerlink" title="确定状态 （a. 最后一步；b. 化为子问题）"></a><strong>确定状态 （a. 最后一步；b. 化为子问题）</strong></h1><p>设f(n, j)代表s到第t&#x3D;n列，第j层结点o(tn,j)的最短距离。</p>
@@ -283,7 +381,7 @@
 <p>维特比算法用于寻找最有可能产生观测事件序列的维特比路径——隐含状态序列，特别是在马尔可夫信息源上下文和隐马尔可夫模型中。维特比算法之所以重要，是因为凡是使用隐含马尔可夫模型描述的问题都可以用它来解码，包括今天的数字通信、语音识别、机器翻译、拼音转汉字、分词、地图导航等。——《数学之美》</p>
 <h1 id="先介绍隐马尔可夫模型的基础知识"><a href="#先介绍隐马尔可夫模型的基础知识" class="headerlink" title="先介绍隐马尔可夫模型的基础知识"></a><strong>先介绍隐马尔可夫模型的基础知识</strong></h1><p>隐马尔可夫模型(HMM)问题可由下面五个元素描述：</p>
 <p>观测序列（observations）：实际观测到的现象序列<br>隐含状态（states）：所有的可能的隐含状态<br>初始概率（start_probability）：每个隐含状态的初始概率<br>转移概率（transition_probability）：从一个隐含状态转移到另一个隐含状态的概率<br>发射概率（emission_probability）：某种隐含状态产生某种观测现象的概率</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/d2979acee4c3433fba08845a25a8000b?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/d2979acee4c3433fba08845a25a8000b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图5-1</p>
 <p>图5-1中展现的隐马尔科夫模型中的状态序列，其中一共包含5种隐含状态，状态序列的长度为7，那么图中很明显横轴是时间轴，纵轴是隐含状态轴。</p>
 <h1 id="例子1-医生看病"><a href="#例子1-医生看病" class="headerlink" title="例子1 医生看病"></a><strong>例子1 医生看病</strong></h1><p>想象一个乡村诊所。村民有着非常理想化的特性，要么健康要么发烧。他们只有问诊所的医生的才能知道是否发烧。 聪明的医生通过询问病人的感觉诊断他们是否发烧。村民只回答他们感觉正常、头晕或冷。</p>
@@ -291,192 +389,234 @@
 <p>医生知道村民的总体健康状况，还知道发烧和没发烧的病人通常会抱怨什么症状。 换句话说，医生知道隐马尔可夫模型的参数。</p>
 <p>隐含状态 &#x3D; (‘健康’, ‘发烧’)<br>观测序列 &#x3D; (‘正常’, ‘冷’, ‘头晕’)<br>初始概率 &#x3D; {‘健康’: 0.6, ‘发烧’: 0.4}<br>转移概率 &#x3D; {<br>‘健康’ : {‘健康’: 0.7, ‘发烧’: 0.3},<br>‘发烧’ : {‘健康’: 0.4, ‘发烧’: 0.6},<br>}<br>发射概率 &#x3D; {<br>‘健康’ : {‘正常’: 0.5, ‘冷’: 0.4, ‘头晕’: 0.1},<br>‘发烧’ : {‘正常’: 0.1, ‘冷’: 0.3, ‘头晕’: 0.6},<br>}</p>
 <p>其对应的状态转移图如图5-2所示：</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/fb7204ccd8bf4e68ba1aa74c0125a92b?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/fb7204ccd8bf4e68ba1aa74c0125a92b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图5-2</p>
 <p>题目：</p>
 <p>已知：医生知道隐马尔可夫模型的参数；阿华连续三天的身体感觉依次是正常、冷、头晕。</p>
 <p>求：阿华这三天的身体健康状态变化的过程是怎么样的？</p>
 <p>解：横轴观测序列的长度为 3（第一天 正常、第二天 冷、第三天 头晕），纵轴隐含状态个数为2（健康、发烧）。</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/316a7e4c21934a93bd03c8acd771fbb9?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/8adef5788aef461ab800cb7ade01ecfa?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/b261d151b77746a5ba134fbbcb0c0308?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/37cf06429b0b4fa993aa20bdbec689e1?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/003977e62e644ecca0b37524d6677679?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/a2ce999e8e624d58b1e62b31d5da5338?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/316a7e4c21934a93bd03c8acd771fbb9?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/8adef5788aef461ab800cb7ade01ecfa?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/b261d151b77746a5ba134fbbcb0c0308?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/37cf06429b0b4fa993aa20bdbec689e1?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/003977e62e644ecca0b37524d6677679?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/a2ce999e8e624d58b1e62b31d5da5338?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>维特比算法揭示了观察结果 [‘正常’, ‘冷’, ‘发晕’] 最有可能由状态序列 [‘健康’, ‘健康’, ‘发烧’]产生。 换句话说，对于观察到的活动, 病人第一天感到正常，第二天感到冷时都是健康的，而第三天发烧了。</p>
 <p>维特比算法的计算过程可以直观地由上面系列图表示。黑色加粗的是维特比路径。</p>
 <h1 id="例子2-通过拼音识别汉字"><a href="#例子2-通过拼音识别汉字" class="headerlink" title="例子2 通过拼音识别汉字"></a><strong>例子2 通过拼音识别汉字</strong></h1><p>这是维特比算法求解隐马尔可夫模型问题，用维特比算法针对隐马尔可夫模型三大问题中的解码问题(给定模型和观测序列，如何找到与此观测序列最匹配的状态序列的问题)进行求解。</p>
 <p>首先，我们已经知道状态序列X会产生观测序列O {wo, ai, zhong, guo}:</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/49561b4502f84b9b9353dad70663864b?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/49561b4502f84b9b9353dad70663864b?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图5-3</p>
 <p>观测序列O对应的状态序列X有很多种可能，对应的概率如图5-4所示，比如ai可能有三种可能：哎、爱、挨。</p>
-<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/7a4cc02401054e2a8e1c71a5bbcb983c?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<p><img src="https://p9.toutiaoimg.com/origin/pgc-image/7a4cc02401054e2a8e1c71a5bbcb983c?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图5-4</p>
 <p>观测序列O求状态序列问题就变成了最大概率问题，把概率最大理解为路径最短，转换为了求解最短路径问题。</p>
-<h1 id="1、模型化为篱笆网络。如图5-6所示。"><a href="#1、模型化为篱笆网络。如图5-6所示。" class="headerlink" title="1、模型化为篱笆网络。如图5-6所示。"></a><strong>1、模型化为篱笆网络。如图5-6所示。</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/7141c099e37245a1877702dc4545a160?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<h1 id="1、模型化为篱笆网络。如图5-6所示。"><a href="#1、模型化为篱笆网络。如图5-6所示。" class="headerlink" title="1、模型化为篱笆网络。如图5-6所示。"></a><strong>1、模型化为篱笆网络。如图5-6所示。</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/7141c099e37245a1877702dc4545a160?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图5-6</p>
-<h1 id="2、利用维特比算法求得最短路径。如5-7所示。"><a href="#2、利用维特比算法求得最短路径。如5-7所示。" class="headerlink" title="2、利用维特比算法求得最短路径。如5-7所示。"></a><strong>2、利用维特比算法求得最短路径。如5-7所示。</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/b3e846a967b94d428af6d5c44fbb078f?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<h1 id="2、利用维特比算法求得最短路径。如5-7所示。"><a href="#2、利用维特比算法求得最短路径。如5-7所示。" class="headerlink" title="2、利用维特比算法求得最短路径。如5-7所示。"></a><strong>2、利用维特比算法求得最短路径。如5-7所示。</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/b3e846a967b94d428af6d5c44fbb078f?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <p>图5-7</p>
-<h1 id="六、附录"><a href="#六、附录" class="headerlink" title="六、附录"></a><strong>六、附录</strong></h1><h1 id="隐马尔可夫模型中的维特比算法与伪代码实现-1"><a href="#隐马尔可夫模型中的维特比算法与伪代码实现-1" class="headerlink" title="隐马尔可夫模型中的维特比算法与伪代码实现[1]"></a><strong>隐马尔可夫模型中的维特比算法与伪代码实现[1]</strong></h1><h1 id="1、算法描述"><a href="#1、算法描述" class="headerlink" title="1、算法描述"></a><strong>1、算法描述</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/42edad2f4a7c458989f0169937685b42?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
-<h1 id="2、伪代码实现"><a href="#2、伪代码实现" class="headerlink" title="2、伪代码实现"></a><strong>2、伪代码实现</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/3efd5d476e844c309c764909c83e9124?from=pc" alt="流行算法：动态规划最短路径-维特比算法"></p>
+<h1 id="六、附录"><a href="#六、附录" class="headerlink" title="六、附录"></a><strong>六、附录</strong></h1><h1 id="隐马尔可夫模型中的维特比算法与伪代码实现-1"><a href="#隐马尔可夫模型中的维特比算法与伪代码实现-1" class="headerlink" title="隐马尔可夫模型中的维特比算法与伪代码实现[1]"></a><strong>隐马尔可夫模型中的维特比算法与伪代码实现[1]</strong></h1><h1 id="1、算法描述"><a href="#1、算法描述" class="headerlink" title="1、算法描述"></a><strong>1、算法描述</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/42edad2f4a7c458989f0169937685b42?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
+<h1 id="2、伪代码实现"><a href="#2、伪代码实现" class="headerlink" title="2、伪代码实现"></a><strong>2、伪代码实现</strong></h1><p><img src="https://p9.toutiaoimg.com/origin/pgc-image/3efd5d476e844c309c764909c83e9124?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：动态规划最短路径-维特比算法"></p>
 <h1 id="七、参考资料"><a href="#七、参考资料" class="headerlink" title="七、参考资料"></a><strong>七、参考资料</strong></h1><p>[1] zh.wikipedia.org&#x2F;wiki&#x2F;维特比算法</p>
 
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">动态规划算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">模拟退火算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-        <!--添加编辑 常飞-->
-        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/动态规划最短路径-维特比算法.md" target="_blank">编辑</a>
-        <!--添加编辑-->
-</article>
-
-
-
-    <!--添加高亮代码 常飞-->
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-    </script>
-    <!--添加高亮代码-->
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/search">搜索</a></li>
-        
-      </ul>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B1%82%E7%AF%B1%E7%AC%86%E7%BD%91%E7%BB%9C%EF%BC%88Lattice%EF%BC%89%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">二、求篱笆网络（Lattice）的最短路径问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%A9%B7%E4%B8%BE%E6%B3%95%E6%89%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">3.</span> <span class="toc-text">1、穷举法找最短路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E7%BB%B4%E7%89%B9%E6%AF%94%E6%B3%95%E6%89%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">4.</span> <span class="toc-text">2、维特比法找最短路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">3、小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BB%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E8%A7%92%E5%BA%A6%E7%90%86%E8%A7%A3%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">三、从动态规划的角度理解维特比算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9B%9B%E9%83%A8%E6%9B%B2"><span class="toc-number">7.</span> <span class="toc-text">动态规划四部曲</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E7%8A%B6%E6%80%81-%EF%BC%88a-%E6%9C%80%E5%90%8E%E4%B8%80%E6%AD%A5%EF%BC%9Bb-%E5%8C%96%E4%B8%BA%E5%AD%90%E9%97%AE%E9%A2%98%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">确定状态 （a. 最后一步；b. 化为子问题）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="toc-number">9.</span> <span class="toc-text">转移方程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%92%8C%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="toc-number">10.</span> <span class="toc-text">开始和边界条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%A1%BA%E5%BA%8F"><span class="toc-number">11.</span> <span class="toc-text">计算顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95%E7%9A%84%E7%90%86%E8%A7%A3%E5%8F%AF%E4%BB%A5%E6%A6%82%E6%8B%AC%E6%88%90%E4%B8%89%E7%82%B9"><span class="toc-number">12.</span> <span class="toc-text">四、维特比算法的理解可以概括成三点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">13.</span> <span class="toc-text">五、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%88%E4%BB%8B%E7%BB%8D%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">14.</span> <span class="toc-text">先介绍隐马尔可夫模型的基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901-%E5%8C%BB%E7%94%9F%E7%9C%8B%E7%97%85"><span class="toc-number">15.</span> <span class="toc-text">例子1 医生看病</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902-%E9%80%9A%E8%BF%87%E6%8B%BC%E9%9F%B3%E8%AF%86%E5%88%AB%E6%B1%89%E5%AD%97"><span class="toc-number">16.</span> <span class="toc-text">例子2 通过拼音识别汉字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%A8%A1%E5%9E%8B%E5%8C%96%E4%B8%BA%E7%AF%B1%E7%AC%86%E7%BD%91%E7%BB%9C%E3%80%82%E5%A6%82%E5%9B%BE5-6%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-number">17.</span> <span class="toc-text">1、模型化为篱笆网络。如图5-6所示。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%88%A9%E7%94%A8%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95%E6%B1%82%E5%BE%97%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%82%E5%A6%825-7%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-number">18.</span> <span class="toc-text">2、利用维特比算法求得最短路径。如5-7所示。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">19.</span> <span class="toc-text">六、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95%E4%B8%8E%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">20.</span> <span class="toc-text">隐马尔可夫模型中的维特比算法与伪代码实现[1]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="toc-number">21.</span> <span class="toc-text">1、算法描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">22.</span> <span class="toc-text">2、伪代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">23.</span> <span class="toc-text">七、参考资料</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&text=动态规划最短路径-维特比算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&is_video=false&description=动态规划最短路径-维特比算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=动态规划最短路径-维特比算法&body=Check out this article: https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&title=动态规划最短路径-维特比算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&name=动态规划最短路径-维特比算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/&t=动态规划最短路径-维特比算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      </div>
+    
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+<!-- Custom -->
+
+
     
+
     
-    2015-2022
-    koderboy
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </nav>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
+  <!-- SCRIPTS -->
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
-      e.clearSelection();
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
+<!-- Plugins -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
+  <script  src="/js/local-search.js" ></script>
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Umami Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

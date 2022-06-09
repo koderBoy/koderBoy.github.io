@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="来源：今日头条 一、定义模拟退火算法（Simulated Annealing，SA）是一种通用概率演算法，用来在一个大的搜寻空间内找寻命题的最优解。“模拟退火”算法是源于对热力学中退火过程的模拟，在某一给定初温下，通过缓慢下降温度参数，使算法能够在多项式时间内给出一个近似最优解。最早的思想是由Metropolis在1953年提出，Kirkpatrick等人把模拟退火思想与组合最优化的相似点进行类比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模拟退火算法">
@@ -25,162 +35,250 @@
 <meta property="og:image" content="https://p26.toutiaoimg.com/origin/pgc-image/dbab96ab24834881bd995095b9112d76?from=pc">
 <meta property="og:image" content="https://p26.toutiaoimg.com/origin/pgc-image/f2d8c42aac23480eaed50f1b9d6df732?from=pc">
 <meta property="article:published_time" content="2022-01-11T15:14:09.000Z">
-<meta property="article:modified_time" content="2022-06-08T07:30:55.645Z">
+<meta property="article:modified_time" content="2022-06-09T03:54:43.551Z">
 <meta property="article:author" content="koderboy">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://p26.toutiaoimg.com/origin/pgc-image/0cae0994c4cb4dc6847f84cfbf328c3f?from=pc">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>模拟退火算法</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  <title>模拟退火算法 - VOYAGE</title>
 
-    <!-- persian styles -->
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
     
-    <!-- rss -->
     
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
-	<!-- mathjax -->
-	
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&text=模拟退火算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&is_video=false&description=模拟退火算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=模拟退火算法&body=Check out this article: https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&name=模拟退火算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&t=模拟退火算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
 
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%8E%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E3%80%81%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95%E3%80%81-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">二、与贪心算法、爬山算法、 梯度下降算法的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">三、基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%BB%E8%A6%81%E6%80%9D%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">四、主要思想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81Metropolis%E5%87%86%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">五、Metropolis准则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E5%87%86%E5%88%99%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="toc-number">6.</span> <span class="toc-text">1、准则的由来</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%87%86%E5%88%99%E8%AF%A6%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">2、准则详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">8.</span> <span class="toc-text">六、算法实现步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SA%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-number">9.</span> <span class="toc-text">ＳＡ算法具体步骤:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A1%A8%E7%A4%BA"><span class="toc-number">10.</span> <span class="toc-text">1、流程图表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%96%87%E5%AD%97%E6%8F%8F%E8%BF%B0%E8%A1%A8%E7%A4%BA"><span class="toc-number">11.</span> <span class="toc-text">2、文字描述表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E4%BB%8E%E6%96%B0%E8%A7%A3%E7%9A%84%E4%BA%A7%E7%94%9F%E4%B8%8E%E6%8E%A5%E5%8F%97%E6%9D%A5%E8%A1%A8%E7%A4%BA"><span class="toc-number">12.</span> <span class="toc-text">3、从新解的产生与接受来表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E7%AE%97%E6%B3%95%E8%A6%81%E7%B4%A0"><span class="toc-number">13.</span> <span class="toc-text">七、算法要素</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4"><span class="toc-number">14.</span> <span class="toc-text">1、状态空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E7%8A%B6%E6%80%81%E4%BA%A7%E7%94%9F%E5%87%BD%E6%95%B0"><span class="toc-number">15.</span> <span class="toc-text">2、状态产生函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87"><span class="toc-number">16.</span> <span class="toc-text">3、状态转移概率</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%88%9D%E5%A7%8B%E6%B8%A9%E5%BA%A6"><span class="toc-number">17.</span> <span class="toc-text">4、初始温度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E5%86%B7%E5%8D%B4%E8%BF%9B%E5%BA%A6%E8%A1%A8"><span class="toc-number">18.</span> <span class="toc-text">5、冷却进度表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E5%86%85%E5%BE%AA%E7%8E%AF%E7%BB%88%E6%AD%A2%E7%9A%84%E5%87%86%E5%88%99"><span class="toc-number">19.</span> <span class="toc-text">6、内循环终止的准则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E5%A4%96%E5%BE%AA%E7%8E%AF%E7%BB%88%E6%AD%A2%E7%9A%84%E5%87%86%E5%88%99"><span class="toc-number">20.</span> <span class="toc-text">7、外循环终止的准则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">21.</span> <span class="toc-text">八、参数的选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E6%AD%A5%E9%95%BF"><span class="toc-number">22.</span> <span class="toc-text">1、状态转换步长</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0%E5%88%9D%E5%80%BCT0%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">23.</span> <span class="toc-text">2、控制参数初值T0的选取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E8%A1%B0%E5%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">24.</span> <span class="toc-text">3、衰减函数的选取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E9%A9%AC%E5%8F%AF%E5%A4%AB%E9%93%BE%E9%95%BF%E5%BA%A6L%EF%BC%88%E5%86%85%E5%BE%AA%E7%8E%AF%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%EF%BC%89%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">25.</span> <span class="toc-text">4、马可夫链长度L（内循环迭代次数）的选取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E7%BB%88%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="toc-number">26.</span> <span class="toc-text">5、终止条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">27.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E6%B3%95%E6%B1%82%E5%87%BD%E6%95%B0f-x-y-x3D-5sin-xy-x-2-y-2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%E3%80%82"><span class="toc-number">28.</span> <span class="toc-text">例子：使用模拟退火法求函数f(x,y) &#x3D; 5sin(xy) + x^2 + y^2的最小值。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">29.</span> <span class="toc-text">九、算法设计的注意事项</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%AD%96%E7%95%A5"><span class="toc-number">30.</span> <span class="toc-text">十、模拟退火算法改进策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E8%BA%AB%E8%A6%81%E7%B4%A0%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">31.</span> <span class="toc-text">自身要素的改进</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8E%E5%85%B6%E5%AE%83%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E7%9B%B8%E7%BB%93%E5%90%88%E3%80%82"><span class="toc-number">32.</span> <span class="toc-text">与其它搜索算法相结合。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">33.</span> <span class="toc-text">十一、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">34.</span> <span class="toc-text">十二、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">35.</span> <span class="toc-text">附录1 模拟退火算法的数学模型</span></a></li></ol>
-    </div>
-  </span>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="模拟退火算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-11 15:14" pubdate>
+        2022年1月11日 下午
+      </time>
+    </span>
+  
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-        
-    <h1 class="posttitle" itemprop="name headline">
-        模拟退火算法
-    </h1>
+<div class="mt-1">
+  
 
+  
 
+  
+  
+</div>
 
-            <div class="meta">
-                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">koderboy</span>
-                </span>
-                
-    <div class="postdate">
-      
-        <time datetime="2022-01-11T15:14:09.000Z" itemprop="datePublished">2022-01-11</time>
-        
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
 
-
-                    
-    <div class="article-category">
-        <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
-    </div>
-
-
-                        
-
-            </div>
-    </header>
+  <main>
     
+      
 
-        <div class="content" itemprop="articleBody">
-            <p>来源：<a href="read://https_www.toutiao.com/?url=https%3A%2F%2Fwww.toutiao.com%2Farticle%2F6940338047137399299%2F%3Flog_from%3De0ab1a7254c4c_1636702361642">今日头条</a></p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">模拟退火算法</h1>
+            
+            <div class="markdown-body">
+              <p>来源：<a href="read://https_www.toutiao.com/?url=https%3A%2F%2Fwww.toutiao.com%2Farticle%2F6940338047137399299%2F%3Flog_from%3De0ab1a7254c4c_1636702361642">今日头条</a></p>
 <h1 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h1><p>模拟退火算法（Simulated Annealing，SA）是一种通用概率演算法，用来在一个大的搜寻空间内找寻命题的最优解。“模拟退火”算法是源于对热力学中退火过程的模拟，在某一给定初温下，通过缓慢下降温度参数，使算法能够在多项式时间内给出一个近似最优解。最早的思想是由Metropolis在1953年提出，Kirkpatrick等人把模拟退火思想与组合最优化的相似点进行类比，将模拟退火算法引入到组合优化领域。模拟退火算法是解决传统方法难处理的NP完全问题(Nondeterministic Polynomial Complete Problem)，TSP（Traveling Salesman Problem）货郎担问题的有效方法之一。</p>
 <p>模拟退火算法是一种高效、通用、易实现的优化算法，适合于解决大规模组合优化问题的通用而有效的近似算法。</p>
 <p>模拟退火算法是一种贪心算法，也是一种随机算法，它有较强的局部搜索能力，对参数依赖性较强，并不一定能找到全局的最优解，但可以比较快的找到问题的近似最优解。</p>
 <p>SA特别适合并行运算，描述简单、初始条件限制少、使用灵活且效率高，所以被广泛应用。</p>
 <h1 id="二、与贪心算法、爬山算法、-梯度下降算法的比较"><a href="#二、与贪心算法、爬山算法、-梯度下降算法的比较" class="headerlink" title="二、与贪心算法、爬山算法、 梯度下降算法的比较"></a>二、与贪心算法、爬山算法、 梯度下降算法的比较</h1><p>爬山算法是一种简单的贪心搜索算法，该算法每次从当前解的临近解空间中选择一个最优解作为当前解，直到达到一个局部最优解。</p>
 <p>爬山算法实现很简单，其主要缺点是会陷入局部最优解，而不一定能搜索到全局最优解。如图2-1所示：假设C点为当前解，爬山算法搜索到A点这个局部最优解就会停止搜索，因为在A点无论向那个方向小幅度移动都不能得到更优的解。</p>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/0cae0994c4cb4dc6847f84cfbf328c3f?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/0cae0994c4cb4dc6847f84cfbf328c3f?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>图2-1</p>
 <p>模拟退火其实也是一种贪心算法，与爬山算法不同，它是下降寻找谷底，并且它的搜索过程引入了随机因素。模拟退火算法以一定的概率来接受一个比当前解要差的解，因此有可能会跳出这个局部的最优解，达到全局的最优解。如图2-2所示，它的搜索路径是A-&gt;B-&gt;C-&gt;D-&gt;E-&gt;F-G, 最终找到了G这个全局最优解。</p>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/593ceaffaefa466397760bbfacd03b96?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/593ceaffaefa466397760bbfacd03b96?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>图2-2</p>
 <p>关于普通贪心算法与模拟退火，有一个有趣的比喻：</p>
 <p>普通贪心算法：兔子朝着比现在低的地方跳去。它找到了不远处的最低的山谷。但是这座山谷不一定最低的。 它不能保证局部最优值就是全局最优值。</p>
 <p>模拟退火：兔子喝醉了。它随机地跳了很长时间。这期间，它可能走向低处，也可能踏入平地。但是，它渐渐清醒了并朝最低的方向跳去。</p>
 <p>梯度下降法和模拟退火算法都是求最优解的方法，但它们也有所不同。利用一阶导数去求极值的梯度下降法，可以求得局部最优解，但不能直接搜索到全局最优解；由于退火算法加入了候选解，候选解由一定的概率密度分布从解空间随机采样获得，故可以取到全局最优解。</p>
 <h1 id="三、基本原理"><a href="#三、基本原理" class="headerlink" title="三、基本原理"></a>三、基本原理</h1><p>模拟退火算法的出发点是基于物理中固体物质的退火过程与一般组合优化问题之间的相似性。物理中固体物质的退火过程由加温阶段、平衡阶段、冷却阶段这三部分组成。加温阶段对应算法的设定初温，平衡阶段对应算法的采样过程，该过程须遵循Metropolis准则，冷却阶段对应算法控制参数下降。模拟退火基本原理如图3-1与图3-2所示。</p>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/8048bee54ce3409ca771c2f21cb1790c?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/8048bee54ce3409ca771c2f21cb1790c?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>图3-1 固体退火过程示意图</p>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/9214a19884524f3cb273b3a1f3ac2391?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/9214a19884524f3cb273b3a1f3ac2391?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>图3-2 模拟退火算法流程示意图</p>
 <p>在把模拟退火算法应用于最优化问题时，一般可以将温度T当做控制参数，目标函数值f视为内能E，而固体在某温度T时的一个状态对应一个解。然后算法试图随着控制参数Ｔ的降低，使目标函数值f(内能E)也逐渐降低，直至趋于全局最小值(退火中低温时的最低能量状态)，就像固体退火过程一样。</p>
 <h1 id="四、主要思想"><a href="#四、主要思想" class="headerlink" title="四、主要思想"></a>四、主要思想</h1><p>就函数最小值问题来说，模拟退火的主要思想是：在搜索区间（二维平面中）随机游走（即随机选择点），再以Metropolis抽样准则，使随机游走逐渐收敛于局部最优解。而温度即是Metropolis算法中的一个重要控制参数，可以认为这个参数的大小控制了搜索过程向局部或全局最优解移动的快慢。</p>
@@ -193,7 +291,7 @@
 <h1 id="1、准则的由来"><a href="#1、准则的由来" class="headerlink" title="1、准则的由来"></a>1、准则的由来</h1><p>同样的问题，如果使用蒙特卡洛(MonteCarlo)算法模拟，需要大量采样，工作量很大。因而1953年Metropolis提出了这样一个重要性采样的方法， 即设从当前状态i生成新状态j。若新状态的内能小于状态i的内能(即Ej&lt;Ei)，则接受新状态j作为新的当前状态； 否则，以概率接受状态j， 这就是通常所说的Metropolis准则。</p>
 <h1 id="2、准则详解"><a href="#2、准则详解" class="headerlink" title="2、准则详解"></a>2、准则详解</h1><p>Metropolis准则，其实就是以概率p接受新状态。</p>
 <p>若在温度T，当前状态i → 新状态j，则概率p满足：</p>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/b3057b4082be4749a4c9f0c70cf948cc?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/b3057b4082be4749a4c9f0c70cf948cc?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <ul>
 <li>当Ej &lt; Ei时，接受新状态的概率p&#x3D;1, 即完全接受 j 为当前状态；</li>
 <li>当Ej ≥ Ei时，若概率 p&#x3D;exp[-(Ej-Ei)&#x2F;T]大于[0,1)区间的随机数，则仍接受状态 j 为当前状态；若不成立，则保留状态 i 为当前状态。</li>
@@ -201,11 +299,11 @@
 <p>温度T越小，则降温概率p就越小；温度越高，降温概率p就越大，p越大，则j状态是重要状态的概率就越大。若j是重要状态，则取代i成为当前状态，否则舍弃新状态。再重复以上新状态产生过程。</p>
 <p>很明显，在高温下，可接受与当前状态能量差较大的新状态；在低温下，只接受与当前状态能量差较小的新状态。这与不同温度下热运动的影响完全一致，在温度趋于零时，就不能接受任何成立时的新状态j了。</p>
 <p>上述接受新状态的准则称为Metropolis准则，相应的算法被称为Metropolis算法。</p>
-<h1 id="六、算法实现步骤"><a href="#六、算法实现步骤" class="headerlink" title="六、算法实现步骤"></a>六、算法实现步骤</h1><h1 id="SA算法具体步骤"><a href="#SA算法具体步骤" class="headerlink" title="ＳＡ算法具体步骤:"></a>ＳＡ算法具体步骤:</h1><h1 id="1、流程图表示"><a href="#1、流程图表示" class="headerlink" title="1、流程图表示"></a>1、流程图表示</h1><p><img src="https://p26.toutiaoimg.com/origin/pgc-image/7432882bdbfc41d9a7501b85397c1657?from=pc" alt="流行算法：模拟退火算法"></p>
+<h1 id="六、算法实现步骤"><a href="#六、算法实现步骤" class="headerlink" title="六、算法实现步骤"></a>六、算法实现步骤</h1><h1 id="SA算法具体步骤"><a href="#SA算法具体步骤" class="headerlink" title="ＳＡ算法具体步骤:"></a>ＳＡ算法具体步骤:</h1><h1 id="1、流程图表示"><a href="#1、流程图表示" class="headerlink" title="1、流程图表示"></a>1、流程图表示</h1><p><img src="https://p26.toutiaoimg.com/origin/pgc-image/7432882bdbfc41d9a7501b85397c1657?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>图6-1</p>
 <p>最简单的状态产生函数：ω’ &#x3D; ω + R (R是个随机数）。</p>
 <h1 id="2、文字描述表示"><a href="#2、文字描述表示" class="headerlink" title="2、文字描述表示"></a>2、文字描述表示</h1><p>模拟退火算法用冷却进度表来控制算法的进程，是算法在控制参数T徐徐降温并趋于零时最终求得组合优化问题的相对全局最优解。其中优化问题的一个解i及其目标函数f(i)分别与固体的一个微观状态ｉ及其能量Ｅi相对应。</p>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/e2df5554992d43789b27e338da141fab?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/e2df5554992d43789b27e338da141fab?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <h1 id="3、从新解的产生与接受来表示"><a href="#3、从新解的产生与接受来表示" class="headerlink" title="3、从新解的产生与接受来表示"></a>3、从新解的产生与接受来表示</h1><p>模拟退火算法新解的产生和接受可分为如下四个步骤：</p>
 <p>第1步，由一个产生函数从当前解产生一个位于解空间的新解。为便于后续的计算和接受，减少算法耗时，通常选择由当前新解经过简单地变换即可产生新解的方法，如对构成新解的全部或部分元素进行置换、互换等，注意到产生新解的变换方法决定了当前新解的邻域结构，因而对冷却进度表的选取有一定的影响。</p>
 <p>第2步，计算与新解所对应的目标函数差。因为目标函数差仅由变换部分产生，所以目标函数差的计算最好按增量计算。事实表明，对大多数应用而言，这是计算目标函数差的最快方法。</p>
@@ -225,16 +323,16 @@
 <ol>
 <li>最简单的控制参数衰减函数（指数降温）为：</li>
 </ol>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/4518ce0616e04782b49704ab2d48ac8f?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/4518ce0616e04782b49704ab2d48ac8f?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>其中a常取值0.5~0.9, 这种退火策略很常用。</p>
 <ol>
 <li>经典的模拟退火衰减函数（对数降温）为：</li>
 </ol>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/ac9607c4c73e4912b632d2a094e1d740?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/ac9607c4c73e4912b632d2a094e1d740?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <ol>
 <li>可以选择其它的衰减函数：</li>
 </ol>
-<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/dbab96ab24834881bd995095b9112d76?from=pc" alt="流行算法：模拟退火算法"></p>
+<p><img src="https://p26.toutiaoimg.com/origin/pgc-image/dbab96ab24834881bd995095b9112d76?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 <p>衰减函数应选择小的比较合适，可避免过长的马尔可夫链和迭代次数增加。</p>
 <h1 id="6、内循环终止的准则"><a href="#6、内循环终止的准则" class="headerlink" title="6、内循环终止的准则"></a>6、内循环终止的准则</h1><p>内循环终止的准则，也称为Metropolis抽样稳定准则，用于决定各温度下产生候选解的个数，该准则包括有：目标函数的平均值是否稳定；连续若干步目标函数值变化较小；按一定的步数抽样。</p>
 <h1 id="7、外循环终止的准则"><a href="#7、外循环终止的准则" class="headerlink" title="7、外循环终止的准则"></a>7、外循环终止的准则</h1><p>外循环终止的准则，即决定算法何时结束，主要包括：循环迭代的次数设置；终止温度的阈值设置；检验系统熵值是否稳定；检验算法收敛到最优值连续若干步保持不变。其中终止温度的设置常用的是Kirkpatrick等提出准则：在若干个马尔可夫链中解无任何变化（恶化或优化）就终止算法。迭代次数L的选取与冷却进度表密切相关，一般T衰减小，则 L值就适当大。</p>
@@ -302,164 +400,206 @@
 <p>模拟退火算法可用来进行图像恢复等工作，即把一幅被污染的图像重新恢复成清晰的原图，滤掉其中被畸变的部分。因此它在图像处理方面的应用前景是广阔的。</p>
 <p>8、模拟退火算法的其他应用</p>
 <p>除了上述应用外，模拟退火算法还用于其它各种组合优化问题，如TSP和Knapsack问题等。大量的模拟实验表明，模拟退火算法在求解这些问题时能产生令人满意的近似最优解，而且所用的时间也不很长。</p>
-<h1 id="十二、附录"><a href="#十二、附录" class="headerlink" title="十二、附录"></a>十二、附录</h1><h1 id="附录1-模拟退火算法的数学模型"><a href="#附录1-模拟退火算法的数学模型" class="headerlink" title="附录1 模拟退火算法的数学模型"></a>附录1 模拟退火算法的数学模型</h1><p><img src="https://p26.toutiaoimg.com/origin/pgc-image/f2d8c42aac23480eaed50f1b9d6df732?from=pc" alt="流行算法：模拟退火算法"></p>
+<h1 id="十二、附录"><a href="#十二、附录" class="headerlink" title="十二、附录"></a>十二、附录</h1><h1 id="附录1-模拟退火算法的数学模型"><a href="#附录1-模拟退火算法的数学模型" class="headerlink" title="附录1 模拟退火算法的数学模型"></a>附录1 模拟退火算法的数学模型</h1><p><img src="https://p26.toutiaoimg.com/origin/pgc-image/f2d8c42aac23480eaed50f1b9d6df732?from=pc" srcset="/img/loading.gif" lazyload alt="流行算法：模拟退火算法"></p>
 
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B5%81%E8%A1%8C%E7%AE%97%E6%B3%95/">流行算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">动态规划最短路径-维特比算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/05/%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%E4%B9%8B%E7%BB%9F%E8%AE%A1%E6%8E%A8%E6%96%AD%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/">
+                        <span class="hidden-mobile">追根溯源之统计推断常用概率分布</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-        <!--添加编辑 常飞-->
-        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/模拟退火算法.md" target="_blank">编辑</a>
-        <!--添加编辑-->
-</article>
-
-
-
-    <!--添加高亮代码 常飞-->
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-    </script>
-    <!--添加高亮代码-->
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/search">搜索</a></li>
-        
-      </ul>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%8E%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E3%80%81%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95%E3%80%81-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">二、与贪心算法、爬山算法、 梯度下降算法的比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">三、基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%BB%E8%A6%81%E6%80%9D%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">四、主要思想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81Metropolis%E5%87%86%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">五、Metropolis准则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E5%87%86%E5%88%99%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="toc-number">6.</span> <span class="toc-text">1、准则的由来</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E5%87%86%E5%88%99%E8%AF%A6%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">2、准则详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">8.</span> <span class="toc-text">六、算法实现步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SA%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-number">9.</span> <span class="toc-text">ＳＡ算法具体步骤:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A1%A8%E7%A4%BA"><span class="toc-number">10.</span> <span class="toc-text">1、流程图表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%96%87%E5%AD%97%E6%8F%8F%E8%BF%B0%E8%A1%A8%E7%A4%BA"><span class="toc-number">11.</span> <span class="toc-text">2、文字描述表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E4%BB%8E%E6%96%B0%E8%A7%A3%E7%9A%84%E4%BA%A7%E7%94%9F%E4%B8%8E%E6%8E%A5%E5%8F%97%E6%9D%A5%E8%A1%A8%E7%A4%BA"><span class="toc-number">12.</span> <span class="toc-text">3、从新解的产生与接受来表示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E7%AE%97%E6%B3%95%E8%A6%81%E7%B4%A0"><span class="toc-number">13.</span> <span class="toc-text">七、算法要素</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4"><span class="toc-number">14.</span> <span class="toc-text">1、状态空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E7%8A%B6%E6%80%81%E4%BA%A7%E7%94%9F%E5%87%BD%E6%95%B0"><span class="toc-number">15.</span> <span class="toc-text">2、状态产生函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87"><span class="toc-number">16.</span> <span class="toc-text">3、状态转移概率</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%88%9D%E5%A7%8B%E6%B8%A9%E5%BA%A6"><span class="toc-number">17.</span> <span class="toc-text">4、初始温度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E5%86%B7%E5%8D%B4%E8%BF%9B%E5%BA%A6%E8%A1%A8"><span class="toc-number">18.</span> <span class="toc-text">5、冷却进度表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E5%86%85%E5%BE%AA%E7%8E%AF%E7%BB%88%E6%AD%A2%E7%9A%84%E5%87%86%E5%88%99"><span class="toc-number">19.</span> <span class="toc-text">6、内循环终止的准则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E5%A4%96%E5%BE%AA%E7%8E%AF%E7%BB%88%E6%AD%A2%E7%9A%84%E5%87%86%E5%88%99"><span class="toc-number">20.</span> <span class="toc-text">7、外循环终止的准则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">21.</span> <span class="toc-text">八、参数的选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E6%AD%A5%E9%95%BF"><span class="toc-number">22.</span> <span class="toc-text">1、状态转换步长</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0%E5%88%9D%E5%80%BCT0%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">23.</span> <span class="toc-text">2、控制参数初值T0的选取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E8%A1%B0%E5%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">24.</span> <span class="toc-text">3、衰减函数的选取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E9%A9%AC%E5%8F%AF%E5%A4%AB%E9%93%BE%E9%95%BF%E5%BA%A6L%EF%BC%88%E5%86%85%E5%BE%AA%E7%8E%AF%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%EF%BC%89%E7%9A%84%E9%80%89%E5%8F%96"><span class="toc-number">25.</span> <span class="toc-text">4、马可夫链长度L（内循环迭代次数）的选取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E7%BB%88%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="toc-number">26.</span> <span class="toc-text">5、终止条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">27.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E6%B3%95%E6%B1%82%E5%87%BD%E6%95%B0f-x-y-x3D-5sin-xy-x-2-y-2%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC%E3%80%82"><span class="toc-number">28.</span> <span class="toc-text">例子：使用模拟退火法求函数f(x,y) &#x3D; 5sin(xy) + x^2 + y^2的最小值。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">29.</span> <span class="toc-text">九、算法设计的注意事项</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%AD%96%E7%95%A5"><span class="toc-number">30.</span> <span class="toc-text">十、模拟退火算法改进策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E8%BA%AB%E8%A6%81%E7%B4%A0%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">31.</span> <span class="toc-text">自身要素的改进</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8E%E5%85%B6%E5%AE%83%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E7%9B%B8%E7%BB%93%E5%90%88%E3%80%82"><span class="toc-number">32.</span> <span class="toc-text">与其它搜索算法相结合。</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%BA%94%E7%94%A8"><span class="toc-number">33.</span> <span class="toc-text">十一、应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E9%99%84%E5%BD%95"><span class="toc-number">34.</span> <span class="toc-text">十二、附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%951-%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">35.</span> <span class="toc-text">附录1 模拟退火算法的数学模型</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&text=模拟退火算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&is_video=false&description=模拟退火算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=模拟退火算法&body=Check out this article: https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&title=模拟退火算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&name=模拟退火算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/01/11/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/&t=模拟退火算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      </div>
+    
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+<!-- Custom -->
+
+
     
+
     
-    2015-2022
-    koderboy
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </nav>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
+  <!-- SCRIPTS -->
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
-      e.clearSelection();
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
+<!-- Plugins -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
+  <script  src="/js/local-search.js" ></script>
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Umami Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

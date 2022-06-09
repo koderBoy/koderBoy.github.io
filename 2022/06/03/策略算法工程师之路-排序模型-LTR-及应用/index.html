@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="策略算法工程师之路-排序模型(LTR)及应用目录1.简述 2.Pointwise类 2.1 LR 2.2 MLR 2.3 GBDT + LR 2.4 FM&#x2F;FFM 2.5 深度模型之DNN 2.6 深度模型之Wide&amp;Deep 2.7 深度模型之DeepFM模型 2.8 深度模型之DCN模 2.9 深度模型之DIN模型 2.10 深度模型之DIEN模型 2.11 深度模型之语义相">
 <meta property="og:type" content="article">
 <meta property="og:title" content="策略算法工程师之路-排序模型(LTR)及应用">
@@ -178,144 +188,232 @@
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bt%7D">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-e3cd0372ca57c04ea7afc7338954752f_r.jpg">
 <meta property="article:published_time" content="2022-06-03T11:23:29.000Z">
-<meta property="article:modified_time" content="2022-06-08T07:30:55.645Z">
+<meta property="article:modified_time" content="2022-06-09T03:54:43.551Z">
 <meta property="article:author" content="koderboy">
 <meta property="article:tag" content="算法,LTR,排序,收藏,知乎">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic1.zhimg.com/v2-9596db1c15fb358f19d9537a5e247504_r.jpg">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>策略算法工程师之路-排序模型(LTR)及应用</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  <title>策略算法工程师之路-排序模型(LTR)及应用 - VOYAGE</title>
 
-    <!-- persian styles -->
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
     
-    <!-- rss -->
     
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
-	<!-- mathjax -->
-	
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.2.0"></head>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/06/03/java%E4%B8%AD%E7%9A%84time/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/06/03/%E8%AF%A6%E8%A7%A3%E8%AE%A9%E6%97%A0%E6%95%B0%E4%BA%BA%E9%A1%BF%E6%82%9F%E7%9A%84%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&text=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&is_video=false&description=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=策略算法工程师之路-排序模型(LTR)及应用&body=Check out this article: https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&name=策略算法工程师之路-排序模型(LTR)及应用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&t=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
 
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">策略算法工程师之路-排序模型(LTR)及应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">1.简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Pointwise%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">**2.**Pointwise类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.</span> <span class="toc-text">实例介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10-%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B9%8BDIEN%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">2.10 深度模型之DIEN模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B4%E8%B6%A3%E6%8A%BD%E5%8F%96%E6%A8%A1%E5%9D%97"><span class="toc-number">1.5.</span> <span class="toc-text">什么是兴趣抽取模块?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B4%E8%B6%A3%E6%BC%94%E5%8C%96%E6%A8%A1%E5%9D%97"><span class="toc-number">1.6.</span> <span class="toc-text">什么是兴趣演化模块?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Pairwise%E7%B1%BB"><span class="toc-number">1.7.</span> <span class="toc-text">3.Pairwise类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.8.</span> <span class="toc-text">4.特征工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B-%E8%AE%BA%E6%96%87%E6%A3%80%E7%B4%A2%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.9.</span> <span class="toc-text">5.应用示例-论文检索系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%A8%80%E4%B9%8B%EF%BC%8C%E4%BE%9D%E6%8D%AE%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5Query%E4%BB%8E%E5%80%99%E9%80%89Documents%E4%B8%AD%E6%89%BE%E5%87%BATop-N%E4%B8%AA%E6%9C%80%E7%9B%B8%E5%85%B3%E7%9A%84Documents%EF%BC%8C%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF-%E6%96%87%E6%9C%AC%E8%AF%AD%E4%B9%89%E7%90%86%E8%A7%A3-%E6%90%9C%E7%B4%A2%E6%8E%92%E5%BA%8F%E3%80%82%E6%AF%94%E5%A6%82%E4%BB%A5%E4%B8%8B%E4%BE%8B%E5%AD%90"><span class="toc-number">1.10.</span> <span class="toc-text">简言之，依据用户输入Query从候选Documents中找出Top N个最相关的Documents，核心技术:文本语义理解+搜索排序。比如以下例子:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E6%B3%95%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%A6%82%E4%B8%8B"><span class="toc-number">1.11.</span> <span class="toc-text">问题解法的系统架构如下:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5"><span class="toc-number">1.12.</span> <span class="toc-text">1).数据探查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%B2%97%E5%8F%AC%E5%9B%9E%E9%98%B6%E6%AE%B5"><span class="toc-number">1.13.</span> <span class="toc-text">2).粗召回阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%87%8D%E6%8E%92%E5%BA%8F%E9%98%B6%E6%AE%B5"><span class="toc-number">1.14.</span> <span class="toc-text">3).重排序阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96%E8%A1%A5%E5%85%85"><span class="toc-number">1.15.</span> <span class="toc-text">6.其他补充</span></a></li></ol></li></ol>
-    </div>
-  </span>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="策略算法工程师之路-排序模型(LTR)及应用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-03 11:23" pubdate>
+        2022年6月3日 上午
+      </time>
+    </span>
+  
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-        
-    <h1 class="posttitle" itemprop="name headline">
-        策略算法工程师之路-排序模型(LTR)及应用
-    </h1>
+<div class="mt-1">
+  
 
+  
 
+  
+  
+</div>
 
-            <div class="meta">
-                <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">koderboy</span>
-                </span>
-                
-    <div class="postdate">
-      
-        <time datetime="2022-06-03T11:23:29.000Z" itemprop="datePublished">2022-06-03</time>
-        
-      
+            
+          </div>
+
+          
+        </div>
+      </div>
     </div>
+  </header>
 
-
-                    
-
-                        
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/tags/%E7%AE%97%E6%B3%95-LTR-%E6%8E%92%E5%BA%8F-%E6%94%B6%E8%97%8F-%E7%9F%A5%E4%B9%8E/" rel="tag">算法,LTR,排序,收藏,知乎</a>
-    </div>
-
-
-            </div>
-    </header>
+  <main>
     
+      
 
-        <div class="content" itemprop="articleBody">
-            <h1 id="策略算法工程师之路-排序模型-LTR-及应用"><a href="#策略算法工程师之路-排序模型-LTR-及应用" class="headerlink" title="策略算法工程师之路-排序模型(LTR)及应用"></a>策略算法工程师之路-排序模型(LTR)及应用</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h2><p><strong>1.简述</strong></p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">策略算法工程师之路-排序模型(LTR)及应用</h1>
+            
+            <div class="markdown-body">
+              <h1 id="策略算法工程师之路-排序模型-LTR-及应用"><a href="#策略算法工程师之路-排序模型-LTR-及应用" class="headerlink" title="策略算法工程师之路-排序模型(LTR)及应用"></a>策略算法工程师之路-排序模型(LTR)及应用</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h2><p><strong>1.简述</strong></p>
 <p><strong>2.Pointwise类</strong></p>
 <p>2.1 LR</p>
 <p>2.2 MLR</p>
@@ -336,37 +434,37 @@
 <h2 id="1-简述"><a href="#1-简述" class="headerlink" title="1.简述"></a><strong>1.简述</strong></h2><p>随着移动互联网的崛起，越来越多的用户开始习惯于从手机完成吃、喝、玩、乐、衣、食、住、行等各个方面的需求。打开手机，点开手淘、美团等APP，商品玲玲满目，而让用户将所有商品一页页看完已经不现实，通常情况下用户也就查看前几页，如果找不到满意的商品则退出，从而造成流单。因此如何对<strong>商品进行排序使得用户感兴趣的商品尽量排在前面从而提高交易匹配效率是平台重点攻克的方向</strong>。</p>
 <p>同样的问题出现在通用搜索引擎中，比如Baidu、Google等，当用户输入Query(查询词)时，引擎通过对用户Query的理解将最相关的信息排在最前面，从而提高信息匹配的效率。</p>
 <p>总而言之，在互联网产品中排序是重要研究的问题。而用机器学习方法解决排序问题的方法称为LTR(Learning to Ranking)。排序系统的工作示意图如下:</p>
-<p><img src="https://pic1.zhimg.com/v2-9596db1c15fb358f19d9537a5e247504_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-9596db1c15fb358f19d9537a5e247504_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>L2R可以分为三大类，<strong>Pointwise、Pairwise、Listwise</strong>，下面分别做介绍。</p>
 <p><strong>参考资料:</strong></p>
 <p>1.学习排序 Learning to Rank：从 pointwise 和 pairwise 到 listwise，经典模型与优缺点</p>
 <p><a href="https://link.zhihu.com/?target=https://blog.csdn.net/lipengcn/article/details/80373744">https://blog.csdn.net/lipengcn/article/details/80373744</a></p>
 <p>2.浅谈排序学习</p>
 <p>3.Learning to rank基本算法小结</p>
-<h2 id="2-Pointwise类"><a href="#2-Pointwise类" class="headerlink" title="**2.**Pointwise类"></a>**2.**Pointwise类</h2><p>将排序问题转化为分类问题或者回归问题。考虑<strong>单一文档</strong>作为训练数据，<strong>不考虑文档间的关系</strong>。以分类问题来说，即对于查询<img src="https://www.zhihu.com/equation?tex=q" alt="[公式]">,文档集<img src="https://www.zhihu.com/equation?tex=D=%5C%7Bd_%7B1%7D,d_%7B2%7D,%E2%80%A6,d_%7Bn%7D%5C%7D" alt="[公式]">，可以形成<img src="https://www.zhihu.com/equation?tex=(q,d_%7Bi%7D)" alt="[公式]">这样的训练样例<img src="https://www.zhihu.com/equation?tex=n" alt="[公式]">个，对于二分类问题学习目标可以分为相关(<img src="https://www.zhihu.com/equation?tex=y=1" alt="[公式]">)和不相关(<img src="https://www.zhihu.com/equation?tex=y=0" alt="[公式]">)，然后训模型，对未知的样本做相关性预测。</p>
-<p><strong>CTR</strong>(点击率预估)问题是<strong>Pointwise</strong>的典型应用，研究的相对比较成熟，广泛应用于广告、搜索、推荐中。<strong>CTR</strong>问题的数学表达式<img src="https://www.zhihu.com/equation?tex=y+=+f(x)" alt="[公式]">，其中<img src="https://www.zhihu.com/equation?tex=y+" alt="[公式]">的范围为<img src="https://www.zhihu.com/equation?tex=%5B0,1%5D" alt="[公式]">，即<img src="https://www.zhihu.com/equation?tex=y" alt="[公式]">的值越大表示用户点击概率越高。</p>
+<h2 id="2-Pointwise类"><a href="#2-Pointwise类" class="headerlink" title="**2.**Pointwise类"></a>**2.**Pointwise类</h2><p>将排序问题转化为分类问题或者回归问题。考虑<strong>单一文档</strong>作为训练数据，<strong>不考虑文档间的关系</strong>。以分类问题来说，即对于查询<img src="https://www.zhihu.com/equation?tex=q" srcset="/img/loading.gif" lazyload alt="[公式]">,文档集<img src="https://www.zhihu.com/equation?tex=D=%5C%7Bd_%7B1%7D,d_%7B2%7D,%E2%80%A6,d_%7Bn%7D%5C%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，可以形成<img src="https://www.zhihu.com/equation?tex=(q,d_%7Bi%7D)" srcset="/img/loading.gif" lazyload alt="[公式]">这样的训练样例<img src="https://www.zhihu.com/equation?tex=n" srcset="/img/loading.gif" lazyload alt="[公式]">个，对于二分类问题学习目标可以分为相关(<img src="https://www.zhihu.com/equation?tex=y=1" srcset="/img/loading.gif" lazyload alt="[公式]">)和不相关(<img src="https://www.zhihu.com/equation?tex=y=0" srcset="/img/loading.gif" lazyload alt="[公式]">)，然后训模型，对未知的样本做相关性预测。</p>
+<p><strong>CTR</strong>(点击率预估)问题是<strong>Pointwise</strong>的典型应用，研究的相对比较成熟，广泛应用于广告、搜索、推荐中。<strong>CTR</strong>问题的数学表达式<img src="https://www.zhihu.com/equation?tex=y+=+f(x)" srcset="/img/loading.gif" lazyload alt="[公式]">，其中<img src="https://www.zhihu.com/equation?tex=y+" srcset="/img/loading.gif" lazyload alt="[公式]">的范围为<img src="https://www.zhihu.com/equation?tex=%5B0,1%5D" srcset="/img/loading.gif" lazyload alt="[公式]">，即<img src="https://www.zhihu.com/equation?tex=y" srcset="/img/loading.gif" lazyload alt="[公式]">的值越大表示用户点击概率越高。</p>
 <p>本小节介绍以<strong>CTR</strong>预估模型为例介绍下<strong>Pointwise</strong>的演化过程。</p>
 <p><strong>2.1 LR(logistics regression)</strong></p>
 <p><strong>LR(logistics regression)<strong>，是</strong>CTR</strong>预估模型的最基本的模型，也是工业界最喜爱使用的方案，<strong>排序模型化</strong>的首选。<strong>LR</strong>可以处理大规模的离散化特征、易于并行化、可解释性强。同时LR有很多变种，可以支持在线实时模型训练(<strong>FTRL</strong>)。</p>
 <p>LR的数学表达式如下:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=++%5Cfrac%7B1%7D%7B1+e%5E%7B-%5Ctheta%5E%7BT%7DX%7D%7D" alt="[公式]"></p>
-<p>其中，<img src="https://www.zhihu.com/equation?tex=%5Ctheta+=+(%5Ctheta_%7B1%7D,%5Ctheta_%7B2%7D,%5Ctheta_%7B3%7D...%5Ctheta_%7Bn%7D)" alt="[公式]"></p>
-<p>假设，<img src="https://www.zhihu.com/equation?tex=logistics(x)+=+%5Cfrac%7B1%7D%7B1+e%5E%7B-x%7D%7D" alt="[公式]">，<img src="https://www.zhihu.com/equation?tex=linear(x)+=+%5Ctheta+%5E%7BT%7DX" alt="[公式]">, 则<img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X))" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=++%5Cfrac%7B1%7D%7B1+e%5E%7B-%5Ctheta%5E%7BT%7DX%7D%7D" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>其中，<img src="https://www.zhihu.com/equation?tex=%5Ctheta+=+(%5Ctheta_%7B1%7D,%5Ctheta_%7B2%7D,%5Ctheta_%7B3%7D...%5Ctheta_%7Bn%7D)" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>假设，<img src="https://www.zhihu.com/equation?tex=logistics(x)+=+%5Cfrac%7B1%7D%7B1+e%5E%7B-x%7D%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，<img src="https://www.zhihu.com/equation?tex=linear(x)+=+%5Ctheta+%5E%7BT%7DX" srcset="/img/loading.gif" lazyload alt="[公式]">, 则<img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X))" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p>LR假设各特征间是相互独立的，忽略了特征间的交互关系，因此需要做大量的特征工程。同时LR对非线性的拟合能力较差，限制了模型的性能上限。通常LR可以作为<strong>Baseline</strong>版本。</p>
 <p><strong>2.2 MLR</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-2b491379127dacfefe93cb30ba9f525f_r.jpg" alt="img"></p>
-<p>简言之，就是多个<img src="https://www.zhihu.com/equation?tex=LR" alt="[公式]">的加权组合。<img src="https://www.zhihu.com/equation?tex=MLR" alt="[公式]">的数学表达式如下:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)=%5Csum_%7Bi=1%7D%5E%7Bm%7D%7Bsoftmax(X,i,m)*logistics(linear(X)%7D" alt="[公式]"></p>
+<p><img src="https://pic4.zhimg.com/v2-2b491379127dacfefe93cb30ba9f525f_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>简言之，就是多个<img src="https://www.zhihu.com/equation?tex=LR" srcset="/img/loading.gif" lazyload alt="[公式]">的加权组合。<img src="https://www.zhihu.com/equation?tex=MLR" srcset="/img/loading.gif" lazyload alt="[公式]">的数学表达式如下:</p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)=%5Csum_%7Bi=1%7D%5E%7Bm%7D%7Bsoftmax(X,i,m)*logistics(linear(X)%7D" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p>其中，</p>
-<p><img src="https://www.zhihu.com/equation?tex=softmax(X,i,m)+=+%5Cfrac%7Be%5E%7Bu_%7Bi%7DX%7D%7D%7B%5Csum_%7Bj%7D%5E%7Bm%7D%7Be%5E%7Bu_%7Bj%7DX%7D%7D%7D" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=MLR" alt="[公式]">有更强的非线性拟合能力。</p>
+<p><img src="https://www.zhihu.com/equation?tex=softmax(X,i,m)+=+%5Cfrac%7Be%5E%7Bu_%7Bi%7DX%7D%7D%7B%5Csum_%7Bj%7D%5E%7Bm%7D%7Be%5E%7Bu_%7Bj%7DX%7D%7D%7D" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=MLR" srcset="/img/loading.gif" lazyload alt="[公式]">有更强的非线性拟合能力。</p>
 <p><strong>2.3 GBDT + LR</strong></p>
 <p>GBDT(梯度提升决策树)是一种表达能力比较强的非线性模型。GBDT的优势在于处理连续值特征，而且树的分裂算法使其具有一定的组合特征的能力。在推荐系统的绝大多数场景中，出现的都是大规模离散化特征，如果我们需要使用GBDT的话，则需要将很多特征统计成连续值特征(或者embedding)，这里可能需要耗费比较多的时间。鉴于此Facebook提出了一种<strong>GBDT+LR</strong>的方案。如下图:</p>
-<p><img src="https://pic2.zhimg.com/v2-f2de464c67f66bc6eb9b32099441eb81_r.jpg" alt="img"></p>
-<p><img src="https://www.zhihu.com/equation?tex=X_%7Bnew%7D=X+gbdt(x)%5E%7B%27%7Ds+%5C+nodes" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X_%7Bnew%7D))" alt="[公式]"></p>
+<p><img src="https://pic2.zhimg.com/v2-f2de464c67f66bc6eb9b32099441eb81_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://www.zhihu.com/equation?tex=X_%7Bnew%7D=X+gbdt(x)%5E%7B%27%7Ds+%5C+nodes" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X_%7Bnew%7D))" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p>即先使用GBDT对一些稠密的特征进行特征选择，得到的叶子节点，再拼接离散化特征放进去LR进行训练。</p>
-<p><img src="https://pic3.zhimg.com/v2-6d5f00ec362e1c31718d8e9f36f6da9e_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-6d5f00ec362e1c31718d8e9f36f6da9e_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>此方案可以看成利用GBDT替代人工实现连续值特征的离散化，而且同时在一定程度组合了特征，可以改善人工离散化中可能出现的边界问题，也减少了人工的工作量。</p>
 <p><strong>GBDT</strong>本质是对历史的记忆，而GBDT+LR则<strong>强化了GBDT细粒度的记忆能力</strong>！</p>
 <p><strong>参考资料:</strong></p>
@@ -377,29 +475,29 @@
 <p>4.<a href="https://link.zhihu.com/?target=https://www.cnblogs.com/wuxiangli/p/7258510.html">深度学习最全优化方法—来源于知乎</a></p>
 <p><strong>2.4 FM&#x2F;FFM</strong></p>
 <p>LR模型假设特征之间是相互独立的，忽略了特征间的交互作用，而FM则是在这个基础上进改进。FM的模型公式为:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7Bw_%7Bij%7Dx_%7Bi%7Dx_%7Bj%7D%7D)" alt="[公式]"></p>
-<p>其中<img src="https://www.zhihu.com/equation?tex=%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7Bw_%7Bij%7Dx_%7Bi%7Dx_%7Bj%7D%7D" alt="[公式]">为二次交叉项，表达了特征两两之间的相互作用。而二次项权重矩阵<img src="https://www.zhihu.com/equation?tex=w_%7Bij%7D" alt="[公式]">可能会存在由于<strong>数据稀疏问题带来的不置信问题</strong>，同时当特征维度较高时存储空间复杂度较高。</p>
-<p>一种改进的方法是<img src="https://www.zhihu.com/equation?tex=w_%7Bij%7D+=+%3Cv_%7Bi%7D,v_%7Bj%7D%3E" alt="[公式]">，其中<img src="https://www.zhihu.com/equation?tex=v_%7Bi%7D" alt="[公式]">为对应特征<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" alt="[公式]">的特征向量。</p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7Bw_%7Bij%7Dx_%7Bi%7Dx_%7Bj%7D%7D)" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>其中<img src="https://www.zhihu.com/equation?tex=%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7Bw_%7Bij%7Dx_%7Bi%7Dx_%7Bj%7D%7D" srcset="/img/loading.gif" lazyload alt="[公式]">为二次交叉项，表达了特征两两之间的相互作用。而二次项权重矩阵<img src="https://www.zhihu.com/equation?tex=w_%7Bij%7D" srcset="/img/loading.gif" lazyload alt="[公式]">可能会存在由于<strong>数据稀疏问题带来的不置信问题</strong>，同时当特征维度较高时存储空间复杂度较高。</p>
+<p>一种改进的方法是<img src="https://www.zhihu.com/equation?tex=w_%7Bij%7D+=+%3Cv_%7Bi%7D,v_%7Bj%7D%3E" srcset="/img/loading.gif" lazyload alt="[公式]">，其中<img src="https://www.zhihu.com/equation?tex=v_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">为对应特征<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">的特征向量。</p>
 <p>此时:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7B%3Cv_%7Bi%7D,v_%7Bj%7D%3Ex_%7Bi%7Dx_%7Bj%7D%7D)" alt="[公式]"></p>
-<p>比如，对于天气特征<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" alt="[公式]">, 时间特征<img src="https://www.zhihu.com/equation?tex=x_%7Bj%7D" alt="[公式]">，则两个特征的交互权重为<img src="https://www.zhihu.com/equation?tex=%3Cv_%7Bi%7D,v_%7Bj%7D%3E" alt="[公式]">。同时对于性别特征<img src="https://www.zhihu.com/equation?tex=x_%7Bk%7D" alt="[公式]">,<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" alt="[公式]">与<img src="https://www.zhihu.com/equation?tex=x_%7Bk%7D" alt="[公式]">的交互权重为<img src="https://www.zhihu.com/equation?tex=%3Cv_%7Bi%7D,v_%7Bk%7D%3E" alt="[公式]">。</p>
-<p>直观上，<strong>天气特征</strong>对<strong>时间特征</strong>、<strong>性别特征</strong>的<strong>作用是不一样</strong>的，使用<strong>同样的向量</strong>可能会损失部分信息。因此一种改进的方式是引入<img src="https://www.zhihu.com/equation?tex=field" alt="[公式]">(域)的概念，即<img src="https://www.zhihu.com/equation?tex=w_%7Bij%7D+=+%3Cv_%7Bif_%7Bj%7D%7D,v_%7Bjf_%7Bi%7D%7D%3E" alt="[公式]">, 也就是<strong>天气特征</strong>对<strong>时间特征</strong>、<strong>性别特征</strong>的向量是不一样的。这称之为<img src="https://www.zhihu.com/equation?tex=FFM" alt="[公式]">算法，公式如下:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7B%3Cv_%7Bif_%7Bj%7D%7D,v_%7Bjf_%7Bi%7D%7D%3Ex_%7Bi%7Dx_%7Bj%7D%7D)" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7B%3Cv_%7Bi%7D,v_%7Bj%7D%3Ex_%7Bi%7Dx_%7Bj%7D%7D)" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>比如，对于天气特征<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">, 时间特征<img src="https://www.zhihu.com/equation?tex=x_%7Bj%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，则两个特征的交互权重为<img src="https://www.zhihu.com/equation?tex=%3Cv_%7Bi%7D,v_%7Bj%7D%3E" srcset="/img/loading.gif" lazyload alt="[公式]">。同时对于性别特征<img src="https://www.zhihu.com/equation?tex=x_%7Bk%7D" srcset="/img/loading.gif" lazyload alt="[公式]">,<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">与<img src="https://www.zhihu.com/equation?tex=x_%7Bk%7D" srcset="/img/loading.gif" lazyload alt="[公式]">的交互权重为<img src="https://www.zhihu.com/equation?tex=%3Cv_%7Bi%7D,v_%7Bk%7D%3E" srcset="/img/loading.gif" lazyload alt="[公式]">。</p>
+<p>直观上，<strong>天气特征</strong>对<strong>时间特征</strong>、<strong>性别特征</strong>的<strong>作用是不一样</strong>的，使用<strong>同样的向量</strong>可能会损失部分信息。因此一种改进的方式是引入<img src="https://www.zhihu.com/equation?tex=field" srcset="/img/loading.gif" lazyload alt="[公式]">(域)的概念，即<img src="https://www.zhihu.com/equation?tex=w_%7Bij%7D+=+%3Cv_%7Bif_%7Bj%7D%7D,v_%7Bjf_%7Bi%7D%7D%3E" srcset="/img/loading.gif" lazyload alt="[公式]">, 也就是<strong>天气特征</strong>对<strong>时间特征</strong>、<strong>性别特征</strong>的向量是不一样的。这称之为<img src="https://www.zhihu.com/equation?tex=FFM" srcset="/img/loading.gif" lazyload alt="[公式]">算法，公式如下:</p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7B%3Cv_%7Bif_%7Bj%7D%7D,v_%7Bjf_%7Bi%7D%7D%3Ex_%7Bi%7Dx_%7Bj%7D%7D)" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p><strong>关于交叉部分的公式推导:</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-a13a3fa5e9a5e0f3d2a1f94d83a600eb_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-a13a3fa5e9a5e0f3d2a1f94d83a600eb_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>2.5 深度模型之DNN模型</strong></p>
 <p>神经网络是基于感知机的扩展，而DNN可以理解为有很多隐藏层的神经网络。多层神经网络和深度神经网络DNN其实也基本一样，DNN也叫做多层感知机(MLP)。DNN按不同层的位置划分，神经网络层可以分为三类，输入层，隐藏层和输出层，如下图示例，一般来说第一层是输入层，最后一层是输出层，而中间的层数都是隐藏层。</p>
-<p><img src="https://pic2.zhimg.com/v2-5996db1b95b3ad0ca0bd9d7c3f015419_r.jpg" alt="img"></p>
-<p>层与层之间是全连接的，也就是说，第<img src="https://www.zhihu.com/equation?tex=i" alt="[公式]">层的任意一个神经元一定与第<img src="https://www.zhihu.com/equation?tex=i+1" alt="[公式]">层的任意一个神经元相连。虽然DNN看起来很复杂，但是从小的局部模型来说，它还是和感知机一样，即一个线性关系加上一个激活函数。</p>
-<p>通常神经网络的输入层<img src="https://www.zhihu.com/equation?tex=Z%5E%7B1%7D" alt="[公式]">维度不宜过高，否则导致模型参数量剧增。而推荐搜索等排序应用中，商品ID、用户ID类特征的维度通常是亿级别的，为了缓解此问题一般将ID映射为固定维度的<strong>Embedding</strong>向量。</p>
+<p><img src="https://pic2.zhimg.com/v2-5996db1b95b3ad0ca0bd9d7c3f015419_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>层与层之间是全连接的，也就是说，第<img src="https://www.zhihu.com/equation?tex=i" srcset="/img/loading.gif" lazyload alt="[公式]">层的任意一个神经元一定与第<img src="https://www.zhihu.com/equation?tex=i+1" srcset="/img/loading.gif" lazyload alt="[公式]">层的任意一个神经元相连。虽然DNN看起来很复杂，但是从小的局部模型来说，它还是和感知机一样，即一个线性关系加上一个激活函数。</p>
+<p>通常神经网络的输入层<img src="https://www.zhihu.com/equation?tex=Z%5E%7B1%7D" srcset="/img/loading.gif" lazyload alt="[公式]">维度不宜过高，否则导致模型参数量剧增。而推荐搜索等排序应用中，商品ID、用户ID类特征的维度通常是亿级别的，为了缓解此问题一般将ID映射为固定维度的<strong>Embedding</strong>向量。</p>
 <p>通过<strong>Embedding</strong>层，将<strong>高维离散特征</strong>转换为<strong>固定长度的连续特征</strong>，然后通过多个全联接层，最后通过一个<strong>sigmoid</strong>函数转化为0-1值，代表点击的概率。即<strong>Sparse Features -&gt; Embedding Vector -&gt; MLPs -&gt; Sigmoid -&gt; Output。</strong>这种方法的优点在于：通过神经网络可以拟合高阶的非线性关系，同时减少了人工特征的工作量。</p>
 <p>下图是<strong>DNN</strong>用于<strong>CTR</strong>预估的网络结构，即用户偏好的商品和店铺作为特征，来预测对未知商品是否会点击。</p>
-<p><img src="https://pic1.zhimg.com/v2-89ff8d34f869930828378c8d7d113f2c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-89ff8d34f869930828378c8d7d113f2c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>上图所示模型首先把<strong>one-hot</strong>或<strong>multi-hot</strong>特征转换为<strong>特定长度的embedding</strong>，作为模型的输入，然后经过一个<strong>DNN</strong>的part，得到最终的预估值。特别地，针对multi-hot的特征，<strong>做了一次element-wise+的操作</strong>。这样，不管特征中有多少个非0值，经过转换之后的长度都是一样的。<br>从业务上讲，以上模型充分利用了用户的历史偏好对未知做出预测。</p>
 <p><strong>以下是百度DNN模型在CTR预估中的应用:</strong></p>
-<p><img src="https://pic3.zhimg.com/v2-3713837f4ea3cc9ea952b4b4e131e2da_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-3713837f4ea3cc9ea952b4b4e131e2da_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>2.6 深度模型之Wide&amp;Deep</strong></p>
-<p><img src="https://pic3.zhimg.com/v2-870869c48fadb1dd8c9e91136037e8c2_r.jpg" alt="img">Wide&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;Deep模型</p>
+<p><img src="https://pic3.zhimg.com/v2-870869c48fadb1dd8c9e91136037e8c2_r.jpg" srcset="/img/loading.gif" lazyload alt="img">Wide&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;Deep模型</p>
 <p>Google发表在DLRS 2016上的《**<a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1606.07792">Wide &amp; Deep Learning for Recommender System</a><strong>》，提出了一种将深度学习应用于推荐系统的方法，在工业生产中得到了广泛的应用。</strong>Wide&amp;Deep<strong>模型的核心思想是结合</strong>线性模型的记忆能力<strong>和</strong>DNN模型的泛化能力<strong>，从而提升整体模型性能。</strong>Wide&amp;Deep<strong>已成功应用到了</strong>Google Play<strong>的</strong>app**推荐业务。</p>
 <p>将<strong>线性模型组件</strong>和<strong>深度神经网络组件</strong>进行融合，形成了在一个模型中实现<strong>记忆(Memory)<strong>和</strong>泛化(Generalization)<strong>的</strong>宽深度学习</strong>框架。下面分别简单介绍下记忆**(Memory)**和泛化(<strong>Generalization</strong>)的含义。</p>
 <p><strong>1). Memory（记忆性）</strong></p>
@@ -407,30 +505,30 @@
 <p><strong>2). Generalization（泛化性）</strong></p>
 <p><strong>deep</strong>部分长处在于学习样本中的长尾部分，优点是泛化能力强，对于<strong>少量出现过的样本甚至没有出现过的样本都能做出预测。</strong>缺点是模型对于<strong>低阶特征</strong>的学习需要用较多参才能等同<strong>wide</strong>部分效果，而且泛化能力强某种程度上也可能导致过拟合出现<strong>badcase。</strong></p>
 <h2 id="实例介绍"><a href="#实例介绍" class="headerlink" title="实例介绍"></a><strong>实例介绍</strong></h2><p><strong>1). 美团在外卖搜索排序中W&amp;D模型的网络架构</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-7b83aa65f721d5f3ec136777d7c069b7_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-7b83aa65f721d5f3ec136777d7c069b7_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>2). Google在google paly商店的推荐应用排序中W&amp;D模型的网络架构</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-b4812b185ae611ffb25fde9e8e103927_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-b4812b185ae611ffb25fde9e8e103927_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>数学表达如下:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+DNN(X))" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+DNN(X))" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p><strong>2.7 深度模型之DeepFM模型</strong></p>
 <p><strong>DeepFM</strong>是哈工大Guo博士在华为诺亚实验室实习期间，提出的一种深度学习方法，它基于Google的经典论文<strong>Wide&amp;Deep</strong>基础上，通过<strong>将原论文的wide部分(LR部分)替换成FM</strong>，从而改进了原模型依然需要人工特征工程的缺点，得到一个end-to-end 的深度学习模型。</p>
-<p>也就是将<strong>2.6</strong>所讲的<strong>W&amp;D</strong>中的<strong>线性部分</strong><img src="https://www.zhihu.com/equation?tex=linear(X)" alt="[公式]">替换成2.4中的<img src="https://www.zhihu.com/equation?tex=FM(X)" alt="[公式]">就是所谓的DeepFM模型。模型的架构如下:</p>
-<p><img src="https://pic1.zhimg.com/v2-313c8a340c4df2aef8604b466c17259c_r.jpg" alt="img"></p>
+<p>也就是将<strong>2.6</strong>所讲的<strong>W&amp;D</strong>中的<strong>线性部分</strong><img src="https://www.zhihu.com/equation?tex=linear(X)" srcset="/img/loading.gif" lazyload alt="[公式]">替换成2.4中的<img src="https://www.zhihu.com/equation?tex=FM(X)" srcset="/img/loading.gif" lazyload alt="[公式]">就是所谓的DeepFM模型。模型的架构如下:</p>
+<p><img src="https://pic1.zhimg.com/v2-313c8a340c4df2aef8604b466c17259c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>数学公式如下:</p>
-<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7B%3Cv_%7Bi%7D,v_%7Bj%7D%3Ex_%7Bi%7Dx_%7Bj%7D%7D+DNN(X))=logistics(FM(X)+DNN(X))" alt="[公式]"></p>
-<p>将<strong>W&amp;D线性部分</strong><img src="https://www.zhihu.com/equation?tex=linear(X)" alt="[公式]">替换成<img src="https://www.zhihu.com/equation?tex=FM(X)" alt="[公式]">后增强了低阶特征的表达能力(<strong>二阶交叉</strong>)，克服了<strong>W&amp;D</strong>的<strong>线性部分</strong>依然需要对<strong>低维特征做特征工程</strong>的缺点。</p>
+<p><img src="https://www.zhihu.com/equation?tex=f(x)+=+logistics(linear(X)+%5Csum_%7Bi=1%7D%5E%7Bn%7D%7B%7D%5Csum_%7Bj=i+1%7D%5E%7Bn%7D%7B%3Cv_%7Bi%7D,v_%7Bj%7D%3Ex_%7Bi%7Dx_%7Bj%7D%7D+DNN(X))=logistics(FM(X)+DNN(X))" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>将<strong>W&amp;D线性部分</strong><img src="https://www.zhihu.com/equation?tex=linear(X)" srcset="/img/loading.gif" lazyload alt="[公式]">替换成<img src="https://www.zhihu.com/equation?tex=FM(X)" srcset="/img/loading.gif" lazyload alt="[公式]">后增强了低阶特征的表达能力(<strong>二阶交叉</strong>)，克服了<strong>W&amp;D</strong>的<strong>线性部分</strong>依然需要对<strong>低维特征做特征工程</strong>的缺点。</p>
 <p><strong>2.8 深度模型之DCN模</strong></p>
 <p>上一小节讲到为了加强<strong>低阶特征的表达能力</strong>，将<strong>W&amp;D</strong>中的<strong>LR线性部分</strong>替换成<strong>FM</strong>。FM的本质是<strong>增加了低纬特征间的二阶交叉能力，</strong>为了挖掘<strong>更高阶的特征交叉的价值</strong>提出了**DCN (Deep &amp;Cross Network)**模型。</p>
 <p><strong>DCN的网络架构如下:</strong></p>
-<p><img src="https://pic2.zhimg.com/v2-812f4bc954a3f697b3bfe8146723b305_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-812f4bc954a3f697b3bfe8146723b305_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>比较<strong>DCN</strong>与<strong>DeepFM</strong>的网络架构，可以发现本质区别是将<strong>DeepFM</strong>的<strong>FM结构</strong>替换为<strong>Cross Network结构。下面看下什么是Cross Network? 以及Cross Network</strong>是如何实现<strong>高阶特征组合</strong>的?</p>
 <p><strong>Cross Network结构:</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-15aae0e2a89201f9576c8340b454954c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-15aae0e2a89201f9576c8340b454954c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>Cross Network整体看</strong>是一个递推结构:</p>
-<p><img src="https://www.zhihu.com/equation?tex=x_%7Bl+1%7D=x_%7B0%7Dx_%7Bl%7D%5E%7BT%7Dw_%7Bl%7D+b_%7Bl%7D+x_%7Bl%7D=f(x_%7Bl%7D,w_%7Bl%7D,b_%7Bl%7D)+x_%7Bl%7D" alt="[公式]"></p>
-<p>首先,<img src="https://www.zhihu.com/equation?tex=x_%7B0%7D" alt="[公式]">为输入的特征(第一层输入)，<img src="https://www.zhihu.com/equation?tex=x_%7Bl%7D" alt="[公式]">为第<img src="https://www.zhihu.com/equation?tex=L" alt="[公式]">层的输入，<img src="https://www.zhihu.com/equation?tex=w_%7Bl%7D" alt="[公式]">为第<img src="https://www.zhihu.com/equation?tex=l" alt="[公式]">层的参数矩阵。结合图可以看出Cross Network通过矩阵乘法实现特征的组合。<strong>每一层的特征都由其上一层的特征进行交叉组合，并把上一层的原始特征重新加回来。</strong>这样既能做特征组合，自动生成交叉组合特征，又能保留低阶原始特征，随着cross层的增加，是可以生成任意高阶的交叉组合特征（而DeepFM模型只有2阶的交叉组合特征）的，且在此过程中没有引入更多的参数，有效控制了模型复杂度。</p>
+<p><img src="https://www.zhihu.com/equation?tex=x_%7Bl+1%7D=x_%7B0%7Dx_%7Bl%7D%5E%7BT%7Dw_%7Bl%7D+b_%7Bl%7D+x_%7Bl%7D=f(x_%7Bl%7D,w_%7Bl%7D,b_%7Bl%7D)+x_%7Bl%7D" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>首先,<img src="https://www.zhihu.com/equation?tex=x_%7B0%7D" srcset="/img/loading.gif" lazyload alt="[公式]">为输入的特征(第一层输入)，<img src="https://www.zhihu.com/equation?tex=x_%7Bl%7D" srcset="/img/loading.gif" lazyload alt="[公式]">为第<img src="https://www.zhihu.com/equation?tex=L" srcset="/img/loading.gif" lazyload alt="[公式]">层的输入，<img src="https://www.zhihu.com/equation?tex=w_%7Bl%7D" srcset="/img/loading.gif" lazyload alt="[公式]">为第<img src="https://www.zhihu.com/equation?tex=l" srcset="/img/loading.gif" lazyload alt="[公式]">层的参数矩阵。结合图可以看出Cross Network通过矩阵乘法实现特征的组合。<strong>每一层的特征都由其上一层的特征进行交叉组合，并把上一层的原始特征重新加回来。</strong>这样既能做特征组合，自动生成交叉组合特征，又能保留低阶原始特征，随着cross层的增加，是可以生成任意高阶的交叉组合特征（而DeepFM模型只有2阶的交叉组合特征）的，且在此过程中没有引入更多的参数，有效控制了模型复杂度。</p>
 <p>同时为了缓解网络性能”<strong>退化</strong>“的问题，还引入了<strong>残差</strong>的思想:</p>
-<p><img src="https://pic3.zhimg.com/v2-e252f9a168d66100125e20b0ead13ca2_r.jpg" alt="img">残差思想</p>
+<p><img src="https://pic3.zhimg.com/v2-e252f9a168d66100125e20b0ead13ca2_r.jpg" srcset="/img/loading.gif" lazyload alt="img">残差思想</p>
 <p>总结一下，DCN提出了一种新的交叉网络，在每个层上明确地应用特征交叉，能够<strong>有效地捕获有限度的有效特征的相互作用</strong>，学会高度非线性的相互作用，不需要人工特征工程或遍历搜索，并具有较低的计算成本。此外<strong>Cross Network</strong>可以看成是对<strong>FM的泛化，</strong>而FM则是<strong>Cross Network</strong>在<strong>阶数为2时的特例。</strong></p>
 <p><strong>2.9 深度模型之DIN模型</strong></p>
 <p>在2.5小节中讲到DNN模型利用了用户的历史偏好信息对未知做出预测，然而阿里的研究者们通过收集用户真实数据发现用户行为有两个重要的特性:</p>
@@ -438,38 +536,38 @@
 <p><strong>Diversity</strong>体现在<strong>年轻的母亲</strong>的历史记录中体现的兴趣十分广泛，涵盖羊毛衫、手提袋、耳环、童装、运动装等等。而爱好游泳的人同样兴趣广泛，历史记录涉及浴装、旅游手册、踏水板、马铃薯、冰激凌、坚果等等。</p>
 <p><strong>2).</strong> <strong>Local activation</strong>体现在，当我们给爱好游泳的人推荐goggle(护目镜)时，跟他之前是否购买过薯片、书籍、冰激凌的关系就不大了，而跟他游泳相关的历史记录如游泳帽的关系就比较密切。</p>
 <p>显然，2.5小节中对所有物品简单做<strong>element-wise+的操作无法表达上述两种特性，</strong>因为这里将所有物品或店铺向量<strong>视作同等重要</strong>。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-9e93f9cf2ece17a9fc0c644514ae5c6d_1440w.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-9e93f9cf2ece17a9fc0c644514ae5c6d_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>为了解决该问题阿里提出的DIN模型中使用了<strong>weighted-sum机制，</strong>其实就是加权的sum-pooling，权重经过一个<strong>activation unit</strong>计算得到，即**Attention(注意力)**机制。</p>
-<p><img src="https://pic1.zhimg.com/v2-b89b4ba8a493ebe6d60dc66dd878bff8_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-b89b4ba8a493ebe6d60dc66dd878bff8_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>Attention机制也是一个小的神经网络模型，针对不同的候选项，用户历史行为与该候选项的权重是不同的。假设用户有ABC三个历史行为，对于候选项D，那么ABC的权重可能是0.8、0.1、0.1；<strong>对于候选项E</strong>，那么ABC的权重可能是0.3、0.6、0.1。这里的权重，就是Attention机制即上图中的<strong>Activation Unit</strong>所需要学习的。</p>
 <p>下图是<strong>注意力机制</strong>的简单示例:</p>
-<p><img src="https://pic2.zhimg.com/v2-178e6af2429002e27e7bb4f39b68021d_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-178e6af2429002e27e7bb4f39b68021d_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>下面是一张更详细的<strong>DIN</strong>网络结构图:</p>
-<p><img src="https://pic2.zhimg.com/v2-136d1a2edec32fc9b3fa9425db065ea9_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-136d1a2edec32fc9b3fa9425db065ea9_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h3 id="2-10-深度模型之DIEN模型"><a href="#2-10-深度模型之DIEN模型" class="headerlink" title="2.10 深度模型之DIEN模型"></a>2.10 深度模型之DIEN模型</h3><p>前面介绍的深度兴趣网络<strong>DIN(Deep Interest Net)<strong>提出在电商场景下，用户同时会存在多种多样的兴趣，同时用户在面对一个具体商品的时候只有部分和此商品相关的兴趣会影响用户的行为。</strong>DIN</strong>提出了一个兴趣激活的模块(<strong>注意力机制</strong>)，用于根据被预测的<strong>候选项C</strong>激活其相关的历史行为从而表达用户和此商品<strong>C</strong>相关的部分兴趣。相比以往的模型需要用一个固定的向量表达用户所有的兴趣，<strong>DIN</strong>用一个<strong>根据不同被预测商品变化的向量来表达用户相关的兴趣</strong>，这样的设计降低了<strong>模型表达用户兴趣的难度</strong>。</p>
 <p><strong>然而DIN也有其不足:</strong></p>
 <p><strong>1).<strong>用户的兴趣其实是一个</strong>更为抽象</strong>的概念，而<strong>DIN</strong>的设计中直接**将一个具体的用户行为(如点击一个具体的商品)**当做了用户的兴趣。</p>
 <p>比如用户购买了某款连衣裙，其背后可能是因为触发了用户对颜色、品牌、风格、当季相关的隐藏兴趣，而用户的兴趣并不仅仅局限于这一款具体的商品。</p>
 <p>某个用户一段历史行为序列是:</p>
-<p><img src="https://www.zhihu.com/equation?tex=S=%5BA_%7B1%7D,A_%7B2%7D,B_%7B1%7D,B_%7B2%7D,A_%7B3%7D,A_%7B4%7D,B_%7B3%7D,B_%7B4%7D%5D" alt="[公式]"></p>
-<p>其中，<img src="https://www.zhihu.com/equation?tex=A,B+%5Cin+I" alt="[公式]">代表兴趣空间内的两种不同兴趣。</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5BA_%7B1%7D,A_%7B2%7D,A_%7B3%7D,A_%7B4%7D%5D+%5Cin+A" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=%5BB_%7B1%7D,B_%7B2%7D,B_%7B3%7D,B_%7B4%7D%5D+%5Cin+B" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=S=%5BA_%7B1%7D,A_%7B2%7D,B_%7B1%7D,B_%7B2%7D,A_%7B3%7D,A_%7B4%7D,B_%7B3%7D,B_%7B4%7D%5D" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>其中，<img src="https://www.zhihu.com/equation?tex=A,B+%5Cin+I" srcset="/img/loading.gif" lazyload alt="[公式]">代表兴趣空间内的两种不同兴趣。</p>
+<p><img src="https://www.zhihu.com/equation?tex=%5BA_%7B1%7D,A_%7B2%7D,A_%7B3%7D,A_%7B4%7D%5D+%5Cin+A" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5BB_%7B1%7D,B_%7B2%7D,B_%7B3%7D,B_%7B4%7D%5D+%5Cin+B" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p>兴趣隐藏在行为背后，用户的历史行为可以看做是多个兴趣的很多采样点混合在一起的综合序列。这样的序列与<strong>自然语言处理遇到的有序序列是完全不同的</strong>，在这样的场景下，<strong>序列被打断是一个常规行为</strong>。因此单纯的序列建模，比如<strong>RNN、LSTM、GRU</strong>模型等，在这种场景下效果是不理想的。</p>
 <p>如下图，表示用RNN根据<strong>用户历史的行为预测未来的兴趣</strong>:</p>
-<p><img src="https://pic2.zhimg.com/v2-6e2e26bc40a492fde2fdb7bd8a78ad15_r.jpg" alt="img">RNN兴趣预测</p>
+<p><img src="https://pic2.zhimg.com/v2-6e2e26bc40a492fde2fdb7bd8a78ad15_r.jpg" srcset="/img/loading.gif" lazyload alt="img">RNN兴趣预测</p>
 <p>**2).**DIN忽略了对用户兴趣演化的构建</p>
-<p><img src="https://pic2.zhimg.com/v2-50a6e69c191ad71b3ac8b9e9b24aea8d_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-50a6e69c191ad71b3ac8b9e9b24aea8d_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>用户的浏览历史看上去杂乱无章，但其中也隐含着规律性，比如一个女孩看了上衣、裤子后，接下来可能要看下鞋子相关的商品，<strong>上衣-&gt;裤子-&gt;鞋子</strong>，这几个兴趣间隐含着某种关联性。</p>
 <p>为了解决上面的问题，阿里提出的DIEN(深度兴趣进化网络)中引入了两个新的模块，分别是:兴趣提取模块和兴趣演化模块。</p>
 <p><strong>DIEN的网络模型如下:</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-661ffd11395ddf61c2648dc3f26a211c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-661ffd11395ddf61c2648dc3f26a211c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>用户历史行为-&gt;兴趣抽取模块-&gt;兴趣演化模块</strong>，<strong>简约一点的表示如下:</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-929c74ce7347dec7b6ccabe5ad62089c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-929c74ce7347dec7b6ccabe5ad62089c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h2 id="什么是兴趣抽取模块"><a href="#什么是兴趣抽取模块" class="headerlink" title="什么是兴趣抽取模块?"></a><strong>什么是兴趣抽取模块?</strong></h2><p>行为是具体的，兴趣是抽象的，直接用行为<strong>Embedding</strong>当兴趣缺乏抽象、概括能力。兴趣提取模块的目的就是挖掘出行为背后用户抽象兴趣的表达。</p>
-<p><img src="https://pic3.zhimg.com/v2-c6a223af73d096bfb1cb137cacc6b9a2_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-c6a223af73d096bfb1cb137cacc6b9a2_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>假设用户浏览了一条裤子，那么裤子<strong>id</strong>是一个特征，该特征对于推荐系统来说是一个较为随机的特征，然而这个<strong>id</strong>类特征背后代表的可能是<strong>用户喜欢这个裤子的颜色、样式、功能等某更抽象的兴趣</strong>。</p>
-<p><img src="https://pic4.zhimg.com/v2-cc45d5a6e0797578af92248d82781683_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-cc45d5a6e0797578af92248d82781683_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>由于用户某一时刻的兴趣，不仅与当前的行为相关，也与历史各个时刻的行为相关。因此可以用时序模型对上述问题建模，比如<strong>LSTM、GRU</strong>等。</p>
 <p><strong>DIEN</strong>模型采用<strong>GRU</strong>模型，因为GRU在效果相差无几的前提下，比 LSTM要节省更多的参数。在<strong>神经网络模型整体结构非常复杂的大前提下，会尽量将每一个模块简单化、轻量化</strong>。</p>
 <p>用GRU提取出的隐层状态表达<strong>用户兴趣的抽象</strong>。同时还引入了辅助<strong>loss</strong>的功能，用来辅助提取兴趣表达，有如下好处:</p>
@@ -477,29 +575,29 @@
 <p><strong>2).<strong>能有效解决长序列梯度传播问题，因为在现实场景中，用户兴趣序列有可能非常长，若直接用</strong>GRU，</strong>没有辅助<strong>loss</strong>，则会面临长序列梯度消失问题。</p>
 <p><strong>3).<strong>通过点击</strong>pattern</strong>的学习，出来<strong>hidden state</strong>能学的更好，<strong>Embedding</strong>通过反向传播也能学到更多语义表达，使得学习更加有效。</p>
 <h2 id="什么是兴趣演化模块"><a href="#什么是兴趣演化模块" class="headerlink" title="什么是兴趣演化模块?"></a><strong>什么是兴趣演化模块?</strong></h2><p><strong>兴趣提取模块</strong>相当于是对用户历史行为<strong>提纯，</strong>去除噪声，得到用户兴趣表示。而兴趣演化模块则是在提取模块的基础上得到对<strong>未来兴趣的抽象表示</strong>，这里同样使用了<strong>GRU</strong>。</p>
-<p><img src="https://pic1.zhimg.com/v2-a207d03af16244cca7a5e75495a3491c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-a207d03af16244cca7a5e75495a3491c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>与通常<strong>GRU</strong>不同的是，这里引入了<strong>Attention</strong>机制。因为人的兴趣是多峰分布的，比如可能同时对衣服、书籍、电子产品感兴趣，<strong>通过Attention机制将筛选出与候选项相关的兴趣</strong>，忽略无关的兴趣。</p>
 <p><strong>AUGRU &#x3D; GRU + Attention，</strong>使用<strong>attention score</strong>来控制<strong>update</strong>门的权重，<strong>这样既保留了原始的更新方向，又能根据与候选广告的相关程度来控制隐层状态的更新力度</strong>。</p>
-<p><img src="https://pic1.zhimg.com/v2-51dfe4095a1a351f31a2da7759207968_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-51dfe4095a1a351f31a2da7759207968_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>举2个极端的例子:</strong></p>
-<p>**1).**假如该时刻的行为与候选项相关度为1，我们希望这个行为能更新用户兴趣的隐状态即<img src="https://www.zhihu.com/equation?tex=h(t)=f(h(t-1),+i_t)" alt="[公式]">，而当行为与候选项不相关的时候我们要保留当前状态，即：<img src="https://www.zhihu.com/equation?tex=h(t)=h(t-1)" alt="[公式]">。</p>
-<p>**2).**假如某行为与候选广告不相关，那么隐状态的更新是<img src="https://www.zhihu.com/equation?tex=h(t)=f(h(t-1),+0)" alt="[公式]">, 0 向量并不会不更新，而是会将<img src="https://www.zhihu.com/equation?tex=hidden+%5C+state" alt="[公式]">更新到一个新的地方去，这并不是我们期望的。</p>
+<p>**1).**假如该时刻的行为与候选项相关度为1，我们希望这个行为能更新用户兴趣的隐状态即<img src="https://www.zhihu.com/equation?tex=h(t)=f(h(t-1),+i_t)" srcset="/img/loading.gif" lazyload alt="[公式]">，而当行为与候选项不相关的时候我们要保留当前状态，即：<img src="https://www.zhihu.com/equation?tex=h(t)=h(t-1)" srcset="/img/loading.gif" lazyload alt="[公式]">。</p>
+<p>**2).**假如某行为与候选广告不相关，那么隐状态的更新是<img src="https://www.zhihu.com/equation?tex=h(t)=f(h(t-1),+0)" srcset="/img/loading.gif" lazyload alt="[公式]">, 0 向量并不会不更新，而是会将<img src="https://www.zhihu.com/equation?tex=hidden+%5C+state" srcset="/img/loading.gif" lazyload alt="[公式]">更新到一个新的地方去，这并不是我们期望的。</p>
 <p>如下公式是常规<strong>GRU</strong>的公式，可以对比下与<strong>AUGRU的不同。</strong></p>
-<p><img src="https://pic3.zhimg.com/v2-62b0a406cbc39c5eb97547ac74f93516_r.jpg" alt="img">GRU</p>
+<p><img src="https://pic3.zhimg.com/v2-62b0a406cbc39c5eb97547ac74f93516_r.jpg" srcset="/img/loading.gif" lazyload alt="img">GRU</p>
 <p>最后总结下，<strong>DIN</strong>和<strong>DIEN</strong>的最底层都是<strong>Embedding Layer</strong>，<strong>User profile</strong>， <strong>target AD</strong>和<strong>context feature</strong>的处理方式是一致的。不同的是，<strong>DIEN</strong>将<strong>user behavior</strong>组织成了序列数据的形式，并把简单的使用外积完成的<strong>activation unit</strong>变成了一个<strong>attention-based GRU</strong>网络。</p>
 <p><strong>2.11 深度模型之语义相似模型</strong></p>
 <p><strong>Pointwise除了广泛应用于推荐搜索中CTR预估问题外，在问答系统、同义词扩展中也有很多应用。</strong></p>
 <p><strong>1).CNN(Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks)</strong></p>
 <p><strong>Paper:</strong><a href="https://link.zhihu.com/?target=http://eecs.csuohio.edu/~sschung/CIS660/RankShortTextCNNACM2015.pdf">http://eecs.csuohio.edu/~sschung&#x2F;CIS660&#x2F;RankShortTextCNNACM2015.pdf</a></p>
 <p><strong>Code:</strong><a href="https://link.zhihu.com/?target=https://github.com/YETI-WU/Semantic_Analysis_NLP/blob/master/rank_TextPairs.py">https://github.com/YETI-WU/Semantic_Analysis_NLP&#x2F;blob&#x2F;master&#x2F;rank_TextPairs.py</a></p>
-<p><img src="https://pic3.zhimg.com/v2-d6fbd79428925f433757e557a5a82a4e_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-d6fbd79428925f433757e557a5a82a4e_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>Semantic analysis. GloVe word embedding + Conv1D + MaxPool, concatenated with similarity matching, forward to Softmax layer and following the logistic regression output, binary cross entropy loss function to identify the matching similarity of documentary and query in sklearn datasets fetch_20newsgroup training.</p>
 <p><strong>2).DRMM(Deep Relevance Ranking Using Enhanced Document-Query Interactions)</strong></p>
 <p><strong>Paper:</strong><a href="https://link.zhihu.com/?target=http://nlp.cs.aueb.gr/pubs/emnlp2018.pdf">http://nlp.cs.aueb.gr/pubs/emnlp2018.pdf</a></p>
 <p>3).DSSM</p>
 <p>&#x2F;&#x2F; TODO</p>
 <p>4).预训练模型(Bert等)</p>
-<p><img src="https://pic4.zhimg.com/v2-1adab1d91a2cd61ecbbd4fc6b9b0bfa3_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-1adab1d91a2cd61ecbbd4fc6b9b0bfa3_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>参考资料:</strong></p>
 <p>1.DeepCTR Tensorflow</p>
 <p>2.推荐系统中使用ctr排序的f(x)的设计-传统模型篇</p>
@@ -571,27 +669,118 @@
 <p>44.基于 Spark 的快速短文本数据流分类方法</p>
 <p>45.PaperWeekly 第37期 | 论文盘点：检索式问答系统的语义匹配模型（神经网络篇）</p>
 <p><a href="https://link.zhihu.com/?target=https://yq.aliyun.com/articles/174908?spm=a2c4e.11153940.0.0.62b02f72RfavVK">https://yq.aliyun.com/articles/174908?spm=a2c4e.11153940.0.0.62b02f72RfavVK</a></p>
-<h2 id="3-Pairwise类"><a href="#3-Pairwise类" class="headerlink" title="3.Pairwise类"></a><strong>3.Pairwise类</strong></h2><p><img src="https://pic3.zhimg.com/v2-dba948be995779a3c5b82df59a4eaa66_r.jpg" alt="img"></p>
+<h2 id="3-Pairwise类"><a href="#3-Pairwise类" class="headerlink" title="3.Pairwise类"></a><strong>3.Pairwise类</strong></h2><p><img src="https://pic3.zhimg.com/v2-dba948be995779a3c5b82df59a4eaa66_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>Pairwise</strong>是目前比较流行的方法，相对<strong>pointwise</strong>他将重点转向<strong>文档顺序关系</strong>。它主要将排序问题归结为<strong>二元分类问题</strong>，这时候机器学习的方法就比较多了，比如Boost、SVM、神经网络等。</p>
-<p>对于同一query的相关文档集中，对任何两个不同<strong>label</strong>的文档，都可以得到一个训练实例<img src="https://www.zhihu.com/equation?tex=(d_%7Bi%7D,d_%7Bj%7D)" alt="[公式]">，如果<img src="https://www.zhihu.com/equation?tex=d_%7Bi%7D%3Ed_%7Bj%7D" alt="[公式]">，则赋值+1，反之为-1。于是我们就得到了二元分类器训练所需的训练样本。<strong>预测时可以得到所有文档的一个偏序关系</strong>，<strong>从而实现排序</strong>。</p>
+<p>对于同一query的相关文档集中，对任何两个不同<strong>label</strong>的文档，都可以得到一个训练实例<img src="https://www.zhihu.com/equation?tex=(d_%7Bi%7D,d_%7Bj%7D)" srcset="/img/loading.gif" lazyload alt="[公式]">，如果<img src="https://www.zhihu.com/equation?tex=d_%7Bi%7D%3Ed_%7Bj%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，则赋值+1，反之为-1。于是我们就得到了二元分类器训练所需的训练样本。<strong>预测时可以得到所有文档的一个偏序关系</strong>，<strong>从而实现排序</strong>。</p>
 <p><strong>3.1</strong> <strong>RankNet排序模型</strong></p>
-<p><strong>RankNet</strong>是一种经典的<strong>Pairwise</strong>的排序学习方法，是典型的<strong>前向神经网络排序模型</strong>。在文档集合<img src="https://www.zhihu.com/equation?tex=S" alt="[公式]">中的第<img src="https://www.zhihu.com/equation?tex=i" alt="[公式]">个文档记做<img src="https://www.zhihu.com/equation?tex=U_%7Bi%7D" alt="[公式]">，它的文档特征向量记做<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" alt="[公式]">，对于给定的一根据以上推论构造<strong>RankNet</strong>网络结构，由若干层隐藏层和全连接层构成。</p>
-<p>如下图所示，将文档特征使用隐藏层，全连接层逐层变换，完成了<strong>底层特征空间到高层特征空间的变换</strong>。其中<img src="https://www.zhihu.com/equation?tex=docA" alt="[公式]">和<img src="https://www.zhihu.com/equation?tex=docB" alt="[公式]">结构对称，分别输入到最终的<img src="https://www.zhihu.com/equation?tex=RankCost" alt="[公式]">层中。文档对<img src="https://www.zhihu.com/equation?tex=U_%7Bi%7D" alt="[公式]">,<img src="https://www.zhihu.com/equation?tex=U_%7Bj%7D" alt="[公式]">，<strong>RankNet</strong>将输入的单个文档特征向量<img src="https://www.zhihu.com/equation?tex=x" alt="[公式]">映射到<img src="https://www.zhihu.com/equation?tex=f(x)" alt="[公式]">，得到si&#x3D;f(xi), sj&#x3D;f(xj)。将Ui相关性比Uj好的概率记做Pi,j，则</p>
-<p><img src="https://pic2.zhimg.com/v2-6586d1d764cb5fd0e6e500b78d47014d_r.jpg" alt="img">RankNet</p>
+<p><strong>RankNet</strong>是一种经典的<strong>Pairwise</strong>的排序学习方法，是典型的<strong>前向神经网络排序模型</strong>。在文档集合<img src="https://www.zhihu.com/equation?tex=S" srcset="/img/loading.gif" lazyload alt="[公式]">中的第<img src="https://www.zhihu.com/equation?tex=i" srcset="/img/loading.gif" lazyload alt="[公式]">个文档记做<img src="https://www.zhihu.com/equation?tex=U_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，它的文档特征向量记做<img src="https://www.zhihu.com/equation?tex=x_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，对于给定的一根据以上推论构造<strong>RankNet</strong>网络结构，由若干层隐藏层和全连接层构成。</p>
+<p>如下图所示，将文档特征使用隐藏层，全连接层逐层变换，完成了<strong>底层特征空间到高层特征空间的变换</strong>。其中<img src="https://www.zhihu.com/equation?tex=docA" srcset="/img/loading.gif" lazyload alt="[公式]">和<img src="https://www.zhihu.com/equation?tex=docB" srcset="/img/loading.gif" lazyload alt="[公式]">结构对称，分别输入到最终的<img src="https://www.zhihu.com/equation?tex=RankCost" srcset="/img/loading.gif" lazyload alt="[公式]">层中。文档对<img src="https://www.zhihu.com/equation?tex=U_%7Bi%7D" srcset="/img/loading.gif" lazyload alt="[公式]">,<img src="https://www.zhihu.com/equation?tex=U_%7Bj%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，<strong>RankNet</strong>将输入的单个文档特征向量<img src="https://www.zhihu.com/equation?tex=x" srcset="/img/loading.gif" lazyload alt="[公式]">映射到<img src="https://www.zhihu.com/equation?tex=f(x)" srcset="/img/loading.gif" lazyload alt="[公式]">，得到si&#x3D;f(xi), sj&#x3D;f(xj)。将Ui相关性比Uj好的概率记做Pi,j，则</p>
+<p><img src="https://pic2.zhimg.com/v2-6586d1d764cb5fd0e6e500b78d47014d_r.jpg" srcset="/img/loading.gif" lazyload alt="img">RankNet</p>
 <p>由于<strong>Pairwise</strong>中的网络结构是左右对称，可定义一半网络结构，另一半共享网络参数。模型预测的输入为单个文档的特征向量，模型会给出相关性得分。将预测得分排序即可得到最终的文档相关性排序结果。</p>
 <p>注意这里并没有预测偏序关系，输出的是类似Pointwise的单点结果，与Pointwise类模型不同的是Pairwise的模型结构中学到了更利于区分正负样本的特征。</p>
 <p>RankCost的损失函数为:</p>
-<p><img src="https://pic3.zhimg.com/v2-ad4b8c017902643fffe64f036d8f2b3e_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-ad4b8c017902643fffe64f036d8f2b3e_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>基于<strong>Keras</strong>的<strong>RankNet</strong>实现:</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 网络参数</span><br><span class="line">def create_base_network(input_dim):</span><br><span class="line">    seq = Sequential()</span><br><span class="line">    seq.add(Dense(input_dim, input_shape=(input_dim,), activation=&#x27;relu&#x27;))</span><br><span class="line">    seq.add(Dropout(0.1))</span><br><span class="line">    seq.add(Dense(64, activation=&#x27;relu&#x27;))</span><br><span class="line">    seq.add(Dropout(0.1))</span><br><span class="line">    seq.add(Dense(32, activation=&#x27;relu&#x27;))</span><br><span class="line">    seq.add(Dense(1))</span><br><span class="line">    return seq</span><br><span class="line"></span><br><span class="line"># Rank Cost层</span><br><span class="line">def create_meta_network(input_dim, base_network):</span><br><span class="line">    input_a = Input(shape=(input_dim,))</span><br><span class="line">    input_b = Input(shape=(input_dim,))</span><br><span class="line"></span><br><span class="line">    rel_score = base_network(input_a)</span><br><span class="line">    irr_score = base_network(input_b)</span><br><span class="line"></span><br><span class="line">    # subtract scores</span><br><span class="line">    diff = Subtract()([rel_score, irr_score])</span><br><span class="line"></span><br><span class="line">    # Pass difference through sigmoid function.</span><br><span class="line">    prob = Activation(&quot;sigmoid&quot;)(diff)</span><br><span class="line"></span><br><span class="line">    # Build model.</span><br><span class="line">    model = Model(inputs = [input_a, input_b], outputs = prob)</span><br><span class="line">    model.compile(optimizer = &quot;adam&quot;, loss = &quot;binary_crossentropy&quot;)</span><br><span class="line"></span><br><span class="line">    return model</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text"># 网络参数
+def create_base_network(input_dim):
+    seq = Sequential()
+    seq.add(Dense(input_dim, input_shape=(input_dim,), activation='relu'))
+    seq.add(Dropout(0.1))
+    seq.add(Dense(64, activation='relu'))
+    seq.add(Dropout(0.1))
+    seq.add(Dense(32, activation='relu'))
+    seq.add(Dense(1))
+    return seq
+
+# Rank Cost层
+def create_meta_network(input_dim, base_network):
+    input_a = Input(shape=(input_dim,))
+    input_b = Input(shape=(input_dim,))
+
+    rel_score = base_network(input_a)
+    irr_score = base_network(input_b)
+
+    # subtract scores
+    diff = Subtract()([rel_score, irr_score])
+
+    # Pass difference through sigmoid function.
+    prob = Activation("sigmoid")(diff)
+
+    # Build model.
+    model = Model(inputs = [input_a, input_b], outputs = prob)
+    model.compile(optimizer = "adam", loss = "binary_crossentropy")
+
+    return model<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>事实上<strong>Pairwise</strong>只是一种框架，可以将图中的网络部分替换成<strong>Pointwise</strong>部分讲解的任何模型。</p>
-<p><img src="https://pic2.zhimg.com/v2-c39eb305e6bf98e3385f4b043f392855_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-c39eb305e6bf98e3385f4b043f392855_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>3.2 xgboost+pairwise</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">from xgboost import DMatrix,train</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 训练参数</span><br><span class="line">xgb_rank_params = &#123;</span><br><span class="line">    &#x27;bst:max_depth&#x27;:2, </span><br><span class="line">    &#x27;bst:eta&#x27;:1, &#x27;silent&#x27;:1, </span><br><span class="line">    &#x27;objective&#x27;:&#x27;rank:pairwise&#x27;,</span><br><span class="line">    &#x27;nthread&#x27;:4,</span><br><span class="line">    &#x27;eval_metric&#x27;:&#x27;ndcg&#x27;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"># 产生随机样本</span><br><span class="line">#一共2组*每组3条，6条样本，特征维数是2</span><br><span class="line">n_group=2</span><br><span class="line">n_choice=3  </span><br><span class="line">dtrain=np.random.uniform(0,100,[n_group*n_choice,2])    </span><br><span class="line">dtarget=np.array([np.random.choice([0,1,2],3,False) for i in range(n_group)]).flatten()</span><br><span class="line">#n_group用于表示从前到后每组各自有多少样本，前提是样本中各组是连续的，[3，3]表示一共6条样本中前3条是第一组，后3条是第二组</span><br><span class="line">dgroup= np.array([n_choice for i in range(n_group)]).flatten()</span><br><span class="line"></span><br><span class="line"># 构造Xgboost训练数据</span><br><span class="line">xgbTrain = DMatrix(dtrain, label = dtarget)</span><br><span class="line">xgbTrain.set_group(dgroup)</span><br><span class="line"></span><br><span class="line"># 构造评测数据</span><br><span class="line">dtrain_eval=np.random.uniform(0,100,[n_group*n_choice,2])        </span><br><span class="line">xgbTrain_eval = DMatrix(dtrain_eval, label = dtarget)</span><br><span class="line">xgbTrain_eval .set_group(dgroup)</span><br><span class="line">evallist  = [(xgbTrain,&#x27;train&#x27;),(xgbTrain_eval, &#x27;eval&#x27;)]</span><br><span class="line"></span><br><span class="line"># 训练模型</span><br><span class="line">rankModel = train(xgb_rank_params,xgbTrain,num_boost_round=20,evals=evallist)</span><br><span class="line"></span><br><span class="line"># 测试模型</span><br><span class="line">dtest=np.random.uniform(0,100,[n_group*n_choice,2])    </span><br><span class="line">dtestgroup=np.array([n_choice for i in range(n_group)]).flatten()</span><br><span class="line">xgbTest = DMatrix(dtest)</span><br><span class="line">xgbTest.set_group(dgroup)</span><br><span class="line">print(rankModel.predict( xgbTest))</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">import pandas as pd
+import numpy as np
+from xgboost import DMatrix,train
+
+
+# 训练参数
+xgb_rank_params = &#123;
+    'bst:max_depth':2, 
+    'bst:eta':1, 'silent':1, 
+    'objective':'rank:pairwise',
+    'nthread':4,
+    'eval_metric':'ndcg'
+&#125;
+  
+
+# 产生随机样本
+#一共2组*每组3条，6条样本，特征维数是2
+n_group=2
+n_choice=3  
+dtrain=np.random.uniform(0,100,[n_group*n_choice,2])    
+dtarget=np.array([np.random.choice([0,1,2],3,False) for i in range(n_group)]).flatten()
+#n_group用于表示从前到后每组各自有多少样本，前提是样本中各组是连续的，[3，3]表示一共6条样本中前3条是第一组，后3条是第二组
+dgroup= np.array([n_choice for i in range(n_group)]).flatten()
+
+# 构造Xgboost训练数据
+xgbTrain = DMatrix(dtrain, label = dtarget)
+xgbTrain.set_group(dgroup)
+
+# 构造评测数据
+dtrain_eval=np.random.uniform(0,100,[n_group*n_choice,2])        
+xgbTrain_eval = DMatrix(dtrain_eval, label = dtarget)
+xgbTrain_eval .set_group(dgroup)
+evallist  = [(xgbTrain,'train'),(xgbTrain_eval, 'eval')]
+
+# 训练模型
+rankModel = train(xgb_rank_params,xgbTrain,num_boost_round=20,evals=evallist)
+
+# 测试模型
+dtest=np.random.uniform(0,100,[n_group*n_choice,2])    
+dtestgroup=np.array([n_choice for i in range(n_group)]).flatten()
+xgbTest = DMatrix(dtest)
+xgbTest.set_group(dgroup)
+print(rankModel.predict( xgbTest))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>输出结果:</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[0]	train-ndcg:1	        eval-ndcg:0.98197</span><br><span class="line">[1]	train-ndcg:0.898354	eval-ndcg:1</span><br><span class="line">[2]	train-ndcg:0.898354	eval-ndcg:1</span><br><span class="line">[3]	train-ndcg:0.898  354	eval-ndcg:1</span><br><span class="line">[4]	train-ndcg:0.898354	eval-ndcg:1</span><br><span class="line">[5]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[6]	train-ndcg:0.898354	eval-ndcg:1</span><br><span class="line">[7]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[8]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[9]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[10]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[11]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[12]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[13]	train-ndcg:1	        eval-ndcg:1</span><br><span class="line">[14]	train-ndcg:1	        eval-ndcg:0.829501</span><br><span class="line">[15]	train-ndcg:1	        eval-ndcg:0.829501</span><br><span class="line">[16]	train-ndcg:1	        eval-ndcg:0.829501</span><br><span class="line">[17]	train-ndcg:1	        eval-ndcg:0.829501</span><br><span class="line">[18]	train-ndcg:1	        eval-ndcg:0.829501</span><br><span class="line">[19]	train-ndcg:1	        eval-ndcg:0.829501</span><br><span class="line">[ 1.3936174   1.3936174  -0.65021324  1.3936174   1.3936174   1.3936174 ]</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">[0]	train-ndcg:1	        eval-ndcg:0.98197
+[1]	train-ndcg:0.898354	eval-ndcg:1
+[2]	train-ndcg:0.898354	eval-ndcg:1
+[3]	train-ndcg:0.898  354	eval-ndcg:1
+[4]	train-ndcg:0.898354	eval-ndcg:1
+[5]	train-ndcg:1	        eval-ndcg:1
+[6]	train-ndcg:0.898354	eval-ndcg:1
+[7]	train-ndcg:1	        eval-ndcg:1
+[8]	train-ndcg:1	        eval-ndcg:1
+[9]	train-ndcg:1	        eval-ndcg:1
+[10]	train-ndcg:1	        eval-ndcg:1
+[11]	train-ndcg:1	        eval-ndcg:1
+[12]	train-ndcg:1	        eval-ndcg:1
+[13]	train-ndcg:1	        eval-ndcg:1
+[14]	train-ndcg:1	        eval-ndcg:0.829501
+[15]	train-ndcg:1	        eval-ndcg:0.829501
+[16]	train-ndcg:1	        eval-ndcg:0.829501
+[17]	train-ndcg:1	        eval-ndcg:0.829501
+[18]	train-ndcg:1	        eval-ndcg:0.829501
+[19]	train-ndcg:1	        eval-ndcg:0.829501
+[ 1.3936174   1.3936174  -0.65021324  1.3936174   1.3936174   1.3936174 ]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -603,8 +792,8 @@
 <p>3.Learning to rank的讲解，单文档方法（Pointwise），文档对方法（Pairwise），文档列表方法（Listwise）…</p>
 <p><a href="https://link.zhihu.com/?target=https://blog.csdn.net/weixin_30474613/article/details/98159675">https://blog.csdn.net/weixin_30474613&#x2F;article&#x2F;details&#x2F;98159675</a></p>
 <p>4.<a href="https://link.zhihu.com/?target=https://github.com/eggie5/RankNet">RankNet</a></p>
-<h2 id="4-特征工程"><a href="#4-特征工程" class="headerlink" title="4.特征工程"></a><strong>4.特征工程</strong></h2><p><img src="https://pic1.zhimg.com/v2-b4b09b59b5e67df34319c1d10babc890_r.jpg" alt="img"></p>
-<h2 id="5-应用示例-论文检索系统"><a href="#5-应用示例-论文检索系统" class="headerlink" title="5.应用示例-论文检索系统"></a><strong>5.应用示例-论文检索系统</strong></h2><p><img src="https://pic4.zhimg.com/v2-25364d333b5e79a12e75260add1d764b_r.jpg" alt="img"></p>
+<h2 id="4-特征工程"><a href="#4-特征工程" class="headerlink" title="4.特征工程"></a><strong>4.特征工程</strong></h2><p><img src="https://pic1.zhimg.com/v2-b4b09b59b5e67df34319c1d10babc890_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="5-应用示例-论文检索系统"><a href="#5-应用示例-论文检索系统" class="headerlink" title="5.应用示例-论文检索系统"></a><strong>5.应用示例-论文检索系统</strong></h2><p><img src="https://pic4.zhimg.com/v2-25364d333b5e79a12e75260add1d764b_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>科学研究已经成为现代社会创新的主要动力。大量科研数据的积累也让我们可以理解和预测科研发展，并能用来指导未来的研究。论文是人类最前沿知识的媒介，因此如果可以理解论文中的数据，可以极大地扩充计算机理解知识的能力和范围。</p>
 <p><strong><a href="https://link.zhihu.com/?target=http://www.wsdm-conference.org/2020/wsdm-cup-2020.php">WSDM Cup 2020</a>(<strong>国际网络搜索与数据挖掘会议</strong>)</strong> 的 <strong>DiggSci 2020</strong>赛题，供一个论文库(约含80万篇论文)，同时提供对论文的描述段落，来自论文中对同类研究的介绍。参赛选手需要为描述段落匹配三篇最相关的论文。</p>
 <h2 id="简言之，依据用户输入Query从候选Documents中找出Top-N个最相关的Documents，核心技术-文本语义理解-搜索排序。比如以下例子"><a href="#简言之，依据用户输入Query从候选Documents中找出Top-N个最相关的Documents，核心技术-文本语义理解-搜索排序。比如以下例子" class="headerlink" title="简言之，依据用户输入Query从候选Documents中找出Top N个最相关的Documents，核心技术:文本语义理解+搜索排序。比如以下例子:"></a><strong>简言之，</strong>依据用户输入<strong>Query</strong>从候选<strong>Documents</strong>中找出<strong>Top N</strong>个最相关的<strong>Documents</strong>，核心技术:文本语义理解+搜索排序。<strong>比如以下例子:</strong></h2><p><strong>描述(输入):</strong></p>
@@ -612,23 +801,23 @@
 <p><strong>相关论文(输出):</strong></p>
 <p>[1] BERT: Pre-training of deep bidirectional transformers for language understanding.</p>
 <p>[2] Relational inductive biases, deep learning, and graph networks.</p>
-<h2 id="问题解法的系统架构如下"><a href="#问题解法的系统架构如下" class="headerlink" title="问题解法的系统架构如下:"></a><strong>问题解法</strong>的<strong>系统架构如下:</strong></h2><p><img src="https://pic1.zhimg.com/v2-5b692fcae5d34adaa18f8b9361f3a7e0_r.jpg" alt="img"></p>
-<p>典型的<strong>召回-&gt;重排序</strong>架构。为了降低计算复杂度，首先从<strong>海量数据集</strong>中依据<strong>简单算法</strong>召回<img src="https://www.zhihu.com/equation?tex=N" alt="[公式]">个较相关的文档，再利用<strong>复杂算法(Learning to)<strong>从<img src="https://www.zhihu.com/equation?tex=N" alt="[公式]">个候选集中筛出最优的<img src="https://www.zhihu.com/equation?tex=K" alt="[公式]">个文档作为最后的输出</strong>。</strong></p>
-<p><img src="https://pic1.zhimg.com/80/v2-2e63d7f735a49081b530d23ca1b88540_1440w.jpg" alt="img"></p>
+<h2 id="问题解法的系统架构如下"><a href="#问题解法的系统架构如下" class="headerlink" title="问题解法的系统架构如下:"></a><strong>问题解法</strong>的<strong>系统架构如下:</strong></h2><p><img src="https://pic1.zhimg.com/v2-5b692fcae5d34adaa18f8b9361f3a7e0_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>典型的<strong>召回-&gt;重排序</strong>架构。为了降低计算复杂度，首先从<strong>海量数据集</strong>中依据<strong>简单算法</strong>召回<img src="https://www.zhihu.com/equation?tex=N" srcset="/img/loading.gif" lazyload alt="[公式]">个较相关的文档，再利用<strong>复杂算法(Learning to)<strong>从<img src="https://www.zhihu.com/equation?tex=N" srcset="/img/loading.gif" lazyload alt="[公式]">个候选集中筛出最优的<img src="https://www.zhihu.com/equation?tex=K" srcset="/img/loading.gif" lazyload alt="[公式]">个文档作为最后的输出</strong>。</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-2e63d7f735a49081b530d23ca1b88540_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h2 id="1-数据探查"><a href="#1-数据探查" class="headerlink" title="1).数据探查"></a><strong>1).数据探查</strong></h2><p>数据集共给出<strong>80多万条候选论文</strong>，<strong>6万多条训练样本</strong>和<strong>3万多条本测试样本</strong>。</p>
-<p><img src="https://pic3.zhimg.com/v2-b70fb7020b42cde27ee9194003f7a16e_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-b70fb7020b42cde27ee9194003f7a16e_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>候选论文:paper_id</strong>(论文ID)，<strong>title</strong>(标题)，<strong>abstract</strong>(论文摘要)，<strong>journal</strong>(论文所在期刊)，<strong>keyword</strong>(论文关键词)，<strong>year</strong>(论文年份)。</p>
 <p><strong>训练样本:description_id</strong>(描述科研的句子或段落的ID)，paper_id(匹配论文的ID)，<strong>description_text</strong>(对科研的描述的文本，有时为句子，有时为一段话)。</p>
-<p><img src="https://pic4.zhimg.com/v2-6fb5198eadacdf192bfe8b00d931afa3_r.jpg" alt="img">候选论文样例</p>
-<p><img src="https://pic2.zhimg.com/v2-57b910dff96093cd0f6e65120f31a0b9_r.jpg" alt="img">训练样本样例</p>
-<p>文本是高度非结构化的，通常需要先对其进行预处理，将其分割成的<strong>有序的单词序列，并去除掉无用的冗余信息。</strong>对于中文通常需要复杂的分词算法处理；而对于英文由于天然的空白分割相对比较简单，可以借助<img src="https://www.zhihu.com/equation?tex=nltk" alt="[公式]">工具包。</p>
+<p><img src="https://pic4.zhimg.com/v2-6fb5198eadacdf192bfe8b00d931afa3_r.jpg" srcset="/img/loading.gif" lazyload alt="img">候选论文样例</p>
+<p><img src="https://pic2.zhimg.com/v2-57b910dff96093cd0f6e65120f31a0b9_r.jpg" srcset="/img/loading.gif" lazyload alt="img">训练样本样例</p>
+<p>文本是高度非结构化的，通常需要先对其进行预处理，将其分割成的<strong>有序的单词序列，并去除掉无用的冗余信息。</strong>对于中文通常需要复杂的分词算法处理；而对于英文由于天然的空白分割相对比较简单，可以借助<img src="https://www.zhihu.com/equation?tex=nltk" srcset="/img/loading.gif" lazyload alt="[公式]">工具包。</p>
 <p>由于本小节介绍的案例中数据集是英文的，这里介绍下英文文本的简单处理。对于英文通常需要经过:<strong>分词</strong>-&gt;<strong>词干化(stem)-&gt;去停用词-&gt;去特殊字符-&gt;小写化</strong> 几个处理步骤。</p>
 <p><strong>比如文本:</strong></p>
 <p>‘Pyrvinium is a drug approved by the FDA and identified as a Wnt inhibitor by inhibiting Axin degradation and stabilizing 尾-catenin, which can increase Ki67+ cardiomyocytes in the peri-infarct area and alleviate cardiac remodeling in a mouse model of MI.’</p>
 <p><strong>处理结果:</strong></p>
 <p>[‘pyrvinium’, ‘drug’, ‘approve’, ‘fda’, ‘identify’, ‘wnt’, ‘inhibitor’, ‘inhibit’, ‘axin’, ‘degradation’, ‘stabilize’, ‘尾-catenin’, ‘increase’, ‘ki67+’, ‘cardiomyocytes’, ‘peri-infarct’, ‘area’, ‘alleviate’, ‘cardiac’, ‘remodeling’, ‘mouse’, ‘model’, ‘mi’]</p>
 <p>预处理后的数据依然不能被”<strong>计算</strong>“，需要进一步转换成可计算的结构化数据，这里指<strong>文本的向量化表示。当把文本转化到向量空间后，</strong>。常见的有<strong>One-hot、Bag of Words、TF-IDF、Embedding等。</strong></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42310942"><img src="https://pic4.zhimg.com/v2-03df6b6c21c71950b095bbd902766f8b_180x120.jpg" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42310942"><img src="https://pic4.zhimg.com/v2-03df6b6c21c71950b095bbd902766f8b_180x120.jpg" srcset="/img/loading.gif" lazyload alt="img"></a></p>
 <p>下面再分别简单介绍下:</p>
 <p><strong>1).One-hot</strong></p>
 <p>One-hot编码又称为”**独热编码”**或”<strong>哑编码”<strong>，是一种离散表示方式。这种编码将词(或字)表示成一个</strong>向量</strong>，该向量的维度是词典(或字典)的长度(该词典是通过语料库生成的)，该向量中，当前词的位置的值为1，其余的位置为0。</p>
@@ -648,53 +837,256 @@
 <p><strong>TF-IDF</strong>全称<strong>term frequency–inverse document frequency，</strong>又称”<strong>词频-逆文本</strong>“频率。其中：</p>
 <p>**1).TF(Term Frequency):**某个词在当前文本中出现的频率，频率高的词语或者是重要的.</p>
 <p>**2).IDF(Inverse Document frequency):**逆文本频率。文本频率是指，含有某个词的文本在整个语料库中所占的比例。逆文本频率是文本频率的倒数。</p>
-<p><img src="https://www.zhihu.com/equation?tex=TF=%5Cfrac%7B%E6%AF%8F%E4%B8%AA%E8%AF%8D%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%7D%7B%E6%96%87%E7%AB%A0%E4%B8%AD%E8%AF%8D%E7%9A%84%E6%80%BB%E6%95%B0%7D" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=IDF=log(%5Cfrac%7B%E8%AF%AD%E6%96%99%E5%BA%93%E7%9A%84%E6%96%87%E6%9C%AC%E6%80%BB%E6%95%B0%7D%7B%E5%8C%85%E5%90%AB%E6%9F%90%E8%AF%8D%E7%9A%84%E6%96%87%E6%9C%AC%E6%95%B0%E9%87%8F+1%7D)" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=TF%5C_+IDF+=+TF*IDF" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=TF=%5Cfrac%7B%E6%AF%8F%E4%B8%AA%E8%AF%8D%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%7D%7B%E6%96%87%E7%AB%A0%E4%B8%AD%E8%AF%8D%E7%9A%84%E6%80%BB%E6%95%B0%7D" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=IDF=log(%5Cfrac%7B%E8%AF%AD%E6%96%99%E5%BA%93%E7%9A%84%E6%96%87%E6%9C%AC%E6%80%BB%E6%95%B0%7D%7B%E5%8C%85%E5%90%AB%E6%9F%90%E8%AF%8D%E7%9A%84%E6%96%87%E6%9C%AC%E6%95%B0%E9%87%8F+1%7D)" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=TF%5C_+IDF+=+TF*IDF" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
 <p>总之是考虑了文本中每个单词的<strong>重要程度。</strong>TF-IDF的问题是<strong>不能反映词的位置信息(<strong>如标题、句首、句尾的词</strong>应该赋予更高的权重</strong>)。</p>
 <p><strong>4).Distributed Representation-Embedding向量</strong></p>
 <p><strong>1.Word2Vec</strong></p>
 <p><strong>Word2vec</strong>模型是<strong>Google</strong>团队在2013年发布的<strong>word representation</strong>方法。该方法让预训练词向量的使用在NLP领域遍地开花。</p>
 <p>Word2vec本质是用上下文词预测中心词，或利用中心词预测上下文词。</p>
-<p><img src="https://pic1.zhimg.com/v2-4f7b17f7bad7d20f67ce7bbf38614c9c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-4f7b17f7bad7d20f67ce7bbf38614c9c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>将高维向量投影到二维平面，可以看到语义相似的单词，在空间上也比较接近。</p>
-<p><img src="https://pic3.zhimg.com/v2-96adad0adebeff03bba5c108a9097c4a_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-96adad0adebeff03bba5c108a9097c4a_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>Word2vec在生成向量的过程中考虑到<strong>词语的上下文</strong>，学习到了<strong>语义和语法</strong>的信息。同时得到的<strong>词向量维度小</strong>，<strong>节省存储和计算资源，</strong>通用性强，可以应用到各种NLP任务中。</p>
 <p><strong>2.ELMO</strong></p>
 <p>Word2vec词和向量是一对一的关系，无法解决多义词的问题。同时也无法针对特定的任务做动态优化。缓解该问题的方法是，用语言模型训练神经网络，在使用word embedding时，单词已经具备上下文信息，这个时候神经网络可以<strong>根据上下文信息对word embedding进行调整</strong>，这样经过调整之后的word embedding更能表达在这个上下文中的具体含义，这就解决了静态词向量无法表示多义词的问题。</p>
-<p><img src="https://pic3.zhimg.com/v2-bd4bf956f4bae41286b74fb40ad1e346_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-bd4bf956f4bae41286b74fb40ad1e346_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h2 id="2-粗召回阶段"><a href="#2-粗召回阶段" class="headerlink" title="2).粗召回阶段"></a><strong>2).粗召回阶段</strong></h2><p>使用<strong>高效的匹配算法</strong>对候选集进行<strong>粗筛</strong>，为后续<strong>精排</strong>阶段<strong>缩减候选排序的数据规模</strong>。</p>
-<p><img src="https://pic3.zhimg.com/v2-4434b398d8559dff27760aebe9659a22_r.jpg" alt="img">粗召回</p>
+<p><img src="https://pic3.zhimg.com/v2-4434b398d8559dff27760aebe9659a22_r.jpg" srcset="/img/loading.gif" lazyload alt="img">粗召回</p>
 <p><strong>常见召回策略总结:</strong></p>
-<p><img src="https://pic2.zhimg.com/v2-3be6ca250915a1553d08e8ce83646bcd_r.jpg" alt="img">召回策略</p>
-<p>简单的可以综合运用<strong>BM25</strong>和<strong>TF-IDF</strong>来进行论文的召回。比如，合并选取<strong>BM25</strong>召回的前<img src="https://www.zhihu.com/equation?tex=N_%7B1%7D" alt="[公式]"><strong>篇论文和TF-IDF召回的前</strong><img src="https://www.zhihu.com/equation?tex=N_%7B2%7D" alt="[公式]"><strong>篇论文，</strong>组成最终的召回论文。</p>
-<p><img src="https://pic3.zhimg.com/v2-1b12e86f6bfd9e6de84c9d1cc2091c92_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-3be6ca250915a1553d08e8ce83646bcd_r.jpg" srcset="/img/loading.gif" lazyload alt="img">召回策略</p>
+<p>简单的可以综合运用<strong>BM25</strong>和<strong>TF-IDF</strong>来进行论文的召回。比如，合并选取<strong>BM25</strong>召回的前<img src="https://www.zhihu.com/equation?tex=N_%7B1%7D" srcset="/img/loading.gif" lazyload alt="[公式]"><strong>篇论文和TF-IDF召回的前</strong><img src="https://www.zhihu.com/equation?tex=N_%7B2%7D" srcset="/img/loading.gif" lazyload alt="[公式]"><strong>篇论文，</strong>组成最终的召回论文。</p>
+<p><img src="https://pic3.zhimg.com/v2-1b12e86f6bfd9e6de84c9d1cc2091c92_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>实际生产环境中可以借助倒排索引(如下图)数据库支持线上实时查询，比如<strong>Elastic Search、Solr</strong>等。</p>
-<p><img src="https://pic3.zhimg.com/v2-aa55edf24309f7b32c7929eb13ec562e_r.jpg" alt="img">倒排索引</p>
+<p><img src="https://pic3.zhimg.com/v2-aa55edf24309f7b32c7929eb13ec562e_r.jpg" srcset="/img/loading.gif" lazyload alt="img">倒排索引</p>
 <p><strong>ES是工业界广泛使用的分布式全文搜索引擎，</strong>其内核是<strong>Lucene</strong>(<strong>一种单机的索引工具</strong>)<strong>。</strong></p>
-<p><img src="https://pic3.zhimg.com/v2-5a00e3df564fbbc9dc9d815bae6d9656_r.jpg" alt="img">ElasticSearch交互流程</p>
-<p><img src="https://pic1.zhimg.com/v2-341770a8267f249a5c6b8c37ae93dfe8_r.jpg" alt="img">ElasticSearch搜索过程</p>
+<p><img src="https://pic3.zhimg.com/v2-5a00e3df564fbbc9dc9d815bae6d9656_r.jpg" srcset="/img/loading.gif" lazyload alt="img">ElasticSearch交互流程</p>
+<p><img src="https://pic1.zhimg.com/v2-341770a8267f249a5c6b8c37ae93dfe8_r.jpg" srcset="/img/loading.gif" lazyload alt="img">ElasticSearch搜索过程</p>
 <p><strong>在使用前首先创建索引:</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def create_fields(self):</span><br><span class="line">    # base_url是ES服务器的地址</span><br><span class="line">    mapping_url = self.base_url + &#x27;/_mapping&#x27;</span><br><span class="line">    headers = &#123;&quot;Content-Type&quot;: &quot;application/json&quot;&#125;</span><br><span class="line">    # 索引配置文件</span><br><span class="line">    base_data = json.dumps(read_json(DATA_DIR + &#x27;setting.json&#x27;))</span><br><span class="line">    field_data = json.dumps(read_json(DATA_DIR + &#x27;fields.json&#x27;))</span><br><span class="line">    # 请求创建索引 </span><br><span class="line">    ret = requests.put(self.base_url, data=base_data, headers=headers)</span><br><span class="line">    if ret.status_code != 200:</span><br><span class="line">       raise Exception(&#x27;setting es error, &#123;&#125;&#x27;.format(ret.text))</span><br><span class="line">    </span><br><span class="line">    # 请求结果</span><br><span class="line">    ret = requests.put(mapping_url, data=field_data, headers=headers)</span><br><span class="line">    if ret.status_code != 200:</span><br><span class="line">       raise Exception(&#x27;create index error, &#123;&#125;&#x27;.format(ret.text))</span><br><span class="line">    self.logger.info(&#x27;create index success&#x27;)</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def create_fields(self):
+    # base_url是ES服务器的地址
+    mapping_url = self.base_url + '/_mapping'
+    headers = &#123;"Content-Type": "application/json"&#125;
+    # 索引配置文件
+    base_data = json.dumps(read_json(DATA_DIR + 'setting.json'))
+    field_data = json.dumps(read_json(DATA_DIR + 'fields.json'))
+    # 请求创建索引 
+    ret = requests.put(self.base_url, data=base_data, headers=headers)
+    if ret.status_code != 200:
+       raise Exception('setting es error, &#123;&#125;'.format(ret.text))
+    
+    # 请求结果
+    ret = requests.put(mapping_url, data=field_data, headers=headers)
+    if ret.status_code != 200:
+       raise Exception('create index error, &#123;&#125;'.format(ret.text))
+    self.logger.info('create index success')<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p><strong>配置文件内容:</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">setting.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;settings&quot;: &#123;</span><br><span class="line">    &quot;analysis&quot;: &#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;english_stop&quot;: &#123;</span><br><span class="line">          &quot;type&quot;: &quot;stop&quot;,</span><br><span class="line">          &quot;stopwords&quot;: &quot;_english_&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;english_keywords&quot;: &#123;</span><br><span class="line">          &quot;type&quot;: &quot;keyword_marker&quot;,</span><br><span class="line">          &quot;keywords&quot;: [</span><br><span class="line">            &quot;example&quot;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;english_stemmer&quot;: &#123;</span><br><span class="line">          &quot;type&quot;: &quot;stemmer&quot;,</span><br><span class="line">          &quot;language&quot;: &quot;english&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;english_possessive_stemmer&quot;: &#123;</span><br><span class="line">          &quot;type&quot;: &quot;stemmer&quot;,</span><br><span class="line">          &quot;language&quot;: &quot;possessive_english&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      # 在索引前先对文本做预处理,依次经过各个filter.</span><br><span class="line">      &quot;analyzer&quot;: &#123;</span><br><span class="line">        &quot;english_analyzer&quot;: &#123;</span><br><span class="line">          &quot;tokenizer&quot;: &quot;standard&quot;,</span><br><span class="line">          &quot;filter&quot;: [</span><br><span class="line">            # 代词词干化</span><br><span class="line">            &quot;english_possessive_stemmer&quot;,</span><br><span class="line">            # 小写化</span><br><span class="line">            &quot;lowercase&quot;,</span><br><span class="line">            # 去停用词</span><br><span class="line">            &quot;english_stop&quot;,</span><br><span class="line">            # 通用词干化</span><br><span class="line">            &quot;english_stemmer&quot;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;index&quot;: &#123;</span><br><span class="line">       # 召回阶段粗排序的相似度计算方法(这里是BM25算法)</span><br><span class="line">       &quot;similarity&quot; : &#123;</span><br><span class="line">           &quot;my_similarity&quot; : &#123;   // 自定义相关度算法名称</span><br><span class="line">                &quot;type&quot; : &quot;BM25&quot; ,// 相关度算法</span><br><span class="line">                &quot;b&quot; : &quot;0.75&quot;,</span><br><span class="line">                &quot;k1&quot; : &quot;1&quot;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">       # 索引分片数量</span><br><span class="line">      &quot;number_of_shards&quot;: 10,</span><br><span class="line">       # 索引分片副本数(用于提高并发量和安全性)</span><br><span class="line">      &quot;number_of_replicas&quot;: 2</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#索引中包含的字段(可以类比Mysql中的表结构)</span><br><span class="line">fields.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;properties&quot;: &#123;</span><br><span class="line">    &quot;paper_id&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;title&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">      &quot;analyzer&quot;: &quot;english_analyzer&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;abstract&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">      &quot;analyzer&quot;: &quot;english_analyzer&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;journal&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;keywords&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">      &quot;analyzer&quot;: &quot;english_analyzer&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;TA&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">      &quot;analyzer&quot;: &quot;english_analyzer&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;TAK&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">      &quot;analyzer&quot;: &quot;english_analyzer&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">setting.json
+
+&#123;
+  "settings": &#123;
+    "analysis": &#123;
+      "filter": &#123;
+        "english_stop": &#123;
+          "type": "stop",
+          "stopwords": "_english_"
+        &#125;,
+        "english_keywords": &#123;
+          "type": "keyword_marker",
+          "keywords": [
+            "example"
+          ]
+        &#125;,
+        "english_stemmer": &#123;
+          "type": "stemmer",
+          "language": "english"
+        &#125;,
+        "english_possessive_stemmer": &#123;
+          "type": "stemmer",
+          "language": "possessive_english"
+        &#125;
+      &#125;,
+      # 在索引前先对文本做预处理,依次经过各个filter.
+      "analyzer": &#123;
+        "english_analyzer": &#123;
+          "tokenizer": "standard",
+          "filter": [
+            # 代词词干化
+            "english_possessive_stemmer",
+            # 小写化
+            "lowercase",
+            # 去停用词
+            "english_stop",
+            # 通用词干化
+            "english_stemmer"
+          ]
+        &#125;
+      &#125;
+    &#125;,
+    "index": &#123;
+       # 召回阶段粗排序的相似度计算方法(这里是BM25算法)
+       "similarity" : &#123;
+           "my_similarity" : &#123;   // 自定义相关度算法名称
+                "type" : "BM25" ,// 相关度算法
+                "b" : "0.75",
+                "k1" : "1"
+              &#125;
+            &#125;
+        &#125;,
+       # 索引分片数量
+      "number_of_shards": 10,
+       # 索引分片副本数(用于提高并发量和安全性)
+      "number_of_replicas": 2
+    &#125;
+  &#125;
+&#125;
+
+
+#索引中包含的字段(可以类比Mysql中的表结构)
+fields.json
+&#123;
+  "properties": &#123;
+    "paper_id": &#123;
+      "type": "keyword"
+    &#125;,
+    "title": &#123;
+      "type": "text",
+      "analyzer": "english_analyzer"
+    &#125;,
+    "abstract": &#123;
+      "type": "text",
+      "analyzer": "english_analyzer"
+    &#125;,
+    "journal": &#123;
+      "type": "keyword"
+    &#125;,
+    "keywords": &#123;
+      "type": "text",
+      "analyzer": "english_analyzer"
+    &#125;,
+    "TA": &#123;
+      "type": "text",
+      "analyzer": "english_analyzer"
+    &#125;,
+    "TAK": &#123;
+      "type": "text",
+      "analyzer": "english_analyzer"
+    &#125;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p><strong>索引单个文档:</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">def index_doc(self, doc):</span><br><span class="line">    base_url = self.base_url + &#x27;/_doc/&#123;&#125;&#x27;</span><br><span class="line">    headers = &#123;&quot;Content-Type&quot;: &quot;application/json&quot;&#125;</span><br><span class="line">    # 构造文档字段 </span><br><span class="line">    url = base_url.format(doc[&#x27;paper_id&#x27;])</span><br><span class="line">    if doc[&#x27;keywords&#x27;] == &#x27;&#x27;:</span><br><span class="line">       doc[&#x27;keywords&#x27;] = []</span><br><span class="line">    else:</span><br><span class="line">       doc[&#x27;keywords&#x27;] = doc[&#x27;keywords&#x27;].split(&#x27;;&#x27;)</span><br><span class="line">    doc[&#x27;TA&#x27;] = doc.get(&#x27;title&#x27;, &#x27;&#x27;) + &#x27; &#x27; + doc.get(&#x27;abstract&#x27;, &#x27;&#x27;)</span><br><span class="line">    keyword_str = &#x27; &#x27;.join(doc[&#x27;keywords&#x27;]).lower()</span><br><span class="line">    if keyword_str:</span><br><span class="line">       doc[&#x27;TAK&#x27;] = doc[&#x27;TA&#x27;] + &#x27; &#x27; + keyword_str</span><br><span class="line">     else:</span><br><span class="line">       doc[&#x27;TAK&#x27;] = doc[&#x27;TA&#x27;]</span><br><span class="line">    if not doc[&#x27;paper_id&#x27;].strip():</span><br><span class="line">       return</span><br><span class="line"></span><br><span class="line">    input_str = json.dumps(doc)</span><br><span class="line">    if not input_str:</span><br><span class="line">        return</span><br><span class="line">    # 请求索引文档</span><br><span class="line">    try:</span><br><span class="line">        ret = requests.put(url, input_str, headers=headers)</span><br><span class="line">    except:</span><br><span class="line">        return</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def index_doc(self, doc):
+    base_url = self.base_url + '/_doc/&#123;&#125;'
+    headers = &#123;"Content-Type": "application/json"&#125;
+    # 构造文档字段 
+    url = base_url.format(doc['paper_id'])
+    if doc['keywords'] == '':
+       doc['keywords'] = []
+    else:
+       doc['keywords'] = doc['keywords'].split(';')
+    doc['TA'] = doc.get('title', '') + ' ' + doc.get('abstract', '')
+    keyword_str = ' '.join(doc['keywords']).lower()
+    if keyword_str:
+       doc['TAK'] = doc['TA'] + ' ' + keyword_str
+     else:
+       doc['TAK'] = doc['TA']
+    if not doc['paper_id'].strip():
+       return
+
+    input_str = json.dumps(doc)
+    if not input_str:
+        return
+    # 请求索引文档
+    try:
+        ret = requests.put(url, input_str, headers=headers)
+    except:
+        return<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p><strong>批量索引文档:</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def indexing_runner(self):</span><br><span class="line">   filename = CANDIDATE_FILENAME</span><br><span class="line">   pool = Pool(self.parallel_size)</span><br><span class="line">   start = time.time()</span><br><span class="line">   count = 0</span><br><span class="line">   failed_doc_list = []</span><br><span class="line">   # 并发索引文档</span><br><span class="line">   for item_chunk in get_chunk(read_jsonline_lazy(filename), 500):</span><br><span class="line">       ret = pool.map(self.index_doc, item_chunk)</span><br><span class="line">       failed_doc_list.extend([i for i in ret if i])</span><br><span class="line">       duration = time.time() - start</span><br><span class="line">       count += len(item_chunk)</span><br><span class="line">       msg = &#x27;&#123;&#125; completed, &#123;&#125;min &#123;:.2f&#125;s&#x27;.format(count, duration // 60, duration % 60)</span><br><span class="line">       self.logger.info(msg)</span><br><span class="line"></span><br><span class="line">   # 重新尝试失败的文档</span><br><span class="line">   for doc in failed_doc_list:</span><br><span class="line">       self.index_doc(doc)</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def indexing_runner(self):
+   filename = CANDIDATE_FILENAME
+   pool = Pool(self.parallel_size)
+   start = time.time()
+   count = 0
+   failed_doc_list = []
+   # 并发索引文档
+   for item_chunk in get_chunk(read_jsonline_lazy(filename), 500):
+       ret = pool.map(self.index_doc, item_chunk)
+       failed_doc_list.extend([i for i in ret if i])
+       duration = time.time() - start
+       count += len(item_chunk)
+       msg = '&#123;&#125; completed, &#123;&#125;min &#123;:.2f&#125;s'.format(count, duration // 60, duration % 60)
+       self.logger.info(msg)
+
+   # 重新尝试失败的文档
+   for doc in failed_doc_list:
+       self.index_doc(doc)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p><strong>以上对应如下步骤:</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-2d505d4635607c7238d2bf35a8c87283_r.jpg" alt="img"></p>
-<p>在索引以及数据<strong>Ready</strong>后，即可以根据用户输入的<strong>Query</strong>初步检索<img src="https://www.zhihu.com/equation?tex=N" alt="[公式]">个最相关的文档。</p>
+<p><img src="https://pic4.zhimg.com/v2-2d505d4635607c7238d2bf35a8c87283_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>在索引以及数据<strong>Ready</strong>后，即可以根据用户输入的<strong>Query</strong>初步检索<img src="https://www.zhihu.com/equation?tex=N" srcset="/img/loading.gif" lazyload alt="[公式]">个最相关的文档。</p>
 <p>同样用户输入的<strong>Query</strong>也需要经过预处理操作(<strong>分词</strong>-&gt;<strong>词干化(stem)-&gt;去停用词-&gt;去特殊字符-&gt;小写化</strong>)。同时为了避免由于用户输入错误导致索引中没有对应的词汇，进而导致的”<strong>零</strong>“召回问题，在这个阶段还可以做<strong>同义词扩展</strong>、<strong>Query</strong>纠错等处理。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">def search(self, text, cites_text, top_n, paper_keywords=None):</span><br><span class="line">    if not text:</span><br><span class="line">        raise ValueError(&#x27;input search text is empty&#x27;)</span><br><span class="line">    </span><br><span class="line">    # 抽取名词短语</span><br><span class="line">    noun_chunks = self.extractor.get_noun_chunk(cites_text)</span><br><span class="line">    noun_chunks = self.format_terms(noun_chunks)</span><br><span class="line">    noun_chunks = [&#x27;&quot;&#x27; + noun + &#x27;&quot;&#x27; for noun in noun_chunks]</span><br><span class="line">    # 抽取单个查询词</span><br><span class="line">    query_words = self.extractor.get_query_words(cites_text)</span><br><span class="line">    query_words = self.format_terms(query_words)</span><br><span class="line">    query_terms = noun_chunks + query_words</span><br><span class="line">    if not query_terms:</span><br><span class="line">        query_terms = self.extractor.get_query_words(text)</span><br><span class="line">        query_terms = self.format_terms(query_terms)</span><br><span class="line">    # 抽取重要词汇(TextRank重要度算法)</span><br><span class="line">    cites_keywords = self.extractor.textrank(cites_text, 15, window_size=2,    </span><br><span class="line">                                                 edge_weighting=&#x27;binary&#x27;)</span><br><span class="line">    # 合并所有词汇</span><br><span class="line">    query_terms = query_terms + cites_keywords</span><br><span class="line"></span><br><span class="line">    important_keywords = self.format_terms(self.extractor.get_query_words(text))</span><br><span class="line">    query_terms = query_terms + important_keywords</span><br><span class="line"></span><br><span class="line">    query_terms = [term for term in query_terms if term.strip()]</span><br><span class="line">    if not query_terms:</span><br><span class="line">      query_terms = self.format_terms([text])</span><br><span class="line"></span><br><span class="line">    # 构建ES查询字符串</span><br><span class="line">    query_dict = &#123;&#x27;TA&#x27;: query_terms&#125;</span><br><span class="line">    es_query_obj = self.build_es_query_string_object(query_dict, top_n)</span><br><span class="line">    ret = requests.post(self.search_url, json=es_query_obj, headers=self.headers)</span><br><span class="line">    searched_paper_id = []</span><br><span class="line">    if ret.status_code == 200:</span><br><span class="line">       # 这里是按照BM25排序的前N个最相似的结果</span><br><span class="line">       paper_list = ret.json()[&#x27;hits&#x27;][&#x27;hits&#x27;]</span><br><span class="line">       for doc in paper_list:</span><br><span class="line">           searched_paper_id.append(doc[&#x27;_id&#x27;])</span><br><span class="line">           if len(searched_paper_id) &lt; 3:</span><br><span class="line">             searched_paper_id = self.default_result</span><br><span class="line">    else:</span><br><span class="line">       print(&#x27;search error&#x27;, ret.text)</span><br><span class="line">    # 返回查询结果</span><br><span class="line">    return &#123;&#x27;docs&#x27;: searched_paper_id, &#x27;keywords&#x27;: query_terms&#125;</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def search(self, text, cites_text, top_n, paper_keywords=None):
+    if not text:
+        raise ValueError('input search text is empty')
+    
+    # 抽取名词短语
+    noun_chunks = self.extractor.get_noun_chunk(cites_text)
+    noun_chunks = self.format_terms(noun_chunks)
+    noun_chunks = ['"' + noun + '"' for noun in noun_chunks]
+    # 抽取单个查询词
+    query_words = self.extractor.get_query_words(cites_text)
+    query_words = self.format_terms(query_words)
+    query_terms = noun_chunks + query_words
+    if not query_terms:
+        query_terms = self.extractor.get_query_words(text)
+        query_terms = self.format_terms(query_terms)
+    # 抽取重要词汇(TextRank重要度算法)
+    cites_keywords = self.extractor.textrank(cites_text, 15, window_size=2,    
+                                                 edge_weighting='binary')
+    # 合并所有词汇
+    query_terms = query_terms + cites_keywords
 
-<p><img src="https://pic3.zhimg.com/v2-27f251f326a1c736c87479f3074d1732_r.jpg" alt="img"></p>
+    important_keywords = self.format_terms(self.extractor.get_query_words(text))
+    query_terms = query_terms + important_keywords
+
+    query_terms = [term for term in query_terms if term.strip()]
+    if not query_terms:
+      query_terms = self.format_terms([text])
+
+    # 构建ES查询字符串
+    query_dict = &#123;'TA': query_terms&#125;
+    es_query_obj = self.build_es_query_string_object(query_dict, top_n)
+    ret = requests.post(self.search_url, json=es_query_obj, headers=self.headers)
+    searched_paper_id = []
+    if ret.status_code == 200:
+       # 这里是按照BM25排序的前N个最相似的结果
+       paper_list = ret.json()['hits']['hits']
+       for doc in paper_list:
+           searched_paper_id.append(doc['_id'])
+           if len(searched_paper_id) &lt; 3:
+             searched_paper_id = self.default_result
+    else:
+       print('search error', ret.text)
+    # 返回查询结果
+    return &#123;'docs': searched_paper_id, 'keywords': query_terms&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><img src="https://pic3.zhimg.com/v2-27f251f326a1c736c87479f3074d1732_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>上述过程只是拿到了文章的id，接下来还需要再次访问搜索引擎获取文章的详情用于构建Rerank阶段所<strong>需要的特征，</strong>如下代码。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def get_paper(paper_id):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    get paper content from elastic search index</span><br><span class="line">    :param paper_id:</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    url = ES_API_URL + &#x27;/_doc/&#123;&#125;&#x27;.format(paper_id)</span><br><span class="line">    ret = requests.get(url)</span><br><span class="line">    if ret.ok:</span><br><span class="line">        paper = ret.json()[&#x27;_source&#x27;]</span><br><span class="line">        return paper</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def get_paper(paper_id):
+    """
+    get paper content from elastic search index
+    :param paper_id:
+    :return:
+    """
+    url = ES_API_URL + '/_doc/&#123;&#125;'.format(paper_id)
+    ret = requests.get(url)
+    if ret.ok:
+        paper = ret.json()['_source']
+        return paper<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -703,19 +1095,40 @@
 <p><a href="https://link.zhihu.com/?target=https://segmentfault.com/a/1190000019630099">https://segmentfault.com/a/1190000019630099</a></p>
 <p>2.Elasticsearch权威指南</p>
 <p><a href="https://link.zhihu.com/?target=https://www.cntofu.com/book/40/stemming.html">https://www.cntofu.com/book/40/stemming.html</a></p>
-<h2 id="3-重排序阶段"><a href="#3-重排序阶段" class="headerlink" title="3).重排序阶段"></a><strong>3).重排序阶段</strong></h2><p>精排阶段基于<strong>Learning to Rank</strong>的思想进行设计，从<strong>粗召回阶段的候选集</strong>中挑选出最优的<img src="https://www.zhihu.com/equation?tex=K" alt="[公式]">个最终结果。重排序的策略伪代码如下:</p>
-<p><img src="https://pic1.zhimg.com/v2-cec54e62b72d7a9ffac5755c239404d4_r.jpg" alt="img"></p>
-<p>核心是<img src="https://www.zhihu.com/equation?tex=f(d,q)" alt="[公式]">的设计，也就是我们前面讲过的各种模型(<strong>Pointwise、Pairwise等</strong>)。</p>
+<h2 id="3-重排序阶段"><a href="#3-重排序阶段" class="headerlink" title="3).重排序阶段"></a><strong>3).重排序阶段</strong></h2><p>精排阶段基于<strong>Learning to Rank</strong>的思想进行设计，从<strong>粗召回阶段的候选集</strong>中挑选出最优的<img src="https://www.zhihu.com/equation?tex=K" srcset="/img/loading.gif" lazyload alt="[公式]">个最终结果。重排序的策略伪代码如下:</p>
+<p><img src="https://pic1.zhimg.com/v2-cec54e62b72d7a9ffac5755c239404d4_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>核心是<img src="https://www.zhihu.com/equation?tex=f(d,q)" srcset="/img/loading.gif" lazyload alt="[公式]">的设计，也就是我们前面讲过的各种模型(<strong>Pointwise、Pairwise等</strong>)。</p>
 <p>在模型<strong>Rerank</strong>打分前需要根据用户输入的<strong>Query(<strong>query</strong>)<strong>和召回的文档列表([doc1,doc2,doc3,doc4…])构造特征。分为</strong>Pointwise</strong>和<strong>Pairwise</strong>两种:</p>
 <ul>
 <li>Pointwise模式构造的样本形式为:<strong>&lt;query,doc,label&gt;(线上预测时没有label).</strong></li>
 <li>Pairwise 模式构造的样本形式为:<strong>&lt;query,doc1,doc2,label&gt;(线上预测时没有label).</strong></li>
 </ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def build_batch(search_item):</span><br><span class="line">    qd_pairs = []</span><br><span class="line">    desc_id = search_item[&#x27;description_id&#x27;]</span><br><span class="line">    if desc_id in searched_ids:</span><br><span class="line">        return [[]]</span><br><span class="line"></span><br><span class="line">    query_text = desc_id2item[desc_id][self.args.query_field]</span><br><span class="line">    if self.args.rerank_model_name == &#x27;pairwise&#x27;:</span><br><span class="line">        docs = search_item[&#x27;docs&#x27;][:topk]</span><br><span class="line">        for i, doc_id in enumerate(docs):</span><br><span class="line">              #构造&lt;query,doc1,doc2&gt;</span><br><span class="line">              for p_doc_id in docs[:i] + docs[i+1:]:</span><br><span class="line">                  raw_item = &#123;&#x27;description_id&#x27;: desc_id,</span><br><span class="line">                      &#x27;query&#x27;: query_text, &#x27;first_doc_id&#x27;: doc_id,</span><br><span class="line">                       &#x27;second_doc_id&#x27;:p_doc_id&#125;</span><br><span class="line">                  qd_pairs.append(raw_item)          </span><br><span class="line">        else:    </span><br><span class="line">              #构造&lt;query,doc&gt;</span><br><span class="line">              for doc_id in search_item[&#x27;docs&#x27;][:topk]:</span><br><span class="line">                  raw_item = &#123;&#x27;description_id&#x27;: desc_id,</span><br><span class="line">                                    &#x27;query&#x27;: query_text, &#x27;doc_id&#x27;: doc_id&#125;</span><br><span class="line">                  qd_pairs.append(raw_item)</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def build_batch(search_item):
+    qd_pairs = []
+    desc_id = search_item['description_id']
+    if desc_id in searched_ids:
+        return [[]]
+
+    query_text = desc_id2item[desc_id][self.args.query_field]
+    if self.args.rerank_model_name == 'pairwise':
+        docs = search_item['docs'][:topk]
+        for i, doc_id in enumerate(docs):
+              #构造&lt;query,doc1,doc2>
+              for p_doc_id in docs[:i] + docs[i+1:]:
+                  raw_item = &#123;'description_id': desc_id,
+                      'query': query_text, 'first_doc_id': doc_id,
+                       'second_doc_id':p_doc_id&#125;
+                  qd_pairs.append(raw_item)          
+        else:    
+              #构造&lt;query,doc>
+              for doc_id in search_item['docs'][:topk]:
+                  raw_item = &#123;'description_id': desc_id,
+                                    'query': query_text, 'doc_id': doc_id&#125;
+                  qd_pairs.append(raw_item)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>关于<strong>label</strong>的确定，正样本为<strong>1</strong>，负样本为<strong>0。</strong></p>
-<p><img src="https://pic2.zhimg.com/v2-813a7a68b0d957d7c28ae43cba9cb8f9_r.jpg" alt="img">训练样本</p>
-<p>在本问题中，正样本可由上面提供的训练样本<img src="https://www.zhihu.com/equation?tex=%3Cdescription%5C_id,paper%5C_id%3E" alt="[公式]">构造，而负样本的构造可以根据训练集提供的<img src="https://www.zhihu.com/equation?tex=description%5C_id" alt="[公式]">随机从论文全集中选取<img src="https://www.zhihu.com/equation?tex=paper%5C_id" alt="[公式]">。</p>
+<p><img src="https://pic2.zhimg.com/v2-813a7a68b0d957d7c28ae43cba9cb8f9_r.jpg" srcset="/img/loading.gif" lazyload alt="img">训练样本</p>
+<p>在本问题中，正样本可由上面提供的训练样本<img src="https://www.zhihu.com/equation?tex=%3Cdescription%5C_id,paper%5C_id%3E" srcset="/img/loading.gif" lazyload alt="[公式]">构造，而负样本的构造可以根据训练集提供的<img src="https://www.zhihu.com/equation?tex=description%5C_id" srcset="/img/loading.gif" lazyload alt="[公式]">随机从论文全集中选取<img src="https://www.zhihu.com/equation?tex=paper%5C_id" srcset="/img/loading.gif" lazyload alt="[公式]">。</p>
 <p>在推荐搜索排序中负样本的采样是至关重要的，可以参考以下文章:</p>
 <p><strong>1.推荐系统正负样本的划分和采样，如何做更合理？</strong></p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/334844408">https://www.zhihu.com/question/334844408</a></p>
@@ -728,16 +1141,60 @@
 <p><strong>3.1 树模型</strong></p>
 <p>基于树(<strong>Xgboost</strong>、<strong>lightGBM</strong>)的方案需要特征工程的配合。在我们实践中，特征主要包括<strong>统计特征</strong>(包括F1EXP、F2EXP、TFIDF、BM25等)、<strong>Embedding</strong>类特征(包括<strong>Glove</strong>、<strong>Doc2vec</strong>等)和<strong>Ranking Features</strong>(召回阶段的排序序列特征），并且这些特征分别从<strong>标题、摘要、关键词</strong>等多个维度进行抽取，最终构建成特征集合。</p>
 <p>一篇文档由abstract、description、title等部分组成，计算用户Query与文档每个部分的相似性度量，比如 TF-IDF、BM25、Cosin相似度、编辑距离、Embedding相似度等。</p>
-<p><img src="https://pic4.zhimg.com/v2-56198e622086183a34253af569ecb333_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-56198e622086183a34253af569ecb333_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>详细代码可以参考:</strong></p>
 <p><a href="https://link.zhihu.com/?target=https://github.com/myeclipse/wsdm_cup_2020_solution/blob/master/rank/get_features.py">https://github.com/myeclipse/wsdm_cup_2020_solution&#x2F;blob&#x2F;master&#x2F;rank&#x2F;get_features.py</a></p>
 <p><strong>Pointwise的训练代码如下:</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># lightGBM训练</span><br><span class="line">def lgb_train(train_x,train_y,valid_x,valid_y,group_train,group_valid):</span><br><span class="line">    params = &#123;</span><br><span class="line">        &#x27;boosting_type&#x27;: &#x27;gbdt&#x27;,</span><br><span class="line">        &#x27;objective&#x27; : &#x27;rank:logistic&#x27;,</span><br><span class="line">        &#x27;metric&#x27;: &#x27;map&#x27;,</span><br><span class="line">        &#x27;num_leaves&#x27;:64,</span><br><span class="line">        &#x27;lambda_l1&#x27;:1,</span><br><span class="line">        &#x27;lambda_l2&#x27;:0.1,</span><br><span class="line">        &#x27;max_depth&#x27;: -1,</span><br><span class="line">        &#x27;learning_rate&#x27;: 0.1,</span><br><span class="line">        &#x27;min_child_samples&#x27;:5,</span><br><span class="line">        &#x27;feature_fraction&#x27;: 0.8,</span><br><span class="line">        &#x27;bagging_fraction&#x27;: 0.8,</span><br><span class="line">        &#x27;random_state&#x27;:2019,</span><br><span class="line">        &#x27;num_threads&#x27;:30</span><br><span class="line">    &#125;</span><br><span class="line">    lgb_train = lgb.Dataset(train_x,label=train_y,group=group_train,)</span><br><span class="line">    lgb_validate = lgb.Dataset(valid_x, valid_y, reference=lgb_train,group=group_valid)</span><br><span class="line">    model = lgb.train(params, lgb_train, valid_sets=(lgb_train,lgb_validate), num_boost_round=4000, early_stopping_rounds=100,verbose_eval=100)</span><br><span class="line">    return model</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text"># lightGBM训练
+def lgb_train(train_x,train_y,valid_x,valid_y,group_train,group_valid):
+    params = &#123;
+        'boosting_type': 'gbdt',
+        'objective' : 'rank:logistic',
+        'metric': 'map',
+        'num_leaves':64,
+        'lambda_l1':1,
+        'lambda_l2':0.1,
+        'max_depth': -1,
+        'learning_rate': 0.1,
+        'min_child_samples':5,
+        'feature_fraction': 0.8,
+        'bagging_fraction': 0.8,
+        'random_state':2019,
+        'num_threads':30
+    &#125;
+    lgb_train = lgb.Dataset(train_x,label=train_y,group=group_train,)
+    lgb_validate = lgb.Dataset(valid_x, valid_y, reference=lgb_train,group=group_valid)
+    model = lgb.train(params, lgb_train, valid_sets=(lgb_train,lgb_validate), num_boost_round=4000, early_stopping_rounds=100,verbose_eval=100)
+    return model<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p><strong>3.2</strong> <strong>Bert模型</strong></p>
 <p>Bert原始的论文证明了，Bert预训练对几乎所有类型<strong>NLP</strong>任务(生成模型除外)都有明显促进作用。从头开始训练Bert是非常耗费资源的，通常可以基于预训练的Bert模型做<strong>Fine-tuning</strong>从而适应各类NLP任务<strong>。</strong></p>
-<p><img src="https://pic3.zhimg.com/v2-78c1ecb199522bb094f3faea5778f2b6_r.jpg" alt="img">Bert语义相似度模型</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">def get_model():</span><br><span class="line">    # 加载预训练模型</span><br><span class="line">    bert_model = load_trained_model_from_checkpoint(config_path, checkpoint_path)</span><br><span class="line">    for l in bert_model.layers:</span><br><span class="line">        l.trainable = True</span><br><span class="line">    # Query特征</span><br><span class="line">    T1 = Input(shape=(None,))</span><br><span class="line">    # Document特征</span><br><span class="line">    T2 = Input(shape=(None,))</span><br><span class="line">    </span><br><span class="line">    # 模型输入</span><br><span class="line">    T = bert_model([T1, T2])</span><br><span class="line">    T = Lambda(lambda x: x[:, 0])(T)</span><br><span class="line">    </span><br><span class="line">    # 模型输出(Fine-tuning)</span><br><span class="line">    output = Dense(n_class, activation=&#x27;softmax&#x27;)(T)</span><br><span class="line">    </span><br><span class="line">    # 模型编译</span><br><span class="line">    model = Model([T1, T2], output)</span><br><span class="line">    model.compile(</span><br><span class="line">        loss=&#x27;categorical_crossentropy&#x27;,</span><br><span class="line">        optimizer=Adam(1e-5),  # 用足够小的学习率</span><br><span class="line">        metrics=[&#x27;accuracy&#x27;]</span><br><span class="line">    )</span><br><span class="line">    return model</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-78c1ecb199522bb094f3faea5778f2b6_r.jpg" srcset="/img/loading.gif" lazyload alt="img">Bert语义相似度模型</p>
+<div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">def get_model():
+    # 加载预训练模型
+    bert_model = load_trained_model_from_checkpoint(config_path, checkpoint_path)
+    for l in bert_model.layers:
+        l.trainable = True
+    # Query特征
+    T1 = Input(shape=(None,))
+    # Document特征
+    T2 = Input(shape=(None,))
+    
+    # 模型输入
+    T = bert_model([T1, T2])
+    T = Lambda(lambda x: x[:, 0])(T)
+    
+    # 模型输出(Fine-tuning)
+    output = Dense(n_class, activation='softmax')(T)
+    
+    # 模型编译
+    model = Model([T1, T2], output)
+    model.compile(
+        loss='categorical_crossentropy',
+        optimizer=Adam(1e-5),  # 用足够小的学习率
+        metrics=['accuracy']
+    )
+    return model<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>Bert模型也存在诸多问题。首先BERT模型的输入最大为512个字符，对于数据中的部分长语料需要进行截断处理，这就损失了文本中的<strong>部分语义信息</strong>；其次，本任务中语料多来自科学论文，跟已有的预训练模型还是存在偏差，这也在一定程度上限制了模型对数据的表征能力。最后，BERT模型网络结构较为复杂，在运行效率上不占优势。</p>
 <p><strong>参考文章</strong></p>
@@ -816,189 +1273,231 @@
 <p>45.深度时空网络、记忆网络与特征表达学习在 CTR 预估中的应用</p>
 <p><a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s/A_YkSoWjhvsP_vLtlk7kMg">https://mp.weixin.qq.com/s/A_YkSoWjhvsP_vLtlk7kMg</a></p>
 <h2 id="6-其他补充"><a href="#6-其他补充" class="headerlink" title="6.其他补充"></a><strong>6.其他补充</strong></h2><p><strong>6.1 多模型融合</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-b975e3d8a4d51ceb798428f3a160fbb3_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-b975e3d8a4d51ceb798428f3a160fbb3_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>6.2 Attention Pooling</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-1d83d8ee8502aef70e9f03c3301d788f_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-1d83d8ee8502aef70e9f03c3301d788f_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>6.3 DNN+Embedding</strong></p>
-<p><img src="https://pic4.zhimg.com/v2-952c9def612aa120e55b9204dc9a5bb7_r.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-952c9def612aa120e55b9204dc9a5bb7_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>6.4 Learn to Display</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-e336fdd6eab4467e0df0e9ff655e85c0_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-e336fdd6eab4467e0df0e9ff655e85c0_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>一般的排序模型只是给单独一个文档算分，然后按照分数大小排序。但在个性化排序中，如果两个商品比较相似，得分也会比较相似，会导致排序结果中部分结果是趋同的，多元性差。Learn to Display主要是解决这个问题，核心思路是根据已经排好序的商品预测下一个商品的分数，这里我们是用LSTM对已经排好序的商品做表征，用beam search生产排序序列。</p>
 <p><strong>6.5 多模态信息融合</strong></p>
 <p><strong>文本+图像+…</strong></p>
-<p><img src="https://pic3.zhimg.com/v2-e45354e0c95cc3c3280531e7d2a11542_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-e45354e0c95cc3c3280531e7d2a11542_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><strong>6.6 多目标融合</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-709c6d39152ea6dd671c1ebcbfd34d24_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-709c6d39152ea6dd671c1ebcbfd34d24_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>推荐场景上的优化目标要综合考虑用户的<strong>点击率</strong>和<strong>下单率</strong>。在过去我们使用XGBoost进行单目标训练的时候，通过把点击的样本和下单的样本都作为正样本，并对下单的样本进行上采样或者加权，来平衡点击率和下单率。但这种样本的加权方式也会有一些缺点，例如调整下单权重或者采样率的成本较高，每次调整都需要重新训练，并且对于模型来说较难用同一套参数来表达这两种混合的样本分布。针对上述问题，可以利用DNN灵活的网络结构引入了<strong>Multi-task</strong>训练。</p>
 <p>根据业务目标，把<strong>点击率</strong>和<strong>下单率</strong>拆分出来，形成两个独立的训练目标，分别建立各自的<strong>Loss Function</strong>，作为对模型训练的监督和指导。DNN网络的前几层作为共享层，点击任务和下单任务共享其表达，并在BP阶段根据两个任务算出的梯度共同进行参数更新。网络在最后一个全连接层进行拆分，单独学习对应Loss的参数，从而更好地专注于拟合各自Label的分布。</p>
 <p><strong>6.7 Transformer</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-65e93d4a86f248dc6b768c7804ffd280_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-65e93d4a86f248dc6b768c7804ffd280_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>6.8 Transformer(<strong>Behavior Sequence Transformer for E-commerce Recommendation in Alibaba</strong>)</p>
-<p><img src="https://pic3.zhimg.com/v2-1f366eed4122022193b9a152971db5fa_r.jpg" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-1f366eed4122022193b9a152971db5fa_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>6.9 <strong>Deep Spatio-Temporal Neural Networks for Click-Through Rate Prediction</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-3dd7f9171dd878096a3fb5c57575d56c_r.jpg" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-3dd7f9171dd878096a3fb5c57575d56c_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>输入包括目标<strong>广告信息</strong>、<strong>上下文广告信息</strong>、<strong>点击广告信息</strong>、<strong>曝光未点击广告信息</strong>，经过 <strong>embedding</strong>层，然后有两种<strong>attention</strong>方式，第一种是<strong>self-attention</strong>方式:</p>
-<p><img src="https://pic2.zhimg.com/v2-138e726ad05aae5fa8ad7eac1330b881_r.jpg" alt="img"></p>
-<p>其实就是比如上下文的<strong>embedding</strong>表示<img src="https://www.zhihu.com/equation?tex=x_%7Bci%7D" alt="[公式]">输入到一个函数<img src="https://www.zhihu.com/equation?tex=f" alt="[公式]">中，得到标量输出<img src="https://www.zhihu.com/equation?tex=%CE%B2_%7Bci%7D" alt="[公式]">，然后通过<strong>softmax</strong>将每个上下文<strong>item</strong>的权重归一化到0-1之间，随后基于权重进行加权求和。缺点就是没有考虑<img src="https://www.zhihu.com/equation?tex=target%5C_ad" alt="[公式]">的信息。</p>
-<p>另外一种 <strong>attention</strong> 方式是交互式的，并且加入了目标广告的信息<img src="https://www.zhihu.com/equation?tex=x_%7Bt%7D" alt="[公式]">：</p>
-<p><img src="https://pic4.zhimg.com/v2-e3cd0372ca57c04ea7afc7338954752f_r.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-138e726ad05aae5fa8ad7eac1330b881_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>其实就是比如上下文的<strong>embedding</strong>表示<img src="https://www.zhihu.com/equation?tex=x_%7Bci%7D" srcset="/img/loading.gif" lazyload alt="[公式]">输入到一个函数<img src="https://www.zhihu.com/equation?tex=f" srcset="/img/loading.gif" lazyload alt="[公式]">中，得到标量输出<img src="https://www.zhihu.com/equation?tex=%CE%B2_%7Bci%7D" srcset="/img/loading.gif" lazyload alt="[公式]">，然后通过<strong>softmax</strong>将每个上下文<strong>item</strong>的权重归一化到0-1之间，随后基于权重进行加权求和。缺点就是没有考虑<img src="https://www.zhihu.com/equation?tex=target%5C_ad" srcset="/img/loading.gif" lazyload alt="[公式]">的信息。</p>
+<p>另外一种 <strong>attention</strong> 方式是交互式的，并且加入了目标广告的信息<img src="https://www.zhihu.com/equation?tex=x_%7Bt%7D" srcset="/img/loading.gif" lazyload alt="[公式]">：</p>
+<p><img src="https://pic4.zhimg.com/v2-e3cd0372ca57c04ea7afc7338954752f_r.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95-LTR-%E6%8E%92%E5%BA%8F-%E6%94%B6%E8%97%8F-%E7%9F%A5%E4%B9%8E/">算法,LTR,排序,收藏,知乎</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/03/java%E4%B8%AD%E7%9A%84time/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">java中的time</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/03/%E8%AF%A6%E8%A7%A3%E8%AE%A9%E6%97%A0%E6%95%B0%E4%BA%BA%E9%A1%BF%E6%82%9F%E7%9A%84%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/">
+                        <span class="hidden-mobile">详解让无数人顿悟的熵增定律</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
-        <!--添加编辑 常飞-->
-        <a href="https://github.com/koderBoy/blog/edit/master/source/_posts/策略算法工程师之路-排序模型-LTR-及应用.md" target="_blank">编辑</a>
-        <!--添加编辑-->
-</article>
-
-
-
-    <!--添加高亮代码 常飞-->
-    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-    </script>
-    <!--添加高亮代码-->
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/search">搜索</a></li>
-        
-      </ul>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">策略算法工程师之路-排序模型(LTR)及应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">1.简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Pointwise%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">**2.**Pointwise类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.</span> <span class="toc-text">实例介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-10-%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E4%B9%8BDIEN%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">2.10 深度模型之DIEN模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B4%E8%B6%A3%E6%8A%BD%E5%8F%96%E6%A8%A1%E5%9D%97"><span class="toc-number">1.5.</span> <span class="toc-text">什么是兴趣抽取模块?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%B4%E8%B6%A3%E6%BC%94%E5%8C%96%E6%A8%A1%E5%9D%97"><span class="toc-number">1.6.</span> <span class="toc-text">什么是兴趣演化模块?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Pairwise%E7%B1%BB"><span class="toc-number">1.7.</span> <span class="toc-text">3.Pairwise类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.8.</span> <span class="toc-text">4.特征工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B-%E8%AE%BA%E6%96%87%E6%A3%80%E7%B4%A2%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.9.</span> <span class="toc-text">5.应用示例-论文检索系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%A8%80%E4%B9%8B%EF%BC%8C%E4%BE%9D%E6%8D%AE%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5Query%E4%BB%8E%E5%80%99%E9%80%89Documents%E4%B8%AD%E6%89%BE%E5%87%BATop-N%E4%B8%AA%E6%9C%80%E7%9B%B8%E5%85%B3%E7%9A%84Documents%EF%BC%8C%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF-%E6%96%87%E6%9C%AC%E8%AF%AD%E4%B9%89%E7%90%86%E8%A7%A3-%E6%90%9C%E7%B4%A2%E6%8E%92%E5%BA%8F%E3%80%82%E6%AF%94%E5%A6%82%E4%BB%A5%E4%B8%8B%E4%BE%8B%E5%AD%90"><span class="toc-number">1.10.</span> <span class="toc-text">简言之，依据用户输入Query从候选Documents中找出Top N个最相关的Documents，核心技术:文本语义理解+搜索排序。比如以下例子:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E6%B3%95%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%A6%82%E4%B8%8B"><span class="toc-number">1.11.</span> <span class="toc-text">问题解法的系统架构如下:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5"><span class="toc-number">1.12.</span> <span class="toc-text">1).数据探查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%B2%97%E5%8F%AC%E5%9B%9E%E9%98%B6%E6%AE%B5"><span class="toc-number">1.13.</span> <span class="toc-text">2).粗召回阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%87%8D%E6%8E%92%E5%BA%8F%E9%98%B6%E6%AE%B5"><span class="toc-number">1.14.</span> <span class="toc-text">3).重排序阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96%E8%A1%A5%E5%85%85"><span class="toc-number">1.15.</span> <span class="toc-text">6.其他补充</span></a></li></ol></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&text=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&is_video=false&description=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=策略算法工程师之路-排序模型(LTR)及应用&body=Check out this article: https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&title=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&name=策略算法工程师之路-排序模型(LTR)及应用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://koderboy.github.io/2022/06/03/%E7%AD%96%E7%95%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-LTR-%E5%8F%8A%E5%BA%94%E7%94%A8/&t=策略算法工程师之路-排序模型(LTR)及应用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
+      </div>
+    
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+<!-- Custom -->
+
+
     
+
     
-    2015-2022
-    koderboy
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a href="/search">搜索</a></li><!--
-     -->
-      </ul>
-    </nav>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
+
+  
+
+  
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
+  <!-- SCRIPTS -->
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
-      e.clearSelection();
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
+<!-- Plugins -->
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
+  <script  src="/js/local-search.js" ></script>
 
-  <script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Umami Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>
