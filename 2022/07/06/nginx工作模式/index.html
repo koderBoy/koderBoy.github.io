@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="koderboy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Nginx是一款轻量级的Web服务器、反向代理服务器，由于它的内存占用少（一个worker进程只占用10-12M内存），启动极快，高并发能力强，在互联网项目中广泛应用。  上图基本上说明了当下流行的技术架构，其中Nginx有点入口网关的味道。 代理服务器经常听人说到一些术语，如反向代理，那么什么是反向代理，什么又是正向代理呢？下面是一个简单的总结。 正向代理由于防火墙的原因，我们并不能直接访问谷歌">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx工作模式">
+<meta property="og:url" content="https://koderboy.github.io/2022/07/06/nginx%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="VOYAGE">
+<meta property="og:description" content="Nginx是一款轻量级的Web服务器、反向代理服务器，由于它的内存占用少（一个worker进程只占用10-12M内存），启动极快，高并发能力强，在互联网项目中广泛应用。  上图基本上说明了当下流行的技术架构，其中Nginx有点入口网关的味道。 代理服务器经常听人说到一些术语，如反向代理，那么什么是反向代理，什么又是正向代理呢？下面是一个简单的总结。 正向代理由于防火墙的原因，我们并不能直接访问谷歌">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5fd9755ee52d4146827ddf5eed3ca021?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/98a022c2b5c84f3894f6854f2a592eda?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/91dfd4ec8a78492dbc4ed5b7de996d56?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ad827fb800fa44769e54739b45ab1f65?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/fb943c5575fc4b94a4848f298281289c?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/ac4eba1ec32342e38d310c2472c90a00?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/658d2862227142e0b6d42799e24d5be9?from=pc">
+<meta property="og:image" content="https://p3.toutiaoimg.com/origin/pgc-image/dc3464ec247e4546ae91f4ba8acfc816?from=pc">
+<meta property="article:published_time" content="2022-07-06T14:30:16.000Z">
+<meta property="article:modified_time" content="2022-07-06T06:41:16.030Z">
+<meta property="article:author" content="koderboy">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="代理">
+<meta property="article:tag" content="反向代理">
+<meta property="article:tag" content="负责均衡">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://p3.toutiaoimg.com/origin/pgc-image/5fd9755ee52d4146827ddf5eed3ca021?from=pc">
+  
+  
+  <title>nginx工作模式 - VOYAGE</title>
+
+  <link  rel="stylesheet" href="https://unpkg.zhimg.com/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+          
+          
+        
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/themes/prism-twilight.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.27.0/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"koderboy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"enable","baidu":"0cb769c811cfb8d1b68f0bef537c19db","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 30vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Voyage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" false
+         style="background: url('/img/cover_write.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="nginx工作模式">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-06 14:30" pubdate>
+        2022年7月6日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">nginx工作模式</h1>
+            
+            <div class="markdown-body">
+              <p>Nginx是一款轻量级的Web服务器、反向代理服务器，由于它的内存占用少（一个worker进程只占用10-12M内存），启动极快，高并发能力强，在互联网项目中广泛应用。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/5fd9755ee52d4146827ddf5eed3ca021?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>上图基本上说明了当下流行的技术架构，其中Nginx有点入口网关的味道。</p>
+<h1 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h1><p>经常听人说到一些术语，如反向代理，那么什么是反向代理，什么又是正向代理呢？下面是一个简单的总结。</p>
+<h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a><strong>正向代理</strong></h2><p>由于防火墙的原因，我们并不能直接访问谷歌，那么我们可以借助VPN来实现，这就是一个简单的正向代理的例子。这里你能够发现，正向代理“代理”的是客户端，而且客户端是知道目标的，而目标是不知道客户端是通过VPN访问的。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/98a022c2b5c84f3894f6854f2a592eda?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>正向代理示意图</p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a><strong>反向代理</strong></h2><p>当我们在外网访问百度的时候，其实会进行一个转发，代理到内网去，这就是所谓的反向代理，即反向代理“代理”的是服务器端，而且这一个过程对于客户端而言是透明的。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/91dfd4ec8a78492dbc4ed5b7de996d56?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>反向代理示意图</p>
+<p><strong>Nginx的Master-Worker模式</strong></p>
+<p>要启动nginx，只需要输入命nginx，其中xxx是你nginx的安装目录。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ad827fb800fa44769e54739b45ab1f65?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>nginx进程</p>
+<p>启动Nginx后，其实就是在80端口启动了Socket服务进行监听，如图所示，Nginx涉及Master进程和Worker进程。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/fb943c5575fc4b94a4848f298281289c?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>Master-Worker模式</p>
+<p>Master进程的作用：读取并验证配置文件nginx.conf；管理worker进程；</p>
+<p>Worker进程的作用：每一个Worker进程都维护一个线程（避免线程切换），处理连接和请求；注意Worker进程的个数由配置文件决定，一般和CPU个数相关（有利于进程切换），配置几个就有几个Worker进程，上面的例子只有1个Worker进程。</p>
+<p><strong>思考1：Nginx如何做到热部署？</strong></p>
+<p>所谓热部署，就是配置文件nginx.conf修改后，不需要stop Nginx，不需要中断请求，就能让配置文件生效！（nginx -s reload 重新加载&#x2F;nginx -t检查配置&#x2F;nginx -s stop）</p>
+<p>通过上文我们已经知道worker进程负责处理具体的请求，那么如果想达到热部署的效果，可以想象：</p>
+<p>方案一：修改配置文件nginx.conf后，主进程master负责推送给worker进程更新配置信息，worker进程收到信息后，更新进程内部的线程信息。</p>
+<p>方案二：修改配置文件nginx.conf后，重新生成新的worker进程，当然会以新的配置进行处理，而且新的请求都必须交给新的worker进程，至于老worker进程，等把那些以前的请求处理完毕，kill掉即可。</p>
+<p>Nginx采用的就是方案二来达到热部署的！</p>
+<p><strong>思考2：Nginx如何做到高并发下的高效处理？</strong></p>
+<p>上文已经提及Nginx的worker进程个数与CPU绑定、worker进程内部包含一个线程高效回环处理请求，这的确有助于效率，但这是不够的。</p>
+<p>作为专业的程序员，我们可以开一下脑洞：BIO&#x2F;NIO&#x2F;AIO、异步&#x2F;同步、阻塞&#x2F;非阻塞…</p>
+<p>要同时处理那么多的请求，要知道，有的请求需要发生IO，可能需要很长时间，如果等着它，就会拖慢worker的处理速度。</p>
+<p>Nginx采用了Linux的epoll模型，epoll模型基于事件驱动机制，它可以监控多个事件是否准备完毕，如果OK，那么放入epoll队列中，这个过程是异步的。worker只需要从epoll队列循环处理即可。</p>
+<p><strong>思考3：Nginx挂了怎么办？</strong></p>
+<p>Nginx既然作为入口网关，很重要，如果出现单点问题，显然是不可接受的。答案是：Keepalived+Nginx实现高可用。</p>
+<p>Keepalived是一个高可用解决方案，主要是用来防止服务器单点发生故障，可以通过和Nginx配合来实现Web服务的高可用。（其实，Keepalived不仅仅可以和Nginx配合，还可以和很多其他服务配合）</p>
+<p>Keepalived+Nginx实现高可用的思路：</p>
+<p>第一：请求不要直接打到Nginx上，应该先通过Keepalived（这就是所谓虚拟IP，VIP）</p>
+<p>第二：Keepalived应该能监控Nginx的生命状态（提供一个用户自定义的脚本，定期检查Nginx进程状态，进行权重变化,，从而实现Nginx故障切换）</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/ac4eba1ec32342e38d310c2472c90a00?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p><strong>Keepalived+Nginx</strong></p>
+<p>我们的主战场：nginx.conf</p>
+<p>很多时候，在开发、测试环境下，我们都得自己去配置Nginx，就是去配置nginx.conf。nginx.conf是典型的分段配置文件，下面我们来分析下。在 Nginx 内部，你可以指定多个虚拟服务器，每个虚拟服务器用 server{} 上下文描述。</p>
+<h2 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a><strong>虚拟主机</strong></h2><p>nginx的配置文件主要由指令构成，指令主要包括名称和参数，以分号;结束。如下是一个虚拟服务器的配置：listen 指令来指定该虚拟主机在监听给定的 IP 端口组合；server_name指令检测 Host 头以决定请求到底匹配到哪个虚拟主机…nginx的配置项很多，具体可以查阅网上资料。</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/658d2862227142e0b6d42799e24d5be9?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>http的server段</p>
+<p><img src="https://p3.toutiaoimg.com/origin/pgc-image/dc3464ec247e4546ae91f4ba8acfc816?from=pc" srcset="/img/loading.gif" lazyload alt="看了这篇，我确定你已经彻底搞懂Nginx了"></p>
+<p>访问结果</p>
+<p>其实这是把Nginx作为web server来处理静态资源，</p>
+<p><strong>1</strong>：location可以进行正则匹配，应该注意正则的几种形式以及优先级。（这里不展开）</p>
+<p><strong>2</strong>：Nginx能够提高速度的其中一个特性就是：<strong>动静分离</strong>，就是把静态资源放到Nginx上，由Nginx管理，动态请求转发给后端。</p>
+<p><strong>3</strong>：我们可以在Nginx下把静态资源、日志文件归属到不同域名下（也即是目录），这样方便管理维护。</p>
+<p><strong>4</strong>：Nginx可以进行IP访问控制，有些电商平台，就可以在Nginx这一层，做一下处理，内置一个黑名单模块，那么就不必等请求通过Nginx达到后端在进行拦截，而是直接在Nginx这一层就处理掉。</p>
+<p><strong>反向代理—proxy_pass</strong></p>
+<p>所谓反向代理，很简单，其实就是在location这一段配置中的root替换成proxy_pass即可。root说明是静态资源，可以由Nginx进行返回;而proxy_pass说明是动态请求，需要进行转发，比如代理到Tomcat上。</p>
+<p>反向代理，上面已经说了，过程是透明的，比如说request -&gt; Nginx -&gt; Tomcat，那么对于Tomcat而言，请求的IP地址就是Nginx的地址，而非真实的request地址，这一点需要注意。不过好在Nginx不仅仅可以反向代理请求，还可以由用户自定义设置HTTP HEADER。</p>
+<p><strong>负载均衡—upstream</strong></p>
+<p>上面的反向代理中，我们通过proxy_pass来指定Tomcat的地址，很显然我们只能指定一台Tomcat地址，那么我们如果想指定多台来达到负载均衡呢？</p>
+<p>1：通过upstream来定义一组Tomcat，并指定负载策略（IPHASH、加权论调、最少连接），健康检查策略（Nginx可以监控这一组Tomcat的状态）等。</p>
+<p>2：将proxy_pass替换成upstream指定的值即可。</p>
+<p>负载均衡需要注意的问题：选择不同的负载均衡算法，可能会带来不同的问题，如果选择轮询方式，那么一个请求，可以到A server，也可以到B server，我们得注意用户状态的保存问题，如Session会话信息，不能在保存到服务器上。</p>
+<p>如果选择散列，没有了上面的问题，但是又得考虑，什么样的散列算法尽可能均匀打到后端的服务器上，总之实际应用中需要根据场景权衡选择。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/ngxin/">ngxin</a>
+                    
+                      <a class="hover-with-bg" href="/categories/ngxin/%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/">工作模式</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/nginx/">nginx</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86/">代理</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">反向代理</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%9F%E8%B4%A3%E5%9D%87%E8%A1%A1/">负责均衡</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/06/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Git笔记二-命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://unpkg.zhimg.com/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://unpkg.zhimg.com/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://unpkg.zhimg.com/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://unpkg.zhimg.com/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0cb769c811cfb8d1b68f0bef537c19db";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
